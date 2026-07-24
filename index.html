@@ -182,33 +182,33 @@
   <p class="lead"><b>2026年7月23日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
-  <div class="sec"><span class="badge">A</span><h2>有効会員（サブスク版・顧客DB）</h2><span class="note">重複除去・退会除外・最新資格</span></div>
+  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（DBマスター基準）</h2><span class="note">資格有効期限内の在籍ユニーク・当残（基準）</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
-      <div class="label" style="justify-content:center">有効会員 合計</div>
-      <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0" id="dbm-total">—<span class="unit">名</span></div>
-      <div class="foot">顧客DBマスター（サブスク＋期5以降）</div>
-    </div>
-    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="dbm-mentor">—</div><div class="foot" id="dbm-mentor-pct">—</div></div>
-    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="dbm-leader">—</div><div class="foot" id="dbm-leader-pct">—</div></div>
-    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="dbm-crew">—</div><div class="foot" id="dbm-crew-pct">—</div></div>
-    <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="dbm-sup">—</div><div class="foot">＋メンバー <span id="dbm-member">—</span></div></div>
-  </div>
-  <div class="callout"><b>サブスク版の有効会員です。</b>顧客DBマスター（サブスク＋期5以降に移行した会員）を重複除去・退会除外・最新資格で数えた<b><span id="dbm-total2">—</span>名</b>。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
-
-  <div class="sec"><span class="badge">B</span><h2>有効会員（一括＆ミコシー経由）</h2><span class="note">DBマスター当残・2026-06末</span></div>
-  <div class="grid g5">
-    <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
-      <div class="label" style="justify-content:center">全体 当残</div>
+      <div class="label" style="justify-content:center">全体 当残（基準）</div>
       <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0">261<span class="unit">名</span></div>
-      <div class="foot">前月407 → 退会168</div>
+      <div class="foot">2026-06末・前月407→退会168</div>
     </div>
     <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">126</div><div class="foot">6月 退会42</div></div>
     <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num">73</div><div class="foot">6月 退会36</div></div>
     <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">49</div><div class="foot">6月 退会77</div></div>
     <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num">13</div><div class="foot">6月 退会13</div></div>
   </div>
-  <div class="callout"><b>一括＆ミコシー経由（期0〜4の年払い一括）の有効会員です。</b>資格別月次増減表の<b>資格有効期限内の在籍ユニーク（当残）＝261名</b>（2026-06末基準）。詳細は「長期推移」タブ。</div>
+  <div class="callout"><b>261が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝261名</b>（2026-06末基準）。これを"正"とします。詳細は「長期推移」タブ。</div>
+
+  <div class="sec"><span class="badge">B</span><h2>サブスク以外の一括＆ミコシー経由</h2><span class="note">重複除去・退会除外・最新資格</span></div>
+  <div class="grid g5">
+    <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
+      <div class="label" style="justify-content:center">有効会員 合計</div>
+      <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0" id="dbm-total">—<span class="unit">名</span></div>
+      <div class="foot">顧客DBマスター（一括・ミコシー経由）</div>
+    </div>
+    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="dbm-mentor">—</div><div class="foot" id="dbm-mentor-pct">—</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="dbm-leader">—</div><div class="foot" id="dbm-leader-pct">—</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="dbm-crew">—</div><div class="foot" id="dbm-crew-pct">—</div></div>
+    <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="dbm-sup">—</div><div class="foot">＋メンバー <span id="dbm-member">—</span></div></div>
+  </div>
+  <div class="callout"><b>サブスク以外の一括＆ミコシー経由の有効会員です。</b>顧客DBマスターを重複除去・退会除外・最新資格で数えた<b><span id="dbm-total2">—</span>名</b>。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
 
   <div class="sec"><span class="badge">C</span><h2>資格の昇降格</h2><span class="note">クルー・リーダー・メンター間／内部除外</span></div>
   <div class="grid g2">
