@@ -182,7 +182,7 @@
   <p class="lead"><b>2026年7月23日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
-  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（DBマスター基準）</h2><span class="note">資格有効期限内の在籍ユニーク・当残（基準）</span></div>
+  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／課金の正はStripe（下記⑥）</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
       <div class="label" style="justify-content:center">全体 当残（基準）</div>
@@ -220,7 +220,7 @@
     <div class="card"><div class="label" style="color:var(--neg);font-weight:800;font-size:14px;margin-bottom:8px">⬇ 降格 <span id="dbm-down-total">—</span>件</div><div id="dbm-down-list" style="font-size:13px;line-height:2"></div></div>
   </div>
 
-  <div class="sec"><span class="badge">D</span><h2>本日現在の会員状況</h2><span class="note">MyASP到達会員（配信可能）139名の内訳</span></div>
+  <div class="sec"><span class="badge">D</span><h2>本日現在の会員状況 <span style="font-size:12px;color:var(--warn);font-weight:700">※参考・非正（配信ベース）</span></h2><span class="note">MyASP到達会員（配信可能）139名の内訳／会員数の正はA=261</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top">
       <div class="label">総会員数</div>
@@ -277,8 +277,9 @@
     <b>経営参謀メモ：</b>成長エンジンは点いています。7月の入会25名のうち21名がクルー、その中核は<b>突破Aiクルー経由の12名</b>——ここが今の推進力です。一方で<b>退会が3名→12名へ急増</b>しており、純増が3か月連続で鈍化（+77→+37→+16）しています。次の一手は「集める」より<b>「留める」＝100日ファン化の設計</b>です。退会12名の内訳と離脱タイミングを「アクティビティ」タブで確認し、F2転換（2回目の継続）に絞った打ち手を組みます。
   </div>
 
-  <div class="callout">
-    <b>データソースは2系統です（混同注意）：</b>この「ホーム／会員内訳／週次／突破AI／配信監視／アクティビティ」は<b>MyASPシナリオ購読者ベース</b>（購読中＝139名）です。別タブ「<b>長期推移</b>」は<b>顧客DBマスター＝購入者・資格有効期限ベース</b>（2026/06末の実在籍261名）で、母数の定義が異なります。片方が誤りではなく「配信リスト上の会員」と「有効期限内の会員」という別の見方です。意思決定では<b>用途に応じて使い分け</b>てください。
+  <div class="callout warn">
+    <b>"正"の定義：会員数の正＝顧客DB（261名・資格有効期限内の在籍）／課金の正＝Stripe決済（実課金175名・¥216万）。</b>この2つを意思決定の基準とします。<br>
+    一方 <b>MyASPシナリオ購読者（139名）は"配信到達の参考値（非正）"</b>です——「ホーム D／会員内訳／週次／突破AI／配信監視／アクティビティ」はMyASP断面のため、<b>会員数の判断には使わず、配信・オンボードの運用指標として</b>ご覧ください。母数の定義が違うだけでどれも誤りではありませんが、<b>数字の最終判断は顧客DB＋Stripe</b>に置きます。
   </div>
 
   <div class="sec"><span class="badge">F</span><h2>月次トレンド</h2><span class="note">純増減・新規入会・退会（2026年5〜7月）</span></div>
@@ -297,8 +298,8 @@
         <tr style="background:#fff6e0;font-weight:700"><td class="l">A DBマスター基準（正）</td><td class="mono"><b>261</b></td><td class="l">資格有効期限内の在籍・当残</td><td class="l">— 基準</td></tr>
         <tr><td class="l">B 顧客DB全体（一括＆ミコシー）</td><td class="mono"><b id="g-total">—</b></td><td class="l">一括・ミコシー含む全顧客</td><td class="l">＋<span id="g-diff2">—</span>（未移行分）</td></tr>
         <tr style="background:#fdf1e0;font-weight:700"><td class="l">└ 差異＝<b>未移行顧客</b></td><td class="mono"><b style="color:var(--warn)" id="g-diff">—</b></td><td class="l">まだサブスク会員に未移行</td><td class="l"><b>サブスク移行アプローチの対象</b></td></tr>
-        <tr><td class="l">D MyASP到達</td><td class="mono">139</td><td class="l">シナリオ購読中（配信可能）</td><td class="l">会員でも配信解除だと届かない→少</td></tr>
-        <tr><td class="l">⑥ Stripe実課金</td><td class="mono">175</td><td class="l">直近30日に実際に課金</td><td class="l">月払いのみ・年払い一括は出ない</td></tr>
+        <tr style="background:#eaf7f0;font-weight:700"><td class="l">⑥ Stripe実課金（課金の正）</td><td class="mono"><b>175</b></td><td class="l">直近30日に実際に課金（¥216万）</td><td class="l">課金の実態基準／年払い一括は別</td></tr>
+        <tr style="opacity:.75"><td class="l">D MyASP到達 <span style="font-size:10px;color:var(--warn)">参考・非正</span></td><td class="mono">139</td><td class="l">シナリオ購読中（配信可能）</td><td class="l">配信ベースの参考値（会員数判断に非使用）</td></tr>
         <tr><td class="l">③ Campus購入者</td><td class="mono">352</td><td class="l">購入累計（退会含む）</td><td class="l">退会者も残る→多</td></tr>
         <tr><td class="l">⑤ NFT期別台帳</td><td class="mono">327</td><td class="l">期0〜4の通算契約者</td><td class="l">通算・重複除去</td></tr>
       </tbody>
