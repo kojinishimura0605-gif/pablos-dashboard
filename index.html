@@ -533,9 +533,17 @@
 <!-- ================= LOG ================= -->
 <section class="tab" id="log">
   <p class="lead">資格者一覧の入退会アクティビティログ（2026年7月分）です。<b>個人情報保護のためメールアドレスはマスク表示</b>しています。退会12名の離脱パターン（Gmail変更に伴う解除が多い点）が読み取れます。</p>
-  <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（アクティビティログ）</a></div>
+  <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧</a><a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit#gid=0" target="_blank" rel="noopener">📊 詳細スプレッドシート（会員アクション詳細ログ）を開く</a></div>
 
-  <div class="sec"><span class="badge">A</span><h2>7月 アクティビティログ</h2><span class="note">入会 / 退会 / 変更</span></div>
+  <div class="sec"><span class="badge">A</span><h2>資格別 × 種別別 集計</h2><span class="note">2026年7月・入会/変更/退会</span></div>
+  <div class="tbl-wrap">
+    <table id="tbl-log-summary">
+      <thead><tr><th class="l">資格</th><th>入会</th><th>変更</th><th>退会</th><th>純増減</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="sec"><span class="badge">B</span><h2>7月 アクティビティログ（明細）</h2><span class="note">入会 / 退会 / 変更</span></div>
   <div class="callout">
     <b>読み解き：</b>7月の退会12名の多くは「Gmail変更」に伴うシステム上の<b>解除→再登録</b>で、必ずしも純粋な離反ではない可能性があります（同名の再入会が別行に存在するケースあり）。真の離反数を確定するには、退会者と同月の再入会者を氏名・電話番号の2キーで突合する必要があります。ここが「退会12」の実態を見極める分岐点です。
   </div>
@@ -550,7 +558,7 @@
 <!-- ================= BOOKCLUB ================= -->
 <section class="tab" id="bookclub">
   <p class="lead"><b>エキスパート読書会</b>の分析ビューです。3つの視点をボタンで切り替えられます。<b>個人情報を含まないハッシュ化済みデータ（HMAC-SHA256・プロジェクト固有salt）</b>から集計しています（2025年6月26日回はMyASP上のデータ不整合のため未集計）。</p>
-  <div class="srcbar">データ出典：<a class="src" href="https://tkaska-cell.github.io/pablos-bookclub-dashboard/dashboard.html" target="_blank" rel="noopener">③ エキスパート読書会ダッシュボード</a></div>
+  <div class="srcbar">データ出典：<a class="src" href="https://tkaska-cell.github.io/pablos-bookclub-dashboard/dashboard.html" target="_blank" rel="noopener">📊 元の読書会ダッシュボード（全図表・詳細）を開く</a></div>
 
   <div class="viewbar" id="bc-views">
     <button data-v="mgr" class="active"><span class="vlabel">VIEW 1</span><span class="vname">経営サマリー</span></button>
@@ -1105,6 +1113,26 @@ line($('#chart-mail'),mail,'d','rate',{color:'#e08a1e',fmt:v=>v+'%',unit:'%'});
   tb.appendChild(tr);
 });}
 // Log
+/* アクティビティ 資格別×種別別 集計 */
+{const tb=$('#tbl-log-summary tbody');
+ const ranks=['メンター','リーダー','クルー','サポーター'];
+ const rtc={'メンター':'rt-mentor','リーダー':'rt-leader','クルー':'rt-crew','サポーター':'rt-sup'};
+ const cnt={};ranks.forEach(r=>cnt[r]={入会:0,変更:0,退会:0});
+ log.forEach(x=>{const rk=x[2],ac=x[1];if(cnt[rk]&&cnt[rk][ac]!==undefined)cnt[rk][ac]++;});
+ let ti=0,tc=0,tt=0;
+ ranks.forEach(r=>{const c=cnt[r],net=c.入会-c.退会;ti+=c.入会;tc+=c.変更;tt+=c.退会;
+   const tr=document.createElement('tr');
+   tr.innerHTML=`<td class="l"><span class="rank-tag ${rtc[r]}">${r}</span></td>`+
+     `<td class="mono" style="color:var(--pos)">${c.入会||'—'}</td>`+
+     `<td class="mono" style="color:var(--warn)">${c.変更||'—'}</td>`+
+     `<td class="mono" style="color:var(--neg)">${c.退会||'—'}</td>`+
+     `<td class="mono"><span class="pill ${net>=0?'pos':'neg'}">${net>0?'+':''}${net}</span></td>`;
+   tb.appendChild(tr);});
+ const trt=document.createElement('tr');trt.style.background='#f3f0e6';trt.style.fontWeight='800';
+ const tnet=ti-tt;
+ trt.innerHTML=`<td class="l"><b>合計</b></td><td class="mono"><b>${ti}</b></td><td class="mono"><b>${tc}</b></td><td class="mono"><b>${tt}</b></td><td class="mono"><span class="pill ${tnet>=0?'pos':'neg'}">${tnet>0?'+':''}${tnet}</span></td>`;
+ tb.appendChild(trt);
+}
 {const tb=$('#tbl-log tbody');const rt={'メンター':'rt-mentor','リーダー':'rt-leader','クルー':'rt-crew','サポーター':'rt-sup'};
  const ac={'入会':'act-join','退会':'act-leave','変更':'act-change'};
  log.forEach(r=>{
