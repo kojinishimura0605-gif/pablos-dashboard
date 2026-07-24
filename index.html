@@ -288,6 +288,25 @@
       <div class="legend"><span><i class="dot b-crew"></i>新規入会</span><span><i class="dot" style="background:var(--neg)"></i>退会</span></div>
     </div>
   </div>
+
+  <div class="sec"><span class="badge">G</span><h2>差異まとめ（全ソースの突合）</h2><span class="note">なぜ数字が違うか・"正"は261</span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th class="l">ソース</th><th>人数</th><th class="l">測っているもの</th><th class="l">261との差の理由</th></tr></thead>
+      <tbody>
+        <tr style="background:#fff6e0;font-weight:700"><td class="l">A DBマスター基準（正）</td><td class="mono"><b>261</b></td><td class="l">資格有効期限内の在籍・当残</td><td class="l">— 基準</td></tr>
+        <tr><td class="l">B 顧客DB全体（一括＆ミコシー）</td><td class="mono"><b id="g-total">—</b></td><td class="l">一括・ミコシー含む全顧客</td><td class="l">＋<span id="g-diff2">—</span>（未移行分）</td></tr>
+        <tr style="background:#fdf1e0;font-weight:700"><td class="l">└ 差異＝<b>未移行顧客</b></td><td class="mono"><b style="color:var(--warn)" id="g-diff">—</b></td><td class="l">まだサブスク会員に未移行</td><td class="l"><b>サブスク移行アプローチの対象</b></td></tr>
+        <tr><td class="l">D MyASP到達</td><td class="mono">139</td><td class="l">シナリオ購読中（配信可能）</td><td class="l">会員でも配信解除だと届かない→少</td></tr>
+        <tr><td class="l">⑥ Stripe実課金</td><td class="mono">175</td><td class="l">直近30日に実際に課金</td><td class="l">月払いのみ・年払い一括は出ない</td></tr>
+        <tr><td class="l">③ Campus購入者</td><td class="mono">352</td><td class="l">購入累計（退会含む）</td><td class="l">退会者も残る→多</td></tr>
+        <tr><td class="l">⑤ NFT期別台帳</td><td class="mono">327</td><td class="l">期0〜4の通算契約者</td><td class="l">通算・重複除去</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <b>結論：</b>"正"は<b>261</b>（有効期限内の在籍）。<b>397は全顧客</b>で、差<b>136が未移行</b>（サブスク移行の対象）。139は届く人・175は今払っている人・352は買った延べ人数——<b>測る断面が違うだけで、どれも誤りではありません</b>。突き合わせの詳細は「整合性チェック」タブに集約しています。
+  </div>
 </section>
 
 <!-- ================= TODO (今週やること) ================= -->
@@ -1257,6 +1276,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  const pct=n=>d.total?(n/d.total*100).toFixed(1)+'%':'—';
  set('dbm-total',d.total+'<span class="unit">名</span>');set('dbm-total2',d.total);set('dbm-upd',d.updated);
  set('dbm-diff',d.total-261);set('dbm-diffB',d.total);
+ set('g-total',d.total);set('g-diff',d.total-261);set('g-diff2',d.total-261);
  set('dbm-mentor',r.mentor);set('dbm-leader',r.leader);set('dbm-crew',r.crew);set('dbm-sup',r.sup);set('dbm-member',r.member);
  set('dbm-mentor-pct','構成比 '+pct(r.mentor));set('dbm-leader-pct','構成比 '+pct(r.leader));set('dbm-crew-pct','構成比 '+pct(r.crew));
  set('dbm-up-total',d.upTotal);set('dbm-down-total',d.downTotal);
