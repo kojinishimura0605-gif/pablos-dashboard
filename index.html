@@ -689,22 +689,30 @@
     </table>
   </div>
 
-  <div class="sec"><span class="badge">B</span><h2>資格ランク別 比較（人数×金額帯）</h2><span class="note">①MyASP ②DBマスター ③Campus ⑤NFT ⑥Stripe</span></div>
+  <div class="sec"><span class="badge">B</span><h2>資格ランク別 人数比較</h2><span class="note">5ソース・実数値</span></div>
   <div class="chart"><div id="int-compare"></div>
     <div class="legend"><span><i class="dot" style="background:#9aa4b2"></i>①MyASP(139)</span><span><i class="dot" style="background:#2f6fb0"></i>②DBマスター(261)</span><span><i class="dot" style="background:#c99a2e"></i>③Campus購入者(352)</span><span><i class="dot" style="background:#7a53c4"></i>⑤NFT台帳(327通算)</span><span><i class="dot" style="background:#635bff"></i>⑥Stripe実課金</span></div>
   </div>
   <div class="tbl-wrap" style="margin-top:12px">
     <table>
-      <thead><tr><th class="l">資格</th><th>金額帯：一括（NFT/ミコシー）</th><th>金額帯：月額（サブスク目安）</th><th>年換算目安</th></tr></thead>
+      <thead><tr><th class="l">資格</th><th>①MyASP</th><th>②DBマスター</th><th>③Campus</th><th>⑤NFT台帳</th><th>⑥Stripe実課金</th></tr></thead>
       <tbody>
-        <tr><td class="l"><span class="rank-tag rt-mentor">メンター</span></td><td class="mono">¥198,000</td><td class="mono">¥19,800/月</td><td class="mono">¥237,600</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-leader">リーダー</span></td><td class="mono">¥99,000</td><td class="mono">¥9,900/月</td><td class="mono">¥118,800</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-crew">クルー</span></td><td class="mono">¥33,000</td><td class="mono">¥3,300/月</td><td class="mono">¥39,600</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-sup">サポーター</span></td><td class="mono">¥6,600</td><td class="mono">—</td><td class="mono">—</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-mentor">メンター</span></td><td class="mono">31</td><td class="mono">126</td><td class="mono">172</td><td class="mono">80</td><td class="mono">73</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-leader">リーダー</span></td><td class="mono">21</td><td class="mono">73</td><td class="mono">92</td><td class="mono">108</td><td class="mono">41</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-crew">クルー</span></td><td class="mono">87</td><td class="mono">49</td><td class="mono">88</td><td class="mono">64</td><td class="mono">53</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-sup">サポーター</span></td><td class="mono">0</td><td class="mono">13</td><td class="mono">100</td><td class="mono">75</td><td class="mono">0</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="callout"><b>金額帯の読み方：</b>資格が上がるほど単価が高く、<b>メンターはクルーの6倍</b>（198,000 vs 33,000）。⑥Stripeの月次会員売上¥216万は、この単価×有効会員数で構成されます。昇格（クルー→リーダー→メンター）はそのまま<b>客単価アップ＝LTV向上</b>に直結します。</div>
+
+  <div class="sec"><span class="badge">B2</span><h2>資格ランク別 金額</h2><span class="note">単価 × Stripe実課金会員 ＝ 月次売上（実額）</span></div>
+  <div class="tbl-wrap">
+    <table id="tbl-price">
+      <thead><tr><th class="l">資格</th><th>月額単価</th><th>一括単価</th><th>Stripe実会員</th><th>月次売上（実額）</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="callout"><b>読み方：</b>資格が上がるほど単価が高く、<b>メンターはクルーの6倍</b>（月額19,800 vs 3,300／一括198,000 vs 33,000）。昇格（クルー→リーダー→メンター）はそのまま<b>客単価アップ＝LTV向上</b>に直結します。月次売上はStripe決済の実額です。</div>
 
   <div class="sec"><span class="badge">C</span><h2>整合性の判定</h2></div>
   <div class="grid g2">
@@ -1309,6 +1317,14 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  cr.innerHTML=`<td class="l">（参考）会員外・講座等</td><td class="mono">${co.members}名</td><td class="mono">${co.charges}件</td><td class="mono">${y(co.amount)}（除外）</td>`;
  tb.appendChild(cr);
  $('#stp-note').textContent=`${stripe.period}・実測（更新 ${stripe.updated}）`;
+ // 資格ランク別 金額表
+ {const pt=$('#tbl-price tbody');const price={メンター:[19800,198000],リーダー:[9900,99000],クルー:[3300,33000]};
+  let tm=0,ta=0;['メンター','リーダー','クルー'].forEach(k=>{const r=stripe.ranks.find(x=>x.k===k),p=price[k];
+    const tr=document.createElement('tr');tm+=r.members;ta+=r.amount;
+    tr.innerHTML=`<td class="l"><span class="rank-tag ${{'メンター':'rt-mentor','リーダー':'rt-leader','クルー':'rt-crew'}[k]}">${k}</span></td><td class="mono">¥${p[0].toLocaleString()}/月</td><td class="mono">¥${p[1].toLocaleString()}</td><td class="mono"><b>${r.members}名</b></td><td class="mono"><b>¥${r.amount.toLocaleString()}</b></td>`;
+    pt.appendChild(tr);});
+  const tr=document.createElement('tr');tr.style.background='#eef4ff';tr.style.fontWeight='800';
+  tr.innerHTML=`<td class="l"><b>3資格計</b></td><td class="mono">—</td><td class="mono">—</td><td class="mono"><b>${tm}名</b></td><td class="mono"><b>¥${ta.toLocaleString()}</b></td>`;pt.appendChild(tr);}
  // ⑥行・KPI populate
  const m=stripe.ranks[0],l=stripe.ranks[1],c=stripe.ranks[2],o=stripe.ranks[3];
  const set=(id,v)=>{const e=$('#'+id);if(e)e.textContent=v;};
