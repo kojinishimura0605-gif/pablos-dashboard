@@ -1093,7 +1093,7 @@ document.querySelectorAll('#lt-period button').forEach(b=>b.onclick=()=>{
 });
 // Mail
 line($('#chart-mail'),mail,'d','rate',{color:'#e08a1e',fmt:v=>v+'%',unit:'%'});
-{const tb=$('#tbl-mail tbody');mail.forEach(m=>{
+{const tb=$('#tbl-mail tbody');mail.slice().reverse().forEach(m=>{
   const tr=document.createElement('tr');
   const warn=m.rate>=0.3;
   tr.innerHTML=`<td class="l"><b>${m.d}</b></td>
