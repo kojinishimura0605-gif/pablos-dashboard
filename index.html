@@ -1159,6 +1159,7 @@ function renderLT(period){
   multiline($('#chart-lt-total'),d.labels,[{name:'全体',color:'#1e3a5f',data:d.total}],{showVal:true,trend:true});
   {const rg=linreg(d.total),rNL=pearson(d.nw,d.lv);
    statNote('#chart-lt-total',`線形回帰 傾き=<b>${rg.b>=0?'+':''}${rg.b.toFixed(1)}</b>/期　<span class="fx">R²</span>=<b>${rg.r2.toFixed(2)}</b>（${rg.r2<0.25?'直線トレンド弱＝資格更新周期で増減':'トレンドあり'}）　${fxR}(新規,退会)=<b>${isNaN(rNL)?'—':rNL.toFixed(2)}</b>`);}
+  if(period==='year'){const c=$('#chart-lt-total');const p=document.createElement('div');p.style.cssText='font-size:11px;color:var(--warn);margin-top:6px;line-height:1.5;background:#fff8ef;border-left:3px solid var(--warn);border-radius:4px;padding:6px 10px';p.innerHTML='※ <b>2026は年途中（6月末時点）</b>の1点です。前2年（2024・2025＝12か月フル）と単純比較できません。しかも6月末は<b>5/31資格更新期限の"谷"</b>（未更新168名離脱）に当たるため、年代表値261が低く出ています。<b>純減ではなく更新反映で戻り得る谷</b>で、下降トレンドは見かけ上のもの。判断は月次の動きと課金の正＝Stripeでご覧ください。';c.appendChild(p);}
   multiline($('#chart-lt-rank'),d.labels,[
     {name:'メンター',color:RANK.mentor,data:d.ment},
     {name:'リーダー',color:RANK.leader,data:d.lead},
