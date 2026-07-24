@@ -767,6 +767,18 @@
       </tbody>
     </table>
   </div>
+
+  <div class="sec"><span class="badge">E</span><h2>未決済者一覧（決済失敗・未回収）</h2><span class="note" id="unpaid-note">Stripe決済失敗・その後未回収</span></div>
+  <div class="srcbar">連動：<a class="src" href="https://docs.google.com/spreadsheets/d/1xQ0LSTWXokYyDPkyicrPq_i41toKQzv1wWiFYwg5fj4/edit" target="_blank" rel="noopener">📊 顧客DBマスターで照合</a><a class="src" href="https://dashboard.stripe.com/payments?status%5B0%5D=failed" target="_blank" rel="noopener">💳 Stripe取引（失敗）で確認</a></div>
+  <div class="tbl-wrap">
+    <table id="tbl-unpaid">
+      <thead><tr><th class="l">決済日</th><th>資格</th><th>金額</th><th class="l">メール（マスク）</th><th>失敗理由</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <b>責任者：横川さん 以下。</b>Stripeで決済が失敗し、その後も回収できていない会員です（重複・後日成功分は除外）。<b>カード更新の個別連絡→再決済</b>で回収します。0件表示なら未回収なし＝健全です。数字は毎朝の自動更新で最新化されます。
+  </div>
 </section>
 </main>
 
@@ -821,6 +833,12 @@ const stripe={updated:'2026/07/24',period:'直近30日',
   course:{members:5,charges:5,amount:412600}
 };
 /*STRIPE-END*/
+/*UNPAID-START*/
+const unpaid=[
+  {d:'2026/06/03',rank:'メンター',amount:19800,email:'b***@yahoo.co.jp',reason:'カード拒否'},
+  {d:'2026/06/01',rank:'リーダー',amount:9900,email:'s***@mac.com',reason:'カード拒否'}
+];
+/*UNPAID-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/07/24',total:397,ranks:{mentor:156,leader:99,crew:120,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→リーダー',n:10},{t:'リーダー→クルー',n:7},{t:'メンター→クルー',n:4}],downTotal:21};
 /*DBMASTER-END*/
@@ -988,7 +1006,7 @@ function stack(mount,rows){
 }
 
 /* ---- Line chart ---- */
-function line(mount,rows,xKey,yKey,{color='#2f6fb0',fmt=v=>v,area=true,unit=''}={}){
+function line(mount,rows,xKey,yKey,{color='#2f6fb0',fmt=v=>v,area=true,unit='',trend=false}={}){
   const W=980,H=250,pad={l:44,r:16,t:18,b:48};
   const iw=W-pad.l-pad.r, ih=H-pad.t-pad.b;
   const vals=rows.map(r=>r[yKey]);
@@ -1002,6 +1020,11 @@ function line(mount,rows,xKey,yKey,{color='#2f6fb0',fmt=v=>v,area=true,unit=''}=
   const d='M'+pts.map(p=>p.join(' ')).join(' L');
   if(area){svg.appendChild(el('path',{d:d+` L${x(rows.length-1)} ${y(min)} L${pad.l} ${y(min)} Z`,fill:color,opacity:.10}));}
   svg.appendChild(el('path',{d,fill:'none',stroke:color,'stroke-width':2.4}));
+  if(trend&&rows.length>1){const rg=linreg(vals);
+    const y0=y(rg.a),y1=y(rg.a+rg.b*(rows.length-1));
+    svg.appendChild(el('line',{x1:x(0),y1:y0,x2:x(rows.length-1),y2:y1,stroke:'#d9534f','stroke-width':2,'stroke-dasharray':'7 5',opacity:.8}));
+    svg.appendChild(el('text',{x:x(rows.length-1)-4,y:y1-6,'text-anchor':'end','font-size':10.5,'font-weight':800,fill:'#d9534f'},`傾き ${rg.b>=0?'+':''}${rg.b.toFixed(2)}/週`));
+  }
   rows.forEach((r,i)=>{
     svg.appendChild(el('circle',{cx:x(i),cy:y(r[yKey]),r:3.6,fill:'#fff',stroke:color,'stroke-width':2}));
     svg.appendChild(el('text',{x:x(i),y:y(r[yKey])-9,'text-anchor':'middle','font-size':10.5,'font-weight':700,fill:color},fmt(r[yKey])));
@@ -1061,7 +1084,7 @@ stack($('#chart-stack'),monthly);
   tb.appendChild(tr);
 });}
 // Week
-line($('#chart-week'),weekly,'w','net',{color:'#2aa596',fmt:v=>(v>0?'+':'')+v});
+line($('#chart-week'),weekly,'w','net',{color:'#2aa596',fmt:v=>(v>0?'+':'')+v,trend:true});
 {const wn=weekly.map(w=>w.net),wr=linreg(wn),wm=wn.reduce((a,b)=>a+b,0)/wn.length;
  statNote('#chart-week',`線形回帰 傾き=<b>${wr.b.toFixed(2)}</b>/週　決定係数 <span class="fx">R²</span>=<b>${wr.r2.toFixed(2)}</b>　平均純増=<b>+${wm.toFixed(1)}</b>／週　<span style="color:var(--neg)">▶ 逓減トレンド</span>`);}
 {const tb=$('#tbl-week tbody');weekly.slice().reverse().forEach(m=>{
@@ -1127,7 +1150,7 @@ line($('#chart-mail'),mail,'d','rate',{color:'#e08a1e',fmt:v=>v+'%',unit:'%'});
   tr.innerHTML=`<td class="l"><b>${m.d}</b></td>
   <td class="mono">${m.tgt}</td><td class="mono">${m.total.toLocaleString()}</td>
   <td class="mono">${m.ok.toLocaleString()}</td>
-  <td class="mono">${m.err}</td>
+  <td class="mono"><a href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener" style="color:var(--leader);text-decoration:underline">${m.err} ↗</a></td>
   <td class="mono"><span class="pill ${warn?'warnp':'pos'}">${m.rate}%</span></td>
   <td class="mono">${m.dlv}%</td>`;
   tb.appendChild(tr);
@@ -1155,7 +1178,8 @@ line($('#chart-mail'),mail,'d','rate',{color:'#e08a1e',fmt:v=>v+'%',unit:'%'});
 }
 {const tb=$('#tbl-log tbody');const rt={'メンター':'rt-mentor','リーダー':'rt-leader','クルー':'rt-crew','サポーター':'rt-sup'};
  const ac={'入会':'act-join','退会':'act-leave','変更':'act-change'};
- log.forEach(r=>{
+ const AO={'入会':1,'変更':2,'退会':3},RO={'メンター':1,'リーダー':2,'クルー':3,'サポーター':4};
+ log.slice().sort((a,b)=> b[0].localeCompare(a[0]) || ((AO[a[1]]||9)-(AO[b[1]]||9)) || ((RO[a[2]]||9)-(RO[b[2]]||9))).forEach(r=>{
   const tr=document.createElement('tr');
   tr.innerHTML=`<td class="l mono">${r[0]}</td>
   <td class="${ac[r[1]]}">${r[1]}</td>
@@ -1330,6 +1354,14 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  const set=(id,v)=>{const e=$('#'+id);if(e)e.textContent=v;};
  set('stp-upd',stripe.updated);set('stp-total',t.members);set('stp-m',m.members);set('stp-l',l.members);set('stp-c',c.members);set('stp-o',o.members);
  set('stp-cal-total',t.members);set('stp-cal-m',m.members);set('stp-cal-l',l.members);set('stp-cal-c',c.members);
+}
+/* 未決済者一覧 レンダリング */
+{const tb=$('#tbl-unpaid tbody');const rtc={'メンター':'rt-mentor','リーダー':'rt-leader','クルー':'rt-crew','サポーター':'rt-sup'};
+ if(!unpaid.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--pos)">未回収なし（健全）</td></tr>';}
+ else unpaid.forEach(u=>{const tr=document.createElement('tr');
+   tr.innerHTML=`<td class="l mono">${u.d}</td><td><span class="rank-tag ${rtc[u.rank]||''}">${u.rank}</span></td><td class="mono">¥${u.amount.toLocaleString()}</td><td class="l mono" style="color:#6b7688">${u.email}</td><td><span class="pill neg">${u.reason}</span></td>`;
+   tb.appendChild(tr);});
+ const n=$('#unpaid-note');if(n)n.textContent=`Stripe決済失敗・その後未回収（${unpaid.length}名）`;
 }
 /* DBマスター（決定版）レンダリング */
 {const d=dbmaster,r=d.ranks,set=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
