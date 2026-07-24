@@ -210,6 +210,10 @@
   </div>
   <div class="callout"><b>サブスク以外の一括＆ミコシー経由の有効会員です。</b>顧客DBマスターを重複除去・退会除外・最新資格で数えた<b><span id="dbm-total2">—</span>名</b>。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
 
+  <div class="callout warn">
+    <b>差異＝<span id="dbm-diff">—</span>名（B <span id="dbm-diffB">—</span> − A 261）＝まだサブスク会員に移行していない顧客</b>です。顧客DB全体のうち、現行の有効会員（DBマスター基準261）を除いた分が<b>一括／ミコシー経由のまま未移行</b>——ここが<b>サブスク移行アプローチの対象リスト</b>になります。<span style="color:var(--muted)">（数字はDB更新で自動再計算）</span>
+  </div>
+
   <div class="sec"><span class="badge">C</span><h2>資格の昇降格</h2><span class="note">クルー・リーダー・メンター間／内部除外</span></div>
   <div class="grid g2">
     <div class="card"><div class="label" style="color:var(--pos);font-weight:800;font-size:14px;margin-bottom:8px">⬆ 昇格 <span id="dbm-up-total">—</span>件</div><div id="dbm-up-list" style="font-size:13px;line-height:2"></div></div>
@@ -1252,6 +1256,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
 {const d=dbmaster,r=d.ranks,set=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
  const pct=n=>d.total?(n/d.total*100).toFixed(1)+'%':'—';
  set('dbm-total',d.total+'<span class="unit">名</span>');set('dbm-total2',d.total);set('dbm-upd',d.updated);
+ set('dbm-diff',d.total-261);set('dbm-diffB',d.total);
  set('dbm-mentor',r.mentor);set('dbm-leader',r.leader);set('dbm-crew',r.crew);set('dbm-sup',r.sup);set('dbm-member',r.member);
  set('dbm-mentor-pct','構成比 '+pct(r.mentor));set('dbm-leader-pct','構成比 '+pct(r.leader));set('dbm-crew-pct','構成比 '+pct(r.crew));
  set('dbm-up-total',d.upTotal);set('dbm-down-total',d.downTotal);
