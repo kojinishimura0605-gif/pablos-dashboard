@@ -632,14 +632,14 @@
         <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/p_kftto1vlwd" target="_blank" rel="noopener">③ Campus購入者 ↗</a></td><td class="l">メンバーシップ購入者（累計）</td><td>Looker最新</td><td class="mono"><b>352</b></td><td class="mono">172</td><td class="mono">92</td><td class="mono">88</td><td class="mono">100<span style="font-size:9px;color:var(--muted)">※別枠</span></td></tr>
         <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/p_kftto1vlwd" target="_blank" rel="noopener">④ Campus利用人数 ↗</a></td><td class="l">Campus/UMU利用者（教育関係者含む）</td><td>Looker最新</td><td class="mono"><b>2,517</b></td><td class="mono" colspan="4">購入者352＋教育関係者2,050＋α</td></tr>
         <tr style="background:#f5f4ff"><td class="l"><a class="srclink" href="https://docs.google.com/spreadsheets/d/1emB456xt6kJZ9FdY1pm7Ct3Qkms7necswPMUYeZuHz4/edit" target="_blank" rel="noopener">⑤ NFT期別台帳 ↗</a></td><td class="l">0〜4期の通算契約者（実購入・重複除去）</td><td>通算</td><td class="mono"><b>327</b></td><td class="mono">80</td><td class="mono">108</td><td class="mono">64</td><td class="mono">75</td></tr>
-        <tr style="background:#eafaf3"><td class="l">💳 ⑥ Stripe決済</td><td class="l">アクティブなサブスク＝いま課金中の会員</td><td>リアルタイム</td><td class="mono"><b>連携待ち</b></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td></tr>
+        <tr style="background:#eafaf3"><td class="l">💳 ⑥ Stripe決済</td><td class="l">直近30日に実課金された会員（決定版）</td><td id="stp-upd">—</td><td class="mono"><b id="stp-total">—</b></td><td class="mono" id="stp-m">—</td><td class="mono" id="stp-l">—</td><td class="mono" id="stp-c">—</td><td class="mono" id="stp-o">—</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="sec"><span class="badge">B</span><h2>資格ランク別 3ソース比較</h2><span class="note">①MyASP ②DBマスター ③Campus購入者</span></div>
   <div class="chart"><div id="int-compare"></div>
-    <div class="legend"><span><i class="dot" style="background:#9aa4b2"></i>①MyASP(139)</span><span><i class="dot" style="background:#2f6fb0"></i>②DBマスター(261)</span><span><i class="dot" style="background:#c99a2e"></i>③Campus購入者(352)</span><span><i class="dot" style="background:#7a53c4"></i>⑤NFT台帳(327通算)</span></div>
+    <div class="legend"><span><i class="dot" style="background:#9aa4b2"></i>①MyASP(139)</span><span><i class="dot" style="background:#2f6fb0"></i>②DBマスター(261)</span><span><i class="dot" style="background:#c99a2e"></i>③Campus購入者(352)</span><span><i class="dot" style="background:#7a53c4"></i>⑤NFT台帳(327通算)</span><span><i class="dot" style="background:#635bff"></i>⑥Stripe実課金</span></div>
   </div>
 
   <div class="sec"><span class="badge">C</span><h2>整合性の判定</h2></div>
@@ -670,7 +670,17 @@
     <b>📗 NFT期別台帳（0〜4期）で"全体総数"が見えました：通算契約者 327名</b>（メンター80・リーダー108・クルー64・サポーター75）。実購入ベースのため <b>③Campus累計352 と差はわずか25名（352−327）＝実質整合</b>で、これが「集めた契約者の全体」の実態レンジ（327〜352）です。①139・②261はここからの部分集合（配信到達・期限内在籍）と読めます。<b>※327は通算（過去の全契約者）</b>で、"いま有効な会員"は各期の年間契約が生きている分に絞られます（＝⑥Stripeで確定）。<br><span style="font-size:11px;color:var(--muted)">※資格別の内訳（メンター80等）は台帳の大容量読取のため暫定値です。全行の再取得で精緻化できます。③サポーター100は購入者352の別枠（UMU利用なし）。</span></div>
 
   <div class="callout" style="border-left-color:#635bff;background:#f5f4ff;border-color:#dcd9ff">
-    <b>💳 "いま有効な会員数"の確定は Stripe決済が基準です（推奨）。</b>①〜④はいずれも「配信購読」「資格期限」「購入累計」という別々の切り口で、どれも<b>真の有効会員数そのものではありません</b>。一方 <b>Stripe のアクティブなサブスクリプション数＝いま実際に課金されている会員</b>で、これが最も確実な"有効会員の全体総数"です。プラン（メンター／リーダー／クルーの各price）ごとの active 数を毎月取得すれば、<b>261 や 139 が正しいかを決済実績で判定</b>できます。年間契約でDB未掲載の契約者も、Stripe上のサブスクなら捕捉できます。</div>
+    <b>💳 "いま有効な会員数"の決定版は Stripe決済です。</b>①〜④は「配信購読」「資格期限」「購入累計」という別々の切り口で、どれも<b>真の有効会員数そのものではありません</b>。一方 <b>Stripeで直近30日に実課金された会員</b>こそ、いま本当に生きている会員です。<b>Stripe有効会員 <span id="stp-cal-total">—</span>名（メンター<span id="stp-cal-m">—</span>／リーダー<span id="stp-cal-l">—</span>／クルー<span id="stp-cal-c">—</span>）</b>で、Stripeはメンター多め＝実際に払っている層。MyASPのクルー87（無料の突破Aiクルー込み）とは別物と分かります。</div>
+
+  <div class="sec"><span class="badge">A2</span><h2>⑥ Stripe決済：金額 × 件数</h2><span class="note" id="stp-note">直近30日・実測</span></div>
+  <div class="tbl-wrap">
+    <table id="stp-table">
+      <thead><tr><th class="l">資格</th><th>有効会員（ユニーク）</th><th>決済件数</th><th>金額（会員売上）</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="callout" style="border-left-color:#635bff;background:#f5f4ff;border-color:#dcd9ff">
+    <b>金額と件数はセットです。</b>「件数（有効会員）」だけでなく「金額（会員売上）」を必ずペアで表示します。会員外の講座等（フォトリーディング・Ken式）は会員売上から除外しています。</div>
 
   <div class="sec"><span class="badge">D</span><h2>次のアクション（突合の手順）</h2></div>
   <div class="tbl-wrap">
@@ -727,6 +737,18 @@ const mail=[
   {d:'2026/07/22',tgt:10,total:70458,ok:70203,err:255,rate:0.362,dlv:99.6},
   {d:'2026/07/23',tgt:11,total:72047,ok:71772,err:275,rate:0.382,dlv:99.6},
 ];
+/*STRIPE-START*/
+const stripe={updated:'2026/07/24',period:'直近30日',
+  ranks:[
+    {k:'メンター',members:73,charges:73,amount:1458600},
+    {k:'リーダー',members:41,charges:41,amount:409200},
+    {k:'クルー',members:53,charges:53,amount:198000},
+    {k:'その他会員',members:8,charges:8,amount:99000}
+  ],
+  total:{members:175,charges:175,amount:2164800},
+  course:{members:5,charges:5,amount:412600}
+};
+/*STRIPE-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）2024-06〜2026-06 */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
 const ltTotal =[212,212,320,320,320,320,320,515,515,515,515,516,493,493,428,428,428,472,508,358,358,358,358,407,261];
@@ -1185,11 +1207,33 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
 });
 
 /* integrity compare chart */
+/* Stripe 金額×件数 レンダリング */
+{const y=n=>'¥'+n.toLocaleString();
+ const tb=$('#stp-table tbody');
+ stripe.ranks.forEach(r=>{const tr=document.createElement('tr');
+   const isCore=['メンター','リーダー','クルー'].includes(r.k);
+   tr.innerHTML=`<td class="l"><b>${r.k}</b></td><td class="mono"><b>${r.members}</b>名</td><td class="mono">${r.charges}件</td><td class="mono"><b>${y(r.amount)}</b></td>`;
+   if(!isCore)tr.style.color='var(--muted)';
+   tb.appendChild(tr);});
+ const t=stripe.total;const tr=document.createElement('tr');tr.style.background='#eef4ff';tr.style.fontWeight='800';
+ tr.innerHTML=`<td class="l"><b>会員合計</b></td><td class="mono"><b>${t.members}名</b></td><td class="mono">${t.charges}件</td><td class="mono"><b>${y(t.amount)}</b></td>`;
+ tb.appendChild(tr);
+ const co=stripe.course;const cr=document.createElement('tr');cr.style.color='var(--muted)';cr.style.fontSize='12px';
+ cr.innerHTML=`<td class="l">（参考）会員外・講座等</td><td class="mono">${co.members}名</td><td class="mono">${co.charges}件</td><td class="mono">${y(co.amount)}（除外）</td>`;
+ tb.appendChild(cr);
+ $('#stp-note').textContent=`${stripe.period}・実測（更新 ${stripe.updated}）`;
+ // ⑥行・KPI populate
+ const m=stripe.ranks[0],l=stripe.ranks[1],c=stripe.ranks[2],o=stripe.ranks[3];
+ const set=(id,v)=>{const e=$('#'+id);if(e)e.textContent=v;};
+ set('stp-upd',stripe.updated);set('stp-total',t.members);set('stp-m',m.members);set('stp-l',l.members);set('stp-c',c.members);set('stp-o',o.members);
+ set('stp-cal-total',t.members);set('stp-cal-m',m.members);set('stp-cal-l',l.members);set('stp-cal-c',c.members);
+}
 groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポーター'],[
   {name:'MyASP',color:'#9aa4b2',data:[31,21,87,0]},
   {name:'DBマスター',color:'#2f6fb0',data:[126,73,49,13]},
   {name:'Campus',color:'#c99a2e',data:[172,92,88,100]},
   {name:'NFT台帳',color:'#7a53c4',data:[80,108,64,75]},
+  {name:'Stripe実課金',color:'#635bff',data:[stripe.ranks[0].members,stripe.ranks[1].members,stripe.ranks[2].members,0]},
 ]);
 </script>
 </body>
