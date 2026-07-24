@@ -163,7 +163,7 @@
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
-    <button data-t="todo">今週やること</button>
+    <button data-t="todo">今週・今月</button>
     <button data-t="rank">会員内訳</button>
     <button data-t="week">週次推移</button>
     <button data-t="longterm">長期推移</button>
@@ -311,16 +311,17 @@
 
 <!-- ================= TODO (今週やること) ================= -->
 <section class="tab" id="todo">
-  <p class="lead"><b>今週やること</b>を優先度順に1本化しました。数字（各タブ）から導いた"次の一手"です。<b>「集める」は十分に回っています。今週の主戦場は「留める」</b>——退会の山とオンボードの穴を塞ぐ週にします。</p>
+  <p class="lead"><b>今週・今月やること</b>を優先度順・担当つきで1本化しました。数字（各タブ）から導いた"次の一手"です。<b>「集める」は十分に回っています。主戦場は「留める」</b>——退会の山とオンボードの穴を塞ぎます。</p>
   <div class="srcbar">連動データ：<a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=longterm]').click();return false;">長期推移</a><a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=toppa]').click();return false;">突破AI</a><a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=bookclub]').click();return false;">読書会</a><a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=integrity]').click();return false;">整合性チェック</a></div>
 
+  <div class="sec"><span class="badge" style="background:#d9534f">週</span><h2>今週やること</h2><span class="note">即実行・攻めの3手</span></div>
   <div class="act-board">
     <div class="act-card top">
       <div class="act-meta"><span class="act-prio p-top">最優先</span><span class="act-cat">会員維持</span><span class="act-when">今週</span></div>
       <div class="act-body">
         <h4>6月クルー退会77名の「未更新」掘り起こし</h4>
         <p>2026-06の退会168名（うちクルー77）は<b>5/31期限の未更新分</b>で、純離反ではなく更新オペレーションの遅延を含みます。今週中に対象リストを抽出し、<b>再更新の個別案内</b>を送付します。ここを塞げば当残261は上振れします。</p>
-        <div class="act-owner">担当：<b>CRM／運営</b> ｜ 連動：長期推移タブ（月次2026-06）</div>
+        <div class="act-owner">担当：<b>木村学長 以下</b> ｜ 連動：長期推移タブ（月次2026-06）</div>
       </div>
     </div>
 
@@ -329,7 +330,7 @@
       <div class="act-body">
         <h4>突破Aiクルー12名のオンボード設計（2回目への引き戻し）</h4>
         <p>7月の成長エンジンは突破Aiクルー12名です。しかし<b>読書会のF2転換率は5.1%</b>——初回で止まる層が大半です。同じ轍を踏まないよう、<b>入会直後100日のステップ設計</b>（LP→ステップメール→初回体験→2回目告知）を今週たたき台まで作ります。</p>
-        <div class="act-owner">担当：<b>ファネル設計</b> ｜ 連動：突破AIタブ・入口LP</div>
+        <div class="act-owner">担当：<b>豊留さん 以下</b> ｜ 連動：突破AIタブ・入口LP</div>
       </div>
     </div>
 
@@ -338,31 +339,34 @@
       <div class="act-body">
         <h4>読書会：初回参加者→2回目の引き戻しメール投入</h4>
         <p>直近回のコホート継続率は<b>05-15で38.2%・06-23で42.1%と改善傾向</b>です。この勢いを活かし、<b>直近回の新規118名</b>に次回告知＋"なぜ続けると効くか"の一通を今週配信します。ロイヤル継続率31.5%（目標60%）の底上げが狙いです。</p>
-        <div class="act-owner">担当：<b>読書会運営</b> ｜ 連動：読書会タブ VIEW3 CS・オンボード</div>
+        <div class="act-owner">担当：<b>豊留さん 以下</b> ｜ 連動：読書会タブ VIEW3 CS・オンボード</div>
       </div>
     </div>
+  </div>
 
+  <div class="sec"><span class="badge" style="background:#e08a1e">月</span><h2>今月やること</h2><span class="note">月内の整備・データ／配信</span></div>
+  <div class="act-board">
     <div class="act-card mid">
-      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">データ整合</span><span class="act-when">今週</span></div>
+      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">データ整合</span><span class="act-when">今月</span></div>
       <div class="act-body">
         <h4>クルー実数の確定（49 vs 88 の突合）</h4>
-        <p>クルー数がDBマスター49・Campus88とズレています。<b>③Campus購入者352と②DBマスター261をメール/ハッシュIDで突合</b>し、差91名が「失効」か「未反映」かを今週確定させます。会社・ボード共通の"正しい会員数"を1つにします。</p>
-        <div class="act-owner">担当：<b>データ</b> ｜ 連動：整合性チェックタブ</div>
+        <p>クルー数がDBマスター49・Campus88とズレています。<b>③Campus購入者352と②DBマスター261をメール/ハッシュIDで突合</b>し、差91名が「失効」か「未反映」かを今月中に確定させます。会社・ボード共通の"正しい会員数"を1つにします（＝A基準261の裏づけ）。</p>
+        <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：整合性チェックタブ</div>
       </div>
     </div>
 
     <div class="act-card low">
-      <div class="act-meta"><span class="act-prio p-low">中期</span><span class="act-cat">配信品質</span><span class="act-when">今週着手</span></div>
+      <div class="act-meta"><span class="act-prio p-low">中期</span><span class="act-cat">配信品質</span><span class="act-when">今月</span></div>
       <div class="act-body">
         <h4>MyASP エラー集中メールの宛先クリーニング</h4>
-        <p>送達率は99.6〜99.9%で健全ですが、エラーは<b>「エキスパート読書会のご案内3」に集中</b>（7/20で0.45%）しています。無効アドレスの棚卸しを今週から着手し、配信基盤を軽くします。</p>
-        <div class="act-owner">担当：<b>配信</b> ｜ 連動：配信監視タブ</div>
+        <p>送達率は99.6〜99.9%で健全ですが、エラーは<b>「エキスパート読書会のご案内3」に集中</b>（7/20で0.45%）しています。無効アドレスの棚卸しを今月中に行い、配信基盤を軽くします。</p>
+        <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：配信監視タブ</div>
       </div>
     </div>
   </div>
 
   <div class="callout" style="margin-top:16px">
-    <b>今週の旗印：</b>「集めて売る」の"集める"は達成しました。次は<b>集めた人を100日でファンに変える</b>——退会の山（更新の壁）を埋め、初回参加者を2回目へ運ぶ。この2つが今週の北極星です。
+    <b>旗印：</b>「集めて売る」の"集める"は達成しました。次は<b>集めた人を100日でファンに変える</b>——退会の山（更新の壁）を埋め、初回参加者を2回目へ運ぶ。この2つが北極星です。<b>136名の未移行（サブスク移行対象）</b>も掘り起こしの母集団になります。
   </div>
 </section>
 
