@@ -159,7 +159,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/07/25</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/07/27</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -189,7 +189,7 @@
       <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0">261<span class="unit">名</span></div>
       <div class="foot">2026-06末・前月407→退会168</div>
     </div>
-    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">31</div><div class="foot">6月 退会42</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">32</div><div class="foot">6月 退会42</div></div>
     <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num">21</div><div class="foot">6月 退会36</div></div>
     <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">87</div><div class="foot">6月 退会77</div></div>
     <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num">0</div><div class="foot">6月 退会13</div></div>
@@ -224,23 +224,23 @@
   <div class="grid g5">
     <div class="card kpi accent-top">
       <div class="label">総会員数</div>
-      <div class="num" style="color:var(--navy)">139<span class="unit">名</span></div>
+      <div class="num" style="color:var(--navy)">140<span class="unit">名</span></div>
       <div class="foot">2026年5月〜の累計（純増 +130）</div>
     </div>
     <div class="card kpi accent-top at-mentor">
       <div class="label"><span class="dot b-mentor"></span>メンター</div>
       <div class="num">31<span class="unit">名</span></div>
-      <div class="foot">構成比 22.3%</div>
+      <div class="foot">構成比 22.9%</div>
     </div>
     <div class="card kpi accent-top at-leader">
       <div class="label"><span class="dot b-leader"></span>リーダー</div>
       <div class="num">21<span class="unit">名</span></div>
-      <div class="foot">構成比 15.1%</div>
+      <div class="foot">構成比 15.0%</div>
     </div>
     <div class="card kpi accent-top at-crew">
       <div class="label"><span class="dot b-crew"></span>クルー</div>
       <div class="num">87<span class="unit">名</span></div>
-      <div class="foot">構成比 62.6%（最大層）</div>
+      <div class="foot">構成比 62.1%（最大層）</div>
     </div>
     <div class="card kpi accent-top at-sup">
       <div class="label"><span class="dot b-sup"></span>サポーター</div>
@@ -253,13 +253,13 @@
   <div class="grid g4">
     <div class="card kpi">
       <div class="label">純増減</div>
-      <div class="num" style="color:var(--pos)">+16<span class="unit">名</span></div>
+      <div class="num" style="color:var(--pos)">+17<span class="unit">名</span></div>
       <div class="foot">6月 +37 <span class="pill neg">-21</span></div>
     </div>
     <div class="card kpi">
       <div class="label">新規入会（実数）</div>
-      <div class="num">25<span class="unit">名</span></div>
-      <div class="foot">メンター3・リーダー1・クルー21</div>
+      <div class="num">26<span class="unit">名</span></div>
+      <div class="foot">メンター4・リーダー1・クルー21</div>
     </div>
     <div class="card kpi">
       <div class="label">退会数</div>
@@ -832,7 +832,7 @@ const RANK={mentor:'#c99a2e',leader:'#2f6fb0',crew:'#2aa596',sup:'#9aa4b2'};
 const monthly=[
   {ym:'2026/05',net:77,mj:21,mr:0,lj:15,lr:0,cj:41,cr:0,sj:0,sr:0,lv:0},
   {ym:'2026/06',net:37,mj:7,mr:1,lj:5,lr:2,cj:25,cr:0,sj:0,sr:0,lv:3},
-  {ym:'2026/07',net:16,mj:3,mr:2,lj:1,lr:1,cj:21,cr:0,sj:0,sr:0,lv:12},
+  {ym:'2026/07',net:17,mj:4,mr:2,lj:1,lr:1,cj:21,cr:0,sj:0,sr:0,lv:12},
 ];
 const weekly=[
   {w:'2026/05/11週',net:28,mj:7,mr:0,lj:6,lr:0,cj:15,cr:0,lv:0},
@@ -845,11 +845,9 @@ const weekly=[
   {w:'2026/06/29週',net:13,mj:3,mr:0,lj:1,lr:2,cj:7,cr:0,lv:0},
   {w:'2026/07/06週',net:2,mj:0,mr:0,lj:0,lr:1,cj:3,cr:0,lv:2},
   {w:'2026/07/13週',net:16,mj:2,mr:2,lj:0,lr:0,cj:15,cr:0,lv:3},
-  {w:'2026/07/20週',net:-6,mj:0,mr:0,lj:0,lr:0,cj:1,cr:0,lv:7},
+  {w:'2026/07/20週',net:-5,mj:1,mr:0,lj:0,lr:0,cj:1,cr:0,lv:7},
 ];
 const mail=[
-  {d:'2026/07/15',tgt:17,total:68730,ok:68664,err:63,rate:0.092,dlv:99.9},
-  {d:'2026/07/16',tgt:14,total:66702,ok:66639,err:60,rate:0.09,dlv:99.9},
   {d:'2026/07/17',tgt:12,total:65978,ok:65928,err:50,rate:0.076,dlv:99.9},
   {d:'2026/07/18',tgt:17,total:67486,ok:67435,err:51,rate:0.076,dlv:99.9},
   {d:'2026/07/19',tgt:20,total:72155,ok:71900,err:255,rate:0.353,dlv:99.6},
@@ -858,17 +856,19 @@ const mail=[
   {d:'2026/07/22',tgt:10,total:70458,ok:70203,err:255,rate:0.362,dlv:99.6},
   {d:'2026/07/23',tgt:11,total:72047,ok:71772,err:275,rate:0.382,dlv:99.6},
   {d:'2026/07/24',tgt:11,total:54653,ok:54599,err:54,rate:0.099,dlv:99.9},
+  {d:'2026/07/25',tgt:13,total:37760,ok:37749,err:11,rate:0.029,dlv:100},
+  {d:'2026/07/26',tgt:10,total:36845,ok:36832,err:13,rate:0.035,dlv:100},
 ];
 /*STRIPE-START*/
-const stripe={updated:'2026/07/25',period:'直近30日',
+const stripe={updated:'2026/07/27',period:'直近30日',
   ranks:[
-    {k:'メンター',members:72,charges:72,amount:1438800},
+    {k:'メンター',members:73,charges:73,amount:1458600},
     {k:'リーダー',members:41,charges:41,amount:409200},
     {k:'クルー',members:53,charges:53,amount:198000},
     {k:'その他会員',members:8,charges:8,amount:99000}
   ],
-  total:{members:174,charges:174,amount:2145000},
-  course:{members:5,charges:5,amount:412600}
+  total:{members:175,charges:175,amount:2164800},
+  course:{members:7,charges:7,amount:577600}
 };
 /*STRIPE-END*/
 /*UNPAID-START*/
@@ -878,7 +878,7 @@ const unpaid=[
 ];
 /*UNPAID-END*/
 /*DBMASTER-START*/
-const dbmaster={updated:'2026/07/25',total:396,ranks:{mentor:156,leader:99,crew:119,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→リーダー',n:10},{t:'リーダー→クルー',n:7},{t:'メンター→クルー',n:4}],downTotal:21};
+const dbmaster={updated:'2026/07/27',total:395,ranks:{mentor:156,leader:99,crew:118,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→リーダー',n:10},{t:'リーダー→クルー',n:7},{t:'メンター→クルー',n:4}],downTotal:21};
 /*DBMASTER-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）2024-06〜2026-06 */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
@@ -924,12 +924,13 @@ const log=[
   ['2026/07/19','入会','クルー','KITO Y','***@gmail.com','購読中'],
   ['2026/07/20','入会','クルー','PABLOS事務局','***@pablos.co.jp','購読中'],
   ['2026/07/22','退会','クルー','池田Y','***@gmail.com','解除済み'],
-  ['2026/07/24','退会','メンター','森A','***@gmail.com','解除済み'],
-  ['2026/07/24','退会','メンター','阿部Y','***@gmail.com','解除済み'],
-  ['2026/07/24','退会','メンター','鳥居N','***@yahoo.co.jp','解除済み'],
-  ['2026/07/24','退会','メンター','丹羽Y','***@gmail.com','解除済み'],
-  ['2026/07/24','退会','メンター','川﨑N','***@gmail.com','解除済み'],
-  ['2026/07/24','退会','メンター','三好M','***@gmail.com','解除済み'],
+  ['2026/07/26','入会','メンター','松本茂','***@hyogo-dai.ac.jp','購読中'],
+  ['2026/07/26','退会','メンター','森A','***@gmail.com','解除済み'],
+  ['2026/07/26','退会','メンター','阿部Y','***@gmail.com','解除済み'],
+  ['2026/07/26','退会','メンター','鳥居N','***@yahoo.co.jp','解除済み'],
+  ['2026/07/26','退会','メンター','丹羽Y','***@gmail.com','解除済み'],
+  ['2026/07/26','退会','メンター','川﨑N','***@gmail.com','解除済み'],
+  ['2026/07/26','退会','メンター','三好M','***@gmail.com','解除済み'],
 ];
 
 /* ================= HELPERS ================= */
