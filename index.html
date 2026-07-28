@@ -538,6 +538,17 @@
     <div class="card kpi accent-top at-mentor"><div class="label">集中期間</div><div class="num" style="font-size:22px">7/17–20</div><div class="foot">4日間に流入が集中</div></div>
   </div>
 
+  <div class="sec"><span class="badge">A2</span><h2>流入経路別（free9）</h2><span class="note">MyASP読者項目 free9＝reading／line／note／x</span></div>
+  <div class="grid g4" id="toppa-routes-cards">
+    <div class="card kpi accent-top"><div class="label">📖 reading（読書会）</div><div class="num" id="tr-reading">—</div><div class="foot">free9=reading</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label">💬 line（LINE）</div><div class="num" id="tr-line">—</div><div class="foot">free9=line</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label">📝 note</div><div class="num" id="tr-note">—</div><div class="foot">free9=note</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label">𝕏 x（旧Twitter）</div><div class="num" id="tr-x">—</div><div class="foot">free9=x</div></div>
+  </div>
+  <div class="callout" id="toppa-routes-note" style="margin-top:10px">
+    <b>データ取得待ち：</b>流入経路はマイスピー（パブロス）の読者項目 <b>free9</b> に記録されていますが、現在の連携（資格者一覧シート・API）には free9 が含まれていません。<b>①シート出力に free9 列を追加</b>いただくか、<b>②マイスピーから読者CSVを書き出して</b>いただければ、実測件数を自動反映します（推測値は入れません）。
+  </div>
+
   <div class="callout">
     <b>件数の読み方：</b>週次集計シート上は「突破AI限定 7/13週：新規16／退会2／+14」と表示されますが、この16名には<b>内部テストアカウント（西村様・PABLOSサポート等）</b>が含まれます。それらを除いた<b>実際の外部新規流入は12名</b>で、こちらが実態値です（<code>data-integrity-analyst</code>：内部アカウントは会員数に含めない）。
   </div>
@@ -899,6 +910,9 @@ const unpaid=[
   {d:'2026/06/01',rank:'リーダー',amount:9900,email:'s***@mac.com',reason:'カード拒否'}
 ];
 /*UNPAID-END*/
+/*TOPPA-ROUTES-START*/
+const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
+/*TOPPA-ROUTES-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/07/28',total:396,ranks:{mentor:147,leader:99,crew:128,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→クルー',n:13},{t:'メンター→リーダー',n:10},{t:'リーダー→クルー',n:7}],downTotal:30};
 /*DBMASTER-END*/
@@ -1473,6 +1487,17 @@ groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポ
   {name:'NFT台帳',color:'#7a53c4',data:[80,108,64,75]},
   {name:'Stripe実課金',color:'#635bff',data:[stripe.ranks[0].members,stripe.ranks[1].members,stripe.ranks[2].members,0]},
 ]);
+// 突破Aiクルー 流入経路別（free9）— toppaRoutesに実測が入ると描画
+if(toppaRoutes){
+  const tot=(toppaRoutes.reading||0)+(toppaRoutes.line||0)+(toppaRoutes.note||0)+(toppaRoutes.x||0);
+  [['tr-reading','reading'],['tr-line','line'],['tr-note','note'],['tr-x','x']].forEach(([id,k])=>{
+    const v=toppaRoutes[k]||0;
+    const el=document.getElementById(id);
+    if(el)el.innerHTML=`${v}<span class="unit">名</span> <span style="font-size:11px;color:var(--muted)">(${tot?Math.round(v/tot*100):0}%)</span>`;
+  });
+  const note=document.getElementById('toppa-routes-note');
+  if(note)note.innerHTML=`<b>実測 ${tot}名</b>（free9集計・更新 ${toppaRoutes.updated||'—'}）。構成比は流入合計に対する割合です。`;
+}
 </script>
 </body>
 </html>
