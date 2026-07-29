@@ -159,7 +159,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/07/28</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/07/29</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -893,15 +893,15 @@ const mail=[
   {d:'2026/07/28',tgt:17,total:38629,ok:38609,err:20,rate:0.052,dlv:99.9},
 ];
 /*STRIPE-START*/
-const stripe={updated:'2026/07/28',period:'直近30日',
+const stripe={updated:'2026/07/29',period:'直近30日',
   ranks:[
-    {k:'メンター',members:73,charges:73,amount:1458600},
+    {k:'メンター',members:73,charges:74,amount:1478400},
     {k:'リーダー',members:41,charges:41,amount:409200},
-    {k:'クルー',members:55,charges:55,amount:204600},
+    {k:'クルー',members:56,charges:56,amount:207900},
     {k:'その他会員',members:8,charges:8,amount:99000}
   ],
-  total:{members:177,charges:177,amount:2171400},
-  course:{members:27,charges:27,amount:1815100}
+  total:{members:178,charges:179,amount:2194500},
+  course:{members:28,charges:28,amount:1870100}
 };
 /*STRIPE-END*/
 /*UNPAID-START*/
@@ -914,7 +914,7 @@ const unpaid=[
 const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
 /*TOPPA-ROUTES-END*/
 /*DBMASTER-START*/
-const dbmaster={updated:'2026/07/28',total:396,ranks:{mentor:155,leader:99,crew:120,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→リーダー',n:10},{t:'リーダー→クルー',n:7},{t:'メンター→クルー',n:5}],downTotal:22};
+const dbmaster={updated:'2026/07/29',total:395,ranks:{mentor:152,leader:100,crew:121,sup:21,member:1},up:[{t:'リーダー→メンター',n:35},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:46,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
 /*DBMASTER-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）2024-06〜2026-06 */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
