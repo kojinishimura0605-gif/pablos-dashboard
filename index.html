@@ -161,7 +161,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/08/01</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/08/02</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -898,14 +898,14 @@ const mail=[
   {d:'2026/08/01',tgt:20,total:52783,ok:52702,err:72,rate:0.136,dlv:99.8},
 ];
 /*STRIPE-START*/
-const stripe={updated:'2026/08/01',period:'直近30日',
+const stripe={updated:'2026/08/02',period:'直近30日',
   ranks:[
     {k:'メンター',members:73,charges:73,amount:1409100},
-    {k:'リーダー',members:40,charges:40,amount:399300},
-    {k:'クルー',members:56,charges:56,amount:207900},
-    {k:'その他会員',members:8,charges:8,amount:99000}
+    {k:'リーダー',members:41,charges:41,amount:409200},
+    {k:'クルー',members:57,charges:57,amount:211200},
+    {k:'その他会員',members:7,charges:7,amount:95700}
   ],
-  total:{members:177,charges:177,amount:2115300},
+  total:{members:178,charges:178,amount:2125200},
   course:{members:50,charges:50,amount:3041600}
 };
 /*STRIPE-END*/
@@ -917,9 +917,9 @@ const unpaid=[
 /*TOPPA-ROUTES-START*/
 const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
 /*TOPPA-ROUTES-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/08/01","cur":{"base":261,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":177,"sC":177,"sA":2115300},"prev":{"base":261,"aM":32,"aL":22,"aC":88,"aS":0,"bT":394,"bM":152,"bL":99,"bC":121,"bS":21,"sM":168,"sC":168,"sA":2046000,"date":"2026/07/30"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/08/02","cur":{"base":261,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2125200},"prev":{"base":261,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":177,"sC":177,"sA":2115300,"date":"2026/08/01"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
-const dbmaster={updated:'2026/08/01',total:395,ranks:{mentor:154,leader:98,crew:122,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
+const dbmaster={updated:'2026/08/02',total:395,ranks:{mentor:154,leader:98,crew:122,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
 /*DBMASTER-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）2024-06〜2026-06 */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
