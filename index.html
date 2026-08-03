@@ -197,7 +197,19 @@
     <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">92</div><div class="dd" id="dd-a-crew"></div><div class="foot" id="mb-q-crew">7月 退会27</div></div>
     <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num">0</div><div class="dd" id="dd-a-sup"></div><div class="foot" id="mb-q-sup">7月 退会0</div></div>
   </div>
-  <div class="callout"><b><span class="mbase">250</span>が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝<span class="mbase">250</span>名</b>（<span class="mbym">2026年7月</span>末基準・日次再集計）。</div>
+  <div class="grid g5" style="margin-top:10px">
+    <div class="card kpi" style="text-align:center;padding:18px 12px">
+      <div class="label" style="justify-content:center">本日時点の当残（速報）</div>
+      <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0"><span id="mb-today">—</span><span class="unit">名</span></div>
+      <div class="dd" id="dd-t-base"></div>
+      <div class="foot" id="mb-today-foot">—</div>
+    </div>
+    <div class="card kpi at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="mb-today-m">—</div><div class="dd" id="dd-t-m"></div><div class="foot">本日時点</div></div>
+    <div class="card kpi at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="mb-today-l">—</div><div class="dd" id="dd-t-l"></div><div class="foot">本日時点</div></div>
+    <div class="card kpi at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="mb-today-c">—</div><div class="dd" id="dd-t-c"></div><div class="foot">本日時点</div></div>
+    <div class="card kpi at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="mb-today-s">—</div><div class="dd" id="dd-t-s"></div><div class="foot">本日時点</div></div>
+  </div>
+  <div class="callout"><b><span class="mbase">250</span>が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝<span class="mbase">250</span>名</b>（<span class="mbym">2026年7月</span>末基準・日次再集計）。上段が<b>月末確定の基準値</b>、下段の「本日時点」は<b>速報（毎朝9時更新・入退会と継続手続きを即日反映）</b>です。</div>
 
   <div class="sec"><span class="badge">B</span><h2>サブスク以外の一括＆ミコシー経由</h2><span class="note">重複除去・退会除外・最新資格</span></div>
   <div class="grid g5">
@@ -917,11 +929,11 @@ const unpaid=[
 /*TOPPA-ROUTES-START*/
 const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
 /*TOPPA-ROUTES-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/08/03","cur":{"base":250,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2112000},"prev":{"base":250,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2125200,"date":"2026/08/02"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/08/03","cur":{"base":250,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2112000,"tBase":222,"tM":115,"tL":57,"tC":45,"tS":5},"prev":{"base":250,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2125200,"date":"2026/08/02"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/08/03',total:395,ranks:{mentor:154,leader:98,crew:122,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
 /*DBMASTER-END*/
-/*MASTERDB-START*/const masterdb={updated:'2026/08/03',ym:'2026-07',base:250,prevBase:264,newTotal:31,quitTotal:45,ranks:{mentor:121,leader:67,crew:49,sup:13},quit:{mentor:9,leader:9,crew:27,sup:0}};/*MASTERDB-END*/
+/*MASTERDB-START*/const masterdb={updated:'2026/08/03',ym:'2026-07',base:250,prevBase:264,newTotal:31,quitTotal:45,ranks:{mentor:121,leader:67,crew:49,sup:13},quit:{mentor:9,leader:9,crew:27,sup:0},today:{date:'2026/08/03',base:222,ranks:{mentor:115,leader:57,crew:45,sup:5}}};/*MASTERDB-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07'];
 const ltTotal=[168,168,276,276,276,276,276,473,473,473,473,474,450,450,385,385,401,445,481,330,347,349,358,408,264,250];
@@ -1474,6 +1486,8 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  set('lt-k-sup',m.ranks.sup);set('lt-k-sup-foot',`${+mm}月 退会${m.quit.sup}`);
  set('int2-date',m.ym.replace('-','/')+'末');set('int2-total',m.base);set('int2-m',m.ranks.mentor);set('int2-l',m.ranks.leader);set('int2-c',m.ranks.crew);set('int2-s',m.ranks.sup);
  set('cmp2-m',m.ranks.mentor);set('cmp2-l',m.ranks.leader);set('cmp2-c',m.ranks.crew);set('cmp2-s',m.ranks.sup);
+ if(m.today){set('mb-today',m.today.base);set('mb-today-foot',m.today.date+' 時点・資格有効期限内の在籍');
+  set('mb-today-m',m.today.ranks.mentor);set('mb-today-l',m.today.ranks.leader);set('mb-today-c',m.today.ranks.crew);set('mb-today-s',m.today.ranks.sup);}
  const f=ltMonths[0].split('-'),l=ltMonths[ltMonths.length-1].split('-');
  set('lt-range',`${f[0]}年${+f[1]}月〜${l[0]}年${+l[1]}月・${ltMonths.length}か月`);set('lt-upd',m.updated);
  set('lt-range2',`${f[0]}/${f[1]}〜${l[0]}/${l[1]}`);
@@ -1484,6 +1498,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
   const cls=d>0?'pos':(d<0?'neg':'');const t=d>0?'+'+d:(d<0?String(d):'±0');
   e.innerHTML=`前日比 <b class="${cls}">${t}</b>`;e.title=`前日（${p.date} 9時時点）との差`;};
  set('dd-a-base',c.base,p.base);set('dd-a-mentor',c.aM,p.aM);set('dd-a-leader',c.aL,p.aL);set('dd-a-crew',c.aC,p.aC);set('dd-a-sup',c.aS,p.aS);
+ set('dd-t-base',c.tBase,p.tBase);set('dd-t-m',c.tM,p.tM);set('dd-t-l',c.tL,p.tL);set('dd-t-c',c.tC,p.tC);set('dd-t-s',c.tS,p.tS);
  set('dd-b-total',c.bT,p.bT);set('dd-b-mentor',c.bM,p.bM);set('dd-b-leader',c.bL,p.bL);set('dd-b-crew',c.bC,p.bC);set('dd-b-sup',c.bS,p.bS);}}
 groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポーター'],[
   {name:'MyASP',color:'#9aa4b2',data:[31,21,87,0]},
