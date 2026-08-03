@@ -210,6 +210,10 @@
     <div class="card kpi at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="mb-today-s">—</div><div class="dd" id="dd-t-s"></div><div class="foot">本日時点</div></div>
   </div>
   <div class="callout"><b><span class="mbase">250</span>が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝<span class="mbase">250</span>名</b>（<span class="mbym">2026年7月</span>末基準・日次再集計）。上段が<b>月末確定の基準値</b>、下段の「本日時点」は<b>速報（毎朝9時更新・入退会と継続手続きを即日反映）</b>です。<span id="mb-gap-note"><b>基準<span class="mbase">250</span>との差<span id="mb-gap">28</span>名</b>は、<span id="mb-gap-from">8/1</span>以降に資格期限を迎えてまだ更新手続きが済んでいない方々です（継続手続きが反映されると翌朝の速報に戻ります）。</span></div>
+  <div style="margin:8px 0 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <button id="gap-dl" style="padding:8px 14px;border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;font-weight:700;cursor:pointer">⬇ 未更新者リスト（名前・メール・資格）をExcel用にダウンロード</button>
+    <span id="gap-dl-note" style="font-size:11px;color:var(--muted)">—</span>
+  </div>
 
   <div class="sec"><span class="badge">B</span><h2>サブスク以外の一括＆ミコシー経由</h2><span class="note">重複除去・退会除外・最新資格</span></div>
   <div class="grid g5">
@@ -933,6 +937,7 @@ const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/08/03',total:395,ranks:{mentor:154,leader:98,crew:122,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
 /*DBMASTER-END*/
+/*GAPLIST-START*/const gapList=[{n:'下山英',e:'***@yahoo.co.jp',q:'メンター'},{n:'織田剛',e:'***@gmail.com',q:'メンター'},{n:'吉岡秀',e:'***@hotmail.com',q:'メンター'},{n:'小口A',e:'***@gmail.com',q:'メンター'},{n:'野間久',e:'***@gmail.com',q:'メンター'},{n:'小阪裕',e:'***@oraculum.co.jp',q:'メンター'},{n:'篠原綾',e:'***@icloud.com',q:'リーダー'},{n:'谷畑彰',e:'***@gmail.com',q:'リーダー'},{n:'横山正',e:'***@yahoo.co.jp',q:'リーダー'},{n:'黒石浩',e:'***@gmail.com',q:'リーダー'},{n:'刈谷真',e:'***@gmail.com',q:'リーダー'},{n:'下田由',e:'***@gmail.com',q:'リーダー'},{n:'新堀高',e:'***@gmail.com',q:'リーダー'},{n:'三谷英',e:'***@gmail.com',q:'リーダー'},{n:'山崎智',e:'***@clearlive.jp',q:'リーダー'},{n:'品川陽',e:'***@gmail.com',q:'リーダー'},{n:'福原大',e:'***@gmail.com',q:'クルー'},{n:'渡邉均',e:'***@ogaki-tv.ne.jp',q:'クルー'},{n:'本多真',e:'***@gmail.com',q:'クルー'},{n:'池田Y',e:'***@gmail.com',q:'クルー'},{n:'石川由',e:'***@gmail.com',q:'クルー'},{n:'千原悠',e:'***@gmail.com',q:'クルー'},{n:'西村K',e:'***@yahoo.co.jp',q:'サポーター'},{n:'浅利美',e:'***@gmail.com',q:'サポーター'},{n:'織部郁',e:'***@gmail.com',q:'サポーター'},{n:'工藤亮',e:'***@mikosea.io',q:'サポーター'},{n:'工藤亮',e:'***@mikosea.io',q:'サポーター'},{n:'須藤志',e:'***@gmail.com',q:'サポーター'},{n:'高橋佳',e:'***@gmail.com',q:'サポーター'},{n:'齋藤康',e:'***@zero.ad.jp',q:'サポーター'}];/*GAPLIST-END*/
 /*MASTERDB-START*/const masterdb={updated:'2026/08/03',ym:'2026-07',base:250,prevBase:264,newTotal:31,quitTotal:45,ranks:{mentor:121,leader:67,crew:49,sup:13},quit:{mentor:9,leader:9,crew:27,sup:0},today:{date:'2026/08/03',base:222,ranks:{mentor:115,leader:57,crew:45,sup:5}}};/*MASTERDB-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07'];
@@ -1491,6 +1496,23 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
   const gap=m.base-m.today.base,gn=$('#mb-gap-note');
   if(gn){if(gap>0){set('mb-gap',gap);const nm=+mm===12?1:+mm+1;set('mb-gap-from',nm+'/1');}else{gn.style.display='none';}}}
  else{const gn=$('#mb-gap-note');if(gn)gn.style.display='none';}
+ /* 未更新者リストのダウンロード（Excel対応CSV・UTF-8 BOM） */
+ {const btn=$('#gap-dl'),note=$('#gap-dl-note');
+  if(btn){
+   if(!gapList.length){btn.style.display='none';if(note)note.textContent='';}
+   else{
+    if(note)note.textContent=`対象 ${gapList.length}名（${m.today?m.today.date:''} 時点）。Excelでそのまま開けます。公開版は氏名・メールをマスク済み——フル版は内部ダッシュボード／exports/フォルダから。`;
+    btn.addEventListener('click',()=>{
+      const esc=s=>'"'+String(s).replace(/"/g,'""')+'"';
+      const rows=[['名前','メールアドレス','資格']].concat(gapList.map(x=>[x.n,x.e,x.q]));
+      const csv='﻿'+rows.map(r=>r.map(esc).join(',')).join('\r\n');
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+      a.download=`PABLOS未更新者リスト_${(m.today?m.today.date:m.updated).replace(/\//g,'')}.csv`;
+      a.click();URL.revokeObjectURL(a.href);
+    });
+   }
+  }}
  const f=ltMonths[0].split('-'),l=ltMonths[ltMonths.length-1].split('-');
  set('lt-range',`${f[0]}年${+f[1]}月〜${l[0]}年${+l[1]}月・${ltMonths.length}か月`);set('lt-upd',m.updated);
  set('lt-range2',`${f[0]}/${f[1]}〜${l[0]}/${l[1]}`);
