@@ -161,7 +161,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/08/04</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/08/05</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -904,7 +904,6 @@ const weekly=[
   {w:'2026/08/03週',net:-4,mj:0,mr:0,lj:0,lr:0,cj:2,cr:0,lv:6},
 ];
 const mail=[
-  {d:'2026/07/25',tgt:13,total:37760,ok:37749,err:11,rate:0.029,dlv:100},
   {d:'2026/07/26',tgt:10,total:36845,ok:36832,err:13,rate:0.035,dlv:100},
   {d:'2026/07/27',tgt:9,total:36750,ok:36733,err:17,rate:0.046,dlv:100},
   {d:'2026/07/28',tgt:17,total:38629,ok:38609,err:20,rate:0.052,dlv:99.9},
@@ -914,16 +913,17 @@ const mail=[
   {d:'2026/08/01',tgt:20,total:52783,ok:52702,err:72,rate:0.136,dlv:99.8},
   {d:'2026/08/02',tgt:20,total:51023,ok:50963,err:51,rate:0.1,dlv:99.9},
   {d:'2026/08/03',tgt:10,total:36096,ok:36081,err:15,rate:0.042,dlv:100},
+  {d:'2026/08/04',tgt:15,total:36798,ok:36781,err:17,rate:0.046,dlv:100},
 ];
 /*STRIPE-START*/
-const stripe={updated:'2026/08/04',period:'直近30日',
+const stripe={updated:'2026/08/05',period:'直近30日',
   ranks:[
-    {k:'メンター',members:72,charges:72,amount:1389300},
-    {k:'リーダー',members:40,charges:40,amount:399300},
+    {k:'メンター',members:73,charges:73,amount:1409100},
+    {k:'リーダー',members:42,charges:42,amount:419100},
     {k:'クルー',members:58,charges:58,amount:214500},
-    {k:'その他会員',members:6,charges:6,amount:69300}
+    {k:'その他会員',members:8,charges:8,amount:99000}
   ],
-  total:{members:176,charges:176,amount:2072400},
+  total:{members:181,charges:181,amount:2141700},
   course:{members:54,charges:54,amount:3261600}
 };
 /*STRIPE-END*/
@@ -935,7 +935,7 @@ const unpaid=[
 /*TOPPA-ROUTES-START*/
 const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
 /*TOPPA-ROUTES-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/08/04","cur":{"base":250,"aM":35,"aL":24,"aC":94,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":176,"sC":176,"sA":2072400,"tBase":222,"tM":115,"tL":57,"tC":45,"tS":5,"sRM":72,"sRL":40,"sRC":58,"sRO":6},"prev":{"base":250,"aM":35,"aL":24,"aC":92,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":178,"sC":178,"sA":2112000,"tBase":222,"tM":115,"tL":57,"tC":45,"tS":5,"sRM":73,"sRL":39,"sRC":58,"sRO":8,"date":"2026/08/03"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/08/05","cur":{"base":250,"aM":35,"aL":24,"aC":94,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":181,"sC":181,"sA":2141700,"tBase":222,"tM":115,"tL":57,"tC":45,"tS":5,"sRM":73,"sRL":42,"sRC":58,"sRO":8},"prev":{"base":250,"aM":35,"aL":24,"aC":94,"aS":0,"bT":395,"bM":154,"bL":98,"bC":122,"bS":20,"sM":176,"sC":176,"sA":2072400,"tBase":222,"tM":115,"tL":57,"tC":45,"tS":5,"sRM":72,"sRL":40,"sRC":58,"sRO":6,"date":"2026/08/04"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/08/03',total:395,ranks:{mentor:154,leader:98,crew:122,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:8},{t:'メンター→クルー',n:6}],downTotal:26};
 /*DBMASTER-END*/
@@ -959,14 +959,14 @@ const log=[
   ['2026/08/01','入会','メンター','刈谷真','***@gmail.com','購読中'],
   ['2026/08/01','入会','リーダー','横田美','***@mb.scn-net.ne.jp','購読中'],
   ['2026/08/01','入会','リーダー','片桐美','***@gmail.com','購読中'],
-  ['2026/08/03','退会','メンター','森A','***@gmail.com','解除済み'],
-  ['2026/08/03','退会','メンター','阿部Y','***@gmail.com','解除済み'],
-  ['2026/08/03','退会','メンター','鳥居N','***@yahoo.co.jp','解除済み'],
-  ['2026/08/03','退会','メンター','丹羽Y','***@gmail.com','解除済み'],
-  ['2026/08/03','退会','メンター','川﨑N','***@gmail.com','解除済み'],
-  ['2026/08/03','退会','メンター','三好M','***@gmail.com','解除済み'],
   ['2026/08/03','入会','クルー','尾田高','***@gmail.com','購読中'],
   ['2026/08/03','入会','クルー','岡村寿','***@yahoo.co.jp','購読中'],
+  ['2026/08/04','退会','メンター','森A','***@gmail.com','解除済み'],
+  ['2026/08/04','退会','メンター','阿部Y','***@gmail.com','解除済み'],
+  ['2026/08/04','退会','メンター','鳥居N','***@yahoo.co.jp','解除済み'],
+  ['2026/08/04','退会','メンター','丹羽Y','***@gmail.com','解除済み'],
+  ['2026/08/04','退会','メンター','川﨑N','***@gmail.com','解除済み'],
+  ['2026/08/04','退会','メンター','三好M','***@gmail.com','解除済み'],
 ];
 
 /* ================= HELPERS ================= */
