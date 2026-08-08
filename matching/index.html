@@ -92,7 +92,8 @@
   .hidden{display:none !important}
   .mcard{border:1px solid var(--line); border-radius:13px; padding:16px; background:var(--card)}
   .mhead{display:flex; gap:12px; align-items:center}
-  .avatar{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.15rem; color:#fff; flex-shrink:0}
+  .avatar{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.15rem; color:#fff; flex-shrink:0; overflow:hidden}
+  .avatar img{width:100%; height:100%; object-fit:cover}
   .av-mentor{background:var(--purple)} .av-leader{background:var(--blue)} .av-crew{background:var(--green)}
   .mname{font-weight:800; font-size:1.05rem}
   .chips{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
@@ -188,6 +189,7 @@ let me = null;            // mk_qualified の自分（email/name/rank/role）
 let myProfile = null;     // mk_profiles の自分
 let myContact = null;     // mk_contacts の自分
 let profiles = [];        // 名鑑キャッシュ
+let photoUrls = {};       // profileId → 署名付き画像URL（1時間有効）
 let cfg = DEFAULT_CFG;
 let currentTab = "m1";
 let meikanFilter = {rank:"all", kw:""};
@@ -212,7 +214,7 @@ function initialsOf(name){ return (name||"?").trim().charAt(0); }
 function profById(id){ return profiles.find(p=>p.id===id) || null; }
 function errMsg(e){ return (e && (e.message||e.error_description)) || "通信エラーが発生しました"; }
 
-/* ============ AI充実度採点（100点・写真なし版） ============ */
+/* ============ AI充実度採点（100点：自己紹介30/話したい20/力になれる20/画像10/SNS10/名前10） ============ */
 function profileScore100(p){
   const items = [];
   const bio = p.bio||"";
@@ -226,13 +228,15 @@ function profileScore100(p){
   items.push({label:"話したいトピック", got:Math.min(tCnt,5)*4, max:20, tips: tCnt>=5?[]:["あと"+(5-tCnt)+"個選ぶと満点（1個につき+4点）"]});
   const sCnt = (p.skill_tags||[]).length;
   items.push({label:"力になれること", got:[0,8,14,20][Math.min(3,sCnt)], max:20, tips: sCnt>=3?[]:["3個以上選ぶと満点（現在"+sCnt+"個）"]});
+  const hasPhoto = !!(p.photo_path || p.photoDataUrl);
+  items.push({label:"プロフィール画像", got:hasPhoto?10:0, max:10, tips:hasPhoto?[]:["プロフィール写真を設定する（+10点）"]});
   let snsCnt = 0;
   const sns = p.sns||{};
   ["x","instagram","facebook"].forEach(k=>{ if(((sns[k])||"").trim()) snsCnt++; });
-  items.push({label:"SNSリンク", got:snsCnt>=2?15:(snsCnt===1?8:0), max:15, tips:snsCnt>=2?[]:["SNSを2つ以上登録すると満点（1つで+8点）"]});
+  items.push({label:"SNSリンク", got:snsCnt>=2?10:(snsCnt===1?5:0), max:10, tips:snsCnt>=2?[]:["SNSを2つ以上登録すると満点（1つで+5点）"]});
   const nm = (p.name||"").trim();
-  const nGot = nm ? (/[\s　]/.test(nm)?15:8) : 0;
-  items.push({label:"名前", got:nGot, max:15, tips:nGot===15?[]:["姓と名の間にスペースを入れたフルネームにする"]});
+  const nGot = nm ? (/[\s　]/.test(nm)?10:5) : 0;
+  items.push({label:"名前", got:nGot, max:10, tips:nGot===10?[]:["姓と名の間にスペースを入れたフルネームにする"]});
   let total = 0; items.forEach(it=>{ total += it.got; });
   return {total, items};
 }
@@ -374,6 +378,7 @@ async function bootWithSession(){
     profiles = profRes.data || [];
     myProfile = myProfRes.data || null;
     myContact = myContactRes.data || null;
+    await refreshPhotoUrls();
     if(!myProfile){ currentTab = "mp"; toast("プロフィールを登録すると名鑑に掲載されます","warn"); }
     render();
   }catch(e){
@@ -385,6 +390,16 @@ async function reloadProfiles(){
   const {data} = await sb.from("mk_profiles").select("*").order("created_at",{ascending:true});
   profiles = data || [];
   myProfile = profiles.find(p=>p.id===session.user.id) || myProfile;
+  await refreshPhotoUrls();
+}
+async function refreshPhotoUrls(){
+  photoUrls = {};
+  const withPhoto = profiles.filter(p=>p.photo_path);
+  if(withPhoto.length===0) return;
+  try{
+    const {data} = await sb.storage.from("avatars").createSignedUrls(withPhoto.map(p=>p.photo_path), 3600);
+    if(data){ data.forEach((d,i)=>{ if(d && d.signedUrl){ photoUrls[withPhoto[i].id] = d.signedUrl; } }); }
+  }catch(e){ /* 画像が取れなくても頭文字アイコンで表示継続 */ }
 }
 
 /* ============ タブ ============ */
@@ -449,7 +464,8 @@ function memberCard(p){
   const isSelf = myProfile && myProfile.id===p.id;
   const rec = recommendScore(p);
   let h = '<div class="mcard">';
-  h += '<div class="mhead"><div class="avatar '+RANKS[p.rank].av+'">'+esc(initialsOf(p.name))+'</div><div>';
+  const avInner = photoUrls[p.id] ? '<img src="'+esc(photoUrls[p.id])+'" alt="">' : esc(initialsOf(p.name));
+  h += '<div class="mhead"><div class="avatar '+RANKS[p.rank].av+'">'+avInner+'</div><div>';
   h += '<div class="mname">'+esc(p.name)+(isSelf?'（自分）':'')+'</div>';
   h += '<div style="margin-top:3px"><span class="pill '+RANKS[p.rank].pill+'">'+RANKS[p.rank].label+'</span> ';
   if(rec>=2 && !isSelf){ h += '<span class="pill p-osusume">相性おすすめ</span> '; }
@@ -731,9 +747,9 @@ async function viewKb(){
 /* ============ マイプロフィール ============ */
 function initProfDraft(){
   if(myProfile){
-    profDraft = {name: myProfile.name, talk_tags:(myProfile.talk_tags||[]).slice(), skill_tags:(myProfile.skill_tags||[]).slice(), bio: myProfile.bio||"", sns: Object.assign({}, (myContact&&myContact.sns)||{})};
+    profDraft = {name: myProfile.name, talk_tags:(myProfile.talk_tags||[]).slice(), skill_tags:(myProfile.skill_tags||[]).slice(), bio: myProfile.bio||"", sns: Object.assign({}, (myContact&&myContact.sns)||{}), photo_path: myProfile.photo_path||null, photoDataUrl:null, photoBlob:null, removePhoto:false};
   } else {
-    profDraft = {name: me.name||"", talk_tags:["マーケティング","AI活用"], skill_tags:["SNS"], bio:"PABLOSで学びながら、自分の事業を育てているところです。まずは月10万円の売上づくりを目標にしています。", sns:{}};
+    profDraft = {name: me.name||"", talk_tags:["マーケティング","AI活用"], skill_tags:["SNS"], bio:"PABLOSで学びながら、自分の事業を育てているところです。まずは月10万円の売上づくりを目標にしています。", sns:{}, photo_path:null, photoDataUrl:null, photoBlob:null, removePhoto:false};
   }
 }
 function viewMp(){
@@ -747,6 +763,14 @@ function viewMp(){
   h += '<label>名前 <span style="color:var(--red)">*</span><span class="counter" id="nameCount">'+p.name.length+'/30</span></label>';
   h += '<input type="text" id="pfName" maxlength="30" value="'+esc(p.name)+'">';
   h += '<div class="helper">名鑑に表示される名前です（資格ランク：'+RANKS[me.rank].label+'は資格者リストから自動設定）</div>';
+  h += '<label>プロフィール画像</label>';
+  const avSrc = p.photoDataUrl || (p.photo_path ? (photoUrls[session.user.id]||null) : null);
+  const avInner = avSrc ? '<img src="'+esc(avSrc)+'" alt="">' : esc(initialsOf(p.name));
+  h += '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><div class="avatar '+RANKS[me.rank].av+'">'+avInner+'</div>';
+  h += '<button class="btn sm" id="photoPickBtn">写真を変更する</button>';
+  if(avSrc || p.photo_path){ h += '<button class="btn sm ghost" id="photoDelBtn">削除する</button>'; }
+  h += '<input type="file" id="pfPhotoInput" accept="image/*" class="hidden"></div>';
+  h += '<div class="helper">選択しない場合は名前の頭文字アイコンになります。写真は自動で縮小され、資格者だけに表示されます</div>';
   h += '<label>興味・話したいトピック <span style="color:var(--red)">*</span></label>';
   h += tagPicker("talk_tags");
   h += '<div class="helper">複数選択できます。相性の良いメンバーのおすすめ表示にも使われます</div>';
@@ -794,8 +818,43 @@ function bindAiDraft(){
     toast("AIがたたき台を作成しました。自分の言葉に直すとさらに良くなります","ok");
   });
 }
+function pfPhotoPicked(input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  const img = new Image();
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    img.onload = ()=>{
+      const maxSize = 384;
+      const scale = Math.min(1, maxSize/Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width*scale));
+      const hh = Math.max(1, Math.round(img.height*scale));
+      const cv = document.createElement("canvas");
+      cv.width = w; cv.height = hh;
+      const ctx = cv.getContext("2d");
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, w, hh);
+      ctx.drawImage(img, 0, 0, w, hh);
+      cv.toBlob((blob)=>{
+        if(!blob){ toast("画像を読み込めませんでした","err"); return; }
+        profDraft.photoBlob = blob;
+        profDraft.photoDataUrl = cv.toDataURL("image/jpeg", 0.85);
+        profDraft.removePhoto = false;
+        renderBody();
+        toast("写真を設定しました。保存ボタンで確定します","ok");
+      }, "image/jpeg", 0.85);
+    };
+    img.onerror = ()=>toast("画像を読み込めませんでした","err");
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 function bindMp(){
   const nameI = byId("pfName"), bioI = byId("pfBio");
+  const pickBtn = byId("photoPickBtn"), photoInput = byId("pfPhotoInput"), delBtn = byId("photoDelBtn");
+  if(pickBtn && photoInput) pickBtn.addEventListener("click", ()=>photoInput.click());
+  if(photoInput) photoInput.addEventListener("change", ()=>pfPhotoPicked(photoInput));
+  if(delBtn) delBtn.addEventListener("click", ()=>{ profDraft.photoDataUrl=null; profDraft.photoBlob=null; profDraft.photo_path=null; profDraft.removePhoto=true; renderBody(); toast("写真を外しました。保存ボタンで確定します"); });
   if(nameI) nameI.addEventListener("input", ()=>{ profDraft.name=nameI.value; byId("nameCount").textContent=nameI.value.length+"/30"; updateScorePanel(); });
   if(bioI) bioI.addEventListener("input", ()=>{ profDraft.bio=bioI.value; byId("bioCount").textContent=bioI.value.length+"/200"; updateScorePanel(); });
   [["pfX","x"],["pfIg","instagram"],["pfFb","facebook"]].forEach(([id,k])=>{
@@ -824,10 +883,24 @@ async function saveProfile(){
   byId("saveProfBtn").disabled = true;
   const isNew = !myProfile;
   try{
+    let photoPath = myProfile ? (myProfile.photo_path||null) : null;
+    if(p.removePhoto && photoPath){
+      const {error: rmErr} = await sb.storage.from("avatars").remove([photoPath]);
+      if(rmErr) throw rmErr;
+      photoPath = null;
+    }
+    if(p.photoBlob){
+      photoPath = session.user.id + "/avatar.jpg";
+      const {error: upErr} = await sb.storage.from("avatars").upload(photoPath, p.photoBlob, {upsert:true, contentType:"image/jpeg", cacheControl:"3600"});
+      if(upErr) throw upErr;
+    }
+    p.photo_path = photoPath;
+    p.photoBlob = null;
     const score = profileScore100(p).total;
     const {error: pe} = await sb.from("mk_profiles").upsert({
       id: session.user.id, name: p.name.trim(), rank: me.rank,
       talk_tags: p.talk_tags, skill_tags: p.skill_tags, bio: p.bio, ai_score: score,
+      photo_path: photoPath,
       updated_at: new Date().toISOString()
     });
     if(pe) throw pe;
