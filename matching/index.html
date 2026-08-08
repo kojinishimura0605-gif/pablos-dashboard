@@ -59,6 +59,8 @@
   .p-mentor{background:var(--purple-bg); color:var(--purple)}
   .p-leader{background:var(--blue-bg); color:var(--blue)}
   .p-crew{background:var(--green-bg); color:var(--green)}
+  .p-staffrank{background:#f1f5f9; color:var(--slate)}
+  .p-office{background:var(--amber-bg); color:var(--amber)}
   .p-osusume{background:var(--orange-bg); color:var(--orange)}
   .p-rich{background:#fef9c3; color:#a16207}
   .pbar{height:12px; background:var(--line); border-radius:999px; overflow:hidden; margin:10px 0}
@@ -95,6 +97,7 @@
   .avatar{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.15rem; color:#fff; flex-shrink:0; overflow:hidden}
   .avatar img{width:100%; height:100%; object-fit:cover}
   .av-mentor{background:var(--purple)} .av-leader{background:var(--blue)} .av-crew{background:var(--green)}
+  .av-staff{background:var(--slate)} .av-office{background:var(--amber)}
   .mname{font-weight:800; font-size:1.05rem}
   .chips{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
   .chip{display:inline-block; font-size:0.82rem; padding:4px 11px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink)}
@@ -166,7 +169,9 @@ const sb = createClient(SB_URL, SB_KEY);
 const RANKS = {
   mentor:{label:"メンター", pill:"p-mentor", av:"av-mentor"},
   leader:{label:"リーダー", pill:"p-leader", av:"av-leader"},
-  crew:{label:"クルー", pill:"p-crew", av:"av-crew"}
+  crew:{label:"クルー", pill:"p-crew", av:"av-crew"},
+  staff:{label:"スタッフ", pill:"p-staffrank", av:"av-staff"},
+  office:{label:"事務局", pill:"p-office", av:"av-office"}
 };
 const ROLE_LABEL = {member:"会員", staff:"運営スタッフ", director:"事務局長"};
 const TAG_GROUPS = [
@@ -181,7 +186,7 @@ const RUBRIC = [
   {key:"manner", label:"マナー・表現", max:15},
   {key:"profile", label:"プロフィール充実度", max:15}
 ];
-const DEFAULT_CFG = {priorityMin:80, reviewMin:60, monthlyLimit:3, rankCanApply:{mentor:true, leader:true, crew:true}};
+const DEFAULT_CFG = {priorityMin:80, reviewMin:60, monthlyLimit:3, rankCanApply:{mentor:true, leader:true, crew:true, staff:true, office:true}};
 
 /* ============ 状態 ============ */
 let session = null;
@@ -375,6 +380,7 @@ async function bootWithSession(){
       sb.from("mk_contacts").select("*").eq("id", session.user.id).maybeSingle()
     ]);
     cfg = (cfgRes.data && cfgRes.data.cfg) || DEFAULT_CFG;
+    cfg.rankCanApply = Object.assign({}, DEFAULT_CFG.rankCanApply, cfg.rankCanApply||{});
     profiles = profRes.data || [];
     myProfile = myProfRes.data || null;
     myContact = myContactRes.data || null;
@@ -440,7 +446,7 @@ function viewM1(){
     '<div class="desc">'+esc(me.name)+' さん（'+RANKS[me.rank].label+'・'+ROLE_LABEL[me.role]+'）としてログイン中。気になるメンバーに「話したい申請」を出せます。連絡先はマッチ成立後に開示されます。</div>'+
     '<div class="autobox">🤖 <b>自動運用ポイント</b>：あなたの「話したいトピック」と相手の「力になれること」が2つ以上重なると、相性おすすめの印が自動で付きます。</div>';
   h += '<div class="filterbar"><div class="seg">';
-  const rf = [["all","すべて"],["mentor","メンター"],["leader","リーダー"],["crew","クルー"]];
+  const rf = [["all","すべて"],["mentor","メンター"],["leader","リーダー"],["crew","クルー"],["staff","スタッフ"],["office","事務局"]];
   rf.forEach(x=>{ h += '<button class="'+(meikanFilter.rank===x[0]?"on":"")+'" data-rank="'+x[0]+'">'+x[1]+'</button>'; });
   h += '</div>';
   h += '<input type="text" id="kwInput" placeholder="名前・タグで検索" value="'+esc(meikanFilter.kw)+'">';
@@ -705,14 +711,14 @@ async function viewM4(){
   const waiting = apps.filter(a=>a.status==="primary_pending"||a.status==="final_pending").length;
   const rejected = apps.filter(a=>a.status==="done_reject").length;
   const rate = total>0 ? Math.round(matched/total*100) : 0;
-  const rk = {mentor:0,leader:0,crew:0};
+  const rk = {mentor:0,leader:0,crew:0,staff:0,office:0};
   profiles.forEach(p=>{ rk[p.rank] = (rk[p.rank]||0)+1; });
   let h = '<div class="card"><h2>M4 運用ダッシュボード</h2>'+
     '<div class="desc">名鑑とマッチングの動きをひと目で。数値はすべてデータベースの実測です。</div>'+
     '<div class="autobox">🤖 <b>自動運用ポイント</b>：申請の採点・振分・記録までは自動、マッチの成立判断だけは人（スタッフ）が担います。</div></div>';
   h += '<div class="grid g6" style="margin-top:14px">';
   h += kpi(profiles.length,"名鑑掲載プロフィール");
-  h += kpi(rk.mentor+"/"+rk.leader+"/"+rk.crew,"内訳（M/L/C）");
+  h += kpi(rk.mentor+"/"+rk.leader+"/"+rk.crew+"/"+rk.staff+"/"+rk.office,"内訳（M/L/C/スタッフ/事務局）");
   h += kpi(total,"申請 累計");
   h += kpi(matched,"マッチ成立");
   h += kpi(waiting,"承認キュー滞留");
@@ -929,7 +935,7 @@ function viewCfg(){
   h += '<div><label>通常レビューの下限（未満は自動差し戻し）</label><input type="number" id="cfgReview" value="'+c.reviewMin+'" min="1" max="100"></div>';
   h += '<div><label>月間申請上限（1人あたり）</label><input type="number" id="cfgLimit" value="'+c.monthlyLimit+'" min="1" max="20"></div></div>';
   h += '<div style="margin-top:14px"><label>ランク別の申請可否</label>';
-  ["mentor","leader","crew"].forEach(r=>{
+  ["mentor","leader","crew","staff","office"].forEach(r=>{
     h += '<div class="toggleRow"><span>'+RANKS[r].label+' からの話したい申請</span><div class="toggle'+((c.rankCanApply||{})[r]?" on":"")+'" data-ranktoggle="'+r+'"></div></div>';
   });
   h += '</div><div class="actions"><button class="btn primary" id="cfgSaveBtn">設定を保存する</button></div></div>';
