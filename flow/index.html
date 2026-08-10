@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>AI流量計 — ⑧監視ダッシュボード</title>
+<style>
+  /* デジタル庁ダッシュボードガイドブック準拠 Blue系統（1成果物1系統） */
+  :root {
+    --blue-1200: #000060; --blue-900: #0017C1; --blue-600: #3460FB;
+    --blue-400: #7096F8;  --blue-200: #C5D7FB; --blue-50: #E8F1FE;
+    --text-black: #000000; --text-label: #626264; --text-link: #0017C1;
+    --bg-standard: #F8F8FB; --bg-control: #F1F1F4;
+    --success: #197A4B; --error: #CE0000;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Meiryo UI", "Yu Gothic UI", sans-serif;
+    background: var(--bg-standard); color: var(--text-black);
+    padding: 24px; font-size: 14px; line-height: 1.6;
+  }
+  header { margin-bottom: 20px; }
+  header h1 { font-size: 22px; color: var(--blue-1200); }
+  header .meta { color: var(--text-label); font-size: 12px; margin-top: 4px; }
+  .banner { background: #fff; border: 2px solid var(--error); color: var(--error); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-weight: bold; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .card { background: #fff; border: 1px solid var(--bg-control); border-radius: 8px; padding: 14px 16px; }
+  .card.hero { border: 2px solid var(--blue-900); background: var(--blue-50); }
+  .card .label { color: var(--text-label); font-size: 12px; }
+  .card .value { font-size: 24px; font-weight: bold; color: var(--blue-900); margin-top: 2px; }
+  .card .sub { color: var(--text-label); font-size: 11px; margin-top: 2px; }
+  .card.ok .value { color: var(--success); }
+  .card.ng .value { color: var(--error); }
+  section { background: #fff; border: 1px solid var(--bg-control); border-radius: 8px; padding: 18px 20px; margin-bottom: 20px; }
+  section h2 { font-size: 15px; color: var(--blue-1200); margin-bottom: 4px; border-left: 4px solid var(--blue-900); padding-left: 8px; }
+  section .desc { color: var(--text-label); font-size: 11px; margin-bottom: 12px; }
+  /* CSS棒グラフ */
+  .chart { display: flex; align-items: flex-end; gap: 3px; height: 160px; padding-top: 16px; }
+  .chart .bar { flex: 1; background: var(--blue-600); border-radius: 2px 2px 0 0; position: relative; min-width: 6px; }
+  .chart .bar:hover { background: var(--blue-900); }
+  .chart .bar .tip {
+    display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    background: var(--blue-1200); color: #fff; font-size: 11px; padding: 3px 8px;
+    border-radius: 4px; white-space: nowrap; z-index: 2; margin-bottom: 4px;
+  }
+  .chart .bar:hover .tip { display: block; }
+  .axis { display: flex; gap: 3px; margin-top: 4px; }
+  .axis span { flex: 1; font-size: 9px; color: var(--text-label); text-align: center; min-width: 6px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--blue-50); color: var(--blue-1200); text-align: left; padding: 6px 10px; border-bottom: 2px solid var(--blue-200); }
+  td { padding: 6px 10px; border-bottom: 1px solid var(--bg-control); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.total td { font-weight: bold; background: var(--blue-50); }
+  .ok-mark { color: var(--success); font-weight: bold; }
+  .ng-mark { color: var(--error); font-weight: bold; }
+  .hbar { height: 10px; background: var(--blue-600); border-radius: 2px; display: inline-block; vertical-align: middle; }
+  footer { color: var(--text-label); font-size: 11px; margin-top: 8px; }
+  footer p { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI流量計 — ⑧監視ダッシュボード</h1>
+  <div class="meta" id="meta">読み込み中…</div>
+</header>
+
+<div class="banner" id="load-error" style="display:none">✗ data.js が読み込めません。collect.py を実行してください。</div>
+<div class="banner" id="stale-warn" style="display:none"></div>
+<div class="banner" id="data-warn" style="display:none"></div>
+
+<div class="cards" id="cards"></div>
+
+<section>
+  <h2>ルーティン別 時短実績（直近30日）</h2>
+  <div class="desc">作業ログの記録値ベース。「手作業見積」は各タスク記録時の見積値、「AI実行」はログのauto_minutes記録値、時短率 = 時短 ÷ 手作業見積（いずれも目安）。</div>
+  <table id="routine-table">
+    <thead><tr>
+      <th>ルーティン（カテゴリ）</th><th class="num">件数</th><th class="num">手作業見積</th>
+      <th class="num">AI実行</th><th class="num">時短</th><th class="num">時短率</th><th style="width:26%"></th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>日別 タスク件数と時短時間（直近30日）</h2>
+  <div class="desc">棒＝タスク件数。カーソルを乗せると時短分数を表示。</div>
+  <div class="chart" id="task-chart"></div>
+  <div class="axis" id="task-axis"></div>
+</section>
+
+<section>
+  <h2>日別 概算コスト（直近30日・API換算USD）</h2>
+  <div class="chart" id="cost-chart"></div>
+  <div class="axis" id="cost-axis"></div>
+</section>
+
+<section>
+  <h2>モデル別内訳（直近30日）</h2>
+  <table id="model-table">
+    <thead><tr>
+      <th>モデル</th><th class="num">メッセージ数</th><th class="num">入力</th><th class="num">出力</th>
+      <th class="num">キャッシュ書込</th><th class="num">キャッシュ読取</th><th class="num">概算コスト</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>日次自動更新の履歴（PABLOSダッシュボード・記録がある直近14日分）</h2>
+  <table id="pipe-table">
+    <thead><tr><th>日付</th><th class="num">実行</th><th>判定</th><th class="num">ERROR</th><th class="num">WARN</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>単価表と注記</h2>
+  <table>
+    <thead><tr><th>モデル</th><th class="num">入力 $/1M</th><th class="num">出力 $/1M</th></tr></thead>
+    <tbody id="price-body"></tbody>
+  </table>
+  <footer id="foot"></footer>
+</section>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  if (!window.FLOW_DATA) { document.getElementById("load-error").style.display = "block"; return; }
+  const D = window.FLOW_DATA;
+  const fmt = (n) => n.toLocaleString("ja-JP");
+  const tok = (n) => n >= 1e9 ? (n / 1e9).toFixed(2) + "G" : n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e3 ? (n / 1e3).toFixed(0) + "K" : String(n);
+  const usd = (n) => "$" + n.toLocaleString("ja-JP", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  const hrs = (min) => (min / 60).toFixed(1) + "h";
+  const pad = (n) => String(n).padStart(2, "0");
+  const localYmd = (d) => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+
+  // 期間の日付列（タイムゾーンに依存しないローカル日付演算で生成）
+  const days = [];
+  {
+    const [sy, sm, sd] = D.window.start.split("-").map(Number);
+    const [ey, em, ed] = D.window.end.split("-").map(Number);
+    const cur = new Date(sy, sm - 1, sd);
+    const endD = new Date(ey, em - 1, ed);
+    while (cur <= endD) { days.push(localYmd(cur)); cur.setDate(cur.getDate() + 1); }
+  }
+  const latest = D.window.end;
+
+  document.getElementById("meta").textContent =
+    "生成: " + D.generated_at + "｜集計期間: " + D.window.start + " 〜 " + D.window.end + "（" + D.window.days + "日間）｜トークン・実行回数は実測／時短は記録時の見積ベース（目安）／コストは単価表による概算";
+
+  // 生成日と閲覧日の乖離警告（「本日」カードの誤読防止）
+  if (localYmd(new Date()) !== latest) {
+    const el = document.getElementById("stale-warn");
+    el.style.display = "block";
+    el.textContent = "▲ このデータの最新日は " + latest + " です（閲覧日と異なります）。collect.py を実行するか毎朝9時の自動集計をお待ちください。";
+  }
+
+  // 欠測・未計上の明示（実測ゼロと区別する）
+  const warns = [];
+  if (D.worklog.parse_errors === -1) warns.push("作業ログ（log.jsonl）が見つからないため、タスク件数・時短は欠測です（0ではありません）");
+  else if (D.worklog.parse_errors > 0) warns.push("作業ログのパース失敗 " + D.worklog.parse_errors + " 行（この分は未集計）");
+  if (D.tokens.unknown_models && D.tokens.unknown_models.length) warns.push("単価不明のためコスト未計上のモデル: " + D.tokens.unknown_models.join(", "));
+  if (warns.length) {
+    const el = document.getElementById("data-warn");
+    el.style.display = "block";
+    el.textContent = "▲ " + warns.join("｜");
+  }
+
+  // ---- KPIカード（主役は時短）
+  const tDaily = D.tokens.daily, wDaily = D.worklog.daily;
+  const wt = D.worklog.window_total;
+  const pw = D.pipeline.window;
+  const lr = D.pipeline.last_run;
+  const costLatest = (tDaily[latest] || {}).cost || 0;
+  const cost30 = Object.values(tDaily).reduce((s, v) => s + v.cost, 0);
+  const savedRate = wt.manual > 0 ? Math.round(wt.saved / wt.manual * 100) : null;
+  const personDays = (wt.saved / 60 / 8).toFixed(1);
+  const rateOk = pw.success_rate !== null && pw.success_rate >= 90;
+  const cards = [
+    { label: "直近30日 時短（目安）", value: hrs(wt.saved), sub: (savedRate !== null ? "時短率 " + savedRate + "%｜手作業見積 " + hrs(wt.manual) + "・AI実行 " + hrs(wt.auto) + "（時短はログ記録値の合計）" : "手作業見積の記録なし"), cls: "hero" },
+    { label: "人日換算（目安）", value: personDays + "人日", sub: "1人日=8時間で換算", cls: "hero" },
+    { label: "直近30日 タスク件数", value: fmt(wt.tasks) + "件", sub: "X発信ネタ候補 " + wt.x_potential + "件" },
+    { label: "検品品質(30日)", value: (D.reviews && D.reviews.targets ? "初回PASS " + D.reviews.first_pass_rate + "%" : "—"), sub: (D.reviews && D.reviews.targets ? "平均巡数 " + D.reviews.avg_rounds + "回・対象" + D.reviews.targets + "件（条件付きPASSは合格扱い）" : "検品記録なし（review-log.jsonl）") },
+    { label: "最新日の概算コスト", value: usd(costLatest), sub: "対象日 " + latest + "・" + fmt((tDaily[latest] || {}).msgs || 0) + "メッセージ" },
+    { label: "直近30日 概算コスト", value: usd(cost30), sub: "API換算・実請求とは異なる" },
+    { label: "自動更新 成功率(30日)", value: pw.runs ? pw.success_rate + "%" : "—", sub: pw.runs ? "✓" + pw.ok + " / 全" + pw.runs + "回・ERROR " + pw.errors + "・WARN " + pw.warns : "実行記録なし", cls: pw.runs ? (rateOk ? "ok" : "ng") : "" },
+    { label: "最終自動更新", value: lr ? (lr.result === "完了" ? "✓成功" : "✗" + lr.result) : "—", sub: lr ? lr.date + " " + lr.time + (lr.warns ? "（WARN " + lr.warns + "）" : "") : "", cls: lr ? (lr.result === "完了" ? "ok" : "ng") : "" },
+  ];
+  document.getElementById("cards").innerHTML = cards.map(c =>
+    '<div class="card ' + (c.cls || "") + '"><div class="label">' + c.label + '</div><div class="value">' + c.value + '</div><div class="sub">' + (c.sub || "") + "</div></div>"
+  ).join("");
+
+  // ---- 棒グラフ描画共通
+  function drawChart(chartId, axisId, values, tipFn) {
+    const max = Math.max(...values.map(v => v.v), 1);
+    document.getElementById(chartId).innerHTML = values.map(v =>
+      '<div class="bar" style="height:' + Math.max(Math.round(v.v / max * 100), v.v > 0 ? 3 : 1) + '%"><span class="tip">' + tipFn(v) + "</span></div>"
+    ).join("");
+    document.getElementById(axisId).innerHTML = values.map((v, i) =>
+      "<span>" + ((i % 5 === 0 || i === values.length - 1) ? v.d.slice(8, 10) : "") + "</span>"
+    ).join("");
+  }
+
+  drawChart("task-chart", "task-axis",
+    days.map(d => ({ d, v: (wDaily[d] || {}).tasks || 0 })),
+    v => v.d + "｜" + v.v + "件｜時短 " + fmt((wDaily[v.d] || {}).saved || 0) + "分");
+
+  drawChart("cost-chart", "cost-axis",
+    days.map(d => ({ d, v: (tDaily[d] || {}).cost || 0 })),
+    v => v.d + "｜" + usd(v.v) + "｜出力 " + tok((tDaily[v.d] || {}).out || 0));
+
+  // ---- ルーティン別 時短実績
+  const cats = Object.entries(D.worklog.by_category).sort((a, b) => b[1].saved - a[1].saved);
+  const maxSaved = Math.max(...cats.map(([, v]) => v.saved), 1);
+  const rows = cats.map(([c, v]) => {
+    const rate = v.manual > 0 ? Math.round(v.saved / v.manual * 100) + "%" : "—";
+    return "<tr><td>" + c + '</td><td class="num">' + v.tasks + '</td><td class="num">' + hrs(v.manual) +
+      '</td><td class="num">' + hrs(v.auto) + '</td><td class="num"><b>' + hrs(v.saved) + '</b></td><td class="num">' + rate +
+      '</td><td><span class="hbar" style="width:' + Math.round(v.saved / maxSaved * 100) + '%"></span></td></tr>';
+  });
+  rows.push('<tr class="total"><td>合計</td><td class="num">' + fmt(wt.tasks) + '</td><td class="num">' + hrs(wt.manual) +
+    '</td><td class="num">' + hrs(wt.auto) + '</td><td class="num">' + hrs(wt.saved) + '</td><td class="num">' +
+    (savedRate !== null ? savedRate + "%" : "—") + "</td><td></td></tr>");
+  document.querySelector("#routine-table tbody").innerHTML = rows.join("");
+
+  // ---- モデル別
+  const models = Object.entries(D.tokens.by_model)
+    .filter(([m]) => !m.includes("synthetic") && m !== "unknown")
+    .sort((a, b) => b[1].cost - a[1].cost);
+  document.querySelector("#model-table tbody").innerHTML = models.map(([m, v]) =>
+    "<tr><td>" + m + '</td><td class="num">' + fmt(v.msgs) + '</td><td class="num">' + tok(v.in) +
+    '</td><td class="num">' + tok(v.out) + '</td><td class="num">' + tok(v.c5 + v.c1h) +
+    '</td><td class="num">' + tok(v.read) + '</td><td class="num"><b>' + usd(v.cost) + "</b></td></tr>"
+  ).join("");
+
+  // ---- 日次更新履歴（記録がある直近14日分）
+  const pipeDays = Object.keys(D.pipeline.daily).sort().slice(-14).reverse();
+  document.querySelector("#pipe-table tbody").innerHTML = pipeDays.length ? pipeDays.map(d => {
+    const v = D.pipeline.daily[d];
+    const allOk = v.ok === v.runs;
+    return "<tr><td>" + d + '</td><td class="num">' + v.runs + "</td><td>" +
+      (allOk ? '<span class="ok-mark">✓ 成功</span>' : '<span class="ng-mark">✗ 失敗あり（成功' + v.ok + "/" + v.runs + "）</span>") +
+      '</td><td class="num">' + (v.errors ? '<span class="ng-mark">' + v.errors + "</span>" : "0") +
+      '</td><td class="num">' + (v.warns ? "▲" + v.warns : "0") + "</td></tr>";
+  }).join("") : '<tr><td colspan="5">記録なし</td></tr>';
+
+  // ---- 単価表・注記
+  document.getElementById("price-body").innerHTML = Object.entries(D.pricing_note.models).map(([m, p]) =>
+    "<tr><td>" + m + '</td><td class="num">$' + p.input.toFixed(2) + '</td><td class="num">$' + p.output.toFixed(2) + "</td></tr>"
+  ).join("");
+  document.getElementById("foot").innerHTML =
+    "<p>キャッシュ: " + D.pricing_note.cache + "。" + (D.pricing_note.assumption || "") + "</p>" +
+    "<p>※ " + D.pricing_note.disclaimer + "。単価出典: " + D.pricing_note.source + "</p>" +
+    "<p>※ 「手作業見積」「人日換算」は目安（見積値ベース）。トークン・実行回数・ERROR/WARNは実測値。</p>" +
+    "<p>※ データ源: ①作業ログ（work-log-作業ログ/log.jsonl）②Claude Codeセッションログ実測トークン（" + fmt(D.tokens.files_scanned) + "ファイル走査・サブエージェント含む）③PABLOSダッシュボード日次更新ログ（update-log.txt）④検品ログ（work-log-作業ログ/review-log.jsonl・検品1巡=1行）</p>" +
+    "<p>※ 更新: 毎朝9時の日次パイプラインで自動集計（手動は collect.py 実行）。配色: デジタル庁ダッシュボードガイドブック準拠 Blue系統 ©2026 Digital Agency</p>";
+})();
+</script>
+</body>
+</html>
