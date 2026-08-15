@@ -161,7 +161,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/08/14</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/08/15</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -181,7 +181,7 @@
 <main>
 <!-- ================= HOME ================= -->
 <section class="tab active" id="home">
-  <p class="lead"><b>2026年8月14日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
+  <p class="lead"><b>2026年8月15日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
   <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字はStripe決済（パブロス）としています・「基準のうち」が顧客DB内訳／金額は下記⑥</span></div>
@@ -917,14 +917,14 @@ const mail=[
   {d:'2026/08/14',tgt:9,total:54237,ok:54173,err:64,rate:0.118,dlv:99.9},
 ];
 /*STRIPE-START*/
-const stripe={updated:'2026/08/14',period:'直近30日',
+const stripe={updated:'2026/08/15',period:'直近30日',
   ranks:[
-    {k:'メンター',members:72,charges:72,amount:1389300},
-    {k:'リーダー',members:41,charges:41,amount:442200},
-    {k:'クルー',members:61,charges:61,amount:257400},
+    {k:'メンター',members:74,charges:74,amount:1428900},
+    {k:'リーダー',members:40,charges:40,amount:432300},
+    {k:'クルー',members:57,charges:57,amount:244200},
     {k:'その他会員',members:7,charges:7,amount:79200}
   ],
-  total:{members:181,charges:181,amount:2168100},
+  total:{members:178,charges:178,amount:2184600},
   course:{members:68,charges:68,amount:4031600}
 };
 /*STRIPE-END*/
@@ -936,12 +936,12 @@ const unpaid=[
 /*TOPPA-ROUTES-START*/
 const toppaRoutes=null; // 実測が入るまでnull（例: {updated:'2026/07/29',reading:5,line:3,note:2,x:2}）
 /*TOPPA-ROUTES-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/08/14","cur":{"base":250,"aM":35,"aL":25,"aC":98,"aS":0,"bT":402,"bM":153,"bL":99,"bC":129,"bS":20,"sM":181,"sC":181,"sA":2168100,"tBase":218,"tM":112,"tL":57,"tC":44,"tS":5,"sRM":72,"sRL":41,"sRC":61,"sRO":7},"prev":{"base":250,"aM":35,"aL":25,"aC":96,"aS":0,"bT":398,"bM":154,"bL":99,"bC":124,"bS":20,"sM":181,"sC":181,"sA":2135100,"tBase":212,"tM":112,"tL":57,"tC":38,"tS":5,"sRM":73,"sRL":40,"sRC":60,"sRO":8,"date":"2026/08/13"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/08/15","cur":{"base":250,"aM":35,"aL":25,"aC":98,"aS":0,"bT":405,"bM":153,"bL":99,"bC":132,"bS":20,"sM":178,"sC":178,"sA":2184600,"tBase":221,"tM":112,"tL":57,"tC":47,"tS":5,"sRM":74,"sRL":40,"sRC":57,"sRO":7},"prev":{"base":250,"aM":35,"aL":25,"aC":98,"aS":0,"bT":402,"bM":153,"bL":99,"bC":129,"bS":20,"sM":181,"sC":181,"sA":2168100,"tBase":218,"tM":112,"tL":57,"tC":44,"tS":5,"sRM":72,"sRL":41,"sRC":61,"sRO":7,"date":"2026/08/14"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
-const dbmaster={updated:'2026/08/14',total:402,ranks:{mentor:153,leader:99,crew:129,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:9},{t:'メンター→クルー',n:7}],downTotal:28};
+const dbmaster={updated:'2026/08/15',total:405,ranks:{mentor:153,leader:99,crew:132,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:12},{t:'リーダー→クルー',n:9},{t:'メンター→クルー',n:7}],downTotal:28};
 /*DBMASTER-END*/
 /*GAPLIST-START*/const gapList=[{n:'臼杵昌',e:'***@gmail.com',q:'メンター'},{n:'下山英',e:'***@yahoo.co.jp',q:'メンター'},{n:'織田剛',e:'***@gmail.com',q:'メンター'},{n:'吉岡秀',e:'***@hotmail.com',q:'メンター'},{n:'宮邉龍',e:'***@koel-01.com',q:'メンター'},{n:'小口A',e:'***@gmail.com',q:'メンター'},{n:'吉岡K',e:'***@gmail.com',q:'メンター'},{n:'野間久',e:'***@gmail.com',q:'メンター'},{n:'小阪裕',e:'***@oraculum.co.jp',q:'メンター'},{n:'篠原綾',e:'***@icloud.com',q:'リーダー'},{n:'谷畑彰',e:'***@gmail.com',q:'リーダー'},{n:'小津K',e:'***@gmail.com',q:'リーダー'},{n:'横山正',e:'***@yahoo.co.jp',q:'リーダー'},{n:'黒石浩',e:'***@gmail.com',q:'リーダー'},{n:'刈谷真',e:'***@gmail.com',q:'リーダー'},{n:'下田由',e:'***@gmail.com',q:'リーダー'},{n:'新堀高',e:'***@gmail.com',q:'リーダー'},{n:'三谷英',e:'***@gmail.com',q:'リーダー'},{n:'山崎智',e:'***@clearlive.jp',q:'リーダー'},{n:'品川陽',e:'***@gmail.com',q:'リーダー'},{n:'神谷S',e:'***@yahoo.co.jp',q:'クルー'},{n:'西村K',e:'***@yahoo.co.jp',q:'クルー'},{n:'福原大',e:'***@gmail.com',q:'クルー'},{n:'牧田孝',e:'***@gmail.com',q:'クルー'},{n:'渡邉均',e:'***@ogaki-tv.ne.jp',q:'クルー'},{n:'柿谷M',e:'***@gmail.com',q:'クルー'},{n:'伊藤恒',e:'***@gmail.com',q:'クルー'},{n:'西中典',e:'***@gmail.com',q:'クルー'},{n:'渡部さ',e:'***@xg7.so-net.ne.jp',q:'クルー'},{n:'本多真',e:'***@gmail.com',q:'クルー'},{n:'高橋健',e:'***@gmail.com',q:'クルー'},{n:'池田Y',e:'***@gmail.com',q:'クルー'},{n:'大城戸Y',e:'***@yahoo.co.jp',q:'クルー'},{n:'石川由',e:'***@gmail.com',q:'クルー'},{n:'千原悠',e:'***@gmail.com',q:'クルー'},{n:'西村K',e:'***@yahoo.co.jp',q:'サポーター'},{n:'浅利美',e:'***@gmail.com',q:'サポーター'},{n:'織部郁',e:'***@gmail.com',q:'サポーター'},{n:'工藤亮',e:'***@mikosea.io',q:'サポーター'},{n:'工藤亮',e:'***@mikosea.io',q:'サポーター'},{n:'須藤志',e:'***@gmail.com',q:'サポーター'},{n:'高橋佳',e:'***@gmail.com',q:'サポーター'},{n:'齋藤康',e:'***@zero.ad.jp',q:'サポーター'}];/*GAPLIST-END*/
-/*MASTERDB-START*/const masterdb={updated:'2026/08/14',ym:'2026-07',base:250,prevBase:264,newTotal:31,quitTotal:45,ranks:{mentor:121,leader:67,crew:49,sup:13},quit:{mentor:9,leader:9,crew:27,sup:0},today:{date:'2026/08/14',base:218,ranks:{mentor:112,leader:57,crew:44,sup:5}}};/*MASTERDB-END*/
+/*MASTERDB-START*/const masterdb={updated:'2026/08/15',ym:'2026-07',base:250,prevBase:264,newTotal:31,quitTotal:45,ranks:{mentor:121,leader:67,crew:49,sup:13},quit:{mentor:9,leader:9,crew:27,sup:0},today:{date:'2026/08/15',base:221,ranks:{mentor:112,leader:57,crew:47,sup:5}}};/*MASTERDB-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07'];
 const ltTotal=[168,168,276,276,276,276,276,473,473,473,473,474,450,450,385,385,401,445,481,330,347,349,358,408,264,250];
