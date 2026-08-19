@@ -559,7 +559,7 @@
     <div class="card kpi accent-top at-mentor"><div class="label">8月の流入（8/1–17実測）</div><div class="num" style="color:var(--crew)">35<span class="unit">名</span></div><div class="foot">8/14–16に32名が集中（Stripeサブスク登録日・現在有効分。7月登録は9名）</div></div>
   </div>
 
-  <div class="sec"><span class="badge">A2</span><h2>流入経路別（free9）</h2><span class="note">MyASP読者項目 free9＝reading／line／note／x／youtube／kubota／pr</span></div>
+  <div class="sec"><span class="badge">A2</span><h2>流入経路別（free9）</h2><span class="note">MyASP読者項目 free9＝reading／line／note／x／youtube／kubota／pr／direct（＋未記録）</span></div>
   <div class="grid g4" id="toppa-routes-cards">
     <div class="card kpi accent-top"><div class="label">📖 reading（読書会）</div><div class="num" id="tr-reading">—</div><div class="foot">free9=reading</div></div>
     <div class="card kpi accent-top at-crew"><div class="label">💬 line（LINE）</div><div class="num" id="tr-line">—</div><div class="foot">free9=line</div></div>
@@ -568,9 +568,11 @@
     <div class="card kpi accent-top"><div class="label">🎥 YouTube</div><div class="num" id="tr-youtube">—</div><div class="foot">free9=youtube</div></div>
     <div class="card kpi accent-top at-crew"><div class="label">🤝 kubota</div><div class="num" id="tr-kubota">—</div><div class="foot">free9=kubota</div></div>
     <div class="card kpi accent-top at-leader"><div class="label">📣 PR</div><div class="num" id="tr-pr">—</div><div class="foot">free9=pr</div></div>
+    <div class="card kpi accent-top"><div class="label">➡️ direct（ダイレクト）</div><div class="num" id="tr-direct">—</div><div class="foot">free9=direct（URL直アクセス等）</div></div>
+    <div class="card kpi accent-top"><div class="label">❓ 未記録</div><div class="num" id="tr-norec">—</div><div class="foot">free9未入力</div></div>
   </div>
   <div class="callout" id="toppa-routes-note" style="margin-top:10px">
-    <b>実測 67名</b>（free9集計・更新 2026/08/19）。集計対象はシナリオ「突破Aiクルー」の有効購読者78名（解約済み30名は除外・同一メールの重複1組を含む）。うちfree9記録あり71名＝reading 47・note 19・line 1・direct 4（カード外）、未記録7名。MyASP MCP実測・毎朝自動更新。
+    <b>実測 78名</b>（free9集計・更新 2026/08/19）。集計対象はシナリオ「突破Aiクルー」の有効購読者78名（解約済み30名は除外・同一メールの重複1組を含む）。うちfree9記録あり71名＝reading 47・note 19・line 1・direct 4、未記録7名。MyASP MCP実測・毎朝自動更新。
   </div>
 
   <div class="callout">
@@ -938,7 +940,7 @@ const unpaid=[
 ];
 /*UNPAID-END*/
 /*TOPPA-ROUTES-START*/
-const toppaRoutes={updated:'2026/08/19',reading:47,line:1,note:19,x:0,youtube:0,kubota:0,pr:0,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者78名（解約済み30名は除外・同一メールの重複1組を含む）。うちfree9記録あり71名＝reading 47・note 19・line 1・direct 4（カード外）、未記録7名。MyASP MCP実測・毎朝自動更新。'};
+const toppaRoutes={updated:'2026/08/19',reading:47,line:1,note:19,x:0,youtube:0,kubota:0,pr:0,direct:4,norec:7,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者78名（解約済み30名は除外・同一メールの重複1組を含む）。うちfree9記録あり71名＝reading 47・note 19・line 1・direct 4、未記録7名。MyASP MCP実測・毎朝自動更新。'};
 /*TOPPA-ROUTES-END*/
 /*DAYSNAP-START*/const daySnap={"date":"2026/08/19","cur":{"base":250,"aM":35,"aL":25,"aC":164,"aS":0,"bT":437,"bM":155,"bL":101,"bC":160,"bS":20,"sM":187,"sC":187,"sA":2280300,"tBase":251,"tM":114,"tL":59,"tC":73,"tS":5,"sRM":74,"sRL":41,"sRC":60,"sRO":12},"prev":{"base":250,"aM":35,"aL":25,"aC":131,"aS":0,"bT":427,"bM":154,"bL":101,"bC":151,"bS":20,"sM":191,"sC":191,"sA":2313300,"tBase":242,"tM":113,"tL":59,"tC":65,"tS":5,"sRM":76,"sRL":42,"sRC":61,"sRO":12,"date":"2026/08/18"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
@@ -1616,7 +1618,7 @@ groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポ
 ]);
 // 突破Aiクルー 流入経路別（free9）— toppaRoutesに実測が入ると描画
 if(toppaRoutes){
-  const keys=['reading','line','note','x','youtube','kubota','pr'];
+  const keys=['reading','line','note','x','youtube','kubota','pr','direct','norec'];
   const tot=keys.reduce((s,k)=>s+(toppaRoutes[k]||0),0);
   keys.forEach(k=>{
     const v=toppaRoutes[k]||0;
