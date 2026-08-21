@@ -98,7 +98,7 @@
     <div class="tile"><div class="k">平均LTV（アクティブ） <span class="badge calc">計算値</span></div><div class="v">¥81,185</div><div class="s">前月比 <span class="pos-v">+¥10,383</span>（+14.7%）※注記</div></div>
     <div class="tile warn"><div class="k">未来院ID数（離反予備軍） <span class="badge fact">実測</span></div><div class="v">149 名</div><div class="s">前月比 <span class="neg-v">+20名</span>（+15.5%）｜効果検証へ</div></div>
     <div class="tile warn"><div class="k">超休眠人数 <span class="badge fact">実測</span></div><div class="v">1,731 名</div><div class="s">前月比 <span class="neg-v">+36名</span>（+2.1%）｜目標+10名以下を超過</div></div>
-    <div class="tile warn"><div class="k">5回以上構成比（来院者/総ID） <span class="badge calc">計算値</span></div><div class="v">27.8%</div><div class="s">前月比 <span class="neg-v">-7.4pt</span> ※注記｜目標30%未達</div></div>
+    <div class="tile warn"><div class="k">5回以上構成比（5回以上来院者/総ID） <span class="badge calc">計算値</span></div><div class="v">27.8%</div><div class="s">前月比 <span class="neg-v">-7.4pt</span> ※注記｜目標30%未達</div></div>
     <div class="tile gold"><div class="k">70回以上ファン人数 <span class="badge fact">実測</span></div><div class="v">46 名</div><div class="s">前月比 <span class="pos-v">+14名</span>（+43.8%）｜目標35名を回復</div></div>
     <div class="tile"><div class="k">70回以上LTV <span class="badge calc">計算値</span></div><div class="v">¥547,557</div><div class="s">前月比 <span class="pos-v">+¥17,273</span>（+3.3%）</div></div>
     <div class="tile"><div class="k">自費ID数 <span class="badge fact">実測</span></div><div class="v">322 名</div><div class="s">前月比 <span class="neg-v">-6名</span>（-1.8%）｜主力は微減</div></div>
@@ -143,17 +143,18 @@
 <!-- P4 区分別サマリー -->
 <section class="page">
   <h2>3. 区分別サマリー（前月対比）</h2>
-  <p class="h2note">今月 2025.7〜2026.6 ／ 前月 2025.6〜2026.5　｜　LTV=区分内 平均総金額 <span class="badge fact">実測</span>（前月比のみ<span class="badge calc">計算値</span>）</p>
+  <p class="h2note">今月 2025.7〜2026.6 ／ 前月 2025.6〜2026.5　｜　ID数・消費総額は<span class="badge fact">実測</span>、LTV（=区分内消費総額÷ID数）・前月比は<span class="badge calc">計算値</span></p>
   <table>
     <tr><th>確定区分</th><th>ID数(今月)</th><th>ID数(前月)</th><th>ID差</th><th>消費総額(今月)</th><th>消費総額(前月)</th><th>総額前月比</th><th>LTV(今月)</th><th>LTV(前月)</th><th>LTV前月比</th></tr>
     <tr><td><b>01:自費</b></td><td><b>322</b></td><td>328</td><td class="neg-v">-6</td><td><b>¥27,666,356</b></td><td>¥28,500,480</td><td class="neg-v">-2.9%</td><td>¥85,920</td><td>¥86,892</td><td class="neg-v">-1.1%</td></tr>
     <tr><td><b>02:自賠責</b></td><td><b>50</b></td><td>53</td><td class="neg-v">-3</td><td><b>¥13,586,780</b></td><td>¥15,739,012</td><td class="neg-v">-13.7%</td><td>¥271,736</td><td>¥296,962</td><td class="neg-v">-8.5%</td></tr>
     <tr><td>03:健保</td><td>7</td><td>9</td><td class="neg-v">-2</td><td>¥169,004</td><td>¥171,163</td><td class="neg-v">-1.3%</td><td>¥24,143</td><td>¥19,018</td><td class="pos-v">+27.0%</td></tr>
-    <tr><td>05:労災</td><td>1</td><td>1</td><td class="flat-v">±0</td><td>¥514,780</td><td>¥177,453</td><td class="pos-v">+190.1%</td><td>¥514,780</td><td>¥177,453</td><td class="pos-v">+190.1%</td></tr>
-    <tr><td>06:未来院</td><td>149</td><td>129</td><td class="neg-v">+20</td><td>¥12,123,287</td><td>¥11,458,629</td><td>+5.8%</td><td>¥81,364</td><td>¥88,827</td><td class="neg-v">-8.4%</td></tr>
+    <tr><td>05:労災</td><td>1</td><td>1</td><td class="flat-v">±0</td><td>¥514,780</td><td>¥177,453</td><td>+190.1% ※</td><td>¥514,780</td><td>¥177,453</td><td>+190.1% ※</td></tr>
+    <tr><td>06:未来院</td><td>149</td><td>129</td><td class="neg-v">+20</td><td>¥12,123,287</td><td>¥11,458,629</td><td class="neg-v">+5.8%</td><td>¥81,364</td><td>¥88,827</td><td class="neg-v">-8.4%</td></tr>
     <tr><td>08:超休眠</td><td>1,731</td><td>1,695</td><td class="neg-v">+36</td><td>¥26,619,981</td><td>¥28,587,444</td><td class="neg-v">-6.9%</td><td>¥15,378</td><td>¥16,866</td><td class="neg-v">-8.8%</td></tr>
     <tr><td><b>合計</b></td><td><b>2,260</b></td><td><b>2,215</b></td><td><b>+45</b></td><td><b>¥80,680,188</b></td><td><b>¥84,634,181</b></td><td class="neg-v"><b>-4.7%</b></td><td><b>¥35,699</b></td><td><b>¥38,210</b></td><td class="neg-v"><b>-6.6%</b></td></tr>
   </table>
+  <p class="note">※労災は1名のみのため、前月比（+190.1%）は参考値としてご覧ください。</p>
   <h3>読み解き</h3>
   <div class="card warn"><h4>自賠責の縮小が全体減収の最大ドライバー</h4>ID -3名・総額-13.7%・LTV-8.5%と縮小。全体減収（-4.7%）の最大ドライバーです。事故施術の受け皿動線（提携・初期対応）の点検を推奨します。</div>
   <div class="grid2" style="margin-top:10px">
@@ -174,7 +175,7 @@
     <tr><td>2025-09</td><td>9</td><td>68名</td><td>80.9%</td><td>63.2%</td><td>44.1%</td><td>32.4%</td><td>21.6回</td><td>¥118,205</td><td>🟡 注意</td></tr>
     <tr><td>2025-10</td><td>8</td><td>57名</td><td>84.2%</td><td>64.9%</td><td>47.4%</td><td>28.1%</td><td>14.7回</td><td>¥72,528</td><td>🟡 注意</td></tr>
     <tr><td>2025-11</td><td>7</td><td>68名</td><td>75.0%</td><td>51.5%</td><td>39.7%</td><td>22.1%</td><td>14.1回</td><td>¥68,371</td><td>🔴 要対策</td></tr>
-    <tr><td>2025-12</td><td>6</td><td>42名</td><td>81.0%</td><td>50.0%</td><td>38.1%</td><td>19.1%</td><td>15.6回</td><td>¥83,200</td><td>🟡 注意</td></tr>
+    <tr><td>2025-12</td><td>6</td><td>42名</td><td>81.0%</td><td>50.0%</td><td>38.1%</td><td>19.0%</td><td>15.6回</td><td>¥83,200</td><td>🟡 注意</td></tr>
     <tr><td>2026-01</td><td>5</td><td>41名</td><td>75.6%</td><td>48.8%</td><td>34.1%</td><td>24.4%</td><td>17.4回</td><td>¥105,505</td><td>🔴 要対策</td></tr>
     <tr><td>2026-02</td><td>4</td><td>64名</td><td>71.9%</td><td>60.9%</td><td>48.4%</td><td>23.4%</td><td>17.8回</td><td>¥84,821</td><td>🔴 要対策</td></tr>
     <tr><td>2026-03</td><td>3</td><td>46名</td><td>78.3%</td><td>58.7%</td><td>43.5%</td><td>19.6%</td><td>15.2回</td><td>¥89,502</td><td>判定保留(経過短)</td></tr>
@@ -187,7 +188,7 @@
     <tr><th>指標</th><th>人数</th><th>到達率</th><th>示唆</th></tr>
     <tr><td>初診</td><td>275名</td><td>100.0%</td><td>基準母集団（2025.8〜2025.11の初診者）</td></tr>
     <tr><td>2回以上到達</td><td>220名</td><td>80.0%</td><td>初診→2回目の壁。20%が一度きりで離脱（前期の安定コホートは12.8%）→ <span class="neg-v">悪化</span></td></tr>
-    <tr><td>5回以上到達</td><td>161名</td><td>58.6%</td><td>定着判定ライン。約41%がここまでに離脱（前期72.1%→58.6%に低下）</td></tr>
+    <tr><td>5回以上到達</td><td>161名</td><td>58.5%</td><td>定着判定ライン。約41%がここまでに離脱（前期72.1%→58.5%に低下）</td></tr>
     <tr><td>10回以上到達</td><td>116名</td><td>42.2%</td><td>優良顧客予備軍</td></tr>
     <tr><td>20回以上到達</td><td>71名</td><td>25.8%</td><td>将来の70回以上ファン候補</td></tr>
     <tr><td>1回のみ離脱</td><td>55名</td><td>20.0%</td><td>🔴 即離脱層。最大の改善余地（前期12.8%から悪化）</td></tr>
@@ -204,7 +205,7 @@
     <tr><td>1</td><td>自賠責 50名（-3名・総額-13.7%）</td><td>🔴最優先</td><td>事故施術の受け皿動線を点検。提携先（整形外科・保険会社）への挨拶と紹介フロー再確認＋事故直後の即日予約枠を整備</td><td>院長</td><td>14日以内</td><td>自賠責IDを月+3名回復</td><td>自賠責ID数/総額</td></tr>
     <tr><td>2</td><td>初診→2回目の壁（1回のみ離脱20%）</td><td>🔴最優先</td><td>初診時に次回予約をその場で必ず取る運用＋48時間フォローLINEの標準化（100日ファン化計画の入口設計）</td><td>受付/院長</td><td>即日</td><td>1回のみ離脱を15%以下に</td><td>初診月の2回到達率</td></tr>
     <tr><td>3</td><td>未来院 149名（+20名）</td><td>🔴最優先</td><td>6月実施の自主アプローチ集計と7月の再来院実績を突合し反応率を検証→高反応層に電話・低反応層にLINEを再配分</td><td>マーケ/受付</td><td>14日以内</td><td>未来院→再来院 20-30%</td><td>再来院数/反応率</td></tr>
-    <tr><td>4</td><td>5回到達率の低下（58.6%）</td><td>🟡構造改革</td><td>3〜4回目来院時の回数券・メンテナンス移行提案フローを再徹底（ベルトコンベアの中間工程）</td><td>院長</td><td>14日以内</td><td>5回到達率を65%以上へ</td><td>5回到達率</td></tr>
+    <tr><td>4</td><td>5回到達率の低下（58.5%）</td><td>🟡構造改革</td><td>3〜4回目来院時の回数券・メンテナンス移行提案フローを再徹底（ベルトコンベアの中間工程）</td><td>院長</td><td>14日以内</td><td>5回到達率を65%以上へ</td><td>5回到達率</td></tr>
     <tr><td>5</td><td>超休眠 1,731名（+36名）</td><td>🟡攻め</td><td>未来院からの流入を上流で止めることを優先しつつ、年齢×最終来院日でセグメントし低コスト（LINE/DM）で四半期一括アプローチ</td><td>マーケ</td><td>30日以内</td><td>3%覚醒で約52名の再来院</td><td>覚醒数</td></tr>
     <tr><td>6</td><td>70回以上ファン 46名（+14名）</td><td>🟢攻め</td><td>熱中層への感謝施策＋紹介依頼カード（1名の熱中者が100名の推し活を生むベルトコンベア理論の起点）</td><td>院長</td><td>30日以内</td><td>紹介経由新規+5名/月</td><td>紹介経由初診数</td></tr>
     <tr><td>7</td><td>新規初診 50名（5月64名から減少）</td><td>🟢攻め</td><td>紹介カード配布・Googleクチコミ促進で入口を補強</td><td>受付</td><td>30日以内</td><td>新規初診60名/月へ回復</td><td>月間初診数</td></tr>
