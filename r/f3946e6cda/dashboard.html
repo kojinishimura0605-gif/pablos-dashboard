@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ジムCRM 経営ダッシュボード R8.7月度</title>
+<style>
+  :root{
+    --text:#000000; --label:#626264; --link:#0017C1;
+    --bg-page:#FFFFFF; --bg-card:#F8F8FB; --bg-control:#F1F1F4;
+    --chart-1:#000060; --chart-2:#0017C1; --chart-3:#3460FB; --chart-4:#7096F8; --chart-5:#C5D7FB; --chart-6:#E8F1FE;
+    --accent-1:#A58000; --accent-2:#D2A400; --accent-3:#FFC700;
+    --neg:#CE0000; --neg-soft:#FDEEEE;
+    --neutral-2:#666666; --neutral-4:#CCCCCC;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Meiryo UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;margin:0;background:var(--bg-card);color:var(--text);line-height:1.65;font-size:13px}
+  .wrap{max-width:900px;margin:0 auto;padding:18px 20px 60px}
+  .page{background:var(--bg-page);border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.06);padding:26px 30px;margin-top:18px}
+  h1{font-size:22px;margin:4px 0 2px;line-height:1.4}
+  h2{font-size:17px;border-left:6px solid var(--chart-2);padding-left:10px;margin:2px 0 4px}
+  h3{font-size:14px;margin:16px 0 6px;color:var(--chart-1)}
+  .h2note{font-size:11px;color:var(--label);margin:0 0 14px;padding-left:16px}
+  .hero{background:linear-gradient(135deg,var(--chart-1),var(--chart-2));color:#fff;border-radius:8px;padding:30px 34px;margin-top:0}
+  .hero .sub{color:var(--chart-5);font-size:12px;margin:0 0 8px}
+  .hero h1{color:#fff}
+  .hero .flag{background:rgba(255,255,255,.12);border-left:4px solid var(--accent-3);padding:12px 16px;margin-top:16px;font-size:15px;font-weight:bold;border-radius:0 6px 6px 0}
+  .hero .meta{font-size:11px;color:var(--chart-5);margin-top:16px}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .tile{background:var(--bg-card);border-radius:6px;padding:10px 12px;border-top:4px solid var(--chart-2)}
+  .tile.warn{border-top-color:var(--neg)}
+  .tile.gold{border-top-color:var(--accent-2)}
+  .tile .k{font-size:10.5px;color:var(--label)}
+  .tile .v{font-size:18px;font-weight:bold;line-height:1.3}
+  .tile .s{font-size:10px;color:var(--label)}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12px}
+  th{background:var(--chart-6);color:var(--chart-1);font-size:11.5px;padding:6px 8px;border:1px solid var(--neutral-4);text-align:left}
+  td{padding:6px 8px;border:1px solid var(--neutral-4);vertical-align:top}
+  tr:nth-child(even) td{background:var(--bg-card)}
+  .callout{background:var(--chart-6);border-left:5px solid var(--chart-2);padding:10px 14px;border-radius:0 6px 6px 0;margin:12px 0;font-size:12.5px}
+  .callout.prop{background:#FDF6E3;border-left-color:var(--accent-2)}
+  .callout.neg{background:var(--neg-soft);border-left-color:var(--neg)}
+  .badge{display:inline-block;font-size:10px;font-weight:bold;border-radius:3px;padding:1px 7px;margin-right:6px;vertical-align:middle}
+  .badge.fact{background:var(--chart-2);color:#fff}
+  .badge.calc{background:var(--chart-4);color:#fff}
+  .badge.prop{background:var(--accent-2);color:#fff}
+  .badge.chk{background:var(--neutral-2);color:#fff}
+  .neg-v{color:var(--neg);font-weight:bold}
+  .pos-v{color:var(--chart-2);font-weight:bold}
+  .flat-v{color:var(--neutral-2);font-weight:bold}
+  .note{font-size:10.5px;color:var(--label);margin:6px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:var(--bg-card);border-radius:6px;padding:12px 14px;border-top:3px solid var(--chart-3)}
+  .card.prop{border-top-color:var(--accent-2)}
+  .card.warn{border-top-color:var(--neg)}
+  .card h4{margin:0 0 6px;font-size:12.5px;color:var(--chart-1)}
+  .bar{display:flex;align-items:center;gap:8px;margin:2px 0;font-size:11px}
+  .bar .lb{width:44px;color:var(--label);text-align:right;flex:none}
+  .bar .tr{flex:1;background:var(--bg-control);border-radius:3px;height:13px;position:relative}
+  .bar .fl{background:var(--chart-3);height:13px;border-radius:3px}
+  .bar .fl.last{background:var(--chart-1)}
+  .bar .vl{width:56px;flex:none;font-weight:bold;font-size:10.5px}
+  .footer{font-size:10.5px;color:var(--label);text-align:center;margin-top:22px}
+  a.dl{position:fixed;right:18px;bottom:18px;background:var(--chart-2);color:#fff;text-decoration:none;font-weight:bold;font-size:13px;padding:12px 20px;border-radius:24px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  a.dl:hover{background:var(--chart-3)}
+  @media (max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+  @media print{
+    @page{size:A4;margin:12mm 11mm}
+    body{background:#fff;font-size:11.5px}
+    .wrap{max-width:none;padding:0}
+    .page{box-shadow:none;border-radius:0;padding:2mm 1mm;margin-top:0;page-break-after:always}
+    .page:last-child{page-break-after:auto}
+    .hero{border-radius:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .tile,.card,.callout,table,.bar{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+    a.dl{display:none}
+    .tiles{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- P1 表紙 -->
+<section class="page hero">
+  <p class="sub">ジムCRM 月次経営レポート｜R8.7月度（2026年7月）</p>
+  <h1>会員数は開業以来の最高値へ。<br>次の主戦場は「来館頻度」です。</h1>
+  <div class="flag">継続1,230名で目標1,220名に初到達。退会率も系列最良値。<br>ただし来館頻度（月5回以下67.9%）だけが3ヶ月連続で悪化——退会の先行指標が鳴っています。</div>
+  <p class="meta">
+    2026年8月21日｜作成: 社外アイデア企画室（ファネル設計士）<br>
+    数値出典: 貴社CRMデータ「CRM LTVサマリー」（まとめ／R8.7月契約プラン区分サマリー／R8.7CRM明細・2026-08-21ご提供）<br>
+    <span style="color:#FFC700">■社外秘</span>｜本資料の数値はご提供データからの転記（<b>実測</b>）または転記値からの機械計算（<b>計算値</b>）のみで構成し、推測による補完は行っていません。
+  </p>
+</section>
+
+<!-- P2 主要KPI -->
+<section class="page">
+  <h2>1. 主要KPI（R8.7 vs R8.6 前月対比つき）</h2>
+  <p class="h2note">凡例: <span class="badge fact">実測</span>ご提供データ転記値　<span class="badge calc">計算値</span>転記値からの機械計算　<span class="badge prop">提案</span>社外アイデア企画室のご提案　／　数値の色: <span class="pos-v">青=改善方向</span>・<span class="neg-v">赤=注視</span>・<span class="flat-v">グレー=横ばい</span></p>
+  <div class="tiles">
+    <div class="tile"><div class="k">継続会員数 <span class="badge fact">実測</span></div><div class="v">1,230 名</div><div class="s">前月比 <span class="pos-v">+28名</span>｜系列最高値・目標1,220名に初到達</div></div>
+    <div class="tile"><div class="k">継続：平均LTV <span class="badge fact">実測</span></div><div class="v">¥133,756</div><div class="s">前月比 <span class="pos-v">+¥343</span>（+0.3%）｜伸びは鈍化</div></div>
+    <div class="tile"><div class="k">退会：平均LTV <span class="badge fact">実測</span></div><div class="v">¥69,728</div><div class="s">前月比 <span class="pos-v">+¥1,060</span>｜はどめ指標</div></div>
+    <div class="tile warn"><div class="k">休会会員数 <span class="badge fact">実測</span></div><div class="v">80 名</div><div class="s">前月比 <span class="flat-v">±0名</span>｜増加が止まる</div></div>
+    <div class="tile warn"><div class="k">月10回以上の割合（優良層） <span class="badge fact">実測</span></div><div class="v">15.4%</div><div class="s">前月比 <span class="neg-v">-0.2pt</span>｜コア層が減少に転じる</div></div>
+    <div class="tile warn"><div class="k">月5回以下の割合（離反予備軍） <span class="badge fact">実測</span></div><div class="v">67.9%</div><div class="s">前月比 <span class="neg-v">+0.1pt</span>｜3ヶ月連続悪化</div></div>
+    <div class="tile"><div class="k">半年以内の退会率 <span class="badge fact">実測</span></div><div class="v">34.7%</div><div class="s">前月比 <span class="pos-v">-0.3pt</span>｜目標&lt;40%達成・系列最良値</div></div>
+    <div class="tile"><div class="k">1年以内の退会率 <span class="badge fact">実測</span></div><div class="v">68.0%</div><div class="s">前月比 <span class="pos-v">-0.6pt</span>｜系列最良値も目標&lt;60%未達</div></div>
+    <div class="tile warn"><div class="k">累計退会会員数 <span class="badge fact">実測</span></div><div class="v">1,758 名</div><div class="s">前月比 +38名（自然増とは考えません）</div></div>
+    <div class="tile"><div class="k">TOP1%平均LTV <span class="badge calc">計算値</span></div><div class="v">¥478,572</div><div class="s">前月比 <span class="pos-v">+¥8,711</span>（TOP12名）</div></div>
+    <div class="tile"><div class="k">長期在籍率（300日以上） <span class="badge fact">実測</span></div><div class="v">65.8%</div><div class="s">前月比 <span class="pos-v">+0.6pt</span>｜系列最高値</div></div>
+    <div class="tile"><div class="k">新規在籍率（0-99日） <span class="badge fact">実測</span></div><div class="v">14.9%</div><div class="s">前月比 <span class="flat-v">±0.0pt</span>｜新規流入は横ばい</div></div>
+  </div>
+  <div class="callout">会員数・退会率・定着率は<b>開業以来もっとも良い数字が揃いました</b>。一方で、来館頻度の2指標（月10回以上・月5回以下）だけが逆方向に動いています。来館頻度は退会の先行指標です——いまの好調な退会率が数ヶ月後に押し戻されないよう、先に手を打つ月です。</div>
+  <p class="note">※前月（R8.6）の継続平均LTVは、ご提供データの改定（継続total LTV 163,363,244円→160,363,244円）に伴い¥135,910→¥133,414を正としています。前月比・推移はすべて改定後基準です。</p>
+</section>
+
+<!-- P3 前月対比差異 -->
+<section class="page">
+  <h2>2. 前月対比 差異一覧（R8.6 → R8.7）</h2>
+  <p class="h2note">全13指標の当月値・前月値・差異。▲=改善方向／▼=悪化方向／―=横ばい <span class="badge fact">実測</span><span class="badge calc">計算値</span></p>
+  <table>
+    <tr><th>KPI</th><th>R8.6（前月）</th><th>R8.7（当月）</th><th>差異</th><th>方向</th><th>コメント</th></tr>
+    <tr><td>継続会員数</td><td>1,202名</td><td><b>1,230名</b></td><td class="pos-v">+28名</td><td class="pos-v">▲ 改善</td><td>3ヶ月連続増。系列最高値を更新</td></tr>
+    <tr><td>継続：平均LTV</td><td>¥133,414</td><td><b>¥133,756</b></td><td class="pos-v">+¥343</td><td class="pos-v">▲ 改善</td><td>+0.3%。前月値はデータ改定後基準</td></tr>
+    <tr><td>退会：平均LTV</td><td>¥68,668</td><td><b>¥69,728</b></td><td class="pos-v">+¥1,060</td><td class="pos-v">▲ 改善</td><td>はどめ。退会時LTVも上昇</td></tr>
+    <tr><td>休会会員数</td><td>80名</td><td><b>80名</b></td><td class="flat-v">±0名</td><td class="flat-v">― 横ばい</td><td>増加が止まる。復帰コンタクト継続</td></tr>
+    <tr><td>月10回以上の割合（優良層）</td><td>15.6%</td><td><b>15.4%</b></td><td class="neg-v">-0.2pt</td><td class="neg-v">▼ 悪化</td><td>コア層が減少に転じる。育成強化</td></tr>
+    <tr><td>月5回以下の割合（離反予備軍）</td><td>67.8%</td><td><b>67.9%</b></td><td class="neg-v">+0.1pt</td><td class="neg-v">▼ 悪化</td><td>3ヶ月連続悪化。最優先課題</td></tr>
+    <tr><td>半年以内の退会率</td><td>35.0%</td><td><b>34.7%</b></td><td class="pos-v">-0.3pt</td><td class="pos-v">▲ 改善</td><td>系列最良値。目標&lt;40%を維持</td></tr>
+    <tr><td>1年以内の退会率</td><td>68.6%</td><td><b>68.0%</b></td><td class="pos-v">-0.6pt</td><td class="pos-v">▲ 改善</td><td>系列最良値も目標&lt;60%には未達</td></tr>
+    <tr><td>累計退会会員数</td><td>1,720名</td><td><b>1,758名</b></td><td>+38名</td><td class="flat-v">― 横ばい</td><td>悪化している（自然増とは考えない）</td></tr>
+    <tr><td>TOP1%平均LTV</td><td>¥469,861</td><td><b>¥478,572</b></td><td class="pos-v">+¥8,711</td><td class="pos-v">▲ 改善</td><td>ファン層の単価が上昇継続</td></tr>
+    <tr><td>長期在籍率（300日以上）</td><td>65.2%</td><td><b>65.8%</b></td><td class="pos-v">+0.6pt</td><td class="pos-v">▲ 改善</td><td>系列最高値。定着層が増加</td></tr>
+    <tr><td>新規在籍率（0-99日）</td><td>14.9%</td><td><b>14.9%</b></td><td class="flat-v">±0.0pt</td><td class="flat-v">― 横ばい</td><td>新規流入は横ばい</td></tr>
+    <tr><td>TOP1%構成人数</td><td>12名</td><td><b>12名</b></td><td class="flat-v">±0名</td><td class="flat-v">― 横ばい</td><td>目標12名を維持</td></tr>
+  </table>
+</section>
+
+<!-- P4 プラン区分別・推移 -->
+<section class="page">
+  <h2>3. 契約プラン区分別LTVサマリーと推移（R7.9〜R8.7）</h2>
+  <p class="h2note">出典: R8.7月契約プラン区分サマリー <span class="badge fact">実測</span>（前月比のみ<span class="badge calc">計算値</span>）</p>
+  <table>
+    <tr><th>プラン区分</th><th>total LTV（円）</th><th>会員数</th><th>平均LTV（円）</th><th>LTV前月比</th><th>会員数 前月比</th></tr>
+    <tr><td><b>01:継続</b></td><td><b>164,520,252</b></td><td><b>1,230</b></td><td><b>¥133,756</b></td><td class="pos-v">+0.3%</td><td class="pos-v">+28</td></tr>
+    <tr><td>02:休会</td><td>6,020,867</td><td>80</td><td>¥75,261</td><td class="neg-v">-3.5%</td><td>±0</td></tr>
+    <tr><td>03:退会</td><td>122,581,933</td><td>1,758</td><td>¥69,728</td><td>+1.5%</td><td>+38</td></tr>
+    <tr><td>04:仮登録</td><td>132,897</td><td>605</td><td>¥220</td><td>-27.3%</td><td>-1</td></tr>
+    <tr><td>05:スタッフ・テスト</td><td>140,272</td><td>240</td><td>¥584</td><td>-0.8%</td><td>+2</td></tr>
+    <tr><td>06:重複</td><td>0</td><td>138</td><td>¥0</td><td>―</td><td>+10</td></tr>
+    <tr><td><b>合計</b></td><td><b>293,396,221</b></td><td><b>4,051</b></td><td><b>¥72,426</b></td><td>+1.0%</td><td>+77</td></tr>
+  </table>
+  <div class="grid2">
+    <div class="card"><h4>継続会員数の推移（名） <span class="badge fact">実測</span></h4>
+      <div class="bar"><span class="lb">R7.9</span><div class="tr"><div class="fl" style="width:33%"></div></div><span class="vl">1,160</span></div>
+      <div class="bar"><span class="lb">R7.10</span><div class="tr"><div class="fl" style="width:45%"></div></div><span class="vl">1,174</span></div>
+      <div class="bar"><span class="lb">R7.11</span><div class="tr"><div class="fl" style="width:25%"></div></div><span class="vl">1,150</span></div>
+      <div class="bar"><span class="lb">R7.12</span><div class="tr"><div class="fl" style="width:18%"></div></div><span class="vl">1,142</span></div>
+      <div class="bar"><span class="lb">R8.1</span><div class="tr"><div class="fl" style="width:23%"></div></div><span class="vl">1,148</span></div>
+      <div class="bar"><span class="lb">R8.2</span><div class="tr"><div class="fl" style="width:14%"></div></div><span class="vl">1,137</span></div>
+      <div class="bar"><span class="lb">R8.3</span><div class="tr"><div class="fl" style="width:23%"></div></div><span class="vl">1,148</span></div>
+      <div class="bar"><span class="lb">R8.4</span><div class="tr"><div class="fl" style="width:25%"></div></div><span class="vl">1,150</span></div>
+      <div class="bar"><span class="lb">R8.5</span><div class="tr"><div class="fl" style="width:57%"></div></div><span class="vl">1,188</span></div>
+      <div class="bar"><span class="lb">R8.6</span><div class="tr"><div class="fl" style="width:68%"></div></div><span class="vl">1,202</span></div>
+      <div class="bar"><span class="lb">R8.7</span><div class="tr"><div class="fl last" style="width:92%"></div></div><span class="vl">1,230</span></div>
+      <p class="note">※横棒は1,120〜1,240名のレンジで表示</p>
+    </div>
+    <div class="card"><h4>平均LTVの推移（継続・円） <span class="badge fact">実測</span></h4>
+      <div class="bar"><span class="lb">R7.9</span><div class="tr"><div class="fl" style="width:6%"></div></div><span class="vl">111,471</span></div>
+      <div class="bar"><span class="lb">R7.10</span><div class="tr"><div class="fl" style="width:11%"></div></div><span class="vl">112,524</span></div>
+      <div class="bar"><span class="lb">R7.11</span><div class="tr"><div class="fl" style="width:30%"></div></div><span class="vl">117,204</span></div>
+      <div class="bar"><span class="lb">R7.12</span><div class="tr"><div class="fl" style="width:53%"></div></div><span class="vl">122,816</span></div>
+      <div class="bar"><span class="lb">R8.1</span><div class="tr"><div class="fl" style="width:63%"></div></div><span class="vl">125,112</span></div>
+      <div class="bar"><span class="lb">R8.2</span><div class="tr"><div class="fl" style="width:74%"></div></div><span class="vl">127,730</span></div>
+      <div class="bar"><span class="lb">R8.3</span><div class="tr"><div class="fl" style="width:85%"></div></div><span class="vl">130,321</span></div>
+      <div class="bar"><span class="lb">R8.4</span><div class="tr"><div class="fl" style="width:91%"></div></div><span class="vl">131,815</span></div>
+      <div class="bar"><span class="lb">R8.5</span><div class="tr"><div class="fl" style="width:95%"></div></div><span class="vl">132,763</span></div>
+      <div class="bar"><span class="lb">R8.6</span><div class="tr"><div class="fl" style="width:98%"></div></div><span class="vl">133,414</span></div>
+      <div class="bar"><span class="lb">R8.7</span><div class="tr"><div class="fl last" style="width:99%"></div></div><span class="vl">133,756</span></div>
+      <p class="note">※横棒は110,000〜134,000円のレンジで表示。退会平均LTVは62,454円（R7.9）→69,728円（R8.7）で推移</p>
+    </div>
+  </div>
+  <div class="callout">継続平均LTVは11ヶ月連続の上昇ですが、直近の伸びは+0.3%と鈍化しています。「集めて売る」の次の一手は、物販（リカバリーウェア）・アフィリエイト（プロテインコーヒー）の8月開始によるLTVの器の拡張です。</div>
+</section>
+
+<!-- P5 診断 -->
+<section class="page">
+  <h2>4. ファネル設計士の診断 — 詰まっているのは「1年の壁」と「来館頻度」</h2>
+  <p class="h2note">会員を『新規→既存→優良→ファン』へ運ぶベルトコンベアの、詰まっている箇所に手を打ちます</p>
+  <div class="tiles">
+    <div class="tile"><div class="k">半年以内の退会率</div><div class="v">34.7%</div><div class="s">目標&lt;40% <span class="pos-v">達成</span>・系列最良値</div></div>
+    <div class="tile warn"><div class="k">1年以内の退会率</div><div class="v">68.0%</div><div class="s">目標&lt;60% <span class="neg-v">未達</span>＝最大の課題</div></div>
+    <div class="tile"><div class="k">1名の離脱によるLTV損失 <span class="badge calc">計算値</span></div><div class="v">約64,000円</div><div class="s">継続¥133,756 − 退会¥69,728</div></div>
+    <div class="tile gold"><div class="k">TOP1%（ファン層）</div><div class="v">12名</div><div class="s">平均LTV ¥478,572・目標12名を維持</div></div>
+  </div>
+  <div class="callout">半年以内の退会率は目標を達成し改善が続いています。一方で1年以内は68.0%——<b>離脱は「半年〜1年」に集中</b>しています。入口の定着は機能し始めた今、主戦場は「1年の壁」です。</div>
+  <h3>ファネル上の位置づけ</h3>
+  <table>
+    <tr><th>フェーズ</th><th>現状の詰まり <span class="badge fact">実測</span></th><th>対応施策</th></tr>
+    <tr><td>新規→既存（0〜6ヶ月）</td><td>来館月5回以下が67.9%と3ヶ月連続悪化</td><td>施策B（早期介入）</td></tr>
+    <tr><td>既存→優良（6〜12ヶ月）</td><td>1年退会率68.0%（1年の壁）</td><td><b>施策A（壁突破・最優先）</b></td></tr>
+    <tr><td>優良→ファン→紹介</td><td>TOP1%12名・紹介導線の強化余地</td><td>施策C（ファン化・Share）</td></tr>
+  </table>
+  <h3>当月の施策・着眼点（貴社実施中の施策）</h3>
+  <table>
+    <tr><td>・新規：週3回の来館促し／入会者専用スタンプカードで習慣化（継続）＋スタンプラリーイベント実施</td></tr>
+    <tr><td>・セットプラン促しLINE配信（継続）・休会会員（80名）への復帰コンタクト・退会予備軍へ個別LINE/メッセージ配信</td></tr>
+    <tr><td>・TOP1%（12名）はスタッフ全員で共有し『感謝の手紙』など金銭以外で大事にされる体験を提供</td></tr>
+    <tr><td>・物販：リカバリーウェア販売開始（8月〜）／アフィリエイト：プロテインコーヒー開始（8月〜）でLTV拡張</td></tr>
+    <tr><td>・2割のコア層を4倍に増やす『集めて育てる』設計（月10回以上15.4%の反転が次の焦点）</td></tr>
+  </table>
+</section>
+
+<!-- P6 施策 -->
+<section class="page">
+  <h2>5. 改善施策のご提案（優先順） <span class="badge prop">提案</span></h2>
+  <p class="h2note">打ち手は3つ。最優先は施策A『1年の壁突破プログラム』です</p>
+  <div class="card prop"><h4>【施策A｜最優先】1年の壁突破プログラム</h4>
+    ねらい: 半年〜1年で離脱する層に再接続し、1年退会率を約4.0pt下げる（68.0%→64%目安）。<br>
+    ・入会7・10ヶ月の節目にInBody再測定＋成果可視化の面談を設定し、変化を数字で実感していただく<br>
+    ・マンネリ化を防ぐ新メニュー・季節プログラムを四半期ごとに投入する<br>
+    ・来館頻度に連動したLINE配信で、停滞のサインが出た会員へ先回りで声かけする<br>
+    ・効果試算 <span class="badge calc">計算値</span>: 1年退会率を64%まで改善で継続会員 約49名増、LTV差64,000円換算で<b>約310万円のLTV防衛</b>
+  </div>
+  <div class="card warn" style="margin-top:10px"><h4>【施策B】離反予備軍の早期介入（来館頻度セグメント）</h4>
+    ねらい: 来館頻度は退会の先行指標。月5回以下67.9%（3ヶ月連続悪化）の増加を止める。<br>
+    ・入会0〜30日で来館5回以上を習慣化（専用スタンプカード）。初期の来館習慣が定着率を決めます<br>
+    ・月5回以下の会員へ自動LINEで再来館を促し、2回連続で来館が落ちた層は個別フォローへ<br>
+    ・週3回来館の促進キャンペーン（週2回から強化）で、離反予備軍をコア層へ押し上げる
+  </div>
+  <div class="card" style="margin-top:10px"><h4>【施策C】ファン層・休眠層の引き上げ（ベルトコンベアの前後を拡張）</h4>
+    ねらい: 出口（ファン化・紹介）と入口（休会・仮登録）の両端を太くする。<br>
+    ・TOP1%（12名）はスタッフ全員で共有し、感謝の手紙など金銭以外の特別体験を提供。紹介（Share）へつなぐ<br>
+    ・休会80名へ復帰コンタクト、仮登録605名へ本登録ナーチャリングで眠っているLTVを起こす<br>
+    ・セットプラン・パーソナル内製化・物販（リカバリーウェア8月開始）・アフィリエイト（プロテインコーヒー8月開始）でアップセルし平均LTVを押し上げる
+  </div>
+  <div class="callout prop"><b>次のアクション</b>: まず施策A『1年の壁突破プログラム』を8月中に本格運用へ移します。①入会7・10ヶ月の対象会員リストを抽出（既存CRMで即時可能）②InBody再測定面談のトークスクリプトとLINE文面を整備 ③9月末にダッシュボードで1年退会率・来館頻度の変化を再計測し効果を検証します。</div>
+</section>
+
+<!-- P7 実行キット -->
+<section class="page">
+  <h2>6. 施策A 実行キット｜1年の壁突破プログラム <span class="badge prop">提案</span></h2>
+  <p class="h2note">目的: 半年〜1年で離脱する層に再接続し、1年以内退会率を68.0%→64%目安まで改善する</p>
+  <h3>対象会員リストの抽出条件（CRM）</h3>
+  <table>
+    <tr><th>区分</th><th>抽出条件</th><th>補足</th></tr>
+    <tr><td>主対象</td><td>契約状況=継続 かつ 総合在籍日数 180〜365日</td><td>半年〜1年の『壁』ゾーン</td></tr>
+    <tr><td>優先順位</td><td>上記のうち 直近12ヶ月の来館数が少ない順</td><td>離反予備軍を上位に並べる</td></tr>
+    <tr><td>節目リスト①</td><td>在籍 約7ヶ月（200〜230日）の会員</td><td>InBody再測定の1回目案内</td></tr>
+    <tr><td>節目リスト②</td><td>在籍 約10ヶ月（290〜320日）の会員</td><td>InBody再測定の2回目案内</td></tr>
+    <tr><td>除外</td><td>休会・退会・仮登録・スタッフ/テスト・重複</td><td>継続会員のみ対象</td></tr>
+  </table>
+  <h3>InBody再測定『成果可視化』面談スクリプト（SPIN話法）</h3>
+  <table>
+    <tr><th>ステップ</th><th>ねらい</th><th>トーク例（です・ます）</th></tr>
+    <tr><td>S 状況</td><td>現状を共有</td><td>入会から約〇ヶ月ですね。最近の通い方や体調はいかがですか。</td></tr>
+    <tr><td>P 問題</td><td>課題を引き出す</td><td>来館の間隔が空くと、せっかくの成果が見えにくくなりますよね。</td></tr>
+    <tr><td>I 示唆</td><td>放置の損失を示す</td><td>ここで一度InBodyで数値を確認しましょう。測らないと、続ける理由を見失いがちです。</td></tr>
+    <tr><td>N 解決</td><td>次の一歩を提示</td><td>本日測って、次の3ヶ月の目標を一緒に決めましょう。週2回ペースなら無理なく狙えます。</td></tr>
+    <tr><td>クロージング</td><td>予約を確保</td><td>では次回を今この場で押さえましょう。〇月〇日のご都合はいかがですか。</td></tr>
+  </table>
+  <h3>来館頻度・節目連動LINE文面（セグメント別・そのまま配信可）</h3>
+  <table>
+    <tr><th>セグメント</th><th>配信タイミング</th><th>文面</th></tr>
+    <tr><td>A 離反予備軍（月5回以下）</td><td>来館が10日空いたら自動配信</td><td>〇〇さん、お久しぶりです。最近お忙しいでしょうか。体は『2週間空くと元に戻りやすい』と言われます。今週どこかで15分だけでも、軽く動きに来ませんか。スタッフ一同お待ちしています。</td></tr>
+    <tr><td>B 節目（7・10ヶ月）</td><td>対象月の月初に配信</td><td>〇〇さん、通い始めて〇ヶ月ですね。この節目に、InBodyで体の変化を数字で確認しませんか。前回からの伸びを見える化して、次の目標を一緒に決めましょう。ご来館時にスタッフへお声がけください。</td></tr>
+    <tr><td>C 優良層（月10回以上）</td><td>月1回の称賛配信</td><td>〇〇さん、今月もしっかり通われていますね。その積み重ねが一番の力です。次のステージとして、新メニューやイベントもご用意しています。良ければ次回ご案内させてください。</td></tr>
+  </table>
+  <h3>実行スケジュール（8月）と効果測定</h3>
+  <table>
+    <tr><th>時期</th><th>アクション</th><th>担当</th></tr>
+    <tr><td>第1週</td><td>対象リスト抽出・優先順位付け（節目①②を分離）</td><td>CRM担当</td></tr>
+    <tr><td>第2週</td><td>面談スクリプト/LINE文面を最終化しスタッフ全員へ共有</td><td>店長</td></tr>
+    <tr><td>第3〜4週</td><td>面談実施・LINE配信開始（A→B→Cの順で）</td><td>スタッフ全員</td></tr>
+    <tr><td>9月末</td><td>ダッシュボードで再計測: 1年退会率・月5回以下・再来館率</td><td>CRM担当</td></tr>
+  </table>
+  <div class="callout prop">効果目標 <span class="badge calc">計算値</span>: 1年以内退会率 68.0%→64%（-4.0pt＝継続会員 約49名・LTV約310万円の防衛）／月5回以下 67.9%を低下傾向へ。</div>
+</section>
+
+<!-- P8 計算式 -->
+<section class="page">
+  <h2>7. 計算式（12KPIの算出方法｜年間推移の検証用・毎月同一ロジック）</h2>
+  <p class="h2note">数値の再現性を担保するため、毎月同じ計算式で算出しています</p>
+  <table>
+    <tr><th>KPI</th><th>算出方法</th><th>R8.7の値</th></tr>
+    <tr><td>1. 継続会員数</td><td>R8.7月契約プラン区分サマリー『01:継続』の会員数</td><td>1,230名</td></tr>
+    <tr><td>2. 継続：平均LTV</td><td>『01:継続』total LTV ÷ 会員数 ＝ 164,520,252円 ÷ 1,230名</td><td>¥133,756</td></tr>
+    <tr><td>3. 退会：平均LTV</td><td>『03:退会』total LTV ÷ 会員数 ＝ 122,581,933円 ÷ 1,758名</td><td>¥69,728</td></tr>
+    <tr><td>4. 休会会員数</td><td>『02:休会』の会員数</td><td>80名</td></tr>
+    <tr><td>5. 月10回以上の割合（優良層）</td><td>まとめ『来館数：月10回以上の割合（年間）』</td><td>15.4%</td></tr>
+    <tr><td>6. 月5回以下の割合（離反予備軍）</td><td>まとめ『来館数：月5回以下の割合（年間）』</td><td>67.9%</td></tr>
+    <tr><td>7. 半年以内の退会率</td><td>まとめ『半年以内の退会率（オープン〜）』（目標&lt;40%）</td><td>34.7%</td></tr>
+    <tr><td>8. 1年以内の退会率</td><td>まとめ『1年以内の退会率（オープン〜）』（目標&lt;60%）</td><td>68.0%</td></tr>
+    <tr><td>9. 累計退会会員数</td><td>『03:退会』の会員数（開業からの累計）</td><td>1,758名</td></tr>
+    <tr><td>10. TOP1%平均LTV</td><td>R8.7CRM明細で契約状況=継続をLTV降順に並べ、上位12名（まとめ『TOP1%の構成人数』）の平均</td><td>¥478,572</td></tr>
+    <tr><td>11. 長期在籍率（300日以上）</td><td>まとめ『在籍日数300〜365日（年間）』</td><td>65.8%</td></tr>
+    <tr><td>12. 新規在籍率（0-99日）</td><td>まとめ『在籍日数0〜99日（年間）』</td><td>14.9%</td></tr>
+  </table>
+  <p class="note">・前月比 ＝ 当月値 − 前月値（%系はpt差で表記）。例: 継続会員数 1,230名 − 1,202名 ＝ +28名<br>
+  ・検算 ＝ TOP1%平均LTVを前月データ（R8.6CRM・上位12名）で同方式計算 ＝ ¥469,861（R8.6月版と一致）<br>
+  ・R8.6の継続平均LTVは、ご提供データの改定（total LTV -300万円）により¥135,910→¥133,414を正としています<br>
+  ・出典 ＝ CRM LTVサマリー（まとめ／R8.7月契約プラン区分サマリー／R8.7CRM明細・2026-08-21ご提供）</p>
+  <p class="footer">作成: 社外アイデア企画室｜ジムCRM 経営ダッシュボード R8.7月度（2026年7月）｜社外秘・取り扱いにご注意ください</p>
+</section>
+
+</div>
+<a class="dl" href="#" onclick="window.print();return false;">📄 PDFで保存</a>
+</body>
+</html>
