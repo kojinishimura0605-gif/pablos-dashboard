@@ -142,6 +142,10 @@
   .act-body p{margin:0;font-size:12.5px;color:#46536a;line-height:1.75}
   .act-owner{margin-top:7px;font-size:11.5px;color:var(--muted)}
   .act-owner b{color:var(--ink)}
+  .act-prog{margin-top:9px;font-size:12px;color:#46536a}
+  .act-prog b{color:var(--ink)}
+  .act-prog .bar{height:8px;background:#e8ecf3;border-radius:4px;overflow:hidden;margin-top:5px}
+  .act-prog .bar>i{display:block;height:100%;background:var(--navy);border-radius:4px}
   @media(max-width:700px){.act-card{grid-template-columns:1fr}}
   .statline{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:11.5px;color:#46536a;font-variant-numeric:tabular-nums}
   .statline b{color:var(--ink);font-weight:800}
@@ -365,11 +369,11 @@
   <div class="sec"><span class="badge" style="background:#1a2233">旗</span><h2>数値の落とし込み（旗印1,000名 → 3か月 → 月 → 週）</h2><span class="note">目標からの逆算値・端数切り上げ</span></div>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th class="l">方針KPI</th><th>3か月目標</th><th>月あたり</th><th>週あたり</th><th class="l">今週（8/24〜28）の的</th></tr></thead>
+      <thead><tr><th class="l">方針KPI</th><th>3か月目標</th><th>月あたり</th><th>週あたり</th><th class="l">今週（8/24〜28）の的</th><th>累計進捗（毎週月曜更新）</th></tr></thead>
       <tbody>
-        <tr><td class="l">【1】未ログイン183名→50名以下</td><td>再接点 <b>133名以上</b></td><td>約45名</td><td>約11名</td><td class="l">対象183名のリスト整備（9月から週11名ペースで再接点）</td></tr>
-        <tr><td class="l">【2】突破Aiオンボーディング完了80%</td><td><b>127名以上</b>（現予備軍158名×80%・対象は流入で増加）</td><td>無料期間の終了日順</td><td>終了日が近い順</td><td class="l"><b>第1陣7名（〜8/31終了）を100%完了</b></td></tr>
-        <tr><td class="l">【3】サブスク未移行185名→148名移行</td><td>移行 <b>148名以上（80%）</b></td><td>約50名</td><td>約12名</td><td class="l">未更新者47名へ再更新の個別案内を送付</td></tr>
+        <tr><td class="l">【1】未ログイン183名→50名以下</td><td>再接点 <b>133名以上</b></td><td>約45名</td><td>約11名</td><td class="l">対象183名のリスト整備（9月から週11名ペースで再接点）</td><td><b>0/133名＝0%</b><br><span style="font-size:11px;color:var(--muted)">カウント開始8/24</span></td></tr>
+        <tr><td class="l">【2】突破Aiオンボーディング完了80%</td><td><b>127名以上</b>（現予備軍158名×80%・対象は流入で増加）</td><td>無料期間の終了日順</td><td>終了日が近い順</td><td class="l"><b>第1陣7名（〜8/31終了）を100%完了</b></td><td><b>0/127名＝0%</b><br><span style="font-size:11px;color:var(--muted)">担当報告ベース</span></td></tr>
+        <tr><td class="l">【3】サブスク未移行185名→148名移行</td><td>移行 <b>148名以上（80%）</b></td><td>約50名</td><td>約12名</td><td class="l">未更新者47名へ再更新の個別案内を送付</td><td><b>0/148名＝0%</b><br><span style="font-size:11px;color:var(--muted)">カウント開始8/24</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -398,6 +402,9 @@
       <div class="act-body">
         <h4>突破Aiオンボード始動：無料期間終了の第1陣（8/30〜）を取りこぼさない【方針2】</h4>
         <p>クルー予備軍は<b>158名（無料期間中・課金開始0名）</b>です。最初の無料期間終了が<b>8/30</b>に来ます（今月末まで7名・以降10/7まで分散）。今週はオンボーディング完了基準（UMU初回ログイン→指定コンテンツ→歓迎会・朝活への行動決定）に沿って、<b>第1陣7名を今週中に完了状態（3基準クリア）へ</b>——完了80%（127名以上）に向けた初週は<b>7名/7名＝100%</b>で立ち上げます。</p>
+        <div class="act-prog">進捗率（週初 8/24時点）：第1陣 完了 <b>0/7名＝0%</b> ｜ 3か月累計 <b>0/127名＝0%</b>（カウント開始8/24・担当報告で毎週月曜更新）
+          <div class="bar"><i style="width:0%"></i></div>
+        </div>
         <div class="act-owner">担当：<b>豊留さん・荒川さん</b>＋フォロー：<b>木村学長・柴さん・らむちぃさん</b> ｜ 連動：突破AIタブ</div>
       </div>
     </div>
@@ -407,6 +414,9 @@
       <div class="act-body">
         <h4>未更新者47名への再更新・個別案内【方針3の先行着手】</h4>
         <p>毎朝自動出力される未更新者リストは<b>47名</b>（メンター11・リーダー11・クルー17・サポーター8）です。今週中に<b>再更新の個別案内</b>を送付します。6月に168名（うちクルー77・大半が5/31期限の未更新）が離脱した轍を踏まないための即応です。更新手続きの反映分は日次再集計で自動的に取り込まれます。</p>
+        <div class="act-prog">進捗率（週初 8/24時点）：個別案内 送付 <b>0/47名＝0%</b> ｜ リスト人数 <b>47名</b>（リスト実体は毎朝自動増減・本欄の表示は毎週月曜更新）
+          <div class="bar"><i style="width:0%"></i></div>
+        </div>
         <div class="act-owner">担当：<b>木村学長 以下</b> ｜ 連動：長期推移タブ・未更新者リスト（毎朝更新）</div>
       </div>
     </div>
@@ -416,6 +426,9 @@
       <div class="act-body">
         <h4>読書会→突破Aiの上流を太くする（初回参加者→2回目の引き戻し）</h4>
         <p>突破Aiクルー161名の流入経路は<b>読書会経由が120名と最大</b>——読書会の定着がそのまま新規500名の生命線です。F2転換率5.1%（目標25%）に対し、コホート継続率は<b>05-15回38.2%→06-23回42.1%と改善傾向</b>。次回告知＋"なぜ続けると効くか"の一通を今週も配信します。</p>
+        <div class="act-prog">進捗率（週初 8/24時点）：引き戻しメール 配信 <b>0/1本</b>（今週の計画） ｜ F2転換率 <b>5.1%／目標25%＝達成率20.4%</b>（読書会タブ実測・下のバー＝F2達成率）
+          <div class="bar"><i style="width:20.4%"></i></div>
+        </div>
         <div class="act-owner">担当：<b>豊留さん・高須賀さん 以下</b> ｜ 連動：読書会タブ VIEW3・突破AIタブA2</div>
       </div>
     </div>
