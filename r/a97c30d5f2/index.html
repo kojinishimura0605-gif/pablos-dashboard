@@ -55,6 +55,14 @@
     position:relative;overflow:hidden;
   }
   .hero-bgimg{position:absolute;inset:0;background:url("assets/hero.jpg") right center/cover no-repeat;}
+  .hero-bgimg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,
+      rgba(250,252,255,.96) 0%,
+      rgba(250,252,255,.86) 30%,
+      rgba(250,252,255,.45) 44%,
+      rgba(250,252,255,0) 56%);
+  }
   .hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:70px 24px 60px;}
   .hero-copy{max-width:560px;text-align:left;}
   .hero .badge{
