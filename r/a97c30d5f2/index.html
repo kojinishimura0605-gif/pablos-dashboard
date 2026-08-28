@@ -123,6 +123,7 @@
   }
   .prob-card b{color:var(--navy);}
   /* ===== flow ===== */
+  .heptawrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .stepgrid{display:flex;flex-direction:column;gap:14px;margin:24px 0 10px;}
   .steprow{display:flex;align-items:stretch;gap:6px;}
   .stepcard{
@@ -331,53 +332,106 @@
     <span class="sec-label">02　HOW IT WORKS</span>
     <h2>発信から成約まで、一本のベルトコンベアに。</h2>
     <p>お伝えするのは、単発のSNSテクニックではありません。次の7つの仕事を、AIとの分業で回し続ける設計図です。</p>
-    <div class="stepgrid">
-      <div class="steprow">
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">1</span><span class="tt">ネタ出し</span></div>
-          <div class="ds">旗印から発信テーマを設計</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><circle cx="0" cy="-3" r="8"/><path d="M-3.5,5 v3.5 h7 v-3.5"/><line x1="-3" y1="11.5" x2="3" y2="11.5"/><line x1="0" y1="-15" x2="0" y2="-17"/><line x1="9.5" y1="-11" x2="11.5" y2="-13"/><line x1="-9.5" y1="-11" x2="-11.5" y2="-13"/></svg>
-        </div>
-        <span class="sarw">→</span>
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">2</span><span class="tt">SNS投稿</span></div>
-          <div class="ds">下書きはAI・仕上げは人</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><rect x="-8.5" y="-14" width="17" height="28" rx="3.5"/><line x1="-3" y1="9.5" x2="3" y2="9.5"/><line x1="-4" y1="-6" x2="4" y2="-6"/><line x1="-4" y1="-1" x2="4" y2="-1"/></svg>
-        </div>
-        <span class="sarw">→</span>
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">3</span><span class="tt">リスト化</span></div>
-          <div class="ds">投稿の出口に名簿をつくる</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><rect x="-11" y="-13" width="22" height="26" rx="3"/><circle cx="-4" cy="-5" r="3"/><path d="M-8.5,2 Q-4,-2.5 0.5,2"/><line x1="3" y1="-6" x2="7.5" y2="-6"/><line x1="-7.5" y1="6" x2="7.5" y2="6"/><line x1="-7.5" y1="9.5" x2="4" y2="9.5"/></svg>
-        </div>
-      </div>
-      <div class="steprow">
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">4</span><span class="tt">顧客育成</span></div>
-          <div class="ds">ステップ配信で信頼を積む</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><circle cx="-6" cy="-7" r="4.5"/><path d="M-13,3 Q-6,-4 1,3"/><rect x="2" y="-4" width="12" height="9" rx="2.5"/><path d="M10,5 l0,3.5 -3.5,-3.5"/><path d="M-9,9 h18"/><path d="M-9,13 h11"/></svg>
-        </div>
-        <span class="sarw">→</span>
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">5</span><span class="tt">成約</span></div>
-          <div class="ds">説明会・個別相談から成約へ</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><circle r="12"/><circle r="6.5"/><circle r="1.8" fill="#2E7BFF" stroke="none"/></svg>
-        </div>
-        <span class="sarw">→</span>
-        <div class="stepcard">
-          <div class="head"><span class="stepnum">6</span><span class="tt">データ分析</span></div>
-          <div class="ds">投稿〜成約まで横断で確認</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><polyline points="-13,9 -5,1 1,5 12,-7"/><circle cx="-13" cy="9" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="-5" cy="1" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="1" cy="5" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="12" cy="-7" r="1.8" fill="#2E7BFF" stroke="none"/><line x1="-14" y1="13" x2="14" y2="13"/></svg>
-        </div>
-      </div>
-      <div class="steprow">
-        <div class="stepcard" style="max-width:calc(33.4% - 4px);margin:0 auto;">
-          <div class="head"><span class="stepnum">7</span><span class="tt">改善提案</span></div>
-          <div class="ds">次のネタ出しへ反映（1へ戻る）</div>
-          <svg class="sic" viewBox="-18 -18 36 36"><path d="M10,-6 A11.5,11.5 0 1 0 11.5,1"/><path d="M10,-12 l0.5,6.5 -6.5,-0.5"/><circle r="4.5"/><path d="M-1.5,0.5 l1.5,1.5 3,-3.5" stroke-width="1.8"/></svg>
-        </div>
-      </div>
-      <div class="steploop">⟲ すべてを、一本のライン（ベルトコンベア）で接続</div>
+    <div class="heptawrap">
+      <svg viewBox="0 0 800 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="7つの仕事をベルトコンベアのように一本の環で接続した図" style="width:100%;max-width:640px;display:block;margin:24px auto 8px;min-width:520px;">
+        <defs>
+          <marker id="harw" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1E6FFF"/>
+          </marker>
+          <filter id="hns" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0B1E3F" flood-opacity="0.16"/>
+          </filter>
+        </defs>
+        <!-- ベルト（帯） -->
+        <circle cx="400" cy="385" r="280" fill="none" stroke="#DCE8F8" stroke-width="26"/>
+        <!-- 環をつなぐ矢印（7→1も含む閉ループ） -->
+        <g fill="none" stroke="#1E6FFF" stroke-width="3" stroke-linecap="round">
+          <path d="M477,116 A280,280 0 0 1 562,157" marker-end="url(#harw)"/>
+          <path d="M659,278 A280,280 0 0 1 680,370" marker-end="url(#harw)"/>
+          <path d="M645,520 A280,280 0 0 1 586,594" marker-end="url(#harw)"/>
+          <path d="M447,661 A280,280 0 0 1 353,661" marker-end="url(#harw)"/>
+          <path d="M214,594 A280,280 0 0 1 155,520" marker-end="url(#harw)"/>
+          <path d="M120,370 A280,280 0 0 1 141,278" marker-end="url(#harw)"/>
+          <path d="M238,157 A280,280 0 0 1 323,116" marker-end="url(#harw)"/>
+        </g>
+        <!-- 中央ラベル -->
+        <rect x="250" y="348" width="300" height="74" rx="37" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2.5" filter="url(#hns)"/>
+        <text x="400" y="379" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E6FFF" font-family="Meiryo UI,sans-serif">⟲ すべてを、一本のライン</text>
+        <text x="400" y="402" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E6FFF" font-family="Meiryo UI,sans-serif">（ベルトコンベア）で接続</text>
+        <!-- ノード（正七角形の頂点） -->
+        <g font-family="Meiryo UI,sans-serif" text-anchor="middle">
+          <!-- 1 ネタ出し (400,105) -->
+          <g>
+            <circle cx="400" cy="105" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="400" cy="41" r="14" fill="#1E6FFF"/><text x="400" y="46" font-size="15" font-weight="bold" fill="#FFFFFF">1</text>
+            <g transform="translate(400,89) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="0" cy="-3" r="7"/><path d="M-3,4 v3 h6 v-3"/><line x1="-2.5" y1="10" x2="2.5" y2="10"/><line x1="0" y1="-13" x2="0" y2="-15.5"/><line x1="8" y1="-9.5" x2="10" y2="-11.5"/><line x1="-8" y1="-9.5" x2="-10" y2="-11.5"/>
+            </g>
+            <text x="400" y="130" font-size="15" font-weight="bold" fill="#0B1E3F">ネタ出し</text>
+            <text x="400" y="148" font-size="10.5" fill="#5A6B85">旗印からテーマ設計</text>
+          </g>
+          <!-- 2 SNS投稿 (619,210) -->
+          <g>
+            <circle cx="619" cy="210" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="619" cy="146" r="14" fill="#1E6FFF"/><text x="619" y="151" font-size="15" font-weight="bold" fill="#FFFFFF">2</text>
+            <g transform="translate(619,194) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-7" y="-12" width="14" height="24" rx="3"/><line x1="-2.5" y1="8" x2="2.5" y2="8"/><line x1="-3.5" y1="-5" x2="3.5" y2="-5"/><line x1="-3.5" y1="-1" x2="3.5" y2="-1"/>
+            </g>
+            <text x="619" y="235" font-size="15" font-weight="bold" fill="#0B1E3F">SNS投稿</text>
+            <text x="619" y="253" font-size="10.5" fill="#5A6B85">下書きAI・仕上げ人</text>
+          </g>
+          <!-- 3 リスト化 (673,447) -->
+          <g>
+            <circle cx="673" cy="447" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="673" cy="383" r="14" fill="#1E6FFF"/><text x="673" y="388" font-size="15" font-weight="bold" fill="#FFFFFF">3</text>
+            <g transform="translate(673,431) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-10" y="-12" width="20" height="24" rx="3"/><circle cx="-3.5" cy="-4.5" r="2.8"/><path d="M-7.5,2 Q-3.5,-2 0.5,2"/><line x1="3" y1="-5.5" x2="6.5" y2="-5.5"/><line x1="-6.5" y1="5.5" x2="6.5" y2="5.5"/><line x1="-6.5" y1="8.8" x2="3.5" y2="8.8"/>
+            </g>
+            <text x="673" y="472" font-size="15" font-weight="bold" fill="#0B1E3F">リスト化</text>
+            <text x="673" y="490" font-size="10.5" fill="#5A6B85">出口に名簿をつくる</text>
+          </g>
+          <!-- 4 顧客育成 (521,637) -->
+          <g>
+            <circle cx="521" cy="637" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="521" cy="573" r="14" fill="#1E6FFF"/><text x="521" y="578" font-size="15" font-weight="bold" fill="#FFFFFF">4</text>
+            <g transform="translate(521,621) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="-5" cy="-6" r="4"/><path d="M-11,3 Q-5,-3 1,3"/><rect x="2" y="-3.5" width="10" height="8" rx="2"/><path d="M8.5,4.5 l0,3 -3,-3"/><path d="M-8,8 h16"/><path d="M-8,11.5 h9"/>
+            </g>
+            <text x="521" y="662" font-size="15" font-weight="bold" fill="#0B1E3F">顧客育成</text>
+            <text x="521" y="680" font-size="10.5" fill="#5A6B85">配信で信頼を積む</text>
+          </g>
+          <!-- 5 成約 (279,637) -->
+          <g>
+            <circle cx="279" cy="637" r="64" fill="#FFFFFF" stroke="#00A3E0" stroke-width="3" filter="url(#hns)"/>
+            <circle cx="279" cy="573" r="14" fill="#1E6FFF"/><text x="279" y="578" font-size="15" font-weight="bold" fill="#FFFFFF">5</text>
+            <g transform="translate(279,621) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle r="10"/><circle r="5.5"/><circle r="1.6" fill="#2E7BFF" stroke="none"/>
+            </g>
+            <text x="279" y="662" font-size="15" font-weight="bold" fill="#0B1E3F">成約</text>
+            <text x="279" y="680" font-size="10.5" fill="#5A6B85">相談から成約へ</text>
+          </g>
+          <!-- 6 データ分析 (127,447) -->
+          <g>
+            <circle cx="127" cy="447" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="127" cy="383" r="14" fill="#1E6FFF"/><text x="127" y="388" font-size="15" font-weight="bold" fill="#FFFFFF">6</text>
+            <g transform="translate(127,431) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="-10,7 -4,1 1,4 10,-6"/><circle cx="-10" cy="7" r="1.6" fill="#2E7BFF" stroke="none"/><circle cx="-4" cy="1" r="1.6" fill="#2E7BFF" stroke="none"/><circle cx="1" cy="4" r="1.6" fill="#2E7BFF" stroke="none"/><circle cx="10" cy="-6" r="1.6" fill="#2E7BFF" stroke="none"/><line x1="-11" y1="10.5" x2="11" y2="10.5"/>
+            </g>
+            <text x="127" y="472" font-size="15" font-weight="bold" fill="#0B1E3F">データ分析</text>
+            <text x="127" y="490" font-size="10.5" fill="#5A6B85">横断で数字を確認</text>
+          </g>
+          <!-- 7 改善提案 (181,210) -->
+          <g>
+            <circle cx="181" cy="210" r="64" fill="#FFFFFF" stroke="#1E6FFF" stroke-width="2" filter="url(#hns)"/>
+            <circle cx="181" cy="146" r="14" fill="#1E6FFF"/><text x="181" y="151" font-size="15" font-weight="bold" fill="#FFFFFF">7</text>
+            <g transform="translate(181,194) scale(0.95)" fill="none" stroke="#2E7BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9,-5 A10.5,10.5 0 1 0 10.5,1"/><path d="M9,-11 l0.5,6 -6,-0.5"/><circle r="4"/><path d="M-1.5,0.5 l1.5,1.5 2.5,-3" stroke-width="1.7"/>
+            </g>
+            <text x="181" y="235" font-size="15" font-weight="bold" fill="#0B1E3F">改善提案</text>
+            <text x="181" y="253" font-size="10.5" fill="#5A6B85">次のネタへ反映</text>
+          </g>
+        </g>
+      </svg>
     </div>
     <div class="feature">
       <div class="num">POINT 01</div>
