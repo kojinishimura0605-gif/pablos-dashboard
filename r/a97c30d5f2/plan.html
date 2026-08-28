@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>売上1億ローンチ設計図｜3,000万→5,000万→1億超え（ソロプレナー版）</title>
+<style>
+  :root{
+    --navy:#0B1E3F; --blue:#1E6FFF; --sky:#00C2FF; --pale:#E8F1FF;
+    --ink:#1A2333; --muted:#5A6B85; --line:#D5E2F5; --white:#FFFFFF;
+    --warn-bg:#FFF6E0; --warn-ink:#8A6000;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Meiryo UI",Meiryo,"Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:var(--white);line-height:1.9;font-size:15px;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 20px;}
+  section{padding:40px 0;}
+  h1{font-size:26px;line-height:1.5;color:var(--white);}
+  h2{font-size:21px;color:var(--navy);margin-bottom:14px;}
+  h3{font-size:16px;color:var(--navy);margin-bottom:8px;}
+  p{margin-bottom:1em;}
+  .muted{color:var(--muted);font-size:12.5px;line-height:1.7;}
+  .draft-bar{background:#3A2E00;color:#FFD966;font-size:12px;text-align:center;padding:6px 12px;}
+  .head{background:linear-gradient(160deg,var(--navy),#1A4E9E);padding:44px 0;color:var(--white);}
+  .head .tag{display:inline-block;border:1px solid rgba(255,255,255,.4);border-radius:999px;font-size:12px;padding:2px 14px;margin-bottom:14px;color:#D7E5FF;}
+  .step-label{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.15em;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:2px 14px;margin-bottom:10px;}
+  .placeholder{background:var(--warn-bg);color:var(--warn-ink);border:1px dashed #D8B24A;border-radius:8px;padding:10px 14px;font-size:12.5px;line-height:1.7;margin:12px 0;}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:14px;background:var(--white);}
+  .card .num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;}
+  .alt{background:var(--pale);}
+  .tree{display:flex;flex-direction:column;gap:6px;margin:18px 0;}
+  .tree .node{background:var(--pale);border-left:4px solid var(--blue);border-radius:8px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--navy);}
+  .tree .node .v{color:var(--blue);font-size:17px;}
+  .tree .op{text-align:center;font-size:12px;color:var(--muted);}
+  .tbl-hint{font-size:11px;color:var(--muted);text-align:right;margin:14px 0 4px;}
+  .tbl-scroll{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch;}
+  table{border-collapse:separate;border-spacing:0;width:100%;min-width:760px;font-size:13px;}
+  th,td{border:1px solid var(--line);border-left:none;border-top:none;padding:9px 10px;text-align:center;line-height:1.5;background:var(--white);}
+  tr:first-child th{border-top:1px solid var(--line);}
+  th:first-child,td:first-child{border-left:1px solid var(--line);}
+  th{background:var(--navy);color:var(--white);font-weight:700;white-space:nowrap;}
+  td:first-child,th:first-child{position:sticky;left:0;z-index:2;text-align:left;background:var(--pale);font-weight:700;color:var(--navy);min-width:110px;box-shadow:2px 0 4px rgba(11,30,63,.08);}
+  th:first-child{background:var(--navy);color:var(--white);}
+  .hl td{background:#EDF4FF;font-weight:700;}
+  ul.chk{list-style:none;margin:8px 0;}
+  ul.chk li{padding-left:1.5em;position:relative;margin-bottom:6px;font-size:14px;}
+  ul.chk li::before{content:"✓";color:var(--blue);font-weight:700;position:absolute;left:0;}
+  .goal{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px;}
+  .pass{background:var(--pale);border-radius:8px;padding:8px 14px;font-size:13px;margin-top:8px;}
+  .pass b{color:var(--navy);}
+  footer{background:var(--navy);color:#9FB4D8;font-size:12px;text-align:center;padding:22px;line-height:2;}
+</style>
+</head>
+<body>
+
+<div class="draft-bar">▲ 提供用コンテンツ・ドラフト（2026-08-28）— 無料説明会の配布資料＋有料コンテンツ収録用。数値は試算例（あなたの数字で引き直す前提）▲</div>
+
+<header class="head">
+  <div class="wrap">
+    <span class="tag">ソロプレナーのためのAI右腕アカデミー ／ 提供コンテンツ</span>
+    <h1>売上1億ローンチ設計図<br>ステップ・バイ・ステップ</h1>
+    <p style="color:#D7E5FF;font-size:14px;margin-top:12px;">「作って終わり」で止めず、逆算の数字 → 小さく検証 → 本ローンチ → 拡大 → 積み上げ、まで一本道に。<br>階段は <b style="color:var(--sky);">3,000万（保守）→ 5,000万（標準）→ 1億超え（挑戦）</b>。説明会→個別相談→成約のファネルで、あなたの商品を通します。</p>
+  </div>
+</header>
+
+<!-- STEP 1 -->
+<section>
+  <div class="wrap">
+    <span class="step-label">STEP 1</span>
+    <h2>まず「1億」を数字で分解する（逆算KPIツリー）</h2>
+    <p>1億は"気合"では届きません。1つの数式に分解して、どこを何倍にするかを決めます。</p>
+    <div class="card">
+      <h3>前提（試算のモデル例）</h3>
+      <ul class="chk">
+        <li>客単価（フロント）＝14万円：本命20万が40%・スタンダードコース10万が60%と仮定した加重平均（0.4×20＋0.6×10＝14万）</li>
+        <li>ファネル各率：登録→参加50%／参加→個別相談40%／個別相談→成約33%</li>
+        <li>LP登録率15%／広告を使う場合のリード（説明会登録）単価 ¥4,000 と仮定</li>
+      </ul>
+      <p class="muted" style="margin:0;">※すべて計画用の仮説値です。実際は、あなたの客単価・あなたの各率に置き換えて引き直します。検証（β）で実測して差し替える前提です（数値は個人差・市況で変動します）。</p>
+    </div>
+    <div class="tree">
+      <div class="node"><span>売上目標</span><span class="v">¥100,000,000</span></div>
+      <div class="op">÷ 客単価 14万</div>
+      <div class="node"><span>必要 成約数</span><span class="v">約 715 件</span></div>
+      <div class="op">÷ 成約率 33%</div>
+      <div class="node"><span>必要 個別相談</span><span class="v">約 2,165 件</span></div>
+      <div class="op">÷ 相談化 40%</div>
+      <div class="node"><span>必要 説明会参加</span><span class="v">約 5,410 名</span></div>
+      <div class="op">÷ 参加率 50%</div>
+      <div class="node"><span>必要 説明会登録</span><span class="v">約 10,800 名</span></div>
+      <div class="op">÷ LP登録率 15%</div>
+      <div class="node"><span>必要 LP到達</span><span class="v">約 72,000 訪問</span></div>
+    </div>
+    <p><b>結論：1億の急所は「説明会登録 約10,800名」。</b>この価格帯（客単価14万）でリード単価¥4,000の広告に頼ると、広告費率は約43%になり利益が残りません。だから主役は<b>SNSオーガニック×既存リスト×紹介</b>で、広告は勝ちパターンの増幅にだけ使う。「SNS投稿から成約まで」の一本ラインが、気分ではなく数字の必然になります。</p>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="alt">
+  <div class="wrap">
+    <span class="step-label">STEP 2</span>
+    <h2>3シナリオで"現実的な階段"を引く</h2>
+    <p>いきなり1億ではなく、3,000万→5,000万→1億超えと段階で設計します（客単価14万・上記各率で試算）。</p>
+    <div class="tbl-hint">→ 表は横にスクロールできます</div>
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>目標売上</th><th>成約数</th><th>個別相談</th><th>説明会参加</th><th>説明会登録</th><th>全部広告なら<br>(@¥4,000/登録)</th><th>広告費率</th><th>＋サブスクARR<br>(積み上げ)</th></tr>
+        <tr><td>3,000万（保守）</td><td>約 215</td><td>約 650</td><td>約 1,625</td><td>約 3,250</td><td>約 1,300万</td><td>約43%</td><td>約 850万/年</td></tr>
+        <tr><td>5,000万（標準）</td><td>約 357</td><td>約 1,080</td><td>約 2,700</td><td>約 5,400</td><td>約 2,160万</td><td>約43%</td><td>約 1,410万/年</td></tr>
+        <tr class="hl"><td>1億超え（挑戦）</td><td>約 715</td><td>約 2,165</td><td>約 5,410</td><td>約 10,800</td><td>約 4,330万</td><td>約43%</td><td>約 2,830万/年</td></tr>
+      </table>
+    </div>
+    <p class="muted">※「全部広告なら」の列は、登録を100%広告で集めた場合の上限コスト試算です。広告費率約43%では利益が残らないため、実際はSNSオーガニック・既存リスト・紹介を主役にして、この列を圧縮しにいきます。<br>※サブスクARRは月額3,300円のサブスクを全成約者に併売できた場合の上限試算。フロー売上とは別に積み上がり、2年目以降の土台になります（解約は考慮していません）。</p>
+    <p>説明会の器で見ると、<b>1回20名参加なら「3,000万＝約82回」「5,000万＝約135回」「1億＝約271回」</b>。手動の週1開催では回らない回数です。つまりこの価格帯では、説明会のエバーグリーン化（自動ウェビナー・PHASE 4）と、1回あたり参加人数を増やす大型開催が最初から前提になります。ここが「気合」ではなく「構造」で見えるのが、逆算の効能です。</p>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section>
+  <div class="wrap">
+    <span class="step-label">STEP 3</span>
+    <h2>ローンチを5フェーズで実行する</h2>
+    <div class="card"><div class="num">PHASE 0</div>
+      <h3>準備・制作</h3>
+      <div class="goal">ゴール：ファネルの箱を全部作り、計測できる状態にする</div>
+      <ul class="chk">
+        <li>あなたの商品の説明会LP＋サンクスページ＋SNS投稿/広告クリエイティブ</li>
+        <li>導線を全部つなぐ：SNS投稿/広告→LP→登録→自動返信→ステップ配信→説明会→個別相談予約→決済</li>
+        <li>計測タグ：登録・参加・相談予約・成約の各段階を数えられるように（ここが無いと改善不能）</li>
+        <li>特典・お客様の声の用意（実在の声のみ。数字の裏づけ資料も一緒に保管＝景表法対応）</li>
+        <li>個別相談体制の設計：誰がやるか。録音→スクリプト化まで先に決める</li>
+      </ul>
+      <div class="pass"><b>合格ライン：</b>テスト送客で「登録→サンクス→配信→予約」が最後まで通ること</div>
+    </div>
+    <div class="card"><div class="num">PHASE 1</div>
+      <h3>シード検証（β）｜説明会3回×20名＝60名規模</h3>
+      <div class="goal">ゴール：各率の"実測値"と、最初の成約＆お客様の声を取る</div>
+      <ul class="chk">
+        <li>小さく広告＋既存のお客様リスト＋SNSで登録を集めて説明会を回す</li>
+        <li>実測：登録率／参加率／相談化率／成約率／上位商品比率／CPAを数字で確定</li>
+        <li>初成約から実名・数字入りのお客様の声を回収（LPの「声」枠を実データで埋める）</li>
+        <li>クロージングトークを録音→勝ちスクリプト化</li>
+      </ul>
+      <div class="pass"><b>合格ライン：</b>成約率が想定（33%目安）に届く／CPAが許容内（例 ¥5,000以下）。NGなら広告を増やさずファネルを直す</div>
+    </div>
+    <div class="card"><div class="num">PHASE 2</div>
+      <h3>本ローンチ（スケール）</h3>
+      <div class="goal">ゴール：勝ちLP×勝ち訴求に寄せて、説明会を定例で回す</div>
+      <ul class="chk">
+        <li>βの勝ちクリエイティブに予算・投稿量を寄せて拡大（意味の違うフック3〜5本を常時テスト）</li>
+        <li>説明会を週1〜複数回の定例に。個別相談枠を先に確保する</li>
+        <li>ステップ配信＆ファネル動画で取りこぼし層を回収</li>
+      </ul>
+      <div class="pass"><b>合格ライン：</b>3,000万ライン（成約約215件）へのペースに乗ること</div>
+    </div>
+    <div class="card"><div class="num">PHASE 3</div>
+      <h3>登録源の分散（提携・アフィリ・オーガニック）</h3>
+      <div class="goal">ゴール：広告依存から脱却し、5,000万ラインへ</div>
+      <ul class="chk">
+        <li>紹介者用LP・特典を用意し、「あなたの推薦だから」の文脈で登録率を上げる</li>
+        <li>広告×提携×アフィリ×オーガニック（X/note/YouTube）を合算して登録約5,400名へ</li>
+      </ul>
+      <div class="pass"><b>合格ライン：</b>外部送客が全登録の30〜50%を占める</div>
+    </div>
+    <div class="card"><div class="num">PHASE 4</div>
+      <h3>エバーグリーン／積み上げ継続</h3>
+      <div class="goal">ゴール：単発ローンチを"止まらない仕組み"に変え、1億超えへ</div>
+      <ul class="chk">
+        <li>説明会をエバーグリーン（自動ウェビナー）化して常時登録→常時成約</li>
+        <li>月額商品のARRを積み上げ（解約率 月次5%以下を目安に「解約理由が消える」設計）</li>
+        <li>アセンション：本命の上位商品で客単価とLTVを上げる</li>
+        <li>年3〜4回の再ローンチ＋常時エバーグリーンで、1億超えを単年で通す</li>
+      </ul>
+      <div class="pass"><b>合格ライン：</b>広告を止めても登録が続く／MRRが右肩上がり</div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="alt">
+  <div class="wrap">
+    <span class="step-label">STEP 4</span>
+    <h2>1億を作る「6つのレバー」</h2>
+    <p>売上＝登録数 × 参加率 × 相談化 × 成約率 × 客単価（＋サブスク＋頻度）。どれか1つでなく、全部を少しずつ上げると"掛け算"で伸びます。</p>
+    <div class="card"><div class="num">01</div><b>集客量（登録数）</b>：SNS＋既存リスト＋提携＋広告。1億の最大の急所（約10,800登録）。</div>
+    <div class="card"><div class="num">02</div><b>ファネルCVR</b>：登録率・参加率・相談化・成約率を各+5%。掛け算で効く。</div>
+    <div class="card"><div class="num">03</div><b>提携／アフィリエイト</b>：他人のリストを借りる。単独の広告より速く大きい。</div>
+    <div class="card"><div class="num">04</div><b>客単価（AOV）</b>：上位商品比率↑・オーダーバンプ・引き上げ設計。</div>
+    <div class="card"><div class="num">05</div><b>サブスクARR</b>：売上のうち"ストック"を積む。2年目の土台。</div>
+    <div class="card"><div class="num">06</div><b>ローンチ頻度</b>：年3〜4回＋エバーグリーンで、単発を連続に。</div>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section>
+  <div class="wrap">
+    <span class="step-label">STEP 5</span>
+    <h2>毎週の運転リズム（止めないための管理）</h2>
+    <div class="tbl-hint">→ 表は横にスクロールできます</div>
+    <div class="tbl-scroll">
+      <table style="min-width:640px;">
+        <tr><th>頻度</th><th>見る数字</th><th>判断</th></tr>
+        <tr><td>毎日</td><td>広告CPA・登録数・予算消化</td><td>CPA高騰の広告を止める／勝ち広告・勝ち投稿に寄せる</td></tr>
+        <tr><td>毎週</td><td>登録→参加→相談→成約の各率</td><td>詰まった段階だけを直す（全部いじらない）</td></tr>
+        <tr><td>毎月</td><td>売上・広告費率・MRR・解約率・LTV</td><td>予算配分の再決定、次月ローンチ設計</td></tr>
+      </table>
+    </div>
+    <p class="muted">※この管理は、日次・週次・月次の振り返りの仕組みにそのまま乗せられます。AIとの分業で、集計と一次判断は自動化できます。</p>
+  </div>
+</section>
+
+<!-- STEP 6 -->
+<section class="alt">
+  <div class="wrap">
+    <span class="step-label">STEP 6</span>
+    <h2>詰まりやすい所と、先回りの手</h2>
+    <div class="card"><b>① 個別相談のクロージング体制</b><br>登録が増えるほど相談が渋滞し、成約率が落ちる。→ 相談枠を先に設計。録音→スクリプト→AI一次対応で拡張。</div>
+    <div class="card"><b>② CPA高騰で広告費率が崩れる</b><br>広告一本足だと単価が上がる。→ SNSオーガニック・既存リスト・提携で登録源を分散（PHASE 3を前倒し）。</div>
+    <div class="card"><b>③ サブスク解約（チャーン）</b><br>フローだけ追うとARRが漏れる。→ 成果を可視化し「解約理由が消える」状態を作る。目安 月次5%以下。</div>
+    <div class="card"><b>④ 景表法（実績表記）</b><br>実績の断定表記は根拠資料の保持が必須。→ 売上台帳・実測データを保管。お客様の声は許諾＋数字の裏づけをセットで。</div>
+    <div class="card"><b>⑤ "稼げる系"との誤認</b><br>誇大に振ると質の低いリードと炎上リスク。→ 実装課題で選別し、個人差の明記を徹底する。</div>
+  </div>
+</section>
+
+<footer>
+  ソロプレナーのためのAI右腕アカデミー 提供コンテンツ ／ 売上1億ローンチ設計図（ドラフト）<br>
+  本ページの数値はすべて計画用の試算（仮説）です。あなたの実測値で随時引き直してください。<br>
+  ※成果には個人差があり、売上・成約を保証するものではありません。
+</footer>
+
+</body>
+</html>
