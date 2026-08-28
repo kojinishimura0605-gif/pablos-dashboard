@@ -202,12 +202,29 @@
     padding-left:1.3em;position:relative;margin-bottom:6px;font-size:14px;
   }
   .speaker li::before{content:"■";color:var(--blue);position:absolute;left:0;font-size:10px;top:.45em;}
-  /* ===== voice ===== */
+  /* ===== voice / case ===== */
   .voice{
     border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;
     font-size:14px;background:var(--white);
   }
   .voice .who{font-size:12px;color:var(--muted);margin-top:6px;}
+  .case{
+    border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--white);
+    margin-bottom:16px;box-shadow:0 6px 16px rgba(11,30,63,.06);
+  }
+  .case .ctag{display:inline-block;background:var(--pale);color:var(--blue);font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 12px;margin-bottom:8px;}
+  .case .goal{font-size:13px;color:var(--muted);margin-bottom:4px;}
+  .case-kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
+  .case-kpi .k{flex:1;min-width:120px;background:var(--pale);border-radius:10px;padding:12px 8px;text-align:center;}
+  .case-kpi .k b{display:block;font-size:23px;color:var(--blue);line-height:1.3;}
+  .case-kpi .k span{font-size:11.5px;color:var(--muted);line-height:1.5;}
+  .case blockquote{border-left:3px solid var(--blue);padding:2px 14px;color:#33415C;font-size:14px;margin:12px 0;}
+  .case blockquote p{margin-bottom:.6em;}
+  .books-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px;}
+  .books-row img{height:112px;width:auto;border-radius:4px;box-shadow:0 4px 12px rgba(11,30,63,.25);}
+  .proof-photo{margin:18px 0 0;}
+  .proof-photo img{width:100%;border-radius:12px;box-shadow:0 8px 22px rgba(11,30,63,.15);}
+  .proof-photo figcaption{font-size:12.5px;color:var(--muted);line-height:1.8;margin-top:8px;}
   /* ===== bonus ===== */
   .bonus-list{counter-reset:b;list-style:none;margin:16px 0;}
   .bonus-list li{
@@ -505,11 +522,29 @@
 <section>
   <div class="wrap">
     <span class="sec-label">04　VOICE</span>
-    <h2>実践している方の声</h2>
-    <div class="placeholder">【要確認】ここには実在するPABLOS会員・受講者の声のみを掲載します（想像で作成しない方針のため、現時点は枠のみ）。掲載候補と本人許諾は西村さんにて確定をお願いします。</div>
-    <div class="voice">「（実際のご感想を掲載）」<div class="who">— 業種・お立場【要確認】</div></div>
-    <div class="voice">「（実際のご感想を掲載）」<div class="who">— 業種・お立場【要確認】</div></div>
-    <p class="muted">※個人の感想であり、成果を保証するものではありません。</p>
+    <h2>実践している方の、実測値。</h2>
+    <article class="case">
+      <span class="ctag">受講生の事例（実測）</span>
+      <h3>個人美容院の経営者（自社シャンプーD2C）</h3>
+      <p class="goal">目標：顧客の平均LTV 18,000円以上 ＆ リピート率60%以上</p>
+      <div class="case-kpi">
+        <div class="k"><b>9か月連続</b><span>目標達成を継続</span></div>
+        <div class="k"><b>34,025円</b><span>平均LTV（最大）<br>目標の約1.9倍</span></div>
+        <div class="k"><b>61.9%</b><span>リピート率</span></div>
+      </div>
+      <blockquote>
+        <p>「一番苦しかったのは、<b>『良いものなのに伝わらない』</b>という現実でした。」</p>
+        <p>「変化を感じた瞬間は、お客様から商品ではなく<b>『髪の相談』</b>が届くようになった時でした。それは、伴走する関係が始まった瞬間でした。」</p>
+      </blockquote>
+      <p class="muted" style="margin:0;">※西村の通販講座（オメガ理論6ステップ）受講生の実測月次集計値（2026年1月度末現在）。成果は一例であり、すべての方に同様の成果を保証するものではありません。</p>
+    </article>
+    <article class="case">
+      <span class="ctag">支援先の事例（実名掲載許可済み）</span>
+      <h3>農業生産法人 株式会社松尾農園グループ</h3>
+      <p style="font-size:14px;margin:0;">会員制度が何もない状態から、会員サービス「松尾農園友の会」を設計。ブロンズからダイヤモンドまでの5ステージ制・ステージ別特典を備えた仕組みが、いまも自動で運用されています。</p>
+    </article>
+    <p class="muted">そのほかの支援実績：アンファーストア、チバテレ、scroll ほか（累計421社）。</p>
+    <div class="placeholder">【要確認】上記は西村の既存講座・支援先の実例です。AI右腕アカデミー自体の受講生の声は、β説明会の開催後に回収して差し替え・追加します。</div>
   </div>
 </section>
 
@@ -590,10 +625,17 @@
         <li>一般社団法人インターネット通販協会 代表理事／多摩大学 経営情報学部 講師</li>
         <li>大手通信販売会社で16年、化粧品メーカーで5年の実務を経て2014年に株式会社ルーチェを設立</li>
         <li>通販6ステップ法「ベルトコンベア理論」「100日ファン化計画」「AI時代のオメガ理論」を提唱</li>
-        <li>著書に『伝説の通販バイブル』（日本経済新聞出版社）、『売ってから、つくる！ミニマム通販バイブル』（スタンダーズ）、『小さな会社 ネット通販 億超えのルール』（すばる舎）ほか</li>
+        <li>著書に『伝説の通販バイブル』（日本経済新聞出版社・発売後たちまち増刷）、『売ってから、つくる！ミニマム通販バイブル』（スタンダーズ）、『小さな会社 ネット通販 億超えのルール』（すばる舎）ほか商業出版4冊を含む8冊</li>
         <li>テレビ「ビジネスフラッシュ」出演、東洋経済オンライン・Yahoo!ニュース掲載</li>
+        <li>支援実績にアンファーストア、チバテレ、scroll、農業生産法人 株式会社松尾農園グループ ほか</li>
         <li>3社の業務をAIとの分業で運用し、実測データを毎朝公開中</li>
       </ul>
+      <div class="books-row">
+        <img src="assets/books/densetsu.jpg" alt="書影『伝説の通販バイブル』（日本経済新聞出版社）">
+        <img src="assets/books/okugoe.jpg" alt="書影『小さな会社ネット通販 億超えのルール』（すばる舎）">
+        <img src="assets/books/minimum.jpg" alt="書影『売ってから、つくる！ミニマム通販バイブル』">
+        <img src="assets/books/sukinakoto.jpg" alt="書影『好きなことで無理なく毎月10万円稼ぐ方法』">
+      </div>
       <p class="muted" style="margin-top:10px;">※支援実績は累計の一例です。案件により成果は異なります。</p>
     </div>
   </div>
@@ -603,8 +645,12 @@
 <section>
   <div class="wrap">
     <span class="sec-label">08　VOICE</span>
-    <h2>説明会に参加した方の声</h2>
-    <div class="placeholder">【要確認】初回開催前のため現時点では掲載なし。開催後に実際のご感想を集めて掲載します（それまでこのセクションは非表示推奨）。</div>
+    <h2>「聞く」ことから、始めてきました。</h2>
+    <figure class="proof-photo">
+      <img src="assets/voice-seminar.jpg" alt="セミナー参加者が直筆で書いたアンケート用紙の分厚い束。机の上に何百枚も積み上がっている" loading="lazy">
+      <figcaption>セミナー「10億通販実践道場」で集めた、参加者直筆のアンケート。AIが解を出す時代のずっと前から、「お客様の声を聞く」ことから始めてきました。この説明会も同じです——売り込む場ではなく、あなたの状況を聞く場として設計しています。</figcaption>
+    </figure>
+    <div class="placeholder">【要確認】本説明会は初開催のため、参加者の声は開催後に実物を回収して掲載します。</div>
   </div>
 </section>
 
