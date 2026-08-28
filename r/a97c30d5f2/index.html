@@ -104,10 +104,10 @@
   }
   .cta-btn{
     display:block;text-align:center;text-decoration:none;
-    background:linear-gradient(90deg,var(--blue),var(--sky));
-    color:var(--white);font-size:17px;font-weight:700;
+    background:linear-gradient(90deg,#FFD54A,#FF9F1C);
+    color:#3B2A00;font-size:17px;font-weight:700;
     border-radius:999px;padding:18px 24px;
-    box-shadow:0 8px 24px rgba(30,111,255,.35);
+    box-shadow:0 8px 24px rgba(255,159,28,.45);
     transition:transform .15s ease;
   }
   .cta-btn:active{transform:scale(.98);}
@@ -123,10 +123,29 @@
   }
   .prob-card b{color:var(--navy);}
   /* ===== flow ===== */
-  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0;}
-  .flow span{
-    background:var(--white);border:1.5px solid var(--blue);color:var(--navy);
-    border-radius:8px;font-size:13px;font-weight:700;padding:8px 12px;position:relative;
+  .stepgrid{display:flex;flex-direction:column;gap:14px;margin:24px 0 10px;}
+  .steprow{display:flex;align-items:stretch;gap:6px;}
+  .stepcard{
+    flex:1;background:var(--white);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 12px;box-shadow:0 6px 16px rgba(11,30,63,.07);min-width:0;
+  }
+  .stepcard .head{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  .stepnum{
+    flex:none;width:26px;height:26px;border-radius:50%;background:var(--blue);color:var(--white);
+    font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .stepcard .tt{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.4;}
+  .stepcard .ds{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+  .stepcard .sic{display:block;margin:0 auto;width:46px;height:46px;stroke:#2E7BFF;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .sarw{align-self:center;color:var(--blue);font-weight:700;font-size:18px;flex:none;}
+  .steploop{
+    display:block;margin:6px auto 0;width:fit-content;max-width:100%;
+    border:2.5px solid var(--blue);color:var(--blue);background:var(--white);
+    border-radius:999px;padding:10px 26px;font-size:15px;font-weight:700;text-align:center;
+  }
+  @media (max-width:599px){
+    .steprow{flex-direction:column;gap:10px;}
+    .sarw{transform:rotate(90deg);align-self:center;margin:-2px 0;}
   }
   .feature{
     border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:16px;
@@ -311,9 +330,54 @@
   <div class="wrap">
     <span class="sec-label">02　HOW IT WORKS</span>
     <h2>発信から成約まで、一本のベルトコンベアに。</h2>
-    <p>PABLOSでお伝えするのは、単発のSNSテクニックではありません。次の一本のラインを、AIとの分業で回し続ける設計図です。</p>
-    <div class="flow">
-      <span>ネタ設計</span><span>投稿生成</span><span>プロフィール導線</span><span>リスト化</span><span>ステップ配信</span><span>個別相談</span><span>成約</span><span>分析</span><span>再投稿</span>
+    <p>お伝えするのは、単発のSNSテクニックではありません。次の7つの仕事を、AIとの分業で回し続ける設計図です。</p>
+    <div class="stepgrid">
+      <div class="steprow">
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">1</span><span class="tt">ネタ出し</span></div>
+          <div class="ds">旗印から発信テーマを設計</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><circle cx="0" cy="-3" r="8"/><path d="M-3.5,5 v3.5 h7 v-3.5"/><line x1="-3" y1="11.5" x2="3" y2="11.5"/><line x1="0" y1="-15" x2="0" y2="-17"/><line x1="9.5" y1="-11" x2="11.5" y2="-13"/><line x1="-9.5" y1="-11" x2="-11.5" y2="-13"/></svg>
+        </div>
+        <span class="sarw">→</span>
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">2</span><span class="tt">SNS投稿</span></div>
+          <div class="ds">下書きはAI・仕上げは人</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><rect x="-8.5" y="-14" width="17" height="28" rx="3.5"/><line x1="-3" y1="9.5" x2="3" y2="9.5"/><line x1="-4" y1="-6" x2="4" y2="-6"/><line x1="-4" y1="-1" x2="4" y2="-1"/></svg>
+        </div>
+        <span class="sarw">→</span>
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">3</span><span class="tt">リスト化</span></div>
+          <div class="ds">投稿の出口に名簿をつくる</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><rect x="-11" y="-13" width="22" height="26" rx="3"/><circle cx="-4" cy="-5" r="3"/><path d="M-8.5,2 Q-4,-2.5 0.5,2"/><line x1="3" y1="-6" x2="7.5" y2="-6"/><line x1="-7.5" y1="6" x2="7.5" y2="6"/><line x1="-7.5" y1="9.5" x2="4" y2="9.5"/></svg>
+        </div>
+      </div>
+      <div class="steprow">
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">4</span><span class="tt">顧客育成</span></div>
+          <div class="ds">ステップ配信で信頼を積む</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><circle cx="-6" cy="-7" r="4.5"/><path d="M-13,3 Q-6,-4 1,3"/><rect x="2" y="-4" width="12" height="9" rx="2.5"/><path d="M10,5 l0,3.5 -3.5,-3.5"/><path d="M-9,9 h18"/><path d="M-9,13 h11"/></svg>
+        </div>
+        <span class="sarw">→</span>
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">5</span><span class="tt">成約</span></div>
+          <div class="ds">説明会・個別相談から成約へ</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><circle r="12"/><circle r="6.5"/><circle r="1.8" fill="#2E7BFF" stroke="none"/></svg>
+        </div>
+        <span class="sarw">→</span>
+        <div class="stepcard">
+          <div class="head"><span class="stepnum">6</span><span class="tt">データ分析</span></div>
+          <div class="ds">投稿〜成約まで横断で確認</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><polyline points="-13,9 -5,1 1,5 12,-7"/><circle cx="-13" cy="9" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="-5" cy="1" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="1" cy="5" r="1.8" fill="#2E7BFF" stroke="none"/><circle cx="12" cy="-7" r="1.8" fill="#2E7BFF" stroke="none"/><line x1="-14" y1="13" x2="14" y2="13"/></svg>
+        </div>
+      </div>
+      <div class="steprow">
+        <div class="stepcard" style="max-width:calc(33.4% - 4px);margin:0 auto;">
+          <div class="head"><span class="stepnum">7</span><span class="tt">改善提案</span></div>
+          <div class="ds">次のネタ出しへ反映（1へ戻る）</div>
+          <svg class="sic" viewBox="-18 -18 36 36"><path d="M10,-6 A11.5,11.5 0 1 0 11.5,1"/><path d="M10,-12 l0.5,6.5 -6.5,-0.5"/><circle r="4.5"/><path d="M-1.5,0.5 l1.5,1.5 3,-3.5" stroke-width="1.8"/></svg>
+        </div>
+      </div>
+      <div class="steploop">⟲ すべてを、一本のライン（ベルトコンベア）で接続</div>
     </div>
     <div class="feature">
       <div class="num">POINT 01</div>
@@ -346,9 +410,9 @@
     <div class="tbl-hint">→ 表は横にスクロールできます</div>
     <div class="tbl-scroll">
       <table>
-        <tr><th>できること</th><th>生成AI単体</th><th>予約投稿ツール</th><th>SNS運用代行</th><th class="col-hl">PABLOS</th></tr>
+        <tr><th>できること</th><th>生成AI・AIエージェント</th><th>予約投稿ツール</th><th>SNS運用代行</th><th class="col-hl">PABLOS</th></tr>
         <tr><td>投稿文の下書き</td><td>◎</td><td>—</td><td>◎</td><td class="col-hl">◎</td></tr>
-        <tr><td>発信の設計図（旗印・導線）</td><td>—</td><td>—</td><td>△</td><td class="col-hl">◎</td></tr>
+        <tr><td>発信の設計図（旗印・導線）</td><td>△</td><td>—</td><td>△</td><td class="col-hl">◎</td></tr>
         <tr><td>リスト化・顧客育成まで接続</td><td>—</td><td>—</td><td>△</td><td class="col-hl">◎</td></tr>
         <tr><td>成約後のファン化設計</td><td>—</td><td>—</td><td>—</td><td class="col-hl">◎</td></tr>
         <tr><td>自分にノウハウが残る</td><td>△</td><td>—</td><td>—</td><td class="col-hl">◎</td></tr>
@@ -364,7 +428,8 @@
   <div class="wrap">
     <span class="sec-label">03　RESULTS</span>
     <h2>数字は、毎朝公開しています。</h2>
-    <p>講師の西村自身が、この仕組みで3社——株式会社ルーチェ、PABLOS株式会社、社外・アイデア企画室株式会社——の業務を回しています。直近30日の実測値です。</p>
+    <p><b>AI右腕アカデミーを導入すると、分断されていたソロプレナーの仕事が、一つの改善サイクルにつながります。</b>制作・配信・分析・改善をAIが支援することで、施策ごとの手作業や外注を減らしながら、人は成果に直結する判断に集中できます。</p>
+    <p>その証拠がこちらです。講師の西村自身が、この仕組みで3社——株式会社ルーチェ、PABLOS株式会社、社外・アイデア企画室株式会社——の業務を回しています。直近30日の実測値です。</p>
     <div class="result-hero">
       <div style="font-size:13px;color:#B9CCEE;">手作業なら 30日で1,128時間分の業務を</div>
       <div class="big">実働 158時間</div>
