@@ -124,6 +124,35 @@
   .prob-card b{color:var(--navy);}
   /* ===== flow ===== */
   .heptawrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  /* ===== 業種対応マトリクス ===== */
+  .mtxwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .mtx{display:grid;grid-template-columns:128px repeat(7,1fr);gap:8px;min-width:1020px;align-items:stretch;}
+  .mtx-belt{grid-column:1 / -1;display:grid;grid-template-columns:128px repeat(7,1fr);gap:8px;position:relative;padding:4px 0 12px;}
+  .mtx-belt::before{content:"";position:absolute;left:146px;right:10px;top:30px;height:12px;background:var(--pale);border-radius:6px;}
+  .mtx-kl{font-size:11.5px;font-weight:700;color:var(--muted);align-self:center;line-height:1.5;}
+  .mtx-k{position:relative;text-align:center;}
+  .mtx-k .pill{
+    position:relative;display:inline-flex;align-items:center;gap:6px;
+    background:var(--navy);color:var(--white);border-radius:999px;padding:6px 13px;
+    font-size:15px;font-weight:700;letter-spacing:.18em;box-shadow:0 5px 12px rgba(11,30,63,.25);
+  }
+  .mtx-k .pill .no{display:flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--blue);font-size:11.5px;letter-spacing:0;}
+  .mtx-k .arw{position:absolute;right:-10px;top:10px;color:var(--blue);font-weight:700;font-size:14px;}
+  .mtx-lane{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:var(--navy);color:var(--white);border-radius:10px;
+    font-size:12.5px;font-weight:700;line-height:1.55;padding:8px 6px;
+  }
+  .mtx-cell{
+    background:var(--pale);border:1px solid var(--line);border-radius:10px;
+    padding:8px 9px;font-size:12px;font-weight:700;color:var(--navy);line-height:1.6;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  }
+  .mtx-cell span{display:block;font-weight:400;font-size:10.5px;color:var(--muted);margin-top:1px;}
+  .mtx-cell.human{background:#FFF6E6;border-color:#F2C879;}
+  .mtx-legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
+  .mtx-legend i{width:13px;height:13px;border-radius:4px;display:inline-block;vertical-align:-2px;margin-right:5px;}
+  .mtx-loop{text-align:center;margin-top:10px;font-size:13px;font-weight:700;color:var(--blue);}
   .stepgrid{display:flex;flex-direction:column;gap:14px;margin:24px 0 10px;}
   .steprow{display:flex;align-items:stretch;gap:6px;}
   .stepcard{
@@ -477,6 +506,62 @@
       <h3>改善は「勘」ではなく「記録」で回す</h3>
       <p style="font-size:14px;margin:0;">何を出し、何分かかり、何につながったかを記録し、AIと一緒に振り返ります。改善を止めない、はここを指しています。</p>
     </div>
+  </div>
+</section>
+
+<!-- ===== 業種対応（型の普遍性） ===== -->
+<section>
+  <div class="wrap" style="max-width:1160px;">
+    <div style="max-width:680px;margin:0 auto 20px;">
+      <span class="sec-label">UNIVERSAL</span>
+      <h2>あなたの業種でも、同じ型で回ります。</h2>
+      <p>7つの仕事は、SNS発信だけの話ではありません。上段の「型」は業種を問わず同じ——下段を、あなたの業界の言葉に読み替えてみてください。</p>
+    </div>
+    <div class="tbl-hint">→ 表は横にスクロールできます</div>
+    <div class="mtxwrap">
+      <div class="mtx">
+        <div class="mtx-belt">
+          <div class="mtx-kl">共通の型<br>（視座マックス）</div>
+          <div class="mtx-k"><span class="pill"><span class="no">1</span>理解</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">2</span>制作</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">3</span>集客</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">4</span>育成</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">5</span>成約</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">6</span>分析</span><span class="arw">→</span></div>
+          <div class="mtx-k"><span class="pill"><span class="no">7</span>改善</span></div>
+        </div>
+        <div class="mtx-lane">ソロプレナー<br>× SNS</div>
+        <div class="mtx-cell">ネタ出し<span>読者の悩みを掘る</span></div>
+        <div class="mtx-cell">SNS投稿づくり</div>
+        <div class="mtx-cell">投稿を届けて<br>リスト化</div>
+        <div class="mtx-cell human">ステップ配信で<br>信頼づくり</div>
+        <div class="mtx-cell human">説明会・個別相談<br>から成約</div>
+        <div class="mtx-cell">データ分析<span>投稿→成約を横断</span></div>
+        <div class="mtx-cell human">改善提案<span>次のネタへ</span></div>
+        <div class="mtx-lane">通販・物販</div>
+        <div class="mtx-cell">商品リサーチ</div>
+        <div class="mtx-cell">商品ページ作成</div>
+        <div class="mtx-cell">集客<span>広告・モール・SNS</span></div>
+        <div class="mtx-cell human">メルマガ・LINE・<br>同梱物でフォロー</div>
+        <div class="mtx-cell human">受注</div>
+        <div class="mtx-cell">売上分析</div>
+        <div class="mtx-cell human">次の仕入れ判断</div>
+        <div class="mtx-lane">コーチ・<br>コンサル</div>
+        <div class="mtx-cell">ニーズリサーチ</div>
+        <div class="mtx-cell">メニュー・<br>案内ページ作成</div>
+        <div class="mtx-cell">集客<span>発信→登録</span></div>
+        <div class="mtx-cell human">配信・無料コンテンツ<br>で信頼づくり</div>
+        <div class="mtx-cell human">体験セッション<br>から契約</div>
+        <div class="mtx-cell">成果分析<span>成約率・継続率</span></div>
+        <div class="mtx-cell human">次のプログラム判断</div>
+      </div>
+    </div>
+    <div class="mtx-legend">
+      <span><i style="background:var(--pale);border:1px solid var(--line);"></i>AIが肩代わりできる段（理解・制作・集客・分析）</span>
+      <span><i style="background:#FFF6E6;border:1px solid #F2C879;"></i>人にしか残らない段（育成・成約・改善の判断）</span>
+    </div>
+    <div class="mtx-loop">⟲ 改善は、理解へ戻る——すべてを一本のライン（ベルトコンベア）で接続</div>
+    <p class="muted" style="max-width:680px;margin:14px auto 0;text-align:center;">※提供（発送・納品・セッション）は成約と分析の間に流れる工程で、100日ファン化計画の入り口に接続します。</p>
   </div>
 </section>
 
