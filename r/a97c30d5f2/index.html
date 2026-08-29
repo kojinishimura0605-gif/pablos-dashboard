@@ -150,9 +150,26 @@
   }
   .mtx-cell span{display:block;font-weight:400;font-size:10.5px;color:var(--muted);margin-top:1px;}
   .mtx-cell.human{background:#FFF6E6;border-color:#F2C879;}
-  .mtx-legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
-  .mtx-legend i{width:13px;height:13px;border-radius:4px;display:inline-block;vertical-align:-2px;margin-right:5px;}
-  .mtx-loop{text-align:center;margin-top:10px;font-size:13px;font-weight:700;color:var(--blue);}
+  .mtx-loopline{
+    grid-column:2 / -1;position:relative;height:22px;margin:2px 46px 8px;
+    border-left:2.5px solid var(--blue);border-right:2.5px solid var(--blue);border-bottom:2.5px solid var(--blue);
+    border-radius:0 0 12px 12px;
+  }
+  .mtx-loopline::before{
+    content:"";position:absolute;left:-8px;top:-9px;
+    border:6.5px solid transparent;border-bottom:10px solid var(--blue);
+  }
+  .mtx-loopline span{
+    position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);
+    background:var(--white);padding:0 14px;font-size:12.5px;font-weight:700;color:var(--blue);white-space:nowrap;
+  }
+  .mtx-legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:16px;font-size:12px;color:var(--muted);}
+  .mtx-legend i{
+    width:26px;height:26px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;
+    font-size:15px;font-style:normal;margin-right:7px;vertical-align:-8px;
+  }
+  .lg-ai{background:var(--pale);border:1px solid var(--line);}
+  .lg-hu{background:#FFF6E6;border:1px solid #F2C879;}
   .stepgrid{display:flex;flex-direction:column;gap:14px;margin:24px 0 10px;}
   .steprow{display:flex;align-items:stretch;gap:6px;}
   .stepcard{
@@ -530,6 +547,8 @@
           <div class="mtx-k"><span class="pill"><span class="no">6</span>分析</span><span class="arw">→</span></div>
           <div class="mtx-k"><span class="pill"><span class="no">7</span>改善</span></div>
         </div>
+        <div style="grid-column:1;"></div>
+        <div class="mtx-loopline" style="grid-column:2 / -1;"><span>⟲ 改善は、理解へ戻る</span></div>
         <div class="mtx-lane">ソロプレナー<br>× SNS</div>
         <div class="mtx-cell">ネタ出し<span>読者の悩みを掘る</span></div>
         <div class="mtx-cell">SNS投稿づくり</div>
@@ -557,10 +576,9 @@
       </div>
     </div>
     <div class="mtx-legend">
-      <span><i style="background:var(--pale);border:1px solid var(--line);"></i>AIが肩代わりできる段（理解・制作・集客・分析）</span>
-      <span><i style="background:#FFF6E6;border:1px solid #F2C879;"></i>人にしか残らない段（育成・成約・改善の判断）</span>
+      <span><i class="lg-ai">🤖</i>AIが肩代わりできる段（理解・制作・集客・分析）</span>
+      <span><i class="lg-hu">👤</i>人にしか残らない段（何を約束し、どんな旗を掲げるか）</span>
     </div>
-    <div class="mtx-loop">⟲ 改善は、理解へ戻る——すべてを一本のライン（ベルトコンベア）で接続</div>
     <p class="muted" style="max-width:680px;margin:14px auto 0;text-align:center;">※提供（発送・納品・セッション）は成約と分析の間に流れる工程で、100日ファン化計画の入り口に接続します。</p>
   </div>
 </section>
