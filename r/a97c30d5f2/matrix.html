@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商売は、7段のベルトコンベア。｜7ステップ業種対応表</title>
+<style>
+  :root{
+    --navy:#0B1E3F; --blue:#1E6FFF; --sky:#00C2FF; --pale:#E8F1FF;
+    --ink:#1A2333; --muted:#5A6B85; --line:#D5E2F5; --white:#FFFFFF;
+    --human:#FFF6E6; --human-line:#F2C879;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Meiryo UI",Meiryo,"Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:#F2F6FC;line-height:1.8;padding:36px 18px 48px;}
+  .sheet{max-width:1240px;margin:0 auto;}
+  .head{text-align:center;margin-bottom:26px;}
+  .head .eyebrow{display:inline-block;border:1.5px solid var(--blue);color:var(--blue);border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.15em;padding:3px 16px;margin-bottom:12px;}
+  .head h1{font-size:30px;color:var(--navy);letter-spacing:.03em;}
+  .head p{font-size:14px;color:var(--muted);margin-top:6px;}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:26px 22px 20px;box-shadow:0 10px 30px rgba(11,30,63,.08);}
+  .grid{display:grid;grid-template-columns:150px repeat(7,1fr);gap:10px;min-width:1080px;align-items:stretch;}
+  /* ベルト（型の行） */
+  .beltrow{grid-column:1 / -1;display:grid;grid-template-columns:150px repeat(7,1fr);gap:10px;position:relative;padding:6px 0 14px;}
+  .beltrow::before{content:"";position:absolute;left:170px;right:12px;top:38px;height:14px;background:var(--pale);border-radius:7px;}
+  .kata-label{font-size:12px;font-weight:700;color:var(--muted);align-self:center;line-height:1.5;}
+  .kata{position:relative;text-align:center;}
+  .kata .pill{
+    position:relative;display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy);color:var(--white);border-radius:999px;padding:8px 18px;
+    font-size:18px;font-weight:700;letter-spacing:.2em;box-shadow:0 6px 14px rgba(11,30,63,.25);
+  }
+  .kata .pill .no{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--blue);font-size:13px;letter-spacing:0;}
+  .kata .arw{position:absolute;right:-12px;top:14px;color:var(--blue);font-weight:700;font-size:16px;}
+  /* レーン */
+  .lane-label{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:var(--navy);color:var(--white);border-radius:12px;
+    font-size:13.5px;font-weight:700;line-height:1.6;padding:10px 8px;
+  }
+  .cell{
+    background:var(--pale);border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;font-size:13px;font-weight:700;color:var(--navy);line-height:1.65;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+  .cell.human{background:var(--human);border-color:var(--human-line);}
+  .legend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:12.5px;color:var(--muted);}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:14px;height:14px;border-radius:4px;display:inline-block;}
+  .loopnote{text-align:center;margin-top:14px;font-size:13.5px;font-weight:700;color:var(--blue);}
+  .foot{max-width:1240px;margin:16px auto 0;text-align:center;font-size:12px;color:var(--muted);line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="head">
+    <span class="eyebrow">BELT CONVEYOR ── 共通の型</span>
+    <h1>商売は、7段のベルトコンベア。</h1>
+    <p>上段＝業種を問わない「型」。下段＝あなたの業界の実務語。どの列も同じ視座で読み替えられます。</p>
+  </div>
+
+  <div class="scroll">
+    <div class="grid">
+      <!-- 型（ベルト） -->
+      <div class="beltrow">
+        <div class="kata-label">共通の型<br>（視座マックス）</div>
+        <div class="kata"><span class="pill"><span class="no">1</span>理解</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">2</span>制作</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">3</span>集客</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">4</span>育成</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">5</span>成約</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">6</span>分析</span><span class="arw">→</span></div>
+        <div class="kata"><span class="pill"><span class="no">7</span>改善</span></div>
+      </div>
+
+      <!-- レーン1: ソロプレナー×SNS -->
+      <div class="lane-label">ソロプレナー<br>× SNS</div>
+      <div class="cell">ネタ出し<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">読者の悩みを掘る</span></div>
+      <div class="cell">SNS投稿づくり</div>
+      <div class="cell">投稿を届けて<br>リスト化</div>
+      <div class="cell human">ステップ配信で<br>信頼づくり</div>
+      <div class="cell human">説明会・個別相談<br>から成約</div>
+      <div class="cell">データ分析<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">投稿→成約を横断</span></div>
+      <div class="cell human">改善提案<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">次のネタへ</span></div>
+
+      <!-- レーン2: 通販・物販 -->
+      <div class="lane-label">通販・物販</div>
+      <div class="cell">商品リサーチ</div>
+      <div class="cell">商品ページ作成</div>
+      <div class="cell">集客<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">広告・モール・SNS</span></div>
+      <div class="cell human">メルマガ・LINE・<br>同梱物でフォロー</div>
+      <div class="cell human">受注</div>
+      <div class="cell">売上分析</div>
+      <div class="cell human">次の仕入れ判断</div>
+
+      <!-- レーン3: コーチ・コンサル -->
+      <div class="lane-label">コーチ・<br>コンサル</div>
+      <div class="cell">ニーズリサーチ</div>
+      <div class="cell">メニュー・<br>案内ページ作成</div>
+      <div class="cell">集客<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">発信→登録</span></div>
+      <div class="cell human">配信・無料コンテンツ<br>で信頼づくり</div>
+      <div class="cell human">体験セッション<br>から契約</div>
+      <div class="cell">成果分析<br><span style="font-weight:400;font-size:11.5px;color:var(--muted);">成約率・継続率</span></div>
+      <div class="cell human">次のプログラム判断</div>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:var(--pale);border:1px solid var(--line);"></i>AIが肩代わりできる段（理解・制作・集客・分析）</span>
+      <span><i style="background:var(--human);border:1px solid var(--human-line);"></i>人にしか残らない段（育成・成約・改善の判断）</span>
+    </div>
+    <div class="loopnote">⟲ 改善は、理解へ戻る——すべてを一本のライン（ベルトコンベア）で接続</div>
+  </div>
+
+  <p class="foot">提供（発送・納品・セッション）は成約と分析の間に流れる工程で、100日ファン化計画の入り口に接続します。<br>ソロプレナーのためのAI右腕アカデミー〈0期〉／株式会社ルーチェ</p>
+</div>
+</body>
+</html>
