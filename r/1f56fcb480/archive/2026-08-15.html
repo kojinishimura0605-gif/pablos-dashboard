@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>朝ブリーフ 2026年8月15日（土）｜㈱ルーチェ 経営参謀室</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-date="2026-08-15">
+<div class="masked">共有版です。メールアドレスは載せていません（西村さん＋役員向け）</div>
+<header><div class="wrap">
+<p class="eyebrow">㈱ルーチェ ／ 経営参謀室</p>
+<h1>朝ブリーフ 2026年8月15日（土）</h1>
+<p class="sub">会議ゼロ。まとまった時間を置ける、今週で唯一の日です</p>
+<nav class="navbar"><a href="../index.html">最新</a><a href="../archive/index.html">過去のブリーフ（12件）</a><span class="stamp">生成 2026-08-29</span></nav>
+</div></header>
+<div class="wrap">
+<section>
+<h2>1. 健康管理 — 今日の稼働キャパを決める</h2>
+<p class="lead">ここが起点です。体調の実測値を入れると、下の「最優先タスク」の本数が自動で切り替わります。<b>未入力のあいだは通常時の本数を表示しています。</b></p>
+<div class="vitals">
+  <div class="vf"><label for="v-sleep">睡眠スコア</label><input type="number" id="v-sleep" min="0" max="100" placeholder="例：78"><p class="hint">80以上＝良好／70未満＝要調整</p></div>
+  <div class="vf"><label for="v-hr">安静時心拍数（bpm）</label><input type="number" id="v-hr" min="30" max="140" placeholder="例：58"><p class="hint">平常より+5bpm以上は疲労のサイン</p></div>
+  <div class="vf"><label for="v-fat">疲労感（自己申告）</label><select id="v-fat"><option value="">— 未入力 —</option><option value="good">良い</option><option value="normal">普通</option><option value="tired">疲れ気味</option></select><p class="hint">迷ったら低いほうを選んでください</p></div>
+</div>
+<div class="verdict" id="verdict">
+  <p class="vt" id="v-title">体調データ未入力です</p>
+  <p class="vb" id="v-body">睡眠スコア・心拍数・疲労感を入れていただくと、今日の負荷配分を確定します。数値は推測で埋めません。入力があるまでは通常時の本数で表示します。</p>
+</div>
+<p class="saved" id="v-saved"></p>
+</section>
+<section><h2>2. 今日のブリーフィング</h2>
+<p class="lead">天気・会議・自由時間の実測です。</p>
+<div class="grid g4" style="margin-bottom:18px"><div class="card"><p class="k">天気（足立区）</p><p class="v">曇時々晴</p><p class="n">ゲリラ雷雨の可能性あり。折りたたみ傘があると安心です</p></div><div class="card alert"><p class="k">気温</p><p class="v">32<small>／24℃</small></p><p class="n">最高32℃・最低24℃。昨日より2℃高くなります</p></div><div class="card"><p class="k">降水確率 12–18時</p><p class="v">30<small>%</small></p><p class="n">06–12時 30%／18–24時 20%</p></div><div class="card"><p class="k">会議</p><p class="v">0<small>本</small></p><p class="n">土曜。定例の自動タスクだけが走ります</p></div></div>
+<ul class="tl"><li data-end="09:10"><span class="time">9:00</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">朝の定例便（morning-routine）</p><p class="meta">このブリーフです</p></div></li><li data-end="09:20"><span class="time">9:15</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">PABLOSダッシュボード更新（自動）</p><p class="meta">Windowsタスクスケジューラ</p></div></li><li data-end="09:35"><span class="time">9:30</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">グループ秘書メール仕分け（自動）</p><p class="meta">以降 12:30／15:30／18:30</p></div></li><li class="is-free" data-end="20:00"><span class="time">9:40〜</span><span class="rail"><i class="dot free"></i></span><div class="bd"><p class="ttl">終日、予定が入っていません</p><p class="meta">稼働するかどうかも含めて西村さんのご判断です。動くなら、まとまった作業を置ける今週唯一の日です</p></div></li><li data-end="23:59"><span class="time">毎時:15</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">email-router／Chatwork着火便（自動）</p><p class="meta">info@・support@の振り分けとブリーフ依頼の検知</p></div></li><li data-end="21:00"><span class="time">20:30</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">デイリー4媒体フルルーチン（自動）</p><p class="meta">記事生成→下書き→MyASP翌朝7時配信予約</p></div></li><li data-end="22:00"><span class="time">21:30</span><span class="rail"><i class="dot routine"></i></span><div class="bd"><p class="ttl">作業フォルダーバックアップ（自動）</p><p class="meta">ローカルミラーへ差分同期</p></div></li></ul>
+<div class="note"><b>今日は平日の定例が2つ止まります。</b>10:00の返信漏れチェックは平日のみ、17:30の週次レビューは金曜のみのため、今日は動きません（週次レビューは昨日8/14に実行済みで、週報も出ています）。会議がゼロの日は今週これ1日だけです。</div>
+</section>
+<section><h2>3. 経営参謀の判定 — 今日の最優先</h2>
+<p class="lead">まとまった作業時間に何を置くかの提案です。<b>実行は西村さんのご判断でお願いします。</b></p>
+<ol class="prio" id="prio-list"><li data-tired="drop"><span class="tag">会議ゼロの日にしか置けない</span><p class="pt">note記事「AIに任せる仕事、任せない仕事」の検品round 3 → 公開GO判断</p><p class="pw">8/13にround 2を終えてから<b>2日間、ここで止まったままです</b>。検品ログにround 3の記録はまだありません。本文16,500字・画像15枚は完成しており、残るのは最終1巡と西村さんの公開判断だけです。<b>この1手が動かないと、Kindle本（全7章・約37,500字）も着手できません。</b>3時間まとまった枠が要る唯一のタスクで、それを置けるのが今日です。</p></li><li data-tired="keep"><span class="tag goal">承認だけで納品が動く</span><p class="pt">整骨院CRM 2026年7月版のクライアント送付GO判断</p><p class="pw">数値は完成し、<b>export照合DIFFS:0・検品round 2でPASS</b>まで到達しています。止まっているのは西村さんの送付GOだけです。残るGoogleシートの手直しは、カード背景の色・小数桁・文字色など<b>5点で数分</b>。あわせてKPI定義タブの目標値誤記（「135名以上維持」→正しくは「135名以下」）の修正可否もご判断ください（凍結仕様のため承認制です）。</p></li><li data-tired="keep"><span class="tag risk">5日後に3件が1日へ集中</span><p class="pt">8/20（木）コンサル3件への備え — まずフィブロ製薬様ブリーフの内容確認</p><p class="pw">8/20は<b>フリーダイブ様11:00／AIVICK様13:00／フィブロ製薬様15:30</b>と、コンサルが1日に3件集中します。しかも同じ午前に「仕組み化タイム」「週刊パブロスセットアップ」が重なります。フィブロ製薬様の商談前ブリーフは8/12に生成し検品PASS済みですが、<b>西村さんの内容確認がまだ済んでいません</b>。当日は動けません。今日のうちに目を通しておくのが安全です。</p></li></ol>
+<p class="dropnote" id="drop-note"></p>
+<div class="note"><b>今日の性格は、平日と違います。</b>会議がゼロなので、判断だけの2番・3番は30分もあれば片づきます。残りをまるごと1番に充てられるのが今日の価値です。逆にいえば、<b>1番を今日やらないと、次にまとまった枠が取れるのが見えません</b>。来週は8/17から会議が11件並び、8/20はコンサル3件です。</div>
+</section>
+<section><h2>4. 西村ボール — 手元で止まっている5件</h2>
+<p class="lead">Notion「未返信メールチェック」の未対応から、実測で抽出しました。</p>
+<div class="tw"><table><thead><tr><th>優先</th><th>件名</th><th>相手</th><th class="num">受信日</th><th class="num">経過</th><th>次の一手</th></tr></thead><tbody><tr><td><span class="badge b-red">要対応🔴</span></td><td>Googleドライブ アクセス共有リクエスト<br><span class="sm">ヒューマンプラス業務引継ぎ・初期見積算定用</span></td><td>佐々妙美 氏</td><td class="num">8/05</td><td class="num">10日</td><td>本人確認のうえ許可／拒否。<b>10日経過。ここが最も長く止まっています</b></td></tr><tr><td><span class="badge b-yel">確認のみ🟡</span></td><td>共創・提携に関するお問い合わせ #119</td><td>苗村 冬人 氏<br><span class="sm">そだてる工房㈱</span></td><td class="num">8/05</td><td class="num">10日</td><td>Web制作関連の提案と推定。受ける／断るの判断</td></tr><tr><td><span class="badge b-yel">確認のみ🟡</span></td><td>Re: 突破Aiのご利用について</td><td>渡部 さとみ 様</td><td class="num">8/06</td><td class="num">9日</td><td>移行完了のお礼メール。<b>一言お返しすると関係が続きます</b></td></tr><tr><td><span class="badge b-yel">確認のみ🟡</span></td><td>Chatwork コンタクト承認依頼</td><td>吉田 たかし 氏</td><td class="num">8/13</td><td class="num">2日</td><td>「コンタクト管理＞未承認」で承認操作</td></tr><tr><td><span class="badge b-yel">確認のみ🟡</span></td><td>Chatwork コンタクト承認依頼</td><td>白石 義拓 氏</td><td class="num">8/14</td><td class="num">1日</td><td>同上。心当たりがなければ既知の経路でご本人確認を</td></tr></tbody></table></div>
+<div class="note warn"><b>昨日から1件増えて5件になりました</b>（白石義拓氏のChatwork承認依頼）。うち2件は10日、1件は9日が経っています。Chatwork承認の2件は同じ画面でまとめて処理できます。<b>5件すべて所要は5分前後で、合計しても30分かかりません。</b>会議のない今日のうちに空にしてしまうのが得策です。</div>
+</section>
+<section><h2>5. 進行中案件 — 詰まっている場所</h2>
+<p class="lead">『今月の目標』と作業ログの実測です。「あと何が要るか」だけを書いています。</p>
+<div class="tw"><table><thead><tr><th>案件</th><th>状態</th><th style="width:150px">進捗</th><th>詰まっている一点</th></tr></thead><tbody><tr><td><b>整骨院CRM 2026年7月版</b></td><td><span class="badge b-yel">GO待ち</span></td><td>DIFFS:0・検品PASS<div class="pbar"><i style="width:95%"></i></div></td><td><b>クライアント送付GO</b>＋Googleシートの見た目5点</td></tr><tr><td><b>note記事「AIに任せる仕事、任せない仕事」</b></td><td><span class="badge b-blu">検品中</span></td><td>本文16,500字・画像15枚<div class="pbar"><i style="width:90%"></i></div></td><td>検品round 3 と<b>公開GO</b>（8/13から停滞）</td></tr><tr><td><b>Kindle『AIエージェントに任せる通販、任せない通販』</b></td><td><span class="badge b-gry">未着手</span></td><td>構成案のみ承認済<div class="pbar warn"><i style="width:10%"></i></div></td><td>note公開待ち。全7章 約37,500字は未執筆</td></tr><tr><td><b>オメガ理論6ステップ講座LP</b></td><td><span class="badge b-yel">素材待ち</span></td><td>全13セクション実装済<div class="pbar warn"><i style="width:80%"></i></div></td><td>Stripe URL・講師写真・特商法/プライバシー・税表記。<b>流入前提（Meta広告か温リストか）も未確定</b></td></tr><tr><td><b>突破Aiステップメール7通</b></td><td><span class="badge b-yel">未了2点</span></td><td>原稿7通完成<div class="pbar warn"><i style="width:75%"></i></div></td><td>①MyASP MCP接続　②個別相談URL確定</td></tr><tr><td><b>ホロンPBI様 LP改修指示書（Excel 7シート）</b></td><td><span class="badge b-yel">判断待ち</span></td><td>指示書完成<div class="pbar warn"><i style="width:90%"></i></div></td><td><b>提出可否のご判断</b></td></tr><tr><td><b>AI時代のオメガ理論LP</b></td><td><span class="badge b-yel">確認待ち</span></td><td>構成確定<div class="pbar warn"><i style="width:60%"></i></div></td><td>CTAリンク先・お客様の声の掲載可否</td></tr><tr><td><b>ヒューマンプラス様 AIアカデミーLP</b></td><td><span class="badge b-yel">素材待ち</span></td><td>13パート構成済<div class="pbar warn"><i style="width:70%"></i></div></td><td>CTAリンク先ほか差し替え素材の受領</td></tr><tr><td><b>email-router（info@／support@）</b></td><td><span class="badge b-red">support@ 0件</span></td><td>support@のみ転送未設定<div class="pbar risk"><i style="width:50%"></i></div></td><td>support@の転送設定。<b>実施判断が今月の目標に未記入</b></td></tr><tr><td><b>月次定例（ジムCRM・整骨院CRM・PABLOSダッシュ）</b></td><td><span class="badge b-grn">稼働中</span></td><td>前月複製→値のみ置換<div class="pbar"><i style="width:100%"></i></div></td><td>—（フォーマット変更は西村さん承認制）</td></tr></tbody></table></div>
+<div class="note warn"><b>『今月の目標_2026-08』の「今月の重点」3つが、昨日の週次レビューを経てもまだ未記入です。</b>今日は8月15日、ちょうど月の折り返しです。判断待ちの案件が<b>7件</b>並んでいる状態は、重点が決まっていないことの裏返しでもあります。3行だけ埋めていただくと、来週以降の優先順位が機械的に決まるようになります。</div>
+</section>
+<section><h2>6. 期限ウォッチ</h2>
+<p class="lead">日付が決まっているものだけを並べています。</p>
+<div class="grid g3"><div class="card"><p class="k">8月17日（月）</p><p class="v">2<small>日後</small></p><p class="n">会議3件。08:30 売上拡大会議／13:00 コーチファイ／14:10 マーケ会議</p></div><div class="card"><p class="k">8月19日（水）</p><p class="v">4<small>日後</small></p><p class="n">16:00 PABLOSボード会議／識学 無料セミナー 11:00（参加は任意）</p></div><div class="card alert"><p class="k">8月20日（木）</p><p class="v">5<small>日後</small></p><p class="n"><b>コンサル3件が集中</b>。フリーダイブ様11:00／AIVICK様13:00／フィブロ製薬様15:30。午前は仕組み化タイムと重複</p></div><div class="card alert"><p class="k">8月20日（木）</p><p class="v">5<small>日後</small></p><p class="n">シンクラウド サーバー自動更新が順次開始（ID wpxh295003）。継続の可否と支払い方法の確認を</p></div><div class="card"><p class="k">9月中旬</p><p class="v">約1<small>か月後</small></p><p class="n">KAISETSU解約 → ルーチェHPへチャットボット設置</p></div><div class="card alert"><p class="k">11月10日ごろ</p><p class="v">87<small>日後</small></p><p class="n">Higgsfield APIキー失効。<b>失効してもエラーが表に出ません</b>（11/4にカレンダー登録済）</p></div></div>
+<div class="note warn"><b>今朝4:18、yakunitateru.com のDailyバックアップが失敗しています</b>（Backup ID 553）。このドメインは<b>5日後に自動更新を迎えるシンクラウド（ID wpxh295003）と同じ契約</b>です。バックアップ失敗と更新期日が重なっているので、更新の可否を決める前に、サーバー側で何が起きているかをご確認ください。</div>
+</section>
+<footer><p>生成：2026-08-29　㈱ルーチェ 経営参謀室（Claude Code）<br>配色：デジタル庁 ダッシュボードガイドブック Blue系統（©2026 Digital Agency）</p><p>数値は data-integrity-analyst 準拠。実測のみで、推測による補完はしていません。<br>天気は tenki.jp 足立区、予定はGoogleカレンダー、ボールはNotion「未返信メールチェック」、案件は『週報_2026-08-14』『今月の目標_2026-08』と作業ログが出典です。</p></footer>
+</div>
+<script src="../assets/brief.js"></script>
+</body>
+</html>
