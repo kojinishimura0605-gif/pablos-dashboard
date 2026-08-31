@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PABLOS メンバー名鑑 & マッチング</title>
+<title>PABLOS メンバー名鑑 &amp; マッチング（デモ版）</title>
+<meta name="robots" content="noindex, nofollow">
 <style>
+  .demoBar{background:#7c2d12; color:#fff; font-size:0.88rem; padding:8px 14px; text-align:center; line-height:1.6}
+  .demoBar b{color:#fde68a}
+  .demoBar .roleSeg{display:inline-flex; gap:4px; margin-left:10px; vertical-align:middle}
+  .demoBar .roleSeg button{font-family:inherit; font-size:0.82rem; border:1px solid rgba(255,255,255,.5); background:transparent; color:#fff; border-radius:999px; padding:2px 10px; cursor:pointer}
+  .demoBar .roleSeg button.on{background:#fff; color:#7c2d12; font-weight:700}
   :root{
     --bg:#fafafa; --card:#fff; --ink:#1e2228; --sub:#5a626c; --line:#e2e6ec;
     --blue:#2563eb; --blue-bg:#eff6ff; --green:#16a34a; --green-bg:#f0fdf4;
@@ -134,10 +140,11 @@
 </style>
 </head>
 <body>
+<div class="demoBar">🧪 <b>デモ版（モック）</b>です。登場する会員・申請・数値はすべて架空で、実際のメール送信・保存は行いません（再読み込みで元に戻ります）。<span id="roleSwitch" class="roleSeg hidden"></span></div>
 <header class="hero">
   <div class="heroband">
     <div>
-      <h1>PABLOS メンバー名鑑 &amp; マッチング</h1>
+      <h1>PABLOS メンバー名鑑 &amp; マッチング <span style="font-size:0.85rem;color:var(--amber)">デモ版</span></h1>
       <div class="lead">メンター・リーダー・クルー資格者限定の相互発見とメンバーマッチングの場</div>
     </div>
     <div class="heroActions">
@@ -151,19 +158,148 @@
 <div id="loginView"></div>
 <div class="wrap" id="app"></div>
 
-<div class="foot">PABLOS メンバー名鑑 &amp; マッチング ｜ 資格者限定（会員データはログイン後にのみ表示されます）</div>
+<div class="foot">PABLOS メンバー名鑑 &amp; マッチング デモ版 ｜ 登場する会員・数値はすべて架空です</div>
 
 <div id="modalMount"></div>
 <div class="toasts" id="toasts"></div>
 
 <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-/* ============ 接続設定 ============ */
-const SB_URL = "https://uvcnckzdtczkzbtpiaus.supabase.co";
-const SB_KEY = "sb_publishable_WH-NN5mkGJatLzNvHoqFiA_2FOfPBOV";
-const APP_URL = "https://kojinishimura0605-gif.github.io/pablos-dashboard/matching/";
-const sb = createClient(SB_URL, SB_KEY);
+/* ============ デモ版：接続なし・メモリ内の架空データで動作 ============ */
+const APP_URL = "./";
+const DEMO_UID = "u-demo";
+const DEMO_ME = {email:"demo@example.com", name:"デモ 会員", rank:"crew", role:"member"};
+function iso(minAgo){ return new Date(Date.now()-minAgo*60000).toISOString(); }
+const DB = {
+  mk_settings: [{id:1, cfg:{priorityMin:80, reviewMin:60, monthlyLimit:3, rankCanApply:{mentor:true, leader:true, crew:true, staff:true, office:true}}}],
+  mk_profiles: [
+    {id:"u-m1", name:"名鑑デモ 一郎", rank:"mentor", talk_tags:["AI活用","経営・戦略","読書"], skill_tags:["マーケティング","AI活用","経営・戦略"], bio:"（架空の会員です）通販歴10年のデモ用メンターです。AI活用と経営・戦略のことなら力になれます。100日で最初のファン顧客をつくる設計が得意です。", ai_score:92, photo_path:null, created_at:iso(60*24*20)},
+    {id:"u-m2", name:"名鑑デモ 花子", rank:"mentor", talk_tags:["SNS","ライティング・編集","旅行"], skill_tags:["SNS","ライティング・編集","セミナー"], bio:"（架空の会員です）SNS発信とライティングのデモ用メンターです。毎日発信を100日続ける仕組みづくりをお手伝いします。", ai_score:90, photo_path:null, created_at:iso(60*24*18)},
+    {id:"u-l1", name:"名鑑デモ 次郎", rank:"leader", talk_tags:["起業・法人設立","税金・資産形成"], skill_tags:["店舗ビジネス","セールス・営業"], bio:"（架空の会員です）店舗ビジネス出身のデモ用リーダーです。対面営業とリピートづくりの経験を共有できます。", ai_score:78, photo_path:null, created_at:iso(60*24*10)},
+    {id:"u-c1", name:"名鑑デモ 三花", rank:"crew", talk_tags:["副業／複業・複数ワーカー","Web制作"], skill_tags:["デザイン","Web制作"], bio:"（架空の会員です）デザインが得意なデモ用クルーです。副業でLP制作をしています。まずは月10万円の売上が目標です。", ai_score:71, photo_path:null, created_at:iso(60*24*5)},
+    {id:"u-s1", name:"名鑑デモ 事務局", rank:"office", talk_tags:["企画","セミナー"], skill_tags:["秘書業務","企画"], bio:"（架空の会員です）PABLOS事務局のデモ用アカウントです。イベント運営とマッチングの見守りを担当しています。", ai_score:75, photo_path:null, created_at:iso(60*24*25)}
+  ],
+  mk_contacts: [
+    {id:"u-m1", email:"demo-ichiro@example.com", sns:{x:"demo_ichiro", youtube:"demo_ichiro_ch"}},
+    {id:"u-m2", email:"demo-hanako@example.com", sns:{instagram:"demo_hanako"}},
+    {id:"u-l1", email:"demo-jiro@example.com", sns:{facebook:"demo.jiro"}},
+    {id:"u-c1", email:"demo-mihana@example.com", sns:{}},
+    {id:"u-s1", email:"demo-office@example.com", sns:{}}
+  ],
+  mk_applications: [
+    {id:"app-1", from_id:"u-l1", to_id:"u-m1", body:"現在、店舗の常連さんづくりに取り組んでおり、AI活用について30分ご相談したいです。直近90日の数字は事前に共有します。", wish:"オンライン30分",
+     scores:{purpose:25, targetFit:20, concrete:14, manner:15, profile:11}, total:85, hard:[], lane:"priority", status:"peer_pending", reject_reason:"", match_plan:null, decided_at:null, created_at:iso(60*26)},
+    {id:"app-2", from_id:"u-m2", to_id:"u-m1", body:"SNS発信の題材として、AIを使った通販の事例について30分お話を伺いたいです。記事化の際は事前に確認いただきます。", wish:"オンライン30分",
+     scores:{purpose:25, targetFit:15, concrete:14, manner:15, profile:13}, total:82, hard:[], lane:"priority", status:"done_matched", reject_reason:"", match_plan:null, decided_at:iso(60*48), created_at:iso(60*72)},
+    {id:"app-3", from_id:"u-m1", to_id:DEMO_UID, body:"プロフィールを拝見しました。いま取り組まれているテーマについて、私の経験がお役に立てそうです。よろしければオンライン30分でお話ししませんか。", wish:"オンライン30分",
+     scores:{purpose:20, targetFit:15, concrete:14, manner:15, profile:14}, total:78, hard:[], lane:"normal", status:"peer_pending", reject_reason:"", match_plan:null, decided_at:null, created_at:iso(30)}
+  ],
+  mk_events: [
+    {id:"ev-1", kind:"auto", body:"資格者リストの定時同期が完了（デモ用の架空データ）", created_at:iso(60*9)},
+    {id:"ev-2", kind:"auto", body:"名鑑デモ 花子さん×名鑑デモ 一郎さんの相互マッチが成立し連絡先を開示", created_at:iso(60*48)},
+    {id:"ev-3", kind:"review", body:"名鑑デモ 次郎さんから名鑑デモ 一郎さんへ話したい申請（85点・お相手の返事待ち）", created_at:iso(60*26)}
+  ],
+  mk_knowledge: [
+    {id:"kn-1", rej:false, title:"名鑑デモ 花子さん×名鑑デモ 一郎さんの成立事例（架空）", body:"形式：オンライン30分。SNS題材の相談として成立。", created_at:iso(60*48)},
+    {id:"kn-2", rej:true, title:"差し戻し事例（架空）", body:"理由：連絡先の直書きがあったため自動差し戻し。", created_at:iso(60*96)}
+  ]
+};
+const DEMO_PHOTOS = {};
+function demoClient(){
+  const listeners = [];
+  let curSession = null;
+  function tbl(name){ return DB[name] || (DB[name] = []); }
+  function joinApps(rows){
+    return rows.map(a=>Object.assign({}, a, {
+      fromP: tbl("mk_profiles").find(p=>p.id===a.from_id) || (a.from_id===DEMO_UID?{id:DEMO_UID,name:"あなた（デモ）",rank:DEMO_ME.rank}:null),
+      toP: tbl("mk_profiles").find(p=>p.id===a.to_id) || (a.to_id===DEMO_UID?{id:DEMO_UID,name:"あなた（デモ）",rank:DEMO_ME.rank}:null)
+    }));
+  }
+  function qb(name){
+    const st = {filters:[], ord:null, lim:null, one:null, head:false, count:false, joins:false, op:null};
+    function run(){
+      const rows = tbl(name);
+      if(st.op){
+        if(st.op.type==="insert"){ const r = Object.assign({id:"demo-"+Math.random().toString(36).slice(2,9), created_at:new Date().toISOString()}, st.op.row); rows.push(r); return {data:r, error:null}; }
+        if(st.op.type==="update"){ rows.filter(r=>st.filters.every(f=>f(r))).forEach(r=>Object.assign(r, st.op.patch)); return {data:null, error:null}; }
+        if(st.op.type==="upsert"){ const row = st.op.row; const ex = rows.find(r=>r.id===row.id); if(ex){ Object.assign(ex, row); } else { rows.push(Object.assign({created_at:new Date().toISOString()}, row)); } return {data:null, error:null}; }
+      }
+      let out = rows.filter(r=>st.filters.every(f=>f(r))).slice();
+      if(name==="mk_applications" && DEMO_ME.role==="member"){ out = out.filter(r=>r.from_id===DEMO_UID || r.to_id===DEMO_UID); }
+      if(st.ord){ out.sort((a,b)=>{ const x=String(a[st.ord.k]||""), y=String(b[st.ord.k]||""); return (x<y?-1:(x>y?1:0))*(st.ord.asc?1:-1); }); }
+      if(st.lim){ out = out.slice(0, st.lim); }
+      if(st.count && st.head){ return {count: out.length, data:null, error:null}; }
+      if(st.joins && name==="mk_applications"){ out = joinApps(out); }
+      if(st.one){ const r = out[0]||null; if(st.one==="single" && !r){ return {data:null, error:{message:"データが見つかりません（デモ）"}}; } return {data:r, error:null}; }
+      return {data:out, error:null};
+    }
+    const api = {
+      select(cols, opts){ if(opts){ st.head = !!opts.head; st.count = opts.count==="exact"; } st.joins = typeof cols==="string" && cols.indexOf("fromP:")>=0; return api; },
+      insert(row){ st.op = {type:"insert", row}; return api; },
+      update(patch){ st.op = {type:"update", patch}; return api; },
+      upsert(row){ st.op = {type:"upsert", row}; return api; },
+      eq(k,v){ st.filters.push(r=>r[k]===v); return api; },
+      gte(k,v){ st.filters.push(r=>String(r[k])>=String(v)); return api; },
+      in(k,arr){ st.filters.push(r=>arr.indexOf(r[k])>=0); return api; },
+      order(k,o){ st.ord = {k, asc: !(o && o.ascending===false)}; return api; },
+      limit(n){ st.lim = n; return api; },
+      maybeSingle(){ st.one = "maybe"; return api; },
+      single(){ st.one = "single"; return api; },
+      then(res, rej){ return Promise.resolve().then(run).then(res, rej); }
+    };
+    return api;
+  }
+  return {
+    from(name){ return qb(name); },
+    auth: {
+      getSession(){ return Promise.resolve({data:{session:curSession}}); },
+      onAuthStateChange(cb){ listeners.push(cb); return {data:{subscription:{unsubscribe(){}}}}; },
+      signInWithOtp(){ return Promise.resolve({error:null}); },
+      verifyOtp(){ curSession = {user:{id:DEMO_UID}}; const s = curSession; setTimeout(()=>listeners.forEach(cb=>cb("SIGNED_IN", s)), 0); return Promise.resolve({error:null}); },
+      signOut(){ curSession = null; setTimeout(()=>listeners.forEach(cb=>cb("SIGNED_OUT", null)), 0); return Promise.resolve({error:null}); }
+    },
+    rpc(fn, args){
+      if(fn==="mk_check_qualified"){ return Promise.resolve({data:true, error:null}); }
+      if(fn==="mk_me"){ return Promise.resolve({data:[Object.assign({}, DEMO_ME)], error:null}); }
+      if(fn==="mk_respond_application"){
+        const a = tbl("mk_applications").find(x=>x.id===args.p_app_id);
+        if(!a) return Promise.resolve({data:"not_found", error:null});
+        if(a.to_id!==DEMO_UID) return Promise.resolve({data:"forbidden", error:null});
+        if(a.status!=="peer_pending") return Promise.resolve({data:"already_decided", error:null});
+        if(args.p_accept){ a.status="done_matched"; a.decided_at=new Date().toISOString();
+          tbl("mk_events").unshift({id:"ev-x"+Math.random(), kind:"auto", body:"相互マッチが成立し連絡先を開示（デモ）", created_at:a.decided_at});
+        } else { a.status="done_declined"; a.reject_reason=(args.p_comment&&args.p_comment.trim())||"お相手の都合により今回は見送りになりました。"; a.decided_at=new Date().toISOString(); }
+        return Promise.resolve({data:"ok", error:null});
+      }
+      return Promise.resolve({data:null, error:{message:"デモ未対応のRPC: "+fn}});
+    },
+    storage: {
+      from(){
+        return {
+          createSignedUrls(paths){ return Promise.resolve({data: paths.map(p=>({signedUrl: DEMO_PHOTOS[p]||null}))}); },
+          upload(path, blob){ DEMO_PHOTOS[path] = URL.createObjectURL(blob); return Promise.resolve({error:null}); },
+          remove(paths){ (paths||[]).forEach(p=>{ delete DEMO_PHOTOS[p]; }); return Promise.resolve({error:null}); }
+        };
+      }
+    }
+  };
+}
+const sb = demoClient();
+/* デモ用ロール切替（ログイン後に表示） */
+function renderRoleSwitch(){
+  const el = document.getElementById("roleSwitch");
+  if(!el) return;
+  if(!session){ el.classList.add("hidden"); el.innerHTML=""; return; }
+  const roles = [["member","会員として見る"],["staff","スタッフとして見る"],["director","事務局長として見る"]];
+  el.classList.remove("hidden");
+  el.innerHTML = "表示切替：" + roles.map(r=>'<button data-demorole="'+r[0]+'" class="'+(DEMO_ME.role===r[0]?"on":"")+'">'+r[1]+'</button>').join("");
+  el.querySelectorAll("[data-demorole]").forEach(b=>b.addEventListener("click", ()=>{
+    DEMO_ME.role = b.dataset.demorole;
+    DEMO_ME.rank = DEMO_ME.role==="director" ? "office" : (DEMO_ME.role==="staff" ? "staff" : "crew");
+    me = Object.assign({}, DEMO_ME);
+    if(currentTab==="m3"||currentTab==="m4"||currentTab==="cfg"){ currentTab = "m1"; }
+    render();
+  }));
+}
 
 /* ============ 定数 ============ */
 const RANKS = {
@@ -294,6 +430,7 @@ function totalScore(sc){ if(!sc) return 0; let t=0; for(const k in sc){ t+=sc[k]
 
 /* ============ ログイン画面 ============ */
 function renderLogin(msg){
+  renderRoleSwitch();
   byId("tabsNav").classList.add("hidden");
   byId("logoutBtn").classList.add("hidden");
   byId("app").innerHTML = "";
@@ -301,6 +438,7 @@ function renderLogin(msg){
   if(!pendingEmail){
     h += '<h2>メンバー名鑑を見るには、資格者ログインが必要です</h2>'+
       '<div class="desc">UMUと決済（Stripe）でご利用のメールアドレスを入力してください。PABLOSの資格者リスト（メンター・リーダー・クルー）と照合し、一致した方にだけログイン用の確認コードをメールでお送りします。</div>'+
+      '<div class="autobox" style="border-left-color:#7c2d12;background:#fff7ed;color:#7c2d12">🧪 <b>デモ版の進み方</b>：メールアドレスは架空のもの（例：demo@example.com）でOKです。実際のメールは送信されず、次の画面の確認コードも任意の数字（例：12345678）で進めます。</div>'+
       (msg?('<div class="warn">'+esc(msg)+'</div>'):'')+
       '<label>メールアドレス（UMU/決済に使用しているもの）</label>'+
       '<input type="email" id="loginEmail" placeholder="例：your-name@example.com">'+
@@ -308,11 +446,12 @@ function renderLogin(msg){
       '<div class="autobox">🤖 <b>自動運用ポイント</b>：資格者リストはサーバー側で照合します（この画面から会員名簿は見えません）。資格者一致のときだけ、入力アドレス宛に8桁の確認コードが届きます。</div>';
   } else {
     h += '<h2>メールに届いた確認コードを入力してください</h2>'+
-      '<div class="desc">'+esc(pendingEmail)+' 宛に確認コード（またはログインリンク）をお送りしました。メールが見当たらない場合は迷惑メールフォルダもご確認ください。</div>'+
+      '<div class="desc">'+esc(pendingEmail)+' 宛の確認コード入力画面です（デモのため、実際のメールは送信されていません）。</div>'+
+      '<div class="autobox" style="border-left-color:#7c2d12;background:#fff7ed;color:#7c2d12">🧪 <b>デモ版</b>：実際のメールは届きません。任意の数字8桁（例：12345678）を入力して「ログインする」を押してください。</div>'+
       '<label>確認コード（8桁）</label>'+
       '<input type="text" id="otpInput" inputmode="numeric" placeholder="12345678">'+
       '<div class="actions"><button class="btn" id="backBtn">戻る</button><button class="btn primary" id="otpBtn">ログインする</button></div>'+
-      '<div class="helper">メール内のリンクをタップしてログインすることもできます</div>';
+      '<div class="helper">デモ版のため、任意の数字8桁でそのままログインできます</div>';
   }
   h += '</div></div>';
   byId("loginView").innerHTML = h;
@@ -341,7 +480,7 @@ async function doLoginCheck(){
     if(otpErr) throw otpErr;
     pendingEmail = email;
     renderLogin();
-    toast("確認コードを送信しました。メールをご確認ください","ok");
+    toast("（デモ）コード入力画面へ進みます。実際のメールは送信されていません","ok");
   }catch(e){
     toast(errMsg(e),"err");
   }finally{
@@ -424,6 +563,7 @@ function tabsForRole(){
   return t;
 }
 function renderChrome(){
+  renderRoleSwitch();
   byId("loginView").innerHTML = "";
   byId("tabsNav").classList.remove("hidden");
   byId("logoutBtn").classList.remove("hidden");
@@ -709,7 +849,7 @@ async function viewM4(){
   const rk = {mentor:0,leader:0,crew:0,staff:0,office:0};
   profiles.forEach(p=>{ rk[p.rank] = (rk[p.rank]||0)+1; });
   let h = '<div class="card"><h2>M4 運用ダッシュボード</h2>'+
-    '<div class="desc">名鑑とマッチングの動きをひと目で。数値はすべてデータベースの実測です。</div>'+
+    '<div class="desc">名鑑とマッチングの動きをひと目で。（デモ版のため、数値はすべて架空です）</div>'+
     '<div class="autobox">🤖 <b>自動運用ポイント</b>：申請の採点・振分・記録までは自動、マッチの成立判断だけは人（スタッフ）が担います。</div></div>';
   h += '<div class="grid g6" style="margin-top:14px">';
   h += kpi(profiles.length,"名鑑掲載プロフィール");
