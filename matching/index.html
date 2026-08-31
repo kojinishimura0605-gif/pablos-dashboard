@@ -138,7 +138,7 @@
   <div class="heroband">
     <div>
       <h1>PABLOS メンバー名鑑 &amp; マッチング</h1>
-      <div class="lead">メンター・リーダー・クルー資格者限定の相互発見とスタッフマッチングの場</div>
+      <div class="lead">メンター・リーダー・クルー資格者限定の相互発見とメンバーマッチングの場</div>
     </div>
     <div class="heroActions">
       <button class="btn ghost hidden" id="logoutBtn">ログアウト</button>
@@ -416,7 +416,7 @@ function tabsForRole(){
     {id:"mp", label:"マイプロフィール"}
   ];
   if(me.role==="staff" || me.role==="director"){
-    t.push({id:"m3", label:"M3 マッチング承認"});
+    t.push({id:"m3", label:"M3 申請見守り"});
     t.push({id:"m4", label:"M4 運用ダッシュボード"});
   }
   t.push({id:"kb", label:"📚 ナレッジ"});
@@ -515,12 +515,12 @@ async function openApplyModal(targetId){
   const target = profById(targetId);
   if(!target) return;
   let h = '<h3>'+esc(target.name)+' さんに話したい申請</h3>'+
-    '<p>申請内容は事務局スタッフが確認します。マッチの成立はスタッフが判断し、成立後に連絡先が開示されます。</p>'+
+    '<p>申請はお相手に直接届きます。お相手が「私も話したい」と承諾するとマッチ成立となり、お互いの連絡先が開示されます。</p>'+
     '<label>相談したい内容（テーマは1つに絞ると成立しやすくなります）</label>'+
     '<textarea id="applyBody">'+esc("現在◯◯に取り組んでおり、"+((target.skill_tags||[])[0]||"")+"について30分ご相談したいです。数字や資料は事前に共有します。")+'</textarea>'+
     '<label>希望する形式</label>'+
     '<select id="applyWish"><option>オンライン30分</option><option>オンライン60分</option><option>チャット</option></select>'+
-    '<div class="autobox">🤖 <b>自動運用ポイント</b>：送信すると100点ルーブリックで事前チェックし、'+cfg.priorityMin+'点以上は優先レーン、'+cfg.reviewMin+'〜'+(cfg.priorityMin-1)+'点は通常レビューへ。連絡先の直書きや勧誘表現はその場で差し戻します。</div>'+
+    '<div class="autobox">🤖 <b>自動運用ポイント</b>：送信すると100点ルーブリックで事前チェックし、'+cfg.reviewMin+'点以上の申請はそのままお相手に届きます。連絡先の直書きや勧誘表現はその場で差し戻します（スタッフも全申請を見守っています）。</div>'+
     '<div class="actions"><button class="btn" onclick="closeModal()">やめる</button><button class="btn primary" id="applySubmitBtn">申請する</button></div>';
   openModal(h);
   byId("applySubmitBtn").addEventListener("click", ()=>submitApplication(target));
@@ -534,9 +534,9 @@ async function submitApplication(target){
   const scores = hard.length>0 ? null : scoreApplication(myProfile, target, body);
   const total = totalScore(scores);
   let lane, status, reject_reason = "", decided_at = null;
-  if(hard.length>0){ lane="reject"; status="done_reject"; reject_reason="ハード違反により点数無効・自動差し戻し。連絡先交換はマッチ成立後に事務局経由で行われます。"; decided_at = new Date().toISOString(); }
-  else if(total>=cfg.priorityMin){ lane="priority"; status="primary_pending"; }
-  else if(total>=cfg.reviewMin){ lane="normal"; status="primary_pending"; }
+  if(hard.length>0){ lane="reject"; status="done_reject"; reject_reason="ハード違反により点数無効・自動差し戻し。連絡先交換はマッチ成立後に開示される連絡先で行ってください。"; decided_at = new Date().toISOString(); }
+  else if(total>=cfg.priorityMin){ lane="priority"; status="peer_pending"; }
+  else if(total>=cfg.reviewMin){ lane="normal"; status="peer_pending"; }
   else { lane="reject"; status="done_reject"; reject_reason="自動差し戻し：合計"+total+"点。目的とテーマを絞って再申請してください。"; decided_at = new Date().toISOString(); }
   try{
     const {error} = await sb.from("mk_applications").insert({
@@ -545,10 +545,10 @@ async function submitApplication(target){
     });
     if(error) throw error;
     await sb.from("mk_events").insert({kind: status==="done_reject"?"reject":"review",
-      body: me.name+"さんから"+target.name+"さんへ話したい申請"+(status==="done_reject"?"（自動差し戻し）":"（"+total+"点・"+(lane==="priority"?"優先レーン":"通常レビュー")+"）")});
+      body: me.name+"さんから"+target.name+"さんへ話したい申請"+(status==="done_reject"?"（自動差し戻し）":"（"+total+"点・お相手の返事待ち）")});
     closeModal(); currentTab="m2"; render();
     if(status==="done_reject"){ toast("申請は差し戻しになりました。M2タブで理由を確認できます","err"); }
-    else { toast("申請を受け付けました（事前チェック"+total+"点・"+(lane==="priority"?"優先レーン":"通常レビュー")+"）","ok"); }
+    else { toast("申請を送りました（事前チェック"+total+"点）。お相手の返事をお待ちください","ok"); }
   }catch(e){ toast(errMsg(e),"err"); const b=byId("applySubmitBtn"); if(b) b.disabled=false; }
 }
 
@@ -561,8 +561,8 @@ async function viewM2(){
   const apps = data||[];
   const isStaff = me.role!=="member";
   let h = '<div class="card"><h2>M2 話したい申請'+(isStaff?"（全会員）":"")+'</h2>'+
-    '<div class="desc">'+(isStaff?"スタッフ権限のため全会員の申請が表示されています。":"あなたが出した申請・受けた申請の状況です。マッチ成立後にここで相手の連絡先が開示されます。")+'</div>'+
-    '<div class="autobox">🤖 <b>自動運用ポイント</b>：申請は自動採点後、承認キューへ。マッチの成立判断は自動化せず、必ず運営スタッフ→事務局長の2段階で人が決めます。</div></div>';
+    '<div class="desc">'+(isStaff?"スタッフ権限のため全会員の申請が表示されています。":"あなたが出した申請・受けた申請の状況です。受けた申請には「私も話したい」か「今回は見送る」で返事できます。マッチ成立後にここで相手の連絡先が開示されます。")+'</div>'+
+    '<div class="autobox">🤖 <b>自動運用ポイント</b>：申請は自動採点とハード検査を通過するとお相手に直接届きます。マッチの成立はお相手の承諾で決まり、不適切な申請はAIがその場で差し戻します（スタッフも全申請を見守り、必要なら差し戻せます）。</div></div>';
   if(apps.length===0){ h += '<div class="card"><div class="desc">まだ申請はありません。名鑑（M1）から気になるメンバーに話したい申請を出してみましょう。</div></div>'; return h; }
   for(const a of apps){ h += await appItem(a, false); }
   return h;
@@ -570,6 +570,8 @@ async function viewM2(){
 function laneLabel(a){
   if(a.status==="done_matched") return '<span class="pill p-auto">マッチ成立</span>';
   if(a.status==="done_reject") return '<span class="pill p-reject">差し戻し</span>';
+  if(a.status==="done_declined") return '<span class="pill p-review">見送り</span>';
+  if(a.status==="peer_pending") return '<span class="pill p-new">お相手の返事待ち</span>';
   if(a.status==="final_pending") return '<span class="pill p-stage">最終承認待ち</span>';
   const lane = a.lane==="priority" ? '<span class="pill p-auto">優先レーン</span>' : '<span class="pill p-review">通常レビュー</span>';
   return lane+' <span class="pill p-new">一次確認待ち</span>';
@@ -604,27 +606,53 @@ async function appItem(a, withActions){
       }
     }
   }
-  if(a.status==="done_reject" && a.reject_reason){ h += '<div class="warn">'+esc(a.reject_reason)+'</div>'; }
+  if((a.status==="done_reject"||a.status==="done_declined") && a.reject_reason){ h += '<div class="warn">'+esc(a.reject_reason)+'</div>'; }
+  if(!withActions && a.status==="peer_pending" && a.to_id===session.user.id){
+    h += '<div class="actions"><button class="btn ok sm" data-accept="'+a.id+'">私も話したい（承諾してマッチ成立）</button>'+
+      '<button class="btn sm" data-decline="'+a.id+'">今回は見送る</button></div>';
+  }
   if(withActions){ h += queueActions(a); }
   h += '</div>';
   return h;
+}
+/* ============ 申請への返事（相互マッチ） ============ */
+function bindM2(){
+  document.querySelectorAll("[data-accept]").forEach(b=>b.addEventListener("click", ()=>openRespondModal(b.dataset.accept, true)));
+  document.querySelectorAll("[data-decline]").forEach(b=>b.addEventListener("click", ()=>openRespondModal(b.dataset.decline, false)));
+}
+function openRespondModal(id, accept){
+  if(accept){
+    openModal('<h3>承諾してマッチ成立にしますか？</h3>'+
+      '<p>承諾すると、あなたとお相手の連絡先（メールアドレス・登録済みSNS）がお互いに開示されます。</p>'+
+      '<div class="actions"><button class="btn" onclick="closeModal()">やめる</button><button class="btn ok" id="respondGo">承諾してマッチ成立</button></div>');
+  } else {
+    openModal('<h3>今回は見送りますか？</h3>'+
+      '<p>見送りの理由はお相手に表示されます（未記入の場合は定型文が入ります）。連絡先は開示されません。</p>'+
+      '<label>ひとことメッセージ（任意）</label>'+
+      '<textarea id="respondBody" placeholder="例：いまは繁忙期のため、落ち着いたらこちらからお声がけします。"></textarea>'+
+      '<div class="actions"><button class="btn" onclick="closeModal()">やめる</button><button class="btn danger" id="respondGo">見送る</button></div>');
+  }
+  byId("respondGo").addEventListener("click", async ()=>{
+    try{
+      const comment = accept ? null : ((byId("respondBody")&&byId("respondBody").value)||"");
+      const {data, error} = await sb.rpc("mk_respond_application", {p_app_id: id, p_accept: accept, p_comment: comment});
+      if(error) throw error;
+      if(data!=="ok"){
+        const msgs = {not_found:"申請が見つかりませんでした", forbidden:"この申請に返事をする権限がありません", already_decided:"この申請はすでに決着しています"};
+        toast(msgs[data]||"処理できませんでした","warn"); closeModal(); render(); return;
+      }
+      closeModal(); render();
+      toast(accept ? "マッチが成立しました。お互いの連絡先が開示されます" : "見送りました。理由はお相手に表示されます", accept?"ok":"warn");
+    }catch(e){ toast(errMsg(e),"err"); }
+  });
 }
 
 /* ============ M3 承認キュー ============ */
 function queueActions(a){
   let h = "";
-  if(a.status==="primary_pending"){
+  if(a.status==="peer_pending" || a.status==="primary_pending" || a.status==="final_pending"){
     if(me.role==="staff" || me.role==="director"){
-      h += '<div class="actions"><button class="btn primary sm" data-primary="'+a.id+'">一次確認してマッチ案を作成</button>'+
-        '<button class="btn danger sm" data-reject="'+a.id+'">差し戻し</button></div>';
-    }
-  }
-  if(a.status==="final_pending"){
-    if(me.role==="director"){
-      h += '<div class="actions"><button class="btn ok sm" data-final="'+a.id+'">最終承認（マッチ成立）</button>'+
-        '<button class="btn danger sm" data-reject="'+a.id+'">差し戻し</button></div>';
-    } else {
-      h += '<div class="locknote">一次確認は完了しています。最終承認は事務局長のみ行えます（引き継ぎ型ゲート）。</div>';
+      h += '<div class="actions"><button class="btn danger sm" data-reject="'+a.id+'">差し戻し（不適切な申請の停止）</button></div>';
     }
   }
   return h;
@@ -632,55 +660,21 @@ function queueActions(a){
 async function viewM3(){
   const {data, error} = await sb.from("mk_applications")
     .select("*, fromP:mk_profiles!mk_applications_from_id_fkey(id,name,rank), toP:mk_profiles!mk_applications_to_id_fkey(id,name,rank)")
-    .in("status",["primary_pending","final_pending"])
+    .in("status",["peer_pending","primary_pending","final_pending"])
     .order("created_at",{ascending:true});
   if(error) return '<div class="card"><div class="desc">読み込みエラー：'+esc(errMsg(error))+'</div></div>';
   const apps = data||[];
-  const prim = apps.filter(a=>a.status==="primary_pending").sort((x,y)=>(x.lane==="priority"?0:1)-(y.lane==="priority"?0:1));
-  const fin = apps.filter(a=>a.status==="final_pending");
-  let h = '<div class="card"><h2>M3 マッチング承認キュー（スタッフ専用）</h2>'+
-    '<div class="desc">マッチの成立はスタッフが決めます。運営スタッフが一次確認とマッチ案の作成、事務局長が最終承認という引き継ぎ型ゲートです。</div>'+
-    '<div class="autobox">🤖 <b>自動運用ポイント</b>：優先レーン（'+cfg.priorityMin+'点以上）を上に自動並べ替え。承認と差し戻しは必ずセットで用意されています。</div></div>';
-  h += '<div class="card"><h2>一次確認待ち <span class="pill p-new">'+prim.length+'件</span></h2>';
-  if(prim.length===0){ h += '<div class="desc">一次確認待ちはありません。</div>'; }
-  for(const a of prim){ h += await appItem(a, true); }
-  h += '</div>';
-  h += '<div class="card"><h2>最終承認待ち（事務局長） <span class="pill p-stage">'+fin.length+'件</span></h2>';
-  if(fin.length===0){ h += '<div class="desc">最終承認待ちはありません。</div>'; }
-  for(const a of fin){ h += await appItem(a, true); }
+  let h = '<div class="card"><h2>M3 申請見守りキュー（スタッフ専用）</h2>'+
+    '<div class="desc">マッチの成立はお相手の承諾で決まります（相互マッチ型）。スタッフはお相手の返事待ちの申請を見守り、勧誘・営業などの不適切な申請だけを差し戻します。</div>'+
+    '<div class="autobox">🤖 <b>自動運用ポイント</b>：連絡先の直書きや勧誘表現はAIが送信時に自動差し戻し済み。ここに並ぶのは検査通過済みの申請です。長期間返事がない申請のフォローにもお使いください。</div></div>';
+  h += '<div class="card"><h2>お相手の返事待ち <span class="pill p-new">'+apps.length+'件</span></h2>';
+  if(apps.length===0){ h += '<div class="desc">返事待ちの申請はありません。</div>'; }
+  for(const a of apps){ h += await appItem(a, true); }
   h += '</div>';
   return h;
 }
 function bindM3(){
-  document.querySelectorAll("[data-primary]").forEach(b=>b.addEventListener("click", ()=>openPrimaryModal(b.dataset.primary)));
-  document.querySelectorAll("[data-final]").forEach(b=>b.addEventListener("click", ()=>approveFinal(b.dataset.final)));
   document.querySelectorAll("[data-reject]").forEach(b=>b.addEventListener("click", ()=>openRejectModal(b.dataset.reject)));
-}
-function openPrimaryModal(id){
-  openModal('<h3>一次確認：マッチ案の作成</h3>'+
-    '<p>相性・タイミング・形式を確認し、マッチ案を書いて事務局長へ引き継ぎます。</p>'+
-    '<label>マッチ案（最終承認者への申し送り）</label>'+
-    '<textarea id="planBody">相手の得意領域と合致。希望形式で調整予定。</textarea>'+
-    '<div class="actions"><button class="btn" onclick="closeModal()">やめる</button><button class="btn primary" id="primaryGo">一次確認を完了して引き継ぐ</button></div>');
-  byId("primaryGo").addEventListener("click", async ()=>{
-    try{
-      const {error} = await sb.from("mk_applications").update({status:"final_pending", match_plan: byId("planBody").value||""}).eq("id", id);
-      if(error) throw error;
-      await sb.from("mk_events").insert({kind:"review", body: me.name+"（スタッフ）が一次確認しマッチ案を作成 → 事務局長の最終承認待ち"});
-      closeModal(); render(); toast("一次確認を完了しました。最終承認へ引き継ぎます","ok");
-    }catch(e){ toast(errMsg(e),"err"); }
-  });
-}
-async function approveFinal(id){
-  try{
-    const {data: a, error: ge} = await sb.from("mk_applications").select("*, fromP:mk_profiles!mk_applications_from_id_fkey(name), toP:mk_profiles!mk_applications_to_id_fkey(name)").eq("id", id).single();
-    if(ge) throw ge;
-    const {error} = await sb.from("mk_applications").update({status:"done_matched", decided_at: new Date().toISOString()}).eq("id", id);
-    if(error) throw error;
-    await sb.from("mk_events").insert({kind:"auto", body: (a.fromP?a.fromP.name:"?")+"さん×"+(a.toP?a.toP.name:"?")+"さんのマッチが成立し連絡先を開示"});
-    await sb.from("mk_knowledge").insert({rej:false, title:(a.fromP?a.fromP.name:"?")+"さん×"+(a.toP?a.toP.name:"?")+"さんの成立事例", body:"形式："+a.wish+"。マッチ案："+(a.match_plan||"記載なし")});
-    render(); toast("マッチが成立しました。両者に連絡先が開示されます","ok");
-  }catch(e){ toast(errMsg(e),"err"); }
 }
 function openRejectModal(id){
   openModal('<h3>差し戻し</h3><p>差し戻し理由は申請者に表示され、ナレッジとしても記録されます。</p>'+
@@ -708,7 +702,7 @@ async function viewM4(){
   const apps = appsRes.data||[];
   const total = apps.length;
   const matched = apps.filter(a=>a.status==="done_matched").length;
-  const waiting = apps.filter(a=>a.status==="primary_pending"||a.status==="final_pending").length;
+  const waiting = apps.filter(a=>a.status==="peer_pending"||a.status==="primary_pending"||a.status==="final_pending").length;
   const rejected = apps.filter(a=>a.status==="done_reject").length;
   const rate = total>0 ? Math.round(matched/total*100) : 0;
   const rk = {mentor:0,leader:0,crew:0,staff:0,office:0};
@@ -721,7 +715,7 @@ async function viewM4(){
   h += kpi(rk.mentor+"/"+rk.leader+"/"+rk.crew+"/"+rk.staff+"/"+rk.office,"内訳（M/L/C/スタッフ/事務局）");
   h += kpi(total,"申請 累計");
   h += kpi(matched,"マッチ成立");
-  h += kpi(waiting,"承認キュー滞留");
+  h += kpi(waiting,"お相手の返事待ち");
   h += kpi(rate+"%","成立率");
   h += '</div>';
   h += '<div class="card"><h2>運用タイムライン</h2><div class="tl">';
@@ -971,6 +965,7 @@ async function renderBody(){
   else if(currentTab==="cfg") h = viewCfg();
   app.innerHTML = h;
   if(currentTab==="m1") bindM1();
+  if(currentTab==="m2") bindM2();
   if(currentTab==="mp") bindMp();
   if(currentTab==="m3") bindM3();
   if(currentTab==="cfg") bindCfg();
