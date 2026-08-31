@@ -178,6 +178,7 @@
     <button data-t="log">アクティビティ</button>
     <button data-t="bookclub">読書会</button>
     <button data-t="campus">Campus</button>
+    <button data-t="stripesvc">決済サービス別</button>
     <button data-t="integrity">整合性チェック</button>
   </nav>
 </header>
@@ -818,6 +819,112 @@
   </div>
   <div class="callout">
     <b>内部検算：</b>メンター172＋リーダー92＋クルー88＝<b>352名</b>で、メンバーシップ購入者の合計と一致します（Campus内部は整合）。一方サポーター100は「UMU利用なし」のため利用人数2,517には含まれていない見立てです。
+  </div>
+</section>
+
+<!-- ================= STRIPE SERVICE (2026-08) ================= -->
+<section class="tab" id="stripesvc">
+  <p class="lead"><b>Stripe決済のサービス別集計（2026年8月1日〜8月31日・JST）</b>です。Stripe API（読み取り専用キー）から全決済を実測取得し、説明欄の名寄せでサービス別に区分しました（推測・補完なし／返金1件は成功から除外）。金額と件数は必ずセットで見ます。<b>本タブは8月の確定値（月次確定・更新不要）</b>で、<a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=integrity]').click();return false;">整合性チェックタブ</a>の「⑥ Stripe決済」（直近30日・毎朝自動更新）とは集計期間が異なります。</p>
+  <div class="srcbar">データ出典：<a class="src" href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener">💳 Stripe取引一覧</a><span class="src">8月確定値・集計日 2026/08/31</span></div>
+
+  <div class="sec"><span class="badge">A</span><h2>8月のサマリー：成功決済 265件・¥6,251,900</h2><span class="note">成功（返金除く）のみ。未完了・失敗は下記C</span></div>
+  <div class="grid g4">
+    <div class="card kpi accent-top"><div class="label">講座・イベント系</div><div class="num" style="color:var(--navy)">64<span class="unit">件</span></div><div class="foot">¥3,773,600（売上の60.4%）</div></div>
+    <div class="card kpi accent-top"><div class="label">月会員資格系</div><div class="num" style="color:var(--navy)">136<span class="unit">件</span></div><div class="foot">¥1,405,800（件数の51.3%）</div></div>
+    <div class="card kpi accent-top"><div class="label">パブロス図書館・第6期リスキリング系</div><div class="num" style="color:var(--navy)">57<span class="unit">件</span></div><div class="foot">¥970,200</div></div>
+    <div class="card kpi accent-top"><div class="label">Invoice払い（サブスク自動課金）</div><div class="num" style="color:var(--navy)">8<span class="unit">件</span></div><div class="foot">¥102,300＝突破Aiクルー月会費¥3,300×7＋メンター会費4か月分¥79,200</div></div>
+  </div>
+  <div class="callout">
+    <b>内部検算：</b>64＋136＋57＋8＝<b>265件</b>、¥3,773,600＋¥1,405,800＋¥970,200＋¥102,300＝<b>¥6,251,900</b>で合計と一致します。
+  </div>
+
+  <div class="sec"><span class="badge">B1</span><h2>講座・イベント系（64件・¥3,773,600）</h2></div>
+  <div class="tbl-wrap">
+    <table class="mono">
+      <thead><tr><th class="l">サービス</th><th>件数</th><th>金額</th></tr></thead>
+      <tbody>
+        <tr><td class="l">Ken式・X起点世界接続モデル 実装プログラム_本申込</td><td>21</td><td>¥1,155,000</td></tr>
+        <tr><td class="l">20260905 フューチャーマッピング・アドバンスト講座</td><td>13</td><td>¥484,000</td></tr>
+        <tr><td class="l">10X季節の会_2026秋</td><td>13</td><td>¥171,600</td></tr>
+        <tr><td class="l">2026秋 フューチャーマッピング・アドバンスト＋マスター講座</td><td>9</td><td>¥1,738,000</td></tr>
+        <tr><td class="l">QuesTubeサミット（メンター限定・サミット＋懇親会）</td><td>6</td><td>¥60,000</td></tr>
+        <tr><td class="l">20261003-04 フューチャーマッピング・マスター講座</td><td>2</td><td>¥165,000</td></tr>
+        <tr style="background:var(--soft);font-weight:800"><td class="l">小計</td><td>64</td><td>¥3,773,600</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec"><span class="badge">B2</span><h2>月会員資格系（136件・¥1,405,800）</h2><span class="note">新規・更新・早期継続などを資格別に合算</span></div>
+  <div class="tbl-wrap">
+    <table class="mono">
+      <thead><tr><th class="l">資格</th><th>件数</th><th>金額</th><th class="l">内訳（件数）</th></tr></thead>
+      <tbody>
+        <tr><td class="l"><span class="dot b-mentor"></span> メンター</td><td>40</td><td>¥772,200</td><td class="l">早期継続16／初月無料更新10／新規入学初月無料10／新規入学2／更新2</td></tr>
+        <tr><td class="l"><span class="dot b-leader"></span> リーダー</td><td>34</td><td>¥372,900</td><td class="l">早期継続13／新規入学初月無料10／初月無料更新6／更新3／新規入学2</td></tr>
+        <tr><td class="l"><span class="dot b-crew"></span> クルー</td><td>62</td><td>¥260,700</td><td class="l">新規GPTs付20／早期継続17／初月無料更新13／更新10／新規入学初月無料1／新規入学1</td></tr>
+        <tr style="background:var(--soft);font-weight:800"><td class="l">小計</td><td>136</td><td>¥1,405,800</td><td class="l"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec"><span class="badge">B3</span><h2>パブロス図書館・第6期リスキリング系（57件・¥970,200）</h2></div>
+  <div class="tbl-wrap">
+    <table class="mono">
+      <thead><tr><th class="l">サービス</th><th>件数</th><th>金額</th></tr></thead>
+      <tbody>
+        <tr><td class="l">【5新規】リスキリング事業メンバー（メンターのみ）</td><td>13</td><td>¥257,400</td></tr>
+        <tr><td class="l">継続 第6期デジタル図書館パブロスメンター</td><td>13</td><td>¥257,400</td></tr>
+        <tr><td class="l">新規 第6期デジタル図書館パブロスメンター</td><td>12</td><td>¥237,600</td></tr>
+        <tr><td class="l">継続 第6期デジタル図書館パブロスリーダー</td><td>10</td><td>¥99,000</td></tr>
+        <tr><td class="l">【5新規】全資格</td><td>3</td><td>¥26,400</td></tr>
+        <tr><td class="l">【第6期】全資格</td><td>3</td><td>¥33,000</td></tr>
+        <tr><td class="l">【第6期】SP1115</td><td>2</td><td>¥39,600</td></tr>
+        <tr><td class="l">【第6期】メンターのみ</td><td>1</td><td>¥19,800</td></tr>
+        <tr style="background:var(--soft);font-weight:800"><td class="l">小計</td><td>57</td><td>¥970,200</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec"><span class="badge">C</span><h2>その他：未完了・カード決済失敗（8月・ご参考）</h2><span class="note">同一顧客の再試行を含むため両者は重複あり</span></div>
+  <div class="grid g2">
+    <div class="tbl-wrap">
+      <table class="mono">
+        <thead><tr><th class="l">未完了（30件）</th><th>件数</th></tr></thead>
+        <tbody>
+          <tr><td class="l">20260905 フューチャーマッピング・アドバンスト講座</td><td>6</td></tr>
+          <tr><td class="l">継続 第6期デジタル図書館パブロスメンター</td><td>6</td></tr>
+          <tr><td class="l">月会員 資格（メンター）早期継続特典</td><td>4</td></tr>
+          <tr><td class="l">新規入学月会員 資格（リーダー）</td><td>4</td></tr>
+          <tr><td class="l">新規 第6期デジタル図書館パブロスメンター</td><td>3</td></tr>
+          <tr><td class="l">【5新規】リスキリング事業メンバー（メンターのみ）</td><td>1</td></tr>
+          <tr><td class="l">メンター会費202608</td><td>1</td></tr>
+          <tr><td class="l">QuesTubeサミット（メンター限定・サミット＋懇親会）</td><td>1</td></tr>
+          <tr><td class="l">2026秋 フューチャーマッピング・アドバンスト＋マスター講座</td><td>1</td></tr>
+          <tr><td class="l">20260801.02 フォトリーディング・マスター講座（再受講）</td><td>1</td></tr>
+          <tr><td class="l">20260801.02 フォトリーディング・マスター講座</td><td>1</td></tr>
+          <tr><td class="l">Ken式・X起点世界接続モデル 実装プログラム_本申込</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-wrap">
+      <table class="mono">
+        <thead><tr><th class="l">カード決済失敗（31件）</th><th>件数</th></tr></thead>
+        <tbody>
+          <tr><td class="l">2026秋 フューチャーマッピング・アドバンスト＋マスター講座</td><td>7</td></tr>
+          <tr><td class="l">継続 第6期デジタル図書館パブロスメンター</td><td>6</td></tr>
+          <tr><td class="l">月会員 資格（メンター）早期継続特典</td><td>4</td></tr>
+          <tr><td class="l">Ken式・X起点世界接続モデル 実装プログラム_本申込</td><td>4</td></tr>
+          <tr><td class="l">新規入学月会員 資格（リーダー）</td><td>4</td></tr>
+          <tr><td class="l">新規 第6期デジタル図書館パブロスメンター</td><td>3</td></tr>
+          <tr><td class="l">【5新規】リスキリング事業メンバー（メンターのみ）</td><td>1</td></tr>
+          <tr><td class="l">メンター会費202608</td><td>1</td></tr>
+          <tr><td class="l">20260801.02 フォトリーディング・マスター講座</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="callout warn">
+    <b>取りこぼしの注視ポイント：</b>「継続 第6期メンター」は成功13件に対し未完了6件・失敗6件と目立ちます。回収の実務（カード更新の個別連絡→再決済）は<a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=integrity]').click();return false;">整合性チェックタブ</a>の「E 未決済者一覧」と同じ動線です。返金は8月1件（新規入学月会員 リーダー）で、上記の成功集計から除外済みです。
   </div>
 </section>
 
