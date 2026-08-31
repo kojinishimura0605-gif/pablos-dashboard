@@ -435,59 +435,67 @@
     </div>
   </div>
 
-  <div class="sec"><span class="badge" style="background:#e08a1e">月</span><h2>今月やること</h2><span class="note">2026年8月｜月末に翌月分へ更新</span></div>
+  <div class="sec"><span class="badge" style="background:#e08a1e">月</span><h2>今月やること</h2><span class="note">2026年9月｜月末に翌月分へ更新</span></div>
   <div class="act-board">
-    <div class="act-card mid">
-      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">方針KPI</span><span class="act-when">今月</span></div>
+    <div class="act-card top">
+      <div class="act-meta"><span class="act-prio p-top">最優先</span><span class="act-cat">方針KPI</span><span class="act-when">今月</span></div>
       <div class="act-body">
-        <h4>3か月方針のKPI計測を司令塔に実装（ベースライン確定）</h4>
-        <p>方針の3指標——<b>未ログイン183名→50名以下／オンボーディング完了80%／サブスク未移行185名→148名移行</b>——を、このダッシュボードで毎朝追える形にします。「数値で効果を確認できない業務は見直す」の共通ルールに沿って、8月中にベースラインを確定し、9月から週次で進捗を出します。</p>
-        <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：整合性チェックタブ・Campusタブ</div>
+        <h4>8月は「集める」が最高値でした。9月は3指標を"毎朝見える数字"にします【方針1・2・3】</h4>
+        <p><b>8月の実績（1行）：</b>突破Aiクルーの新規流入<b>137名</b>（8/1〜31・Stripe実測）、Stripe成功決済<b>265件・¥6,251,900</b>（7月230件・¥5,103,000から<b>+35件・+¥1,148,900</b>）——いずれも2026年1月以降で最も大きな月になりました。<br>
+        <b>月末の点検結果：</b>方針3指標の累計進捗は<b>0/133名・0/127名・0/148名＝いずれも0%</b>（担当報告ベース・報告待ち）。8月に掲げた「ベースライン確定」は<b>未達</b>です。とりわけ<b>【1】2か月以上の未ログイン者数は、司令塔のどのタブにも実測値として載っていません</b>（方針の183名は2026年8月時点の算定値であって、ダッシュボード実測ではありません）。数えられない指標は、10月末に達成・未達の判定ができません。<br>
+        <b>9月にやること：</b>①未ログイン者数をCampus／UMUから抽出し、<b>月1回の手動反映でも構わないので数値欄を司令塔に新設</b>します。②再接点・オンボード完了・サブスク移行の3つを、<b>担当報告から週次でカウントできる入力欄</b>にします。この2つを9月中に終えます。あわせて8月に確定できなかった<b>③Campus購入者352名 と ②DBマスター<span class="mbase">250</span>名 の突合（差<span id="camp-diff">102</span>名が「失効」か「未反映」か）</b>も9月へ持ち越します。<br>
+        <b>ご注意ください。</b>進捗0%のまま9月に入ったため、残り2か月で方針を満たすには<b>【1】月67名・【3】月74名</b>のペースが必要です（上の落とし込み表は方針どおり3か月均等の逆算値のまま据え置いています）。</p>
+        <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：Campusタブ・整合性チェックタブ</div>
+      </div>
+    </div>
+
+    <div class="act-card top">
+      <div class="act-meta"><span class="act-prio p-top">最優先</span><span class="act-cat">会員数の正</span><span class="act-when">今月</span></div>
+      <div class="act-body">
+        <h4>当残<span class="mbase">250</span>名はまだ7月末値です。9/1朝に8月末値へ切り替わります</h4>
+        <p><b>8月の実績（1行）：</b>MyASP断面の会員アクションログは<b>入会167名（うちクルー160名）・退会9名・変更3名</b>で、月次では大きな純増でした。<br>
+        <b>月末の点検結果：</b>会員数の"正"＝②月次増減表の当残は、8/31朝9時の日次更新の時点で<b><span class="mbym">2026年7月</span>末・<span class="mbase">250</span>名</b>のままです。②増減表は「月末を過ぎた直近の月」までを確定値とする設計のため、<b>8月末値への切り替わりは翌朝（9/1 9:00）の日次更新待ち</b>です。7月末は前月（6月末264名）から<b>▲14名</b>で、合格ラインの「前月比プラス」を満たしていません。<b>本日時点の速報は364名</b>（毎朝再集計・入退会と継続手続きを即日反映）で、基準との差は8/1以降に資格期限を迎えてまだ更新手続きが済んでいない方々です。<br>
+        <b>9月にやること：</b>①<b>9/1の朝いちばんに、当残が8月末値へ切り替わったか・前月比プラスに転じたか</b>を確認します。②毎朝自動出力の未更新者リストは<b>47名のまま2週連続でまったく動いていません</b>（8/24と8/31で人数・名簿とも完全同一）。内部・重複3件を除く<b>実対象44名</b>への個別案内を<b>9月第1週で送り切り</b>、9月末の当残に効いたかどうかで効果を判定します。</p>
+        <div class="act-owner">担当：<b>木村学長 以下</b>＋<b>横川さん</b> ｜ 連動：長期推移タブ・②月次増減表・未更新者リスト（毎朝更新）</div>
       </div>
     </div>
 
     <div class="act-card mid">
-      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">データ整合</span><span class="act-when">今月</span></div>
+      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">サブスク移行</span><span class="act-when">今月</span></div>
       <div class="act-body">
-        <h4>クルー実数の確定（49 vs 88 の突合）</h4>
-        <p>クルー数がDBマスター49・Campus88とズレています。<b>③Campus購入者352と②DBマスター<span class="mbase">250</span>をメール/ハッシュIDで突合</b>し、差<span id="camp-diff">102</span>名が「失効」か「未反映」かを今月中に確定させます。会社・ボード共通の"正しい会員数"を1つにします（＝A基準の裏づけ）。</p>
-        <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：整合性チェックタブ</div>
+        <h4>未移行の実体は、ダッシュボード実測では270名です【方針3】</h4>
+        <p><b>8月の実績（1行）：</b>Stripeの<b>月会員資格系は136件・¥1,405,800</b>（7月122件・¥1,141,800から<b>+14件・+¥264,000</b>）で、移行の芽は件数に出ています。<br>
+        <b>月末の点検結果：</b>顧客DBマスター基準では<b>B 520名 − A <span class="mbase">250</span>名 ＝ 270名</b>が一括／ミコシー経由のまま未移行です（DB更新で毎朝自動再計算）。方針の<b>185名は2026年8月時点の算定値</b>で、こちらとは断面が違います。まず「案内を出す実対象は何名か」を確定しない限り、<b>148名という分子だけが独り歩きします</b>。<br>
+        <b>9月にやること：</b>①270名から内部アカウント・重複・すでに移行済みの方を除いた<b>実対象リストを9月第2週までに確定</b>します。②確定後、<b>9月中に50名へ状況・関心をうかがう個別接点</b>を持ちます（一律の販売案内はしません）。③移行数は「月会員資格系」の<b>新規分の件数</b>で毎月測り、方針の148名に対する累計として積み上げます。</p>
+        <div class="act-owner">担当：<b>豊留さん・荒川さん</b>＋フォロー：<b>木村学長・柴さん・らむちぃさん</b> ｜ 連動：ホームB・決済サービス別タブ</div>
       </div>
     </div>
 
     <div class="act-card mid">
-      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">新商品・オファー</span><span class="act-when">今月</span></div>
+      <div class="act-meta"><span class="act-prio p-mid">優先</span><span class="act-cat">課金・回収</span><span class="act-when">今月</span></div>
       <div class="act-body">
-        <h4>「Ken式・X起点世界接続モデル 実装プログラム」（55,000円）の販売開始</h4>
-        <div class="grid g4" style="margin:8px 0 10px">
-          <div class="card kpi" style="padding:10px 12px"><div class="label">第0回 参加申し込み</div><div class="num" style="color:var(--navy)">64<span class="unit">名</span></div><div class="foot">7/27</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">Claude Code 安心セミナー</div><div class="num" style="color:var(--navy)">30<span class="unit">名</span></div><div class="foot">7/28／申込64→参加率 46.9%</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">CV率（対セミナー30名）</div><div class="num" style="color:var(--pos)">150.0<span class="unit">%</span></div><div class="foot">本申込45件÷30名（セミナー後の追加申込含む）</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">CV率（対申込64名）</div><div class="num" style="color:var(--pos)">70.3<span class="unit">%</span></div><div class="foot">本申込45件÷64名</div></div>
-        </div>
-        <div class="grid g4" style="margin:8px 0 10px">
-          <div class="card kpi" style="padding:10px 12px"><div class="label">本申込 成功</div><div class="num" style="color:var(--pos)">45<span class="unit">件</span></div><div class="foot">55,000円 × 45（7/27:9・7/28:8・7/29以降:28）</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">本申込 金額</div><div class="num" style="color:var(--navy)">¥2,475,000</div><div class="foot">Stripe実測（一括払い）</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">決済未完了（実未回収）</div><div class="num" style="color:var(--pos)">0<span class="unit">名</span></div><div class="foot">失敗4件（2名）はいずれも後に決済成功（8/21時点）</div></div>
-          <div class="card kpi" style="padding:10px 12px"><div class="label">購入者ユニーク</div><div class="num">45<span class="unit">名</span></div><div class="foot">ほか100円×1件（7/22・内部テスト・除外）</div></div>
-        </div>
-        <p>新プログラム<b>「Ken式・X起点世界接続モデル 実装プログラム」55,000円</b>のローンチは累計<b>45件・¥2,475,000</b>で着地しました（最終申込8/16・決済失敗4件はいずれも後日成功で<b>実未回収0名</b>）。今月は<b>販売から受講オンボードへ軸足を移し</b>、受講案内〜初回体験の導線を月内に整えます。突破Aiクルーの歓迎会・朝活との相互送客も設計します。</p>
-        <div class="act-owner">担当：<b>柴さん・木村学長 以下</b> ｜ 連動：Stripe API実測（2026/08/21時点）</div>
+        <h4>9月は無料期間明け32名——初めての「課金の谷」判定になります【方針2】</h4>
+        <p><b>8月の実績（1行）：</b>Stripe成功決済は<b>265件・¥6,251,900</b>——講座・イベント系64件・¥3,773,600／月会員資格系136件・¥1,405,800／図書館・第6期リスキリング系57件・¥970,200／Invoice払い8件・¥102,300（内部検算一致）。<br>
+        <b>月末の点検結果：</b>突破Aiクルーの無料期間終了は<b>9月32名・10月103名（10/12まで）</b>です（8/31昼のStripe再取得・無料期間中135名の月別内訳）。つまり<b>無料期間明けの課金が金額に現れ始めるのは9月から</b>で、8月のStripe金額にはまだ1円も乗っていません。未決済（決済失敗・未回収）は<b>2名</b>にとどまっています。<br>
+        <b>9月にやること：</b>①9月終了の32名について、<b>初回課金の成功／カード拒否を週内に確認</b>し、未決済ゼロ運用を保ちます。②「Ken式・X起点世界接続モデル 実装プログラム」（累計45件・¥2,475,000で着地）の<b>受講オンボード導線を9月中に開通</b>させ、突破Aiクルーの歓迎会・朝活と相互送客します。③9月の結果をもって、10月の103名に向けた案内文・担当割り・期限を確定します。</p>
+        <div class="act-owner">担当：<b>柴さん・木村学長</b>＋<b>横川さん</b> ｜ 連動：決済サービス別タブ・突破AIタブ・整合性チェックタブE</div>
       </div>
     </div>
 
     <div class="act-card low">
       <div class="act-meta"><span class="act-prio p-low">中期</span><span class="act-cat">配信品質</span><span class="act-when">今月</span></div>
       <div class="act-body">
-        <h4>MyASP エラー集中メールの宛先クリーニング</h4>
-        <p>直近10日の送達率は<b>99.8〜99.9%・エラー率0.08〜0.16%</b>と健全域です。無効アドレスの棚卸しを今月中に行い、9月からの<b>再稼働の接点づくり（未ログイン者・未移行者への個別アプローチ）</b>に備えて配信基盤を軽くしておきます。</p>
+        <h4>エラーが跳ねた2日を特定し、宛先を軽くしてから再接点に入ります</h4>
+        <p><b>8月の実績（1行）：</b>直近10日（8/21〜8/30）の送達率は<b>99.7〜100%</b>で、健全域を保ちました。<br>
+        <b>月末の点検結果：</b>ただし<b>8/26（エラー200件・0.286%）と8/27（222件・0.317%）</b>の2日だけが、他日の11〜83件から突出しています。8月中に予定していた無効アドレスの棚卸しは<b>未着手</b>です。<br>
+        <b>9月にやること：</b>この2日の配信対象を特定して無効アドレスを洗い出し、9月からの<b>再接点（未ログイン者・未移行者への個別アプローチ）</b>の前に配信基盤を軽くします。「案内が届いていないのか、届いて動かないのか」——未更新者47名の切り分けにも、ここが効きます。</p>
         <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：配信監視タブ</div>
       </div>
     </div>
   </div>
 
   <div class="callout" style="margin-top:16px">
-    <b>旗印：</b>「集めて売る」の"集める"は突破Aiで再点火しました。次は<b>PABLOS 1,000名——集めた人と、離れた人を100日でファンに変える</b>。無料期間明けに課金の谷を作らない・未ログイン183名と再びつながる・元会員185名が再参加しやすい接点をつくる。この3つが北極星です。
+    <b>旗印：</b>「集めて売る」の"集める"は、8月の突破Aiクルー<b>137名</b>とStripe<b>¥6,251,900</b>で最高値を更新しました。9月からの主戦場は<b>PABLOS 1,000名——集めた人と、離れた人を100日でファンに変える</b>です。<b>無料期間明けの32名で課金の谷を作らない・未更新47名と未移行270名に再びつながる・未ログイン者を「数えられる指標」にする</b>。この3つが9月の北極星です。
   </div>
 </section>
 
@@ -825,33 +833,34 @@
 <!-- ================= STRIPE SERVICE (svc-pipeline.py が毎朝再生成) ================= -->
 <section class="tab" id="stripesvc">
 <!--SVCTAB-START-->
-  <p class="lead"><b>Stripe決済のサービス別集計</b>です。Stripe API（読み取り専用キー）から2026年1月1日以降の全決済を実測取得し、説明欄の機械判定でカテゴリに区分しました（推測・補完なし／全額返金は成功から除外）。金額と件数は必ずセットで見ます。<b>毎朝9時に前日までの実測へ自動更新</b>します。<a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=integrity]').click();return false;">整合性チェックタブ</a>の「⑥ Stripe決済」（直近30日）とは集計期間が異なります。</p>
-  <div class="srcbar">データ出典：<a class="src" href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener">💳 Stripe取引一覧</a><span class="src">データ断面 2026/08/31 18:00 時点（当日進行分を含む臨時集計）</span></div>
-  <div class="sec"><span class="badge">A</span><h2>月次推移（2026年1月度〜8月度・成功決済）</h2><span class="note">各セル＝件数・金額／最新月は当日18:00時点まで</span></div>
+  <p class="lead"><b>Stripe決済のサービス別集計</b>です。Stripe API（読み取り専用キー）から2026年1月1日以降の全決済を実測取得し、説明欄の機械判定でカテゴリに区分しました（推測・補完なし）。各カテゴリと合計は<b>受注</b>（決済成功ベース・後日返金分を含む）、<b>返金は返金処理日の月に▲計上</b>（一部返金含む）、<b>売上＝受注−返金</b>です。金額と件数は必ずセットで見ます。<b>毎朝9時に前日までの実測へ自動更新</b>します。<a class="src" href="#" onclick="document.querySelector('#tabs button[data-t=integrity]').click();return false;">整合性チェックタブ</a>の「⑥ Stripe決済」（直近30日）とは集計期間が異なります。</p>
+  <div class="srcbar">データ出典：<a class="src" href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener">💳 Stripe取引一覧</a><span class="src">データ断面 2026/08/31 18:59 時点（当日進行分を含む臨時集計）</span></div>
+  <div class="sec"><span class="badge">A</span><h2>月次推移（2026年1月度〜8月度・成功決済）</h2><span class="note">各セル＝件数・金額／最新月は当日18:59時点まで</span></div>
   <div class="tbl-wrap">
     <table class="mono">
-      <thead><tr><th class="l">月度</th><th>講座・イベント系</th><th>月会員資格系</th><th>図書館・第6期リスキリング系</th><th>Invoice払い</th><th>その他</th><th>合計</th></tr></thead>
+      <thead><tr><th class="l">月度</th><th>講座・イベント系</th><th>月会員資格系</th><th>図書館・第6期リスキリング系</th><th>Invoice払い</th><th>その他</th><th>合計（受注）</th><th>返金</th><th>売上（返金後）</th></tr></thead>
       <tbody>
-        <tr><td class="l">2026/01</td><td>153件・¥521,800</td><td>—</td><td>71件・¥1,481,700</td><td>—</td><td>2件・¥4,400</td><td><b>226件・¥2,007,900</b></td></tr>
-        <tr><td class="l">2026/02</td><td>12件・¥158,400</td><td>—</td><td>75件・¥1,970,100</td><td>—</td><td>—</td><td><b>87件・¥2,128,500</b></td></tr>
-        <tr><td class="l">2026/03</td><td>13件・¥171,600</td><td>2件・¥36,300</td><td>71件・¥1,257,300</td><td>—</td><td>1件・¥13,200</td><td><b>87件・¥1,478,400</b></td></tr>
-        <tr><td class="l">2026/04</td><td>—</td><td>11件・¥283,800</td><td>66件・¥1,148,400</td><td>—</td><td>—</td><td><b>77件・¥1,432,200</b></td></tr>
-        <tr><td class="l">2026/05</td><td>—</td><td>32件・¥512,820</td><td>66件・¥1,138,500</td><td>—</td><td>—</td><td><b>98件・¥1,651,320</b></td></tr>
-        <tr><td class="l">2026/06</td><td>—</td><td>67件・¥732,600</td><td>60件・¥1,029,600</td><td>—</td><td>—</td><td><b>127件・¥1,762,200</b></td></tr>
-        <tr><td class="l">2026/07</td><td>48件・¥2,931,600</td><td>122件・¥1,141,800</td><td>60件・¥1,029,600</td><td>—</td><td>—</td><td><b>230件・¥5,103,000</b></td></tr>
-        <tr><td class="l">2026/08<span style="font-size:11px;color:var(--muted)">（〜8/31）</span></td><td>64件・¥3,773,600</td><td>136件・¥1,405,800</td><td>57件・¥970,200</td><td>8件・¥102,300</td><td>—</td><td><b>265件・¥6,251,900</b></td></tr>
-        <tr style="background:var(--soft);font-weight:800"><td class="l">累計</td><td>290件・¥7,557,000</td><td>370件・¥4,113,120</td><td>526件・¥10,025,400</td><td>8件・¥102,300</td><td>3件・¥17,600</td><td>1,197件・¥21,815,420</td></tr>
+        <tr><td class="l">2026/01</td><td>159件・¥560,400</td><td>—</td><td>71件・¥1,481,700</td><td>—</td><td>2件・¥4,400</td><td>232件・¥2,046,500</td><td style="color:var(--neg)">▲5件・▲¥25,400</td><td><b>227件・¥2,021,100</b></td></tr>
+        <tr><td class="l">2026/02</td><td>13件・¥171,600</td><td>—</td><td>75件・¥1,970,100</td><td>—</td><td>—</td><td>88件・¥2,141,700</td><td>—</td><td><b>88件・¥2,141,700</b></td></tr>
+        <tr><td class="l">2026/03</td><td>13件・¥171,600</td><td>2件・¥36,300</td><td>71件・¥1,257,300</td><td>—</td><td>1件・¥13,200</td><td>87件・¥1,478,400</td><td style="color:var(--neg)">▲2件・▲¥26,400</td><td><b>85件・¥1,452,000</b></td></tr>
+        <tr><td class="l">2026/04</td><td>—</td><td>12件・¥316,800</td><td>66件・¥1,148,400</td><td>—</td><td>—</td><td>78件・¥1,465,200</td><td style="color:var(--neg)">▲1件・▲¥33,000</td><td><b>77件・¥1,432,200</b></td></tr>
+        <tr><td class="l">2026/05</td><td>—</td><td>33件・¥516,120</td><td>67件・¥1,158,300</td><td>—</td><td>—</td><td>100件・¥1,674,420</td><td style="color:var(--neg)">▲1件・▲¥3,300</td><td><b>99件・¥1,671,120</b></td></tr>
+        <tr><td class="l">2026/06</td><td>—</td><td>68件・¥752,400</td><td>61件・¥1,049,400</td><td>—</td><td>—</td><td>129件・¥1,801,800</td><td style="color:var(--neg)">▲3件・▲¥59,400</td><td><b>126件・¥1,742,400</b></td></tr>
+        <tr><td class="l">2026/07</td><td>49件・¥2,937,100</td><td>122件・¥1,141,800</td><td>60件・¥1,029,600</td><td>—</td><td>—</td><td>231件・¥5,108,500</td><td style="color:var(--neg)">▲1件・▲¥5,500</td><td><b>230件・¥5,103,000</b></td></tr>
+        <tr><td class="l">2026/08<span style="font-size:11px;color:var(--muted)">（〜8/31）</span></td><td>64件・¥3,773,600</td><td>137件・¥1,452,000</td><td>57件・¥970,200</td><td>8件・¥102,300</td><td>—</td><td>266件・¥6,298,100</td><td style="color:var(--neg)">▲1件・▲¥46,200</td><td><b>265件・¥6,251,900</b></td></tr>
+        <tr style="background:var(--soft);font-weight:800"><td class="l">累計</td><td>298件・¥7,614,300</td><td>374件・¥4,215,420</td><td>528件・¥10,065,000</td><td>8件・¥102,300</td><td>3件・¥17,600</td><td>1,211件・¥22,014,620</td><td style="color:var(--neg)">▲14件・▲¥199,200</td><td>1,197件・¥21,815,420</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="sec"><span class="badge">B</span><h2>8月のサマリー（8/1〜8/31・進行中）：成功決済 265件・¥6,251,900</h2><span class="note">成功（返金除く）のみ。未完了・失敗は下記C</span></div>
+  <div class="callout"><b>受注と売上の読み方：</b>各カテゴリと「合計（受注）」は決済した月に計上し、後日返金された分もそのまま含みます。「返金」は<b>返金処理をした月</b>に▲計上（一部返金含む）するため、決済月と返金月がズレることがあります。「売上＝受注−返金」が手残りベースの実測です（売上件数＝受注件数−全額返金件数。一部返金は金額のみ控除し件数は引きません）。</div>
+  <div class="sec"><span class="badge">B</span><h2>8月のサマリー（8/1〜8/31・進行中）：受注 266件・¥6,298,100　<span style="color:var(--neg)">返金▲1件・▲¥46,200</span>　売上 265件・¥6,251,900</h2><span class="note">受注（決済成功）ベース。未完了・失敗は下記C</span></div>
   <div class="grid g4">
-    <div class="card kpi accent-top"><div class="label">講座・イベント系</div><div class="num" style="color:var(--navy)">64<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥3,773,600</div><div class="foot">売上の60.4%</div></div>
-    <div class="card kpi accent-top"><div class="label">月会員資格系</div><div class="num" style="color:var(--navy)">136<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥1,405,800</div><div class="foot">件数の51.3%</div></div>
+    <div class="card kpi accent-top"><div class="label">講座・イベント系</div><div class="num" style="color:var(--navy)">64<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥3,773,600</div><div class="foot">受注額の59.9%</div></div>
+    <div class="card kpi accent-top"><div class="label">月会員資格系</div><div class="num" style="color:var(--navy)">137<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥1,452,000</div><div class="foot">件数の51.5%</div></div>
     <div class="card kpi accent-top"><div class="label">パブロス図書館・第6期リスキリング系</div><div class="num" style="color:var(--navy)">57<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥970,200</div><div class="foot">明細は下記B3</div></div>
     <div class="card kpi accent-top"><div class="label">Invoice払い（サブスク自動課金）</div><div class="num" style="color:var(--navy)">8<span class="unit">件</span></div><div class="num" style="color:var(--navy);font-size:21px;margin:0 0 4px">¥102,300</div><div class="foot">突破Ai クルー（Stripe直販）×7／メンター会員会費8月まで4か月分×1</div></div>
   </div>
-  <div class="callout"><b>内部検算：</b>64＋136＋57＋8＝<b>265件</b>、¥3,773,600＋¥1,405,800＋¥970,200＋¥102,300＝<b>¥6,251,900</b>で合計と一致します。返金1件（新規入学月会員　資格（リーダー））は成功から除外済みです。</div>
+  <div class="callout"><b>内部検算：</b>64＋137＋57＋8＝<b>266件</b>、¥3,773,600＋¥1,452,000＋¥970,200＋¥102,300＝<b>¥6,298,100</b>で合計と一致します。8月の返金は▲1件・▲¥46,200（新規入学月会員　資格（リーダー） ¥46,200・返金処理日基準）で、売上（返金後）は<b>¥6,251,900</b>です。</div>
   <div class="sec"><span class="badge">B1</span><h2>講座・イベント系（64件・¥3,773,600）</h2><span class="note">金額の降順</span></div>
   <div class="tbl-wrap">
     <table class="mono">
@@ -867,15 +876,15 @@
       </tbody>
     </table>
   </div>
-  <div class="sec"><span class="badge">B2</span><h2>月会員資格系（136件・¥1,405,800）</h2><span class="note">新規・更新・早期継続などを資格別に合算・金額の降順</span></div>
+  <div class="sec"><span class="badge">B2</span><h2>月会員資格系（137件・¥1,452,000）</h2><span class="note">新規・更新・早期継続などを資格別に合算・金額の降順</span></div>
   <div class="tbl-wrap">
     <table class="mono">
       <thead><tr><th class="l">資格</th><th>件数</th><th>金額</th><th class="l">内訳（件数）</th></tr></thead>
       <tbody>
         <tr><td class="l"><span class="dot b-mentor"></span> メンター</td><td>40</td><td>¥772,200</td><td class="l">早期継続特典16／初月無料更新10／初月無料入学金免除10／新規入学月会員　資格（メンター）2／更新2</td></tr>
-        <tr><td class="l"><span class="dot b-leader"></span> リーダー</td><td>34</td><td>¥372,900</td><td class="l">早期継続特典13／初月無料入学金免除10／初月無料更新6／更新3／新規入学月会員　資格（リーダー）2</td></tr>
+        <tr><td class="l"><span class="dot b-leader"></span> リーダー</td><td>35</td><td>¥419,100</td><td class="l">早期継続特典13／初月無料入学金免除10／初月無料更新6／新規入学月会員　資格（リーダー）3／更新3</td></tr>
         <tr><td class="l"><span class="dot b-crew"></span> クルー</td><td>62</td><td>¥260,700</td><td class="l">新規GPTs付_初月無料20／早期継続特典17／初月無料更新13／更新10／初月無料入学金免除1／新規入学月会員　資格（クルー）1</td></tr>
-        <tr style="background:var(--soft);font-weight:800"><td class="l">小計</td><td>136</td><td>¥1,405,800</td><td class="l"></td></tr>
+        <tr style="background:var(--soft);font-weight:800"><td class="l">小計</td><td>137</td><td>¥1,452,000</td><td class="l"></td></tr>
       </tbody>
     </table>
   </div>
