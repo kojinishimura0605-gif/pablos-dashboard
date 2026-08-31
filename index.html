@@ -612,7 +612,7 @@
 
 <!-- ================= TOPPA ================= -->
 <section class="tab" id="toppa">
-  <p class="lead"><b>突破Aiクルー</b>はMyASPのシナリオ管理メニュー上の新規流入チャネルです。7/17〜7/20の集中入会で立ち上がり、8月は<b>クルー流入の主力チャネル</b>になりました（実数は下のカード3枚＝毎朝自動更新を正とします）。ここを常設ファネル化できれば、クルー母数の安定供給源になります。</p>
+  <p class="lead"><b>突破Aiクルー</b>はMyASPのシナリオ管理メニュー上の新規流入チャネルです。7/17〜7/20の集中入会で立ち上がり、8月は<b>クルー流入の主力チャネル</b>になりました（実数は下のカード群＝毎朝自動更新を正とします）。ここを常設ファネル化できれば、クルー母数の安定供給源になります。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a><a class="src" href="https://mokumoku358.biz/toppa_ai04/" target="_blank" rel="noopener">入口LP：突破Ai</a><a class="src" href="https://m.pablos.co.jp/member/item_detail/BDcT9BGZ" target="_blank" rel="noopener">シナリオ：突破Aiクルー</a></div>
 
   <div class="callout">
@@ -622,9 +622,12 @@
   <div class="sec"><span class="badge">A</span><h2>突破Aiクルー 新規流入</h2><span class="note">LP→Stripe決済登録（14日＋30日無料）→シナリオ「突破Aiクルー」</span></div>
   <div class="grid g3">
     <!--TOPPA-INFLOW-START-->
-    <div class="card kpi accent-top at-crew"><div class="label">流入（Stripeサブスク登録）</div><div class="num" style="color:var(--crew)">140<span class="unit">名</span></div><div class="foot">2026/08/31実測・クルー有効（無料期間中）ユニーク。登録累計201件・解約54件・毎朝自動更新</div></div>
-    <div class="card kpi accent-top"><div class="label">クルー予備軍（無料期間中）</div><div class="num">140<span class="unit">名</span></div><div class="foot">14日＋30日無料・課金開始7名。無料期間終了は9/3〜10/12に分散（今月末まで0名）</div></div>
-    <div class="card kpi accent-top at-mentor"><div class="label">8月の流入（8/1–31実測）</div><div class="num" style="color:var(--crew)">137<span class="unit">名</span></div><div class="foot">直近7日で15名（Stripeサブスク登録日・現在有効分。前月登録は3名）</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label">流入（Stripeサブスク登録）</div><div class="num" style="color:var(--crew)">133<span class="unit">名</span></div><div class="foot">2026/08/31実測・クルー有効（無料期間中）ユニーク。登録累計201件・解約61件・毎朝自動更新</div></div>
+    <div class="card kpi accent-top"><div class="label">クルー予備軍（無料期間中）</div><div class="num">133<span class="unit">名</span></div><div class="foot">14日＋30日無料・課金開始7名。無料期間終了は9/3〜10/12に分散（今月末まで0名）</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label">8月の流入（8/1–31実測）</div><div class="num" style="color:var(--crew)">130<span class="unit">名</span></div><div class="foot">直近7日で12名（Stripeサブスク登録日・現在有効分。前月登録は3名）</div></div>
+    <div class="card accent-top at-crew" style="grid-column:1/-1"><div class="label">課金判定日カレンダー（無料期間の終了月・全資格）</div>
+<div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:6px"><div style="min-width:150px"><div class="label">2026年9月</div><div class="num" style="color:var(--crew)">35<span class="unit">名</span></div><div class="foot">クルー32・リーダー2・メンター1</div></div><div style="min-width:150px"><div class="label">2026年10月</div><div class="num" style="color:var(--crew)">106<span class="unit">名</span></div><div class="foot">クルー101・リーダー1・メンター4</div></div></div>
+<div class="foot">2026/08/31実測・Stripeサブスク無料期間中141名（課金開始前・顧客ユニーク・全資格。うちクルー133名）の無料期間終了日を月別集計。この月に継続可否＝課金判定が来ます。解約されない限り月額課金が始まります・毎朝自動更新</div></div>
     <!--TOPPA-INFLOW-END-->
   </div>
 
@@ -1113,13 +1116,13 @@ const mail=[
 /*STRIPE-START*/
 const stripe={updated:'2026/08/31',period:'直近30日',
   ranks:[
-    {k:'メンター',members:83,charges:83,amount:1584400},
+    {k:'メンター',members:85,charges:85,amount:1604400},
     {k:'リーダー',members:44,charges:44,amount:471900},
     {k:'クルー',members:62,charges:62,amount:260700},
-    {k:'その他会員',members:27,charges:27,amount:346500}
+    {k:'その他会員',members:29,charges:29,amount:372900}
   ],
-  total:{members:216,charges:216,amount:2663500},
-  course:{members:43,charges:43,amount:3465000}
+  total:{members:220,charges:220,amount:2709900},
+  course:{members:44,charges:44,amount:3487000}
 };
 /*STRIPE-END*/
 /*UNPAID-START*/
@@ -1131,7 +1134,7 @@ const unpaid=[
 /*TOPPA-ROUTES-START*/
 const toppaRoutes={updated:'2026/08/31',reading:106,line:1,note:34,x:0,youtube:0,kubota:0,pr:0,direct:3,norec:7,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者151名（解約済み67名は除外）。うちfree9記録あり144名＝reading 106・note 34・line 1・direct 3、未記録7名。MyASP MCP実測・毎朝自動更新。'};
 /*TOPPA-ROUTES-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/08/31","cur":{"base":250,"aM":37,"aL":25,"aC":270,"aS":0,"bT":520,"bM":152,"bL":103,"bC":244,"bS":20,"sM":216,"sC":216,"sA":2663500,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":83,"sRL":44,"sRC":62,"sRO":27},"prev":{"base":250,"aM":36,"aL":25,"aC":263,"aS":0,"bT":521,"bM":152,"bL":103,"bC":245,"bS":20,"sM":192,"sC":192,"sA":2491800,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":78,"sRL":41,"sRC":53,"sRO":20,"date":"2026/08/30"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/08/31","cur":{"base":250,"aM":37,"aL":25,"aC":270,"aS":0,"bT":520,"bM":152,"bL":103,"bC":244,"bS":20,"sM":220,"sC":220,"sA":2709900,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":85,"sRL":44,"sRC":62,"sRO":29},"prev":{"base":250,"aM":36,"aL":25,"aC":263,"aS":0,"bT":521,"bM":152,"bL":103,"bC":245,"bS":20,"sM":192,"sC":192,"sA":2491800,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":78,"sRL":41,"sRC":53,"sRO":20,"date":"2026/08/30"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/08/31',total:520,ranks:{mentor:152,leader:103,crew:244,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:14},{t:'リーダー→クルー',n:9},{t:'メンター→クルー',n:8}],downTotal:31};
 /*DBMASTER-END*/
