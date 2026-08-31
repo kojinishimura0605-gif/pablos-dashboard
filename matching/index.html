@@ -305,12 +305,12 @@ function renderLogin(msg){
       '<label>メールアドレス（UMU/決済に使用しているもの)</label>'+
       '<input type="email" id="loginEmail" placeholder="例：your-name@example.com">'+
       '<div class="actions"><button class="btn primary" id="loginBtn">資格を確認してコードを受け取る</button></div>'+
-      '<div class="autobox">🤖 <b>自動運用ポイント</b>：資格者リストはサーバー側で照合します（この画面から会員名簿は見えません）。資格者一致のときだけ、入力アドレス宛に6桁の確認コードが届きます。</div>';
+      '<div class="autobox">🤖 <b>自動運用ポイント</b>：資格者リストはサーバー側で照合します（この画面から会員名簿は見えません）。資格者一致のときだけ、入力アドレス宛に8桁の確認コードが届きます。</div>';
   } else {
     h += '<h2>メールに届いた確認コードを入力してください</h2>'+
       '<div class="desc">'+esc(pendingEmail)+' 宛に確認コード（またはログインリンク）をお送りしました。メールが見当たらない場合は迷惑メールフォルダもご確認ください。</div>'+
-      '<label>確認コード（6桁）</label>'+
-      '<input type="text" id="otpInput" inputmode="numeric" placeholder="123456">'+
+      '<label>確認コード（8桁）</label>'+
+      '<input type="text" id="otpInput" inputmode="numeric" placeholder="12345678">'+
       '<div class="actions"><button class="btn" id="backBtn">戻る</button><button class="btn primary" id="otpBtn">ログインする</button></div>'+
       '<div class="helper">メール内のリンクをタップしてログインすることもできます</div>';
   }
@@ -350,7 +350,7 @@ async function doLoginCheck(){
 }
 async function doVerifyOtp(){
   const token = (byId("otpInput").value||"").trim();
-  if(token.length<6){ toast("6桁の確認コードを入力してください","warn"); return; }
+  if(token.length<6){ toast("メールに届いた確認コード（8桁）を入力してください","warn"); return; }
   byId("otpBtn").disabled = true;
   try{
     const {error} = await sb.auth.verifyOtp({email: pendingEmail, token, type:"email"});
