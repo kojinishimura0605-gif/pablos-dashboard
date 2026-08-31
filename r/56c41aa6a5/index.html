@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PABLOS メンバー名鑑&amp;マッチング 実用化ブリーフ</title>
+<style>
+  :root{
+    --bg:#f5f7fa; --card:#ffffff; --ink:#1e2228; --sub:#5a626c; --line:#dfe4ea;
+    --blue:#2563eb; --blue-dark:#1e40af; --blue-bg:#eff6ff;
+    --green:#16a34a; --green-bg:#f0fdf4;
+    --amber:#d97706; --amber-bg:#fffbeb;
+    --red:#dc2626; --red-bg:#fef2f2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Meiryo",system-ui,sans-serif;
+    font-size:0.97rem; line-height:1.75}
+  .wrap{max-width:880px; margin:0 auto; padding:0 18px 64px}
+  header{background:var(--blue-dark); color:#fff; padding:28px 0 24px}
+  header .wrap{padding-bottom:0}
+  .tag{display:inline-block; font-size:0.78rem; font-weight:700; letter-spacing:.05em;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35);
+    padding:3px 12px; border-radius:999px; margin-bottom:10px}
+  h1{font-size:1.45rem; margin:0 0 6px; line-height:1.4}
+  header p{margin:0; color:#dbe6fb; font-size:0.92rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px 24px; margin-top:20px}
+  .card h2{font-size:1.12rem; margin:0 0 10px; color:var(--blue-dark);
+    border-left:4px solid var(--blue); padding-left:10px}
+  .card p{margin:10px 0}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:0.93rem}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:var(--blue-bg); color:var(--blue-dark); font-weight:700; white-space:nowrap}
+  .ok{color:var(--green); font-weight:700}
+  .warn{color:var(--amber); font-weight:700}
+  .risk{color:var(--red); font-weight:700}
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--blue-bg); border:1px solid #dbe6fb; border-radius:11px; padding:13px 14px}
+  .kpi .n{font-size:1.55rem; font-weight:800; color:var(--blue-dark)}
+  .kpi .l{color:var(--sub); font-size:0.83rem; margin-top:2px}
+  .note{background:var(--amber-bg); border:1px solid #f3e0b8; border-left:4px solid var(--amber);
+    border-radius:10px; padding:12px 15px; margin:14px 0; font-size:0.92rem}
+  .point{background:var(--green-bg); border:1px solid #cfe9d6; border-left:4px solid var(--green);
+    border-radius:10px; padding:12px 15px; margin:14px 0; font-size:0.92rem}
+  ol.steps{padding-left:0; list-style:none; counter-reset:step; margin:14px 0 4px}
+  ol.steps li{counter-increment:step; position:relative; padding:12px 14px 12px 52px;
+    border:1px solid var(--line); border-radius:11px; margin-top:10px; background:#fff}
+  ol.steps li::before{content:counter(step); position:absolute; left:14px; top:14px;
+    width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff;
+    font-weight:800; font-size:0.9rem; display:flex; align-items:center; justify-content:center}
+  ol.steps li b{display:block; margin-bottom:2px}
+  ol.steps li .m{color:var(--sub); font-size:0.88rem}
+  .decide{border:2px solid var(--blue); border-radius:12px; padding:4px 16px 10px; margin-top:14px; background:#fbfdff}
+  footer{color:var(--sub); font-size:0.82rem; text-align:center; margin-top:34px; line-height:1.9}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="tag">役員共有用 ｜ 社外秘</span>
+    <h1>PABLOS メンバー名鑑&amp;マッチング<br>実用化ブリーフ</h1>
+    <p>作成日：2026年8月31日 ｜ 本文中の数値はすべて実測値です（測定日は各所に記載・推測補完なし）</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>結論（30秒で読む要約）</h2>
+    <p>ファネル設計士として、まず結論から申し上げます。メンバー名鑑&マッチングのシステム基盤は<b>すでに本番品質で完成しており、毎朝無人で稼働し続けています</b>。壊れている箇所はありません。</p>
+    <p>ただし、<span class="risk">まだ資格者のどなたにもご案内していない</span>ため、利用者は運営側のテストアカウントのみです。せっかくのベルトコンベアが、乗る人がいないまま毎朝動いている状態です。残る工程は開発ではなく、<b>最終動作確認と「ローンチ（開放）の意思決定・ご案内」</b>です。</p>
+  </div>
+
+  <div class="card">
+    <h2>現在地（2026年8月31日 実測）</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n">357名</div><div class="l">資格者リスト有効数<br>（今朝9:15の自動同期結果）</div></div>
+      <div class="kpi"><div class="n">3件</div><div class="l">ログイン済みアカウント<br>（すべて運営テスト用）</div></div>
+      <div class="kpi"><div class="n">1件</div><div class="l">登録済みプロフィール</div></div>
+      <div class="kpi"><div class="n">0件</div><div class="l">マッチング申請</div></div>
+    </div>
+    <table>
+      <tr><th>点検項目</th><th>状態</th><th>備考</th></tr>
+      <tr><td>公開ページの表示</td><td class="ok">正常</td><td>ログイン画面まで到達・ブラウザエラーなし</td></tr>
+      <tr><td>データベース（Supabase）</td><td class="ok">稼働中</td><td>ステータス ACTIVE_HEALTHY</td></tr>
+      <tr><td>資格者リストの自動同期</td><td class="ok">毎朝9:15 無人稼働</td><td>本日分も完了・資格終了0件。有効357名の内訳＝自動同期分354名＋手動登録の運営枠3名（スタッフ2・事務局長1）</td></tr>
+      <tr><td>ログイン用メール送信基盤</td><td class="ok">開通済み</td><td>独自ドメインからの確認コード送信（8/11に送受信テスト成立）</td></tr>
+      <tr><td>メンバーへのご案内</td><td class="risk">未実施</td><td>実用化に向けた最大の残工程です（下記ロードマップ参照）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>どんな仕組みか（1分でわかる全体像）</h2>
+    <p>メンター・リーダー・クルー資格者<b>限定</b>の「メンバー名鑑」と「話したい申請」の場です。会員データはログイン後にのみ表示される設計で、ログイン前の公開ページには会員情報を置いていません。</p>
+    <table>
+      <tr><th>入口</th><td>UMU・決済でお使いのメールアドレスを入力 → 資格者リストとサーバー側で照合 → 一致した方にだけ6桁の確認コードをメール送付（パスワード不要）</td></tr>
+      <tr><th>名鑑</th><td>プロフィール（写真つき）を資格別バッジで一覧・絞り込み。プロフィール充実度はAIが100点満点で採点</td></tr>
+      <tr><th>マッチング</th><td>「この方と話したい」を申請 → 一次対応は運営スタッフ → 最終引き継ぎは事務局長の承認ゲート（勝手につながらない設計）</td></tr>
+      <tr><th>裏方</th><td>資格者リストは顧客DBマスターから毎朝自動同期。資格を失った方は翌朝自動で入場不可に</td></tr>
+    </table>
+    <div class="point"><b>設計思想：</b>これは単なる名簿ではなく、100日ファン化計画の「養育→支持」フェーズを支える装置です。会員同士の推し活・相互発見が起きる場を運営の管理下でつくることで、1名の熱中者が周りを巻き込むベルトコンベアの終盤工程を担います。</div>
+  </div>
+
+  <div class="card">
+    <h2>これまでの経緯</h2>
+    <table>
+      <tr><th>8月7日</th><td>動くモック完成 → 検品を経てWEB公開。同日、本番化に着手（データベース設計・資格者202名の初回登録）</td></tr>
+      <tr><th>8月8日</th><td>プロフィール画像対応・資格5種類（メンター/リーダー/クルー/スタッフ/事務局）対応・毎朝の自動同期を構築</td></tr>
+      <tr><th>8月11日</th><td>独自ドメインのメール送信基盤を開通。確認コードの送受信からログイン成立まで実測確認</td></tr>
+      <tr><th>8月31日</th><td>実用化に向けた現状監査（本ブリーフ）。基盤は健全・未案内がボトルネックと特定</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>実用化ロードマップ（ご提案）</h2>
+    <ol class="steps">
+      <li><b>ログインの最終動作確認（即日可能）</b>
+        <div class="m">8/11以来の実測がないため、本日あらためて「メール入力→コード受信→ログイン成立」までを通しで検証します。</div></li>
+      <li><b>試運転：スタッフ・運営メンバーで開放（〜1週間）</b>
+        <div class="m">まず運営側の少人数でプロフィール登録と申請フローを一巡させ、使い勝手の引っかかりを潰します。</div></li>
+      <li><b>段階招待：メンター → リーダー → クルー</b>
+        <div class="m">資格の上位層から順にご案内します。上位層の登録が名鑑の「見応え」になり、後続の登録動機になります（呼び水設計）。</div></li>
+      <li><b>案内メールの配信（MyASPから・配信GOは承認制）</b>
+        <div class="m">「名鑑に登録すると何が起きるか」を一言で伝える案内文をドラフトし、ご承認後に配信します。</div></li>
+    </ol>
+    <div class="note"><b>段階招待とする技術的な理由：</b>ログイン用メールの無料枠が<b>1日100通・1時間30通</b>のため、357名へ一斉案内すると初日に確認コードが枠切れし「コードが届かない」体験を生むリスクがあります。段階招待なら無料枠内で安全に回せます。一斉開放をご希望の場合は送信サービスの有料プランへの切り替えで対応可能です（料金は決裁前に最新の公式価格を確認します）。</div>
+  </div>
+
+  <div class="card decide">
+    <h2>ボードでお諮りしたいこと（3点）</h2>
+    <table>
+      <tr><th>①開放方式</th><td>段階招待（無料枠内・推奨）／一斉開放（送信サービスの有料プラン切替が必要）のどちらで進めるか</td></tr>
+      <tr><th>②開放範囲</th><td>初回はメンターまでか、リーダー・クルーまで一気に進めるか</td></tr>
+      <tr><th>③案内時期</th><td>試運転1週間を挟む前提で、メンバー案内の開始目標をいつに置くか</td></tr>
+    </table>
+    <p style="font-size:0.9rem; color:var(--sub)">※案内文の内容・配信の最終GOは、従来どおり西村の承認制で運用します。</p>
+  </div>
+
+  <footer>
+    PABLOS メンバー名鑑&amp;マッチング 実用化ブリーフ ｜ 2026年8月31日作成<br>
+    本文中の数値はすべて実測値です（測定日は各所に記載）。役員内共有用につき、外部への転送はお控えください。
+  </footer>
+</div>
+</body>
+</html>
