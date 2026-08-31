@@ -237,7 +237,7 @@ function profileScore100(p){
   items.push({label:"プロフィール画像", got:hasPhoto?10:0, max:10, tips:hasPhoto?[]:["プロフィール写真を設定する（+10点）"]});
   let snsCnt = 0;
   const sns = p.sns||{};
-  ["x","instagram","facebook"].forEach(k=>{ if(((sns[k])||"").trim()) snsCnt++; });
+  ["x","instagram","facebook","youtube"].forEach(k=>{ if(((sns[k])||"").trim()) snsCnt++; });
   items.push({label:"SNSリンク", got:snsCnt>=2?10:(snsCnt===1?5:0), max:10, tips:snsCnt>=2?[]:["SNSを2つ以上登録すると満点（1つで+5点）"]});
   const nm = (p.name||"").trim();
   const nGot = nm ? (/[\s　]/.test(nm)?10:5) : 0;
@@ -600,6 +600,7 @@ async function appItem(a, withActions){
         if(c.sns && c.sns.x) sns.push("X: "+c.sns.x);
         if(c.sns && c.sns.instagram) sns.push("Instagram: "+c.sns.instagram);
         if(c.sns && c.sns.facebook) sns.push("Facebook: "+c.sns.facebook);
+        if(c.sns && c.sns.youtube) sns.push("YouTube: "+c.sns.youtube);
         h += '<div class="autobox" style="border-left-color:var(--green);color:#14532d;background:var(--green-bg)">🎉 <b>マッチ成立</b>（'+esc(fmtDt(a.decided_at))+'）：連絡先 → '+esc(c.email)+(sns.length?" ／ "+esc(sns.join(" ／ ")):"")+'</div>';
       } else {
         h += '<div class="meta" style="margin-top:8px">マッチ成立（'+esc(fmtDt(a.decided_at))+'）</div>';
@@ -782,6 +783,7 @@ function viewMp(){
   h += '<label>X (Twitter)</label><input type="text" id="pfX" value="'+esc(p.sns.x||"")+'"><div class="helper">ユーザー名またはURLのどちらでもOK。マッチ成立まで相手には表示されません</div>';
   h += '<label>Instagram</label><input type="text" id="pfIg" value="'+esc(p.sns.instagram||"")+'"><div class="helper">ユーザー名またはURLのどちらでもOK</div>';
   h += '<label>Facebook</label><input type="text" id="pfFb" value="'+esc(p.sns.facebook||"")+'"><div class="helper">ユーザー名またはURLのどちらでもOK</div>';
+  h += '<label>YouTube</label><input type="text" id="pfYt" value="'+esc(p.sns.youtube||"")+'"><div class="helper">チャンネル名またはURLのどちらでもOK</div>';
   h += '<div class="actions"><button class="btn primary" id="saveProfBtn">'+(myProfile?"保存する":"登録して名鑑に載る")+'</button></div>';
   h += '</div>';
   return h;
@@ -857,7 +859,7 @@ function bindMp(){
   if(delBtn) delBtn.addEventListener("click", ()=>{ profDraft.photoDataUrl=null; profDraft.photoBlob=null; profDraft.photo_path=null; profDraft.removePhoto=true; renderBody(); toast("写真を外しました。保存ボタンで確定します"); });
   if(nameI) nameI.addEventListener("input", ()=>{ profDraft.name=nameI.value; byId("nameCount").textContent=nameI.value.length+"/30"; updateScorePanel(); });
   if(bioI) bioI.addEventListener("input", ()=>{ profDraft.bio=bioI.value; byId("bioCount").textContent=bioI.value.length+"/200"; updateScorePanel(); });
-  [["pfX","x"],["pfIg","instagram"],["pfFb","facebook"]].forEach(([id,k])=>{
+  [["pfX","x"],["pfIg","instagram"],["pfFb","facebook"],["pfYt","youtube"]].forEach(([id,k])=>{
     const el = byId(id);
     if(el) el.addEventListener("input", ()=>{ profDraft.sns[k]=el.value; updateScorePanel(); });
   });
