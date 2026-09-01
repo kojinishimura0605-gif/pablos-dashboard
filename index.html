@@ -837,7 +837,7 @@
   <div class="srcbar"><span class="src">🧪 試作・サンプルデータ（架空365名・シード固定）</span><a class="src" href="campus-login-sample.html" target="_blank" rel="noopener">↗ 別タブで単体表示</a></div>
   <iframe id="clFrame" src="campus-login-sample.html" title="Campus未ログイン者ピックアップ（サンプル）" loading="lazy" style="width:100%;height:1600px;border:1px solid #d5dbe3;border-radius:12px;background:#fff" onload="fitCLFrame()"></iframe>
   <script>
-  function fitCLFrame(){var f=document.getElementById('clFrame');try{var h=f.contentDocument.documentElement.scrollHeight;if(h>300){f.style.height=(h+40)+'px';}}catch(e){}}
+  function fitCLFrame(){var f=document.getElementById('clFrame');if(!f||f.offsetWidth<300)return;try{f.style.height='100px';var h=f.contentDocument.documentElement.scrollHeight;f.style.height=((h>300?h:1560)+40)+'px';}catch(e){f.style.height='1600px';}}
   document.addEventListener('DOMContentLoaded',function(){
     var b=document.querySelector('#tabs button[data-t=campus]');
     if(b){b.addEventListener('click',function(){setTimeout(fitCLFrame,150);setTimeout(fitCLFrame,600);});}
