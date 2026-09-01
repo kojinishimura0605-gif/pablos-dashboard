@@ -830,6 +830,19 @@
   <div class="callout">
     <b>内部検算：</b>メンター172＋リーダー92＋クルー88＝<b>352名</b>で、メンバーシップ購入者の合計と一致します（Campus内部は整合）。一方サポーター100は「UMU利用なし」のため利用人数2,517には含まれていない見立てです。
   </div>
+
+  <!-- ===== C: 未ログイン者ピックアップ（試作・架空データ） ===== -->
+  <div class="sec"><span class="badge">C</span><h2>未ログイン者ピックアップ（試作）</h2><span class="note">🧪 架空サンプル365名・実データ未接続</span></div>
+  <p class="lead">メンバーシップ購入者（メンター・リーダー・クルー）だけを対象に、31日以上ログインのない方を放置期間の長い順に洗い出し、フォロー通知文まで自動生成する「器」のデモです。<b>下の数値はAIが生成した架空の365名で、上のA・Bの実測値（購入者352名）とは無関係です</b>。混同にご注意ください。実データ接続（MyASP名簿×Campusログイン履歴の突合）は西村さんのGO後に着手します。</p>
+  <div class="srcbar"><span class="src">🧪 試作・サンプルデータ（架空365名・シード固定）</span><a class="src" href="campus-login-sample.html" target="_blank" rel="noopener">↗ 別タブで単体表示</a></div>
+  <iframe id="clFrame" src="campus-login-sample.html" title="Campus未ログイン者ピックアップ（サンプル）" loading="lazy" style="width:100%;height:1600px;border:1px solid #d5dbe3;border-radius:12px;background:#fff" onload="fitCLFrame()"></iframe>
+  <script>
+  function fitCLFrame(){var f=document.getElementById('clFrame');try{var h=f.contentDocument.documentElement.scrollHeight;if(h>300){f.style.height=(h+40)+'px';}}catch(e){}}
+  document.addEventListener('DOMContentLoaded',function(){
+    var b=document.querySelector('#tabs button[data-t=campus]');
+    if(b){b.addEventListener('click',function(){setTimeout(fitCLFrame,150);setTimeout(fitCLFrame,600);});}
+  });
+  </script>
 </section>
 
 <!-- ================= STRIPE SERVICE (svc-pipeline.py が毎朝再生成) ================= -->
