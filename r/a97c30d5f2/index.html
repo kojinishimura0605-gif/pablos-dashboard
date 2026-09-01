@@ -44,6 +44,24 @@
     border:1px dashed #D8B24A;border-radius:8px;
     padding:10px 14px;font-size:13px;line-height:1.7;margin:12px 0;
   }
+  /* ===== CRM自動運用 実例図（RFMフロー） ===== */
+  .rfmflow{margin-top:12px;}
+  .rstep{display:flex;gap:12px;background:var(--pale);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .rstep .rnum{flex:0 0 30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+  .rstep .rbody{flex:1;min-width:0;}
+  .rstep h4{font-size:14.5px;color:var(--navy);margin:2px 0 4px;}
+  .rstep p{font-size:13px;color:#33415C;line-height:1.7;margin:0 0 8px;}
+  .rarrow{text-align:center;color:var(--blue);font-size:17px;line-height:1;margin:6px 0;}
+  .segbar-label{font-size:12px;font-weight:700;color:var(--navy);margin-top:6px;}
+  .segbar{display:flex;height:20px;border-radius:6px;overflow:hidden;border:1px solid var(--line);}
+  .segbar i{display:block;height:100%;}
+  .segtbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;background:#fff;}
+  .segtbl th,.segtbl td{border:1px solid var(--line);padding:5px 4px;text-align:center;}
+  .segtbl th{background:#fff;color:var(--navy);font-size:11.5px;}
+  .segtbl td.l{text-align:left;white-space:nowrap;}
+  .segdot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+  .msglist{list-style:none;margin:0;padding:0;font-size:12.5px;line-height:1.8;}
+  .msglist li{padding-left:2px;}
   /* ===== draft banner ===== */
   .draft-bar{
     background:#3A2E00;color:#FFD966;font-size:12px;text-align:center;
@@ -722,6 +740,60 @@
         </div>
       </div>
       <p class="muted" style="margin:10px 0 0;">※実際に運用中の会員ステージ設計（制度内容をもとに図式化）。実名掲載の許可をいただいています。</p>
+    </article>
+    <article class="case">
+      <span class="ctag">AI右腕の制作実例（実測・社名非公開）</span>
+      <h3>顧客セグメント別のCRM自動運用（通販・D2C 2社）</h3>
+      <p style="font-size:14px;margin:6px 0 4px;">注文データを渡すだけで、AI右腕がRFM分析からセグメント分類、配信メッセージの割り当てまでを組み立てます。下の図は、実際の注文データ（2社・直近12か月）で動かした実測の流れです。</p>
+      <div class="rfmflow">
+        <div class="rstep">
+          <div class="rnum">1</div>
+          <div class="rbody">
+            <h4>RFM分析を自動実行</h4>
+            <p style="margin:0;">注文明細から、顧客ごとの最終購入日（R）・購入回数（F）・累計購入金額（M）を自動集計します。A社はヘアケアD2Cの明細1,340行から顧客288名、B社は健康食品通販の明細8,810行から顧客1,559名を名寄せしました。</p>
+          </div>
+        </div>
+        <div class="rarrow">▼</div>
+        <div class="rstep">
+          <div class="rnum">2</div>
+          <div class="rbody">
+            <h4>5つのセグメントに自動分類</h4>
+            <p>経過日数×回数×金額のルールで、VIP・優良・新規・休眠・離脱危機に自動で振り分けます。同じ物差しで2社を並べると、顧客構造の体質差まで一目で見えます。</p>
+            <div class="segbar-label">A社（ヘアケアD2C・288名）　アクティブ顧客率 41%</div>
+            <div class="segbar">
+              <i style="width:5.9%;background:#c2851a;" title="VIP 5.9%"></i><i style="width:28.1%;background:#2e7d32;" title="優良 28.1%"></i><i style="width:7.3%;background:#2563a8;" title="新規 7.3%"></i><i style="width:15.3%;background:#c62828;" title="離脱危機 15.3%"></i><i style="width:43.4%;background:#757575;" title="休眠 43.4%"></i>
+            </div>
+            <div class="segbar-label">B社（健康食品の通販・1,559名）　アクティブ顧客率 74%</div>
+            <div class="segbar">
+              <i style="width:12.1%;background:#c2851a;" title="VIP 12.1%"></i><i style="width:57.3%;background:#2e7d32;" title="優良 57.3%"></i><i style="width:4.2%;background:#2563a8;" title="新規 4.2%"></i><i style="width:10.0%;background:#c62828;" title="離脱危機 10.0%"></i><i style="width:16.4%;background:#757575;" title="休眠 16.4%"></i>
+            </div>
+            <table class="segtbl">
+              <tr><th style="text-align:left;">セグメント（構成比）</th><th>A社<br>288名</th><th>B社<br>1,559名</th></tr>
+              <tr><td class="l"><span class="segdot" style="background:#c2851a;"></span>VIP</td><td>5.9%</td><td>12.1%</td></tr>
+              <tr><td class="l"><span class="segdot" style="background:#2e7d32;"></span>優良</td><td>28.1%</td><td>57.3%</td></tr>
+              <tr><td class="l"><span class="segdot" style="background:#2563a8;"></span>新規</td><td>7.3%</td><td>4.2%</td></tr>
+              <tr><td class="l"><span class="segdot" style="background:#c62828;"></span>離脱危機</td><td>15.3%</td><td>10.0%</td></tr>
+              <tr><td class="l"><span class="segdot" style="background:#757575;"></span>休眠</td><td>43.4%</td><td>16.4%</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="rarrow">▼</div>
+        <div class="rstep">
+          <div class="rnum">3</div>
+          <div class="rbody">
+            <h4>セグメント別の配信メッセージを自動選定</h4>
+            <p>分類した人数に合わせて、各セグメントの文面と配信タイミングを自動で割り当てます。</p>
+            <ul class="msglist">
+              <li><span class="segdot" style="background:#c2851a;"></span>VIP → 月1回の感謝連絡＋新商品の先行案内</li>
+              <li><span class="segdot" style="background:#2e7d32;"></span>優良 → 購入サイクルに合わせた25日目前後のご案内</li>
+              <li><span class="segdot" style="background:#2563a8;"></span>新規 → 7日目（使い方）と30日目（2回目のご提案）</li>
+              <li><span class="segdot" style="background:#c62828;"></span>離脱危機 → 90日を超えたら早めのお伺い便</li>
+              <li><span class="segdot" style="background:#757575;"></span>休眠 → 季節の節目に復帰のきっかけ便</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="margin:10px 0 0;">※2026年9月制作。社名は掲載許可の関係で非公開としています。構成比は各社の注文データからの実測集計値（四捨五入）。データ読み込みからダッシュボード生成・検算一致の確認まで、AI右腕の作業時間は1社あたり約20分です。</p>
     </article>
     <p class="muted">そのほかの支援実績：アンファーストア、チバテレ、scroll ほか（累計421社）。</p>
     <div class="placeholder">【要確認】上記は西村の既存講座・支援先の実例です。AI右腕アカデミー自体の受講生の声は、β説明会の開催後に回収して差し替え・追加します。</div>
