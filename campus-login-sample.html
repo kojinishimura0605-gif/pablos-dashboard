@@ -6,11 +6,11 @@
 <title>メンバーシップ購入者 未ログイン者ピックアップ（サンプル体験版）</title>
 <style>
   :root {
-    --red: #D0000D;
-    --danger: #c01c28;
-    --danger-bg: #fde8e8;
-    --warn: #b57a00;
-    --warn-bg: #fdf4e0;
+    --red: #1d4a9e;
+    --danger: #1d4a9e;
+    --danger-bg: #e2ebfa;
+    --warn: #3b6fd4;
+    --warn-bg: #eef4fc;
     --blue: #3b6fd4;
     --line: #d5dbe3;
     --text: #1f2430;
@@ -29,7 +29,7 @@
 
   .badge {
     display: inline-block;
-    background: #fdecec;
+    background: #eaf1fb;
     color: var(--red);
     font-size: 14px;
     padding: 3px 12px;
@@ -62,7 +62,7 @@
   }
   .card .num { font-size: 30px; font-weight: bold; }
   .card .label { font-size: 14px; color: var(--sub); }
-  .card.alert { background: var(--danger-bg); border-color: #f0b9bd; }
+  .card.alert { background: var(--danger-bg); border-color: #b9cdf0; }
   .card.alert .num { color: var(--danger); }
 
   h2 {
@@ -110,7 +110,7 @@
     border-radius: 999px; color: #fff;
   }
   .tag.t2 { background: var(--danger); }
-  .tag.t1 { background: #e5a50a; }
+  .tag.t1 { background: #6a92dd; }
   .role {
     display: inline-block; font-size: 13px; padding: 2px 10px;
     border-radius: 999px; background: #eaf1fb; color: var(--blue);
@@ -182,7 +182,7 @@
 
   <h2>未ログイン者一覧（放置期間の長い順）</h2>
   <div class="desc">
-    最終ログインから31日以上経過した方だけを表示しています。90日以上（赤）は重点フォロー、31〜89日（黄）は要フォローです。
+    最終ログインから31日以上経過した方だけを表示しています。90日以上（濃い青）は重点フォロー、31〜89日（淡い青）は要フォローです。
   </div>
   <div class="filters" id="filters"></div>
   <div class="table-scroll">
@@ -297,7 +297,7 @@ document.getElementById("cards").innerHTML = cards.map(c =>
 
 // ---- 資格別 積み上げ横棒（SVG） ----
 (function () {
-  const COLORS = { active: "#3b6fd4", t1: "#e5a50a", t2: "#c01c28" };
+  const COLORS = { active: "#cfd9ea", t1: "#6a92dd", t2: "#1d4a9e" };
   const LABELS = { active: "当月アクティブ", t1: "要フォロー(31〜89日)", t2: "重点フォロー(90日以上)" };
   document.getElementById("barLegend").innerHTML = Object.keys(COLORS).map(k =>
     '<span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:' + COLORS[k] + ';margin:0 5px 0 14px;vertical-align:middle;"></span>' + LABELS[k]
@@ -316,7 +316,7 @@ document.getElementById("cards").innerHTML = cards.map(c =>
       const w = n * scale;
       if (n > 0) {
         s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + barH + '" fill="' + COLORS[k] + '"/>';
-        if (w > 26) s += '<text x="' + (x + w / 2) + '" y="' + (y + barH / 2 + 6) + '" text-anchor="middle" font-size="14" fill="#fff">' + n + "</text>";
+        if (w > 26) s += '<text x="' + (x + w / 2) + '" y="' + (y + barH / 2 + 6) + '" text-anchor="middle" font-size="14" fill="' + (k === "active" ? "#1f2430" : "#fff") + '">' + n + "</text>";
       }
       x += w;
     });
