@@ -326,7 +326,7 @@
         <tr style="background:#fdf1e0;font-weight:700"><td class="l">└ 差異＝<b>未移行顧客</b></td><td class="mono"><b style="color:var(--warn)" id="g-diff">—</b></td><td class="l">まだサブスク会員に未移行</td><td class="l"><b>サブスク移行アプローチの対象</b></td></tr>
         <tr style="background:#eaf7f0;font-weight:700"><td class="l">⑥ Stripe実課金（課金の正）</td><td class="mono"><b id="g-stp-n">178</b></td><td class="l">直近30日に実際に課金（<span id="g-stp-amt">¥2,112,000</span>）</td><td class="l">課金の実態基準／年払い一括は別</td></tr>
         <tr style="opacity:.75"><td class="l">D MyASP到達 <span style="font-size:10px;color:var(--warn)">参考・非正</span></td><td class="mono">139</td><td class="l">シナリオ購読中（配信可能）</td><td class="l">配信ベースの参考値（会員数判断に非使用）</td></tr>
-        <tr><td class="l">③ Campus購入者</td><td class="mono">352</td><td class="l">購入累計（退会含む）</td><td class="l">退会者も残る→多</td></tr>
+        <tr><td class="l">③ Campus購入者</td><td class="mono">376</td><td class="l">購入累計（退会含む）</td><td class="l">退会者も残る→多</td></tr>
         <tr><td class="l">⑤ NFT期別台帳</td><td class="mono">327</td><td class="l">期0〜4の通算契約者</td><td class="l">通算・重複除去</td></tr>
       </tbody>
     </table>
@@ -443,7 +443,7 @@
         <h4>8月は「集める」が最高値でした。9月は3指標を"毎朝見える数字"にします【方針1・2・3】</h4>
         <p><b>8月の実績（1行）：</b>突破Aiクルーの新規流入<b>137名</b>（8/1〜31・登録日ベース・現在有効分／朝9:15の自動更新断面。導線の開設は7月です）、Stripeの<b>売上（返金後）265件・¥6,251,900</b>（7月230件・¥5,103,000から<b>+35件・+¥1,148,900</b>／18:59の再取得断面）——いずれも<b>2026年1月以降で最も大きな月</b>になりました（Stripe実測は2026年1月1日以降のみ遡及。いずれの断面も9/1朝の自動更新で確定します）。<br>
         <b>月末の点検結果：</b>方針3指標の累計進捗は<b>0/133名・0/127名・0/148名＝いずれも0%</b>（担当報告ベース・報告待ち。127名は方針の直接の数字ではなく、8/24時点の予備軍158名×80%からの派生値です）。8月に掲げた「ベースライン確定」は<b>未達</b>です。とりわけ<b>【1】2か月以上の未ログイン者数は、司令塔のどのタブにも実測値として載っていません</b>（方針の183名は2026年8月時点の算定値であって、ダッシュボード実測ではありません）。数えられない指標は、10月末に達成・未達の判定ができません。<br>
-        <b>9月にやること：</b>①未ログイン者数をCampus／UMUから抽出し、<b>専用マーカーに乗せた数値欄</b>として司令塔に新設します（当面は月1回の手動投入でも、置き場所はパイプライン管理下に置き、直書きカードにはしません）。②再接点・オンボード完了・サブスク移行の3つを、<b>担当報告から週次でカウントできる入力欄</b>にします。この2つを9月中に終えます。③8月に確定できなかった<b>Campus購入者352名 と DBマスター<span class="mbase">250</span>名 の突合（差<span id="camp-diff">102</span>名が「失効」か「未反映」か）</b>も9月へ持ち越します。④進捗0%のまま9月に入りましたので、残り2か月で方針を満たすには<b>【1】月67名・【3】月74名</b>のペースが必要です（【2】は無料期間の終了日で決まるため月割りができません。上の落とし込み表は方針どおり3か月均等の逆算値のまま据え置いています）。</p>
+        <b>9月にやること：</b>①未ログイン者数をCampus／UMUから抽出し、<b>専用マーカーに乗せた数値欄</b>として司令塔に新設します（当面は月1回の手動投入でも、置き場所はパイプライン管理下に置き、直書きカードにはしません）。②再接点・オンボード完了・サブスク移行の3つを、<b>担当報告から週次でカウントできる入力欄</b>にします。この2つを9月中に終えます。③8月に確定できなかった<b>Campus購入者376名（9/2月初更新） と DBマスター<span class="mbase">250</span>名 の突合（差<span id="camp-diff">102</span>名が「失効」か「未反映」か）</b>も9月へ持ち越します。④進捗0%のまま9月に入りましたので、残り2か月で方針を満たすには<b>【1】月67名・【3】月74名</b>のペースが必要です（【2】は無料期間の終了日で決まるため月割りができません。上の落とし込み表は方針どおり3か月均等の逆算値のまま据え置いています）。</p>
         <div class="act-owner">担当：<b>横川さん 以下</b> ｜ 連動：Campusタブ・整合性チェックタブ</div>
       </div>
     </div>
@@ -794,46 +794,46 @@
   <p class="lead"><b>PABLOS-Campus ダッシュボード</b>（Looker Studio）の主要数値です。会員基盤（UMU／Campus）側の集計で、<b>MyASP・DBマスターとは別系統</b>の母数です。数値は共有いただいた画面の実測値を転記しています。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/p_kftto1vlwd" target="_blank" rel="noopener">📊 Campus 資格者メンバー数（Looker Studio）を開く</a></div>
 
-  <div class="sec"><span class="badge">★</span><h2>資格者メンバー数（メンバーシップ）</h2><span class="note">Looker Studio 実測値・計 352名</span></div>
+  <div class="sec"><span class="badge">★</span><h2>資格者メンバー数（メンバーシップ）</h2><span class="note">Looker Studio 実測値（2026年8月末断面・9/2月初更新）・計 376名</span></div>
   <div class="grid" style="grid-template-columns:1.4fr 1fr 1fr;gap:14px;align-items:stretch">
     <div class="card kpi accent-top" style="text-align:center;padding:20px 12px;display:flex;flex-direction:column;justify-content:center">
       <div class="label" style="justify-content:center">メンバーシップ購入者</div>
       <div style="font-size:11px;color:var(--muted);margin:2px 0 4px">（メンター・リーダー・クルー）</div>
-      <div class="num" style="color:var(--navy);font-size:46px;margin:2px 0">352<span class="unit">名</span></div>
+      <div class="num" style="color:var(--navy);font-size:46px;margin:2px 0">376<span class="unit">名</span></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンバーシップメンター</div><div class="num">172<span class="unit">名</span></div></div>
-      <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>メンバーシップクルー</div><div class="num">88<span class="unit">名</span></div></div>
+      <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンバーシップメンター</div><div class="num">146<span class="unit">名</span></div></div>
+      <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>メンバーシップクルー</div><div class="num">129<span class="unit">名</span></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>メンバーシップリーダー</div><div class="num">92<span class="unit">名</span></div></div>
-      <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター <span style="font-size:10px;color:var(--muted)">(UMU利用なし)</span></div><div class="num">100<span class="unit">名</span></div></div>
+      <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>メンバーシップリーダー</div><div class="num">101<span class="unit">名</span></div></div>
+      <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター <span style="font-size:10px;color:var(--muted)">(UMU利用なし)</span></div><div class="num">0<span class="unit">名</span></div></div>
     </div>
   </div>
-  <div class="callout" style="margin-top:12px"><b>メンター172＋リーダー92＋クルー88＝352名</b>（メンバーシップ購入者の合計と一致）。サポーター100はUMU利用なしのため購入者352とは別枠です。</div>
+  <div class="callout" style="margin-top:12px"><b>メンター146＋リーダー101＋クルー129＝376名</b>（メンバーシップ購入者の合計と一致）。サポーター（UMU利用なし・別枠）は今回の月初更新で<b>0名</b>です（前回8/21断面は100名）。</div>
 
   <div class="sec"><span class="badge">A</span><h2>Campus 利用・会員サマリー</h2><span class="note">Looker Studio 実測値</span></div>
   <div class="grid g5">
-    <div class="card kpi accent-top"><div class="label">Campus 利用人数</div><div class="num" style="color:var(--navy)">2,517<span class="unit">名</span></div><div class="foot">メンター・リーダー・クルー・教育関係者</div></div>
-    <div class="card kpi accent-top at-leader"><div class="label">メンバーシップ購入者</div><div class="num">352<span class="unit">名</span></div><div class="foot">メンター・リーダー・クルー計</div></div>
-    <div class="card kpi accent-top at-mentor"><div class="label">教育関係者</div><div class="num">2,050<span class="unit">名</span></div><div class="foot">学校教育関係者</div></div>
-    <div class="card kpi accent-top at-sup"><div class="label">サポーター</div><div class="num">100<span class="unit">名</span></div><div class="foot">UMU利用なし</div></div>
-    <div class="card kpi accent-top"><div class="label">利用人数の内訳検算</div><div class="num" style="font-size:20px;color:var(--pos)">352＋2,050<br>＋α</div><div class="foot">購入者＋教育関係者＝2,402</div></div>
+    <div class="card kpi accent-top"><div class="label">Campus 利用人数</div><div class="num" style="color:var(--navy)">2,746<span class="unit">名</span></div><div class="foot">メンター・リーダー・クルー・教育関係者</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label">メンバーシップ購入者</div><div class="num">376<span class="unit">名</span></div><div class="foot">メンター・リーダー・クルー計</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label">教育関係者</div><div class="num">2,072<span class="unit">名</span></div><div class="foot">学校教育関係者</div></div>
+    <div class="card kpi accent-top at-sup"><div class="label">サポーター</div><div class="num">0<span class="unit">名</span></div><div class="foot">UMU利用なし</div></div>
+    <div class="card kpi accent-top"><div class="label">利用人数の内訳検算</div><div class="num" style="font-size:20px;color:var(--pos)">376＋2,072<br>＋α</div><div class="foot">購入者＋教育関係者＝2,448</div></div>
   </div>
 
-  <div class="sec"><span class="badge">B</span><h2>メンバーシップ購入者 内訳</h2><span class="note">計 352名</span></div>
+  <div class="sec"><span class="badge">B</span><h2>メンバーシップ購入者 内訳</h2><span class="note">計 376名</span></div>
   <div class="grid g3">
-    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">172<span class="unit">名</span></div><div class="foot">構成比 48.9%</div></div>
-    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num">92<span class="unit">名</span></div><div class="foot">構成比 26.1%</div></div>
-    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">88<span class="unit">名</span></div><div class="foot">構成比 25.0%</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">146<span class="unit">名</span></div><div class="foot">構成比 38.8%</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num">101<span class="unit">名</span></div><div class="foot">構成比 26.9%</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">129<span class="unit">名</span></div><div class="foot">構成比 34.3%</div></div>
   </div>
   <div class="callout">
-    <b>内部検算：</b>メンター172＋リーダー92＋クルー88＝<b>352名</b>で、メンバーシップ購入者の合計と一致します（Campus内部は整合）。一方サポーター100は「UMU利用なし」のため利用人数2,517には含まれていない見立てです。
+    <b>内部検算：</b>メンター146＋リーダー101＋クルー129＝<b>376名</b>で、メンバーシップ購入者の合計と一致します（Campus内部は整合）。サポーターは今回断面で0名のため、利用人数2,746への別枠影響はありません。
   </div>
 
   <!-- ===== C: 未ログイン者ピックアップ（試作・架空データ） ===== -->
   <div class="sec"><span class="badge">C</span><h2>未ログイン者ピックアップ（試作）</h2><span class="note">🧪 架空サンプル365名・実データ未接続</span></div>
-  <p class="lead">メンバーシップ購入者（メンター・リーダー・クルー）だけを対象に、31日以上ログインのない方を放置期間の長い順に洗い出し、フォロー通知文まで自動生成する「器」のデモです。<b>下の数値はAIが生成した架空の365名で、上のA・Bの実測値（購入者352名）とは無関係です</b>。混同にご注意ください。実データ接続（MyASP名簿×Campusログイン履歴の突合）は西村さんのGO後に着手します。</p>
+  <p class="lead">メンバーシップ購入者（メンター・リーダー・クルー）だけを対象に、31日以上ログインのない方を放置期間の長い順に洗い出し、フォロー通知文まで自動生成する「器」のデモです。<b>下の数値はAIが生成した架空の365名で、上のA・Bの実測値（購入者376名）とは無関係です</b>。混同にご注意ください。実データ接続（MyASP名簿×Campusログイン履歴の突合）は西村さんのGO後に着手します。</p>
   <div class="srcbar"><span class="src">🧪 試作・サンプルデータ（架空365名・シード固定）</span><a class="src" href="campus-login-sample.html" target="_blank" rel="noopener">↗ 別タブで単体表示</a></div>
   <iframe id="clFrame" src="campus-login-sample.html" title="Campus未ログイン者ピックアップ（サンプル）" loading="lazy" style="width:100%;height:1600px;border:1px solid #d5dbe3;border-radius:12px;background:#fff" onload="fitCLFrame()"></iframe>
   <script>
@@ -980,8 +980,8 @@
       <tbody>
         <tr><td class="l"><a class="srclink" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① MyASPシナリオ ↗</a></td><td class="l">シナリオ購読中（配信リスト）</td><td>2026/07/23</td><td class="mono"><b>139</b></td><td class="mono">31</td><td class="mono">21</td><td class="mono">87</td><td class="mono">0</td></tr>
         <tr><td class="l"><a class="srclink" href="https://docs.google.com/spreadsheets/d/191fhWA6D_JAzlL0VdPiaDuWt-SBqr1F7bo48OSazpqc/edit" target="_blank" rel="noopener">② DBマスター ↗</a></td><td class="l">購入者・資格有効期限内の在籍</td><td id="int2-date">2026/07末</td><td class="mono"><b id="int2-total">250</b></td><td class="mono" id="int2-m">121</td><td class="mono" id="int2-l">67</td><td class="mono" id="int2-c">49</td><td class="mono" id="int2-s">13</td></tr>
-        <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/qzcZF" target="_blank" rel="noopener">③ Campus購入者 ↗</a></td><td class="l">メンバーシップ購入者（累計）</td><td>Looker最新</td><td class="mono"><b>352</b></td><td class="mono">172</td><td class="mono">92</td><td class="mono">88</td><td class="mono">100<span style="font-size:9px;color:var(--muted)">※別枠</span></td></tr>
-        <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/qzcZF" target="_blank" rel="noopener">④ Campus利用人数 ↗</a></td><td class="l">Campus/UMU利用者（教育関係者含む）</td><td>Looker最新</td><td class="mono"><b>2,517</b></td><td class="mono" colspan="4">購入者352＋教育関係者2,050＋α</td></tr>
+        <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/qzcZF" target="_blank" rel="noopener">③ Campus購入者 ↗</a></td><td class="l">メンバーシップ購入者（累計）</td><td>2026/08末（9/2更新）</td><td class="mono"><b>376</b></td><td class="mono">146</td><td class="mono">101</td><td class="mono">129</td><td class="mono">0<span style="font-size:9px;color:var(--muted)">※別枠</span></td></tr>
+        <tr><td class="l"><a class="srclink" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/qzcZF" target="_blank" rel="noopener">④ Campus利用人数 ↗</a></td><td class="l">Campus/UMU利用者（教育関係者含む）</td><td>2026/08末（9/2更新）</td><td class="mono"><b>2,746</b></td><td class="mono" colspan="4">購入者376＋教育関係者2,072＋α</td></tr>
         <tr style="background:#f5f4ff"><td class="l"><a class="srclink" href="https://docs.google.com/spreadsheets/d/1emB456xt6kJZ9FdY1pm7Ct3Qkms7necswPMUYeZuHz4/edit" target="_blank" rel="noopener">⑤ NFT期別台帳 ↗</a></td><td class="l">0〜4期の通算契約者（実購入・重複除去）</td><td>通算</td><td class="mono"><b>327</b></td><td class="mono">80</td><td class="mono">108</td><td class="mono">64</td><td class="mono">75</td></tr>
         <tr style="background:#eafaf3"><td class="l">💳 ⑥ Stripe決済</td><td class="l">直近30日に実課金された会員（金額×件数）</td><td id="stp-upd">—</td><td class="mono"><b id="stp-total">—</b></td><td class="mono" id="stp-m">—</td><td class="mono" id="stp-l">—</td><td class="mono" id="stp-c">—</td><td class="mono" id="stp-o">—</td></tr>
       </tbody>
@@ -990,16 +990,16 @@
 
   <div class="sec"><span class="badge">B</span><h2>資格ランク別 人数比較</h2><span class="note">5ソース・実数値</span></div>
   <div class="chart"><div id="int-compare"></div>
-    <div class="legend"><span><i class="dot" style="background:#9aa4b2"></i>①MyASP(139)</span><span><i class="dot" style="background:#2f6fb0"></i>②DBマスター(<span class="mbase">250</span>)</span><span><i class="dot" style="background:#c99a2e"></i>③Campus購入者(352)</span><span><i class="dot" style="background:#7a53c4"></i>⑤NFT台帳(327通算)</span><span><i class="dot" style="background:#635bff"></i>⑥Stripe実課金</span></div>
+    <div class="legend"><span><i class="dot" style="background:#9aa4b2"></i>①MyASP(139)</span><span><i class="dot" style="background:#2f6fb0"></i>②DBマスター(<span class="mbase">250</span>)</span><span><i class="dot" style="background:#c99a2e"></i>③Campus購入者(376)</span><span><i class="dot" style="background:#7a53c4"></i>⑤NFT台帳(327通算)</span><span><i class="dot" style="background:#635bff"></i>⑥Stripe実課金</span></div>
   </div>
   <div class="tbl-wrap" style="margin-top:12px">
     <table>
       <thead><tr><th class="l">資格</th><th>①MyASP</th><th>②DBマスター</th><th>③Campus</th><th>⑤NFT台帳</th><th>⑥Stripe実課金</th></tr></thead>
       <tbody>
-        <tr><td class="l"><span class="rank-tag rt-mentor">メンター</span></td><td class="mono">31</td><td class="mono" id="cmp2-m">121</td><td class="mono">172</td><td class="mono">80</td><td class="mono">73</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-leader">リーダー</span></td><td class="mono">21</td><td class="mono" id="cmp2-l">67</td><td class="mono">92</td><td class="mono">108</td><td class="mono">41</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-crew">クルー</span></td><td class="mono">87</td><td class="mono" id="cmp2-c">49</td><td class="mono">88</td><td class="mono">64</td><td class="mono">53</td></tr>
-        <tr><td class="l"><span class="rank-tag rt-sup">サポーター</span></td><td class="mono">0</td><td class="mono" id="cmp2-s">13</td><td class="mono">100</td><td class="mono">75</td><td class="mono">0</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-mentor">メンター</span></td><td class="mono">31</td><td class="mono" id="cmp2-m">121</td><td class="mono">146</td><td class="mono">80</td><td class="mono">73</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-leader">リーダー</span></td><td class="mono">21</td><td class="mono" id="cmp2-l">67</td><td class="mono">101</td><td class="mono">108</td><td class="mono">41</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-crew">クルー</span></td><td class="mono">87</td><td class="mono" id="cmp2-c">49</td><td class="mono">129</td><td class="mono">64</td><td class="mono">53</td></tr>
+        <tr><td class="l"><span class="rank-tag rt-sup">サポーター</span></td><td class="mono">0</td><td class="mono" id="cmp2-s">13</td><td class="mono">0</td><td class="mono">75</td><td class="mono">0</td></tr>
       </tbody>
     </table>
   </div>
@@ -1019,26 +1019,26 @@
       <ul style="margin:0;padding-left:18px;font-size:13px;color:#2a3a50;line-height:1.9">
         <li>①内訳 31+21+87 = <b>139</b> 一致</li>
         <li>②当残＝前残＋新規−退会・全25か月 <b>不一致0件</b></li>
-        <li>③172+92+88 = <b>352</b> 一致</li>
+        <li>③146+101+129 = <b>376</b> 一致</li>
         <li>各ソースは<b>それ自体では破綻していません</b></li>
       </ul>
     </div>
     <div class="card"><div class="label" style="color:var(--warn);font-weight:800;margin-bottom:6px">△ 一致しなくて当然（定義差）</div>
       <ul style="margin:0;padding-left:18px;font-size:13px;color:#2a3a50;line-height:1.9">
-        <li>①139＜②<span class="mbase">250</span>＜③352 は<b>母数と基準日が違う</b>ため</li>
+        <li>①139＜②<span class="mbase">250</span>＜③376 は<b>母数と基準日が違う</b>ため</li>
         <li>①=配信購読者／②=期限内在籍／③=累計購入者</li>
         <li>③累計は退会・失効を含むので最大になる</li>
-        <li>④2,517は教育関係者2,050を含む別レイヤー</li>
+        <li>④2,746は教育関係者2,072を含む別レイヤー</li>
       </ul>
     </div>
   </div>
 
   <div class="callout warn">
-    <b>要確認の"本当のズレ"（西村さんへ）：</b>定義差では説明しきれない点が1つあります。<b>クルーの大小関係が逆転</b>しています——①MyASP=87 と ③Campus=88 はほぼ同じなのに、②DBマスター=49 だけが極端に少ない。これは②で<b>2026-06にクルー77名が「5/31期限切れ未更新」で退会計上</b>されたためです。更新処理がCampus/MyASP側に反映済みで、DBマスター側だけ未反映という<b>タイムラグの可能性が高い</b>です。ここを突合すれば「クルーの実数」が確定します。
+    <b>要確認の"本当のズレ"（西村さんへ）：</b>定義差では説明しきれない点が1つあります。<b>クルーの大小関係が逆転</b>しています——①MyASP=87 と ③Campus=129（9/2更新） が近い水準なのに、②DBマスター=49 だけが極端に少ない。これは②で<b>2026-06にクルー77名が「5/31期限切れ未更新」で退会計上</b>されたためです。更新処理がCampus/MyASP側に反映済みで、DBマスター側だけ未反映という<b>タイムラグの可能性が高い</b>です。ここを突合すれば「クルーの実数」が確定します。
   </div>
 
   <div class="callout" style="border-left-color:#7a53c4;background:#f5f4ff;border-color:#e0d6f2">
-    <b>📗 NFT期別台帳（0〜4期）で"全体総数"が見えました：通算契約者 327名</b>（メンター80・リーダー108・クルー64・サポーター75）。実購入ベースのため <b>③Campus累計352 と差はわずか25名（352−327）＝実質整合</b>で、これが「集めた契約者の全体」の実態レンジ（327〜352）です。①139・②<span class="mbase">250</span>はここからの部分集合（配信到達・期限内在籍）と読めます。<b>※327は通算（過去の全契約者）</b>で、"いま有効な会員"は各期の年間契約が生きている分に絞られます（＝⑥Stripeで確定）。<br><span style="font-size:11px;color:var(--muted)">※資格別の内訳（メンター80等）は台帳の大容量読取のため暫定値です。全行の再取得で精緻化できます。③サポーター100は購入者352の別枠（UMU利用なし）。</span></div>
+    <b>📗 NFT期別台帳（0〜4期）で"全体総数"が見えました：通算契約者 327名</b>（メンター80・リーダー108・クルー64・サポーター75）。実購入ベースのため <b>③Campus累計376 と差は49名（376−327）＝おおむね同レンジ</b>で、これが「集めた契約者の全体」の実態レンジ（327〜376）です。①139・②<span class="mbase">250</span>はここからの部分集合（配信到達・期限内在籍）と読めます。<b>※327は通算（過去の全契約者）</b>で、"いま有効な会員"は各期の年間契約が生きている分に絞られます（＝⑥Stripeで確定）。<br><span style="font-size:11px;color:var(--muted)">※資格別の内訳（メンター80等）は台帳の大容量読取のため暫定値です。全行の再取得で精緻化できます。③サポーターは9/2月初更新で0名（前回断面は100名・購入者とは別枠）。</span></div>
 
   <div class="callout" style="border-left-color:#635bff;background:#f5f4ff;border-color:#dcd9ff">
     <b>💳 "いま有効な会員数"の決定版は Stripe決済です。</b>①〜④は「配信購読」「資格期限」「購入累計」という別々の切り口で、どれも<b>真の有効会員数そのものではありません</b>。一方 <b>Stripeで直近30日に実課金された会員</b>こそ、いま本当に生きている会員です。<b>Stripe有効会員 <span id="stp-cal-total">—</span>名（メンター<span id="stp-cal-m">—</span>／リーダー<span id="stp-cal-l">—</span>／クルー<span id="stp-cal-c">—</span>）</b>で、Stripeはメンター多め＝実際に払っている層。MyASPのクルー87（無料の突破Aiクルー込み）とは別物と分かります。</div>
@@ -1058,10 +1058,10 @@
     <table>
       <thead><tr><th>#</th><th class="l">やること</th><th class="l">狙い</th></tr></thead>
       <tbody>
-        <tr style="background:#f5f4ff"><td>★</td><td class="l"><b>Stripeのアクティブなサブスクリプションをプラン別に集計</b>し、基準値（真の有効会員数）とする</td><td class="l"><span class="mbase">250</span>/139/352 のどれが実態かを<b>決済で確定</b></td></tr>
-        <tr><td>1</td><td class="l">③Campus購入者352 と ②DBマスター<span class="mbase">250</span> を<b>メール（またはハッシュID）で突合</b></td><td class="l">差<span id="camp-diff2">102</span>名が「失効」か「未反映」かを確定</td></tr>
+        <tr style="background:#f5f4ff"><td>★</td><td class="l"><b>Stripeのアクティブなサブスクリプションをプラン別に集計</b>し、基準値（真の有効会員数）とする</td><td class="l"><span class="mbase">250</span>/139/376 のどれが実態かを<b>決済で確定</b></td></tr>
+        <tr><td>1</td><td class="l">③Campus購入者376 と ②DBマスター<span class="mbase">250</span> を<b>メール（またはハッシュID）で突合</b></td><td class="l">差<span id="camp-diff2">102</span>名が「失効」か「未反映」かを確定</td></tr>
         <tr><td>2</td><td class="l">②の2026-06退会168（うちクルー77）の<b>更新反映状況をCampusで確認</b></td><td class="l">クルー49 vs 88 の真実を特定</td></tr>
-        <tr><td>3</td><td class="l">①MyASP購読139 と ③購入者352 の差を<b>「配信解除だが会員」層</b>として抽出</td><td class="l">到達できていない会員の掘り起こし</td></tr>
+        <tr><td>3</td><td class="l">①MyASP購読139 と ③購入者376 の差を<b>「配信解除だが会員」層</b>として抽出</td><td class="l">到達できていない会員の掘り起こし</td></tr>
         <tr><td>4</td><td class="l">4ソースの<b>基準日を月末で統一</b>して再集計</td><td class="l">今後は同一時点で横並び比較可能に</td></tr>
       </tbody>
     </table>
@@ -1951,7 +1951,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  set('mb-q-mentor',`${+mm}月 退会${m.quit.mentor}`);set('mb-q-leader',`${+mm}月 退会${m.quit.leader}`);set('mb-q-crew',`${+mm}月 退会${m.quit.crew}`);set('mb-q-sup',`${+mm}月 退会${m.quit.sup}`);
  set('mb-r-mentor',m.ranks.mentor);set('mb-r-leader',m.ranks.leader);set('mb-r-crew',m.ranks.crew);set('mb-r-sup',m.ranks.sup);
  set('g-total3',dbmaster.total);set('g-diff4',dbmaster.total-m.base);
- set('v2-diff',Math.abs(255-m.base));set('camp-diff',352-m.base);set('camp-diff2',352-m.base);
+ set('v2-diff',Math.abs(255-m.base));set('camp-diff',376-m.base);set('camp-diff2',376-m.base);
  set('lt-k-total',m.base);set('lt-k-total-foot',`前月${m.prevBase} → 新規${m.newTotal}・退会${m.quitTotal}`);
  set('lt-k-mentor',m.ranks.mentor);set('lt-k-mentor-foot',`${+mm}月 退会${m.quit.mentor}`);
  set('lt-k-leader',m.ranks.leader);set('lt-k-leader-foot',`${+mm}月 退会${m.quit.leader}`);
@@ -1996,7 +1996,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
 groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポーター'],[
   {name:'MyASP',color:'#9aa4b2',data:[31,21,87,0]},
   {name:'DBマスター',color:'#2f6fb0',data:[masterdb.ranks.mentor,masterdb.ranks.leader,masterdb.ranks.crew,masterdb.ranks.sup]},
-  {name:'Campus',color:'#c99a2e',data:[172,92,88,100]},
+  {name:'Campus',color:'#c99a2e',data:[146,101,129,0]},
   {name:'NFT台帳',color:'#7a53c4',data:[80,108,64,75]},
   {name:'Stripe実課金',color:'#635bff',data:[stripe.ranks[0].members,stripe.ranks[1].members,stripe.ranks[2].members,0]},
 ]);
