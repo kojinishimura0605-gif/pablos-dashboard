@@ -839,18 +839,34 @@
     <b>内部検算：</b>メンター146＋リーダー101＋クルー129＝<b>376名</b>で、メンバーシップ購入者の合計と一致します（Campus内部は整合）。サポーターは今回断面で0名のため、利用人数2,746への別枠影響はありません。
   </div>
 
-  <!-- ===== C: 未ログイン者ピックアップ（試作・架空データ） ===== -->
-  <div class="sec"><span class="badge">C</span><h2>未ログイン者ピックアップ（試作）</h2><span class="note">🧪 架空サンプル365名・実データ未接続</span></div>
-  <p class="lead">メンバーシップ購入者（メンター・リーダー・クルー）だけを対象に、31日以上ログインのない方を放置期間の長い順に洗い出し、フォロー通知文まで自動生成する「器」のデモです。<b>下の数値はAIが生成した架空の365名で、上のA・Bの実測値（購入者376名）とは無関係です</b>。混同にご注意ください。実データ接続（MyASP名簿×Campusログイン履歴の突合）は西村さんのGO後に着手します。</p>
-  <div class="srcbar"><span class="src">🧪 試作・サンプルデータ（架空365名・シード固定）</span><a class="src" href="campus-login-sample.html" target="_blank" rel="noopener">↗ 別タブで単体表示</a></div>
-  <iframe id="clFrame" src="campus-login-sample.html" title="Campus未ログイン者ピックアップ（サンプル）" loading="lazy" style="width:100%;height:1600px;border:1px solid #d5dbe3;border-radius:12px;background:#fff" onload="fitCLFrame()"></iframe>
-  <script>
-  function fitCLFrame(){var f=document.getElementById('clFrame');if(!f||f.offsetWidth<300)return;try{f.style.height='100px';var h=f.contentDocument.documentElement.scrollHeight;f.style.height=((h>300?h:1560)+40)+'px';}catch(e){f.style.height='1600px';}}
-  document.addEventListener('DOMContentLoaded',function(){
-    var b=document.querySelector('#tabs button[data-t=campus]');
-    if(b){b.addEventListener('click',function(){setTimeout(fitCLFrame,150);setTimeout(fitCLFrame,600);});}
-  });
-  </script>
+  <!-- ===== C: 未ログイン者ピックアップ（実測・Looker 8月末断面） ===== -->
+  <div class="sec"><span class="badge">C</span><h2>未ログイン者ピックアップ（実測）</h2><span class="note">Looker「利用者分析(メンバーシップ)」2026年8月末断面・9/2月初更新</span></div>
+  <p class="lead">メンバーシップ購入者（メンター・リーダー・クルー）を対象にした<b>実在データの実測</b>です（旧・架空サンプル365名は2026-09-02に撤去し、本欄へ置き換えました）。<b>個人名は公開版に掲載しない方針のため、実名リストはLookerの各「リスト」リンクから取得します</b>（未ログイン者／2ヶ月以上／半年以上の3リンク・ドリルダウンで名簿表示）。</p>
+  <div class="srcbar">データ出典：<a class="src" href="https://datastudio.google.com/u/0/reporting/12aba3c6-1084-4fa2-beea-ae78bf2f09d8/page/p_kftto1vlwd" target="_blank" rel="noopener">📊 Looker「利用者分析(メンバーシップ)」を開く（実名リストはこの中の「リスト」リンク）</a></div>
+  <div class="grid g3" style="margin-top:10px">
+    <div class="card kpi accent-top"><div class="label">未ログイン者</div><div class="num" style="color:var(--navy)">87<span class="unit">名</span></div><div class="foot">構成比 24.10%（Looker表示の実測。「未ログイン」の定義は下記の確認事項参照）</div></div>
+    <div class="card kpi accent-top at-sup"><div class="label">要フォロー（2ヶ月以上未ログイン）</div><div class="num" style="color:var(--warn)">99<span class="unit">名</span></div><div class="foot"><b>方針【1】の実測</b>（基準183名→99名・目標50名以下まで残り49名）</div></div>
+    <div class="card kpi accent-top"><div class="label">重点フォロー（半年以上未ログイン）</div><div class="num" style="color:var(--navy)">50<span class="unit">名</span></div><div class="foot">99名のうち最優先の再接点対象</div></div>
+  </div>
+  <div class="sec" style="margin-top:14px"><span class="badge">C2</span><h2>学習レベル別構成（UMUポイント）</h2><span class="note">Lookerドーナツ表示の実測%・エンゲージメントリスト356名（過去12ヶ月）</span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th class="l">レベル帯（UMUポイント）</th><th>構成比（実測）</th><th class="l">読み方</th></tr></thead>
+      <tbody>
+        <tr><td class="l">〜LV10（0〜550pt）</td><td class="mono"><b>59.6%</b></td><td class="l">入口帯が6割＝最初の550ptに壁</td></tr>
+        <tr><td class="l">LV10-15（550〜2,500pt）</td><td class="mono">21.6%</td><td class="l">習慣化の入り口</td></tr>
+        <tr><td class="l">LV16-20（2,500〜5,200pt）</td><td class="mono">9.4%</td><td class="l">定着層</td></tr>
+        <tr><td class="l">LV21-25（5,200〜10,950pt）</td><td class="mono">5.3%</td><td class="l">熱中層</td></tr>
+        <tr><td class="l">LV26-30／LV MAX</td><td class="mono">残余（約4%）</td><td class="l">Looker表示にラベルなし・次回取得で精緻化</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn" style="margin-top:12px">
+    <b>定義の確認事項（立松さんへ）：</b>低エンゲージメント率の母数はLooker内部定義で、87名÷24.10%＝<b>約361名</b>。メンバーシップ購入者376名（★）とも、エンゲージメントリスト356名とも一致しません。<b>361／376／356の3母数の定義差</b>と、<b>「未ログイン者87」と「2ヶ月以上99」の関係（87は一度もログインなしか・99に含まれるか）</b>を確認できると、方針【1】の分母が確定します。
+  </div>
+  <div class="callout" style="margin-top:8px">
+    <b>運用（方針【1】との接続）：</b>①今週（〜9/4）にLookerの「2ヶ月以上未ログイン リスト」から<b>99名の名簿を取得</b>（担当：横川さん）②名簿はPII保護のため司令塔には載せず、社内ファイルで管理 ③名簿が届き次第、<b>AIがフォロー通知文の下書きを資格別に生成</b>します（旧・架空サンプルで実証済みの器を実データに適用）④9/8週から週11名ペースで再接点（豊留さん・荒川さん）。数値は毎月初のLooker更新で本欄に反映します（9月中に専用マーカーへパイプライン化）。
+  </div>
 </section>
 
 <!-- ================= STRIPE SERVICE (svc-pipeline.py が毎朝再生成) ================= -->
