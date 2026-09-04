@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>読書会・講座 × PABLOS会員DB 突合ダッシュボード</title>
+<style>
+:root{
+  --bg:#eef1f6; --panel:#ffffff; --ink:#1a2233; --muted:#6b7688; --line:#e3e8ef;
+  --navy:#1e3a5f; --navy2:#274b78;
+  --mentor:#c99a2e; --leader:#2f6fb0; --crew:#2aa596; --sup:#9aa4b2;
+  --pos:#1f9d6b; --neg:#d9534f; --warn:#e08a1e;
+  --book:#2f6fb0; --course:#c99a2e; --db:#1e3a5f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Meiryo UI","Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;font-size:14px;line-height:1.7}
+a{color:var(--leader);text-decoration:none}
+header{background:linear-gradient(120deg,#17304f,#274b78);color:#fff;padding:22px 28px}
+header .brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header .logo{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-weight:800}
+header h1{margin:0;font-size:20px;font-weight:800;letter-spacing:.02em}
+header .sub{font-size:12px;color:#dbe7f5;margin-top:4px}
+header .right{margin-left:auto;text-align:right;font-size:12px;color:#dbe7f5}
+header .right b{display:block;font-size:16px;color:#fff}
+main{max-width:1180px;margin:0 auto;padding:22px 24px 60px}
+.lead{color:var(--muted);font-size:13px;margin:2px 0 16px}
+.secret{font-size:12.5px;color:#8a5a1e;background:#f6efe3;border-left:3px solid var(--warn);border-radius:6px;padding:8px 12px;margin:0 0 16px}
+.sec{display:flex;align-items:center;gap:10px;margin:26px 0 12px}
+.sec .badge{width:26px;height:26px;border-radius:7px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.sec h2{margin:0;font-size:16px}
+.sec .note{color:var(--muted);font-size:12px;margin-left:auto}
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g3,.g4,.g2{grid-template-columns:1fr 1fr}} @media(max-width:560px){.g3,.g4,.g2{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+.card.kpi .label{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.card.kpi .num{font-size:34px;font-weight:800;color:var(--navy);line-height:1.15;margin:4px 0}
+.card.kpi .num .unit{font-size:13px;font-weight:600;color:var(--muted);margin-left:3px}
+.card.kpi .foot{font-size:12px;color:var(--muted)}
+.card.kpi .pct{font-size:13px;font-weight:700;color:var(--pos)}
+.accent-top{border-top:3px solid var(--navy)} .at-book{border-top-color:var(--book)} .at-course{border-top-color:var(--course)}
+.callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:8px;padding:12px 16px;font-size:13px;margin:12px 0}
+.callout.warn{border-left-color:var(--warn);background:#fffaf2}
+.callout ol,.callout ul{margin:6px 0 0 18px;padding:0}
+.callout li{margin:4px 0}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{background:#f4f6fa;color:var(--muted);font-weight:700;font-size:12px}
+td.l,th.l{text-align:left;white-space:normal}
+tr.total td{font-weight:800;background:#f8fafc}
+.bar{display:flex;align-items:center;gap:8px}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--book)}
+.bar.c i{background:var(--course)}
+.bar small{color:var(--muted);font-size:11px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.b-book{background:var(--book)} .b-course{background:var(--course)} .b-db{background:var(--db)} .b-out{background:#cbd3de}
+.b-mentor{background:var(--mentor)} .b-leader{background:var(--leader)} .b-crew{background:var(--crew)} .b-sup{background:var(--sup)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.chart h3{margin:0 0 8px;font-size:13px;color:var(--muted)}
+svg text{font-family:inherit}
+.memo{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px}
+.memo b{color:var(--navy)}
+.memo h4{margin:0 0 6px;font-size:14px;color:var(--navy)}
+.src{font-size:12px;color:var(--muted)}
+footer{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">PB</div>
+    <div>
+      <h1>読書会・講座 × PABLOS会員DB 突合ダッシュボード</h1>
+      <div class="sub">パブロス株式会社｜神田館長 ご報告用（役員限定・社外秘）｜人単位（メールアドレス）で重複を除いた実測</div>
+    </div>
+    <div class="right">集計断面<b>2026-09-04</b></div>
+  </div>
+</header>
+<main>
+  <p class="lead"><b>問い：</b>PABLOS会員データベースに載っている方のうち、何人がエキスパート読書会や講座に申し込んでくださったか。会員DB（購入者タブ）のメールアドレスを母数に、MyASPの申込リスト・Stripeの講座決済と<b>人単位</b>で突き合わせました（申込・決済ベース。当日参加は別、下の注意点2）。</p>
+  <div class="secret">🔒 社外秘。掲載は集計値のみで、氏名・メールアドレスは含みません。URLは役員内での共有に限定してください（noindex＝検索避けであり、アクセス制限ではありません）。</div>
+
+  <div class="sec"><span class="badge">★</span><h2>先に読む注意点（数字の定義）</h2><span class="note">集計ルール：突合はメールアドレスの人単位（件数では数えない）</span></div>
+  <div class="callout warn">
+    <ol>
+      <li><b>件数ではなく人で数えています。</b>会員DBのメールアドレスを正規化（小文字・空白除去）してユニーク化した<b id="n-dball">—</b>人が母数です。同じ方の複数申込・複数決済は1人に集約しました。</li>
+      <li><b>「読書会」「講座」は申込（MyASPシナリオ登録・Stripe決済）です。</b>当日参加（Zoom入室）は区別できません。当日参加率は読書会ダッシュボード側のハッシュ化データにしかなく、メールアドレスでの突合はできません。</li>
+      <li><b>「本日在籍」</b>は資格有効期限内の在籍<b id="n-dbact">—</b>人です。資格別の内訳はメールアドレス単位で最新行の資格を採用し、断面も本日（司令塔は前月末基準）であるため、司令塔の月末基準内訳（M115／L60／C186／S5＝366）とは7人ずれます。</li>
+      <li><b>MyASPの申込リストは配信中＋配信解除済みを含みます</b>（仮登録は含みません）。「2026年累計」は2026年の読書会申込者を累積したシナリオで、<b>1/27回から9/16回（受付中）までの申込者を含みます</b>。結論の「2026年読書会のいずれか」はこの累計シナリオと回別4本（5/15〜8/21）の和集合で、<b>9/16回の受付分も含んでいます</b>。回別表の「2026年累計」行は上の各回の合計ではありません（個別に載せていない1/27・2/18・3/18・4/23回を含みます）。</li>
+      <li>講座は「10X目標発見WS」「Ken式実装プログラム」「Claude Codeセミナー」など<b id="n-course-scen">—</b>本のMyASPシナリオと、Stripeの講座・イベント決済（2026年1月〜／会員資格・突破Ai・図書館を除く）の合算です。Stripe決済のうち<b>説明のないもの・Invoice払い（12件）は講座と断定できないため除外</b>し、<b>読書会の有料席（1/27回）は講座ではなく読書会側</b>に数えています。<b>「10X目標発見ワークショップ」「メンター向け 営業自動化講座 紹介」は運営側が案内先として登録したリストの可能性があり</b>（会員DBとの重なりが95%超）、本人の申込と同一視できない場合があります。登録経路の確認までは「講座」に含めています。</li>
+    </ol>
+  </div>
+
+  <div class="sec"><span class="badge">A</span><h2>結論（人単位）</h2><span class="note">母数＝会員DBユニーク／本日在籍</span></div>
+  <div class="grid g4" id="kpi"></div>
+  <div class="grid g4" style="margin-top:10px" id="kpi2"></div>
+
+  <div class="sec"><span class="badge">B</span><h2>読書会 回別</h2><span class="note">申込ユニーク人と、会員DB・本日在籍との重なり</span></div>
+  <div class="grid g2">
+    <div class="card chart"><h3>回別：会員DBと重なる人（人）／申込ユニーク人（人）</h3><div id="chart-book"></div>
+      <div class="legend"><span><i class="dot b-db"></i>会員DBと重なる人</span><span><i class="dot b-out"></i>DB外の申込者</span></div></div>
+    <div class="card chart"><h3>回別：本日在籍<span class="n-dbact2">—</span>人のうち申込した人の割合</h3><div id="chart-book-rate"></div>
+      <div class="legend"><span><i class="dot b-book"></i>在籍比（%）</span></div></div>
+  </div>
+  <div class="tbl-wrap" style="margin-top:12px"><table id="tbl-book"></table></div>
+
+  <div class="sec"><span class="badge">C</span><h2>講座・イベント</h2><span class="note">MyASP講座シナリオ＋Stripe講座決済</span></div>
+  <div class="tbl-wrap"><table id="tbl-course"></table></div>
+
+  <div class="sec"><span class="badge">D</span><h2>資格別（本日在籍）</h2><span class="note">クルーは読書会と、メンター・リーダーは講座と重なる（重なりの実測・時系列は未確認）</span></div>
+  <div class="grid g2">
+    <div class="card chart"><h3>資格別：読書会あり／講座あり の割合（%）</h3><div id="chart-rank"></div>
+      <div class="legend"><span><i class="dot b-book"></i>読書会（2026年いずれか）</span><span><i class="dot b-course"></i>講座・イベント（いずれか）</span></div></div>
+    <div class="tbl-wrap"><table id="tbl-rank"></table></div>
+  </div>
+
+  <div class="sec"><span class="badge">E</span><h2>ファネル設計士としての読み方とご提案案</h2><span class="note">最終判断は西村・神田館長</span></div>
+  <div class="grid g2">
+    <div class="memo"><h4>読み方</h4><div id="memo-read"></div></div>
+    <div class="memo"><h4>ご提案案（ドラフト）</h4><div id="memo-next"></div></div>
+  </div>
+
+  <div class="sec"><span class="badge">F</span><h2>データ所在と更新手順</h2></div>
+  <div class="callout src">
+    取得元：MyASP（パブロス）読者検索＝読書会シナリオ7本・講座シナリオ8本／Stripe（読み取り専用キー）／顧客DBマスター「購入者」タブ（Sheets読み取り）。集計は <code>tools-ツール/pablos-participation-crossmatch/intersect.py</code>、描画は <code>build.py</code>（同じ器に数字だけ入れ替える）。メールアドレスは集計後に破棄し、このページには残していません。ビルド 2026/09/04 15:23。
+  </div>
+</main>
+<footer>©2026 パブロス株式会社／株式会社ルーチェ 経営参謀室。数値は実測値のみ（推測・補完なし）。</footer>
+<script>
+const D={"as_of": "2026-09-04", "db_all": 843, "db_active": 359, "book": [{"name": "『半うつ 憂鬱以上、うつ未満』", "date": "5/15", "rows": 413, "unique": 413, "db": 66, "act": 40}, {"name": "『正しい答えを導くための疑う思考』", "date": "6/23", "rows": 464, "unique": 464, "db": 70, "act": 43}, {"name": "『いつも機嫌よくいられる本』", "date": "7/17", "rows": 475, "unique": 475, "db": 71, "act": 58}, {"name": "『感性のある人が習慣にしていること』", "date": "8/21", "rows": 936, "unique": 936, "db": 223, "act": 169}, {"name": "『能力だけで選ばれる時代は終わり「存在」の時代が始まる。』（受付中）", "date": "9/16", "rows": 325, "unique": 325, "db": 104, "act": 67}, {"name": "Stripe 読書会決済（1/27回 有料席・一般／LINE。累計シナリオに全員含まれる）", "date": "Stripe", "rows": 55, "unique": 55, "db": 6, "act": 4}, {"name": "2025年エキスパート読書会参加者（参考・統合値には含めません）", "date": "2025年累計", "rows": 466, "unique": 458, "db": 58, "act": 29}, {"name": "2026年エキスパート読書会参加者（累計シナリオ・1/27〜9/16受付分を含む。上の各回の合計ではありません）", "date": "2026年累計", "rows": 2462, "unique": 2452, "db": 338, "act": 216}], "course": [{"name": "10X目標発見ワークショップ（無料メルマガ型・案内リストの可能性）", "date": "MyASP", "rows": 225, "unique": 225, "db": 214, "act": 141}, {"name": "8月 10X目標発見WS参加者", "date": "MyASP", "rows": 12, "unique": 12, "db": 10, "act": 6}, {"name": "Ken式 実装プログラム 第0回申込", "date": "MyASP", "rows": 93, "unique": 93, "db": 87, "act": 57}, {"name": "Ken式 実装プログラム 本申込", "date": "MyASP", "rows": 46, "unique": 46, "db": 43, "act": 23}, {"name": "Claude Code安心スタートセミナー 7/28", "date": "MyASP", "rows": 72, "unique": 72, "db": 67, "act": 47}, {"name": "メンター向け 営業自動化講座 紹介（案内リストの可能性）", "date": "MyASP", "rows": 91, "unique": 65, "db": 63, "act": 37}, {"name": "実践AIエージェントセミナー", "date": "MyASP", "rows": 34, "unique": 34, "db": 31, "act": 17}, {"name": "分野No.1ポジション設定WS", "date": "MyASP", "rows": 42, "unique": 42, "db": 41, "act": 24}, {"name": "Stripe 講座・イベント決済（2026/1〜）", "date": "Stripe", "rows": 253, "unique": 175, "db": 97, "act": 58}], "union": {"book_any": {"name": "2026年読書会のいずれか（1/27〜9/16受付分）", "unique": 2452, "db": 338, "act": 216}, "course_any": {"name": "講座・イベントのいずれか", "unique": 361, "db": 263, "act": 158}, "either": {"name": "読書会 or 講座", "unique": 2658, "db": 488, "act": 304}, "both": {"name": "読書会 and 講座", "unique": 155, "db": 113, "act": 70}}, "rank": [{"rank": "メンター", "n": 113, "book": 49, "course": 92, "either": 100}, {"rank": "リーダー", "n": 57, "book": 18, "course": 52, "either": 54}, {"rank": "クルー", "n": 184, "book": 147, "course": 13, "either": 148}, {"rank": "サポーター", "n": 5, "book": 2, "course": 1, "either": 2}]};
+const $=s=>document.querySelector(s);
+const el=(t,a,tx)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',t);for(const k in a)e.setAttribute(k,a[k]);if(tx!=null)e.textContent=tx;return e;};
+const pc=(a,b)=>b?(a/b*100).toFixed(1):'0.0';
+$('#n-dball').textContent=D.db_all;$('#n-dbact').textContent=D.db_active;document.querySelectorAll('.n-dbact2').forEach(e=>e.textContent=D.db_active);$('#n-course-scen').textContent=D.course.filter(c=>c.date==='MyASP').length;
+const isCum=b=>/累計|Stripe/.test(b.date);
+const U=D.union;
+const kpi=(cls,label,num,unit,foot)=>`<div class="card kpi accent-top ${cls}"><div class="label">${label}</div><div class="num">${num}<span class="unit">${unit}</span></div><div class="foot">${foot}</div></div>`;
+$('#kpi').innerHTML=[
+ kpi('', '会員DB（購入者タブ）ユニーク', D.db_all,'人','メールアドレスで重複を除いた母数'),
+ kpi('', '本日在籍（資格有効期限内）', D.db_active,'人',`会員DB ${D.db_all}人のうち`),
+ kpi('at-book','2026年読書会のいずれかに申込', U.book_any.db,'人',`<span class="pct">DB比 ${pc(U.book_any.db,D.db_all)}%</span>｜在籍 ${U.book_any.act}人（<span class="pct">${pc(U.book_any.act,D.db_active)}%</span>）`),
+ kpi('at-course','講座・イベントのいずれかに申込・決済', U.course_any.db,'人',`<span class="pct">DB比 ${pc(U.course_any.db,D.db_all)}%</span>｜在籍 ${U.course_any.act}人（<span class="pct">${pc(U.course_any.act,D.db_active)}%</span>）`)
+].join('');
+const b821=D.book.find(b=>b.date==='8/21'), b916=D.book.find(b=>b.date==='9/16'), bAll=D.book.find(b=>b.date==='2026年累計');
+$('#kpi2').innerHTML=[
+ kpi('', '読書会 or 講座 のどちらか', U.either.db,'人',`DB比 ${pc(U.either.db,D.db_all)}%｜在籍 ${U.either.act}人（${pc(U.either.act,D.db_active)}%）`),
+ kpi('', '読書会 and 講座 の両方', U.both.db,'人',`DB比 ${pc(U.both.db,D.db_all)}%｜在籍 ${U.both.act}人（${pc(U.both.act,D.db_active)}%）`),
+ kpi('at-book', `直近 ${b821?b821.date:'—'}回 に申込した会員`, b821?b821.db:'—','人',b821?`申込 ${b821.unique}人中｜在籍 ${b821.act}人（${pc(b821.act,D.db_active)}%）`:''),
+ kpi('at-book', '読書会だけの人（DB外）', bAll?bAll.unique-bAll.db:'—','人',bAll?`2026年（1/27〜9/16受付分）申込 ${bAll.unique}人のうちDB未掲載＝名簿の伸びしろ`:'')
+].join('');
+/* B: 回別 積み上げ横棒 */
+{const rows=D.book.filter(b=>!isCum(b));const W=520,H=26*rows.length+20,L=64,R=70;const max=Math.max(...rows.map(r=>r.unique));
+ const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%'});
+ rows.forEach((r,i)=>{const y=10+i*26,iw=W-L-R,w1=iw*r.db/max,w2=iw*(r.unique-r.db)/max;
+  svg.appendChild(el('text',{x:L-6,y:y+13,'text-anchor':'end','font-size':11,fill:'#6b7688'},r.date));
+  svg.appendChild(el('rect',{x:L,y:y,width:w1,height:16,rx:3,fill:'#1e3a5f'}));
+  svg.appendChild(el('rect',{x:L+w1,y:y,width:w2,height:16,rx:3,fill:'#cbd3de'}));
+  svg.appendChild(el('text',{x:L+4,y:y+12,'font-size':11,'font-weight':700,fill:'#fff'},r.db));
+  svg.appendChild(el('text',{x:L+w1+w2+6,y:y+12,'font-size':11,fill:'#6b7688'},`計${r.unique}`));});
+ $('#chart-book').appendChild(svg);}
+{const rows=D.book.filter(b=>!isCum(b));const W=520,H=26*rows.length+20,L=64,R=56;
+ const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%'});
+ rows.forEach((r,i)=>{const y=10+i*26,iw=W-L-R,v=r.act/D.db_active*100,w=iw*v/100;
+  svg.appendChild(el('text',{x:L-6,y:y+13,'text-anchor':'end','font-size':11,fill:'#6b7688'},r.date));
+  svg.appendChild(el('rect',{x:L,y:y,width:iw,height:16,rx:3,fill:'#f0f3f8'}));
+  svg.appendChild(el('rect',{x:L,y:y,width:w,height:16,rx:3,fill:'#2f6fb0'}));
+  svg.appendChild(el('text',{x:L+w+6,y:y+12,'font-size':11,'font-weight':700,fill:'#1e3a5f'},`${v.toFixed(1)}%（${r.act}人）`));});
+ $('#chart-book-rate').appendChild(svg);}
+/* B table */
+{const t=$('#tbl-book');let h='<thead><tr><th class="l">回</th><th class="l">課題本</th><th>申込ユニーク人</th><th>会員DBと重なる人</th><th>DB比</th><th>本日在籍と重なる人</th><th>在籍比</th><th>DB外の人</th></tr></thead><tbody>';
+ D.book.forEach(r=>{h+=`<tr${r.date==='2026年累計'?' class="total"':''}><td class="l">${r.date}</td><td class="l">${r.name}</td><td>${r.unique}</td><td>${r.db}</td><td>${pc(r.db,D.db_all)}%</td><td>${r.act}</td><td>${pc(r.act,D.db_active)}%</td><td>${r.unique-r.db}</td></tr>`;});
+ t.innerHTML=h+'</tbody>';}
+/* C table */
+{const t=$('#tbl-course');let h='<thead><tr><th class="l">講座・イベント</th><th class="l">出典</th><th>ユニーク人</th><th>会員DBと重なる人</th><th>DB比</th><th>本日在籍と重なる人</th><th>在籍比</th><th>DB外の人</th></tr></thead><tbody>';
+ D.course.forEach(r=>{h+=`<tr><td class="l">${r.name}</td><td class="l">${r.date}</td><td>${r.unique}</td><td>${r.db}</td><td>${pc(r.db,D.db_all)}%</td><td>${r.act}</td><td>${pc(r.act,D.db_active)}%</td><td>${r.unique-r.db}</td></tr>`;});
+ h+=`<tr class="total"><td class="l">いずれか（重複除去）</td><td class="l">—</td><td>${U.course_any.unique}</td><td>${U.course_any.db}</td><td>${pc(U.course_any.db,D.db_all)}%</td><td>${U.course_any.act}</td><td>${pc(U.course_any.act,D.db_active)}%</td><td>${U.course_any.unique-U.course_any.db}</td></tr>`;
+ t.innerHTML=h+'</tbody>';}
+/* D: 資格別 grouped bars */
+{const rows=D.rank;const W=520,H=200,L=40,B=30,T=14;const iw=W-L-14,ih=H-T-B,gw=iw/rows.length,bw=gw*0.28;
+ const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%'});const y=v=>T+ih*(1-v/100);
+ [0,25,50,75,100].forEach(g=>{svg.appendChild(el('line',{x1:L,y1:y(g),x2:W-14,y2:y(g),stroke:'#e3e8ef'}));svg.appendChild(el('text',{x:L-4,y:y(g)+4,'text-anchor':'end','font-size':10,fill:'#6b7688'},g+'%'));});
+ rows.forEach((r,i)=>{const cx=L+gw*(i+.5);const vb=r.book/r.n*100,vc=r.course/r.n*100;
+  svg.appendChild(el('rect',{x:cx-bw-2,y:y(vb),width:bw,height:y(0)-y(vb),rx:3,fill:'#2f6fb0'}));
+  svg.appendChild(el('text',{x:cx-bw/2-2,y:y(vb)-4,'text-anchor':'middle','font-size':10,'font-weight':700,fill:'#2f6fb0'},vb.toFixed(0)+'%'));
+  svg.appendChild(el('rect',{x:cx+2,y:y(vc),width:bw,height:y(0)-y(vc),rx:3,fill:'#c99a2e'}));
+  svg.appendChild(el('text',{x:cx+bw/2+2,y:y(vc)-4,'text-anchor':'middle','font-size':10,'font-weight':700,fill:'#c99a2e'},vc.toFixed(0)+'%'));
+  svg.appendChild(el('text',{x:cx,y:H-10,'text-anchor':'middle','font-size':11,fill:'#6b7688'},`${r.rank}（${r.n}人）`));});
+ $('#chart-rank').appendChild(svg);}
+{const t=$('#tbl-rank');let h='<thead><tr><th class="l">資格（在籍・最新行）</th><th>在籍人</th><th>読書会あり</th><th>率</th><th>講座あり</th><th>率</th><th>どちらか</th><th>率</th></tr></thead><tbody>';
+ let n=0,b=0,c=0,e=0;D.rank.forEach(r=>{n+=r.n;b+=r.book;c+=r.course;e+=r.either;h+=`<tr><td class="l"><span class="dot b-${({メンター:'mentor',リーダー:'leader',クルー:'crew',サポーター:'sup'})[r.rank]||'sup'}"></span> ${r.rank}</td><td>${r.n}</td><td>${r.book}</td><td>${pc(r.book,r.n)}%</td><td>${r.course}</td><td>${pc(r.course,r.n)}%</td><td>${r.either}</td><td>${pc(r.either,r.n)}%</td></tr>`;});
+ h+=`<tr class="total"><td class="l">合計</td><td>${n}</td><td>${b}</td><td>${pc(b,n)}%</td><td>${c}</td><td>${pc(c,n)}%</td><td>${e}</td><td>${pc(e,n)}%</td></tr>`;t.innerHTML=h+'</tbody>';}
+/* E memo */
+{const rk=k=>D.rank.find(r=>r.rank===k)||{n:0,book:0,course:0};const m=rk('メンター'),l=rk('リーダー'),c=rk('クルー');
+ $('#memo-read').innerHTML=`<p>会員DB ${D.db_all}人のうち、2026年の読書会に申し込んだ方は<b>${U.book_any.db}人（${pc(U.book_any.db,D.db_all)}%）</b>、講座・イベントに申込・決済された方は<b>${U.course_any.db}人（${pc(U.course_any.db,D.db_all)}%）</b>でした。本日在籍${D.db_active}人に絞ると、読書会<b>${pc(U.book_any.act,D.db_active)}%</b>・講座<b>${pc(U.course_any.act,D.db_active)}%</b>、どちらかに申し込んだ方は<b>${pc(U.either.act,D.db_active)}%</b>です。</p>
+ <p>資格別に見ると重なり方がはっきり分かれています。<b>クルーの${pc(c.book,c.n)}%は読書会の申込者と重なり</b>、<b>メンターの${pc(m.course,m.n)}%・リーダーの${pc(l.course,l.n)}%は講座の申込者と重なります</b>。今回の突合は「重なり」の実測で、入会前後の時系列までは取っていません。それでも、読書会が「集める入口」、講座が「上の資格へ運ぶベルトコンベア」という設計仮説と整合する分布です。</p>
+ <p>もうひとつ。2026年に読書会へ申し込んだ${bAll?bAll.unique:'—'}人のうち、会員DBに入っている方は${bAll?bAll.db:'—'}人（${bAll?pc(bAll.db,bAll.unique):'—'}%）で、<b>${bAll?bAll.unique-bAll.db:'—'}人が「読書会だけの人」</b>です。ここが名簿の最大の伸びしろです。</p>`;
+ $('#memo-next').innerHTML=`<ol style="margin:0 0 0 18px;padding:0">
+ <li><b>読書会だけの${bAll?bAll.unique-bAll.db:'—'}人への100日ファン化</b>：次回（9/16回）の申込者から、参加後100日の接点（次回案内・感想の共有・突破Aiの無料期間）を1本の導線に。突破Aiクルーの流入経路は読書会経由が73.6%（司令塔・突破AIタブA2、MyASP読者項目free9の実測、2026/8/31更新）という別の実測とも整合します。</li>
+ <li><b>クルー→リーダー／メンターの階段に講座を置く</b>：メンター・リーダーの8〜9割が講座と重なるなら、クルー${c.n}人（講座あり${pc(c.course,c.n)}%）への講座案内が、そのまま昇格の導線候補になります。</li>
+ <li><b>当日参加の突合を可能にする</b>：読書会ダッシュボード側の名簿はハッシュ化（司令塔・読書会タブの注記どおりHMAC-SHA256・固有salt）されています。同じ鍵を会員DB側にも適用すれば、氏名を出さずに「当日参加率」まで人単位で追えます。読書会ダッシュボードの担当者との鍵の共有が前提です。</li>
+ <li><b>会員DBの入力遅れの解消</b>：Stripe試用中で購入者タブに未登録の方が9/4時点で26人います（②月次増減表シート「課金判定日リスト」の「名前の出典＝Stripeのみ」・毎朝自動更新）。母数が正しくないと、ここの率も動きます。</li>
+ </ol><p class="src" style="margin:8px 0 0">※ いずれも「ご提案案」です。実施の可否・順番は西村・神田館長のご判断でお願いします。</p>`;}
+</script>
+</body>
+</html>
