@@ -1447,7 +1447,7 @@ function multiline(mount,labels,series,{showVal=false,trend=false}={}){
 barNet($('#chart-net'),monthly,'ym','net');
 barGroup($('#chart-joinleave'),monthly.map(m=>({ym:m.ym.slice(5),join:m.mj+m.lj+m.cj,lv:m.lv})));
 // Rank
-donut($('#chart-donut'),[{v:31,c:RANK.mentor},{v:21,c:RANK.leader},{v:87,c:RANK.crew}]);
+donut($('#chart-donut'),[{v:37,c:RANK.mentor},{v:25,c:RANK.leader},{v:300,c:RANK.crew}]);
 stack($('#chart-stack'),monthly);
 // month table（MyASP実測 05〜07 ＋ DBマスター遡及 01〜04・降順）
 {const tb=$('#tbl-month tbody');
