@@ -189,7 +189,7 @@
   <p class="lead"><b>2026年9月4日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
-  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字はStripe決済（パブロス）としています・「基準のうち」が顧客DB内訳／金額は下記⑥</span></div>
+  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字＝<b>顧客DB基準の内訳（会員数の正）</b>／小さい併記＝MyASP配信リスト（週刊パブロス購読者・参考）／金額は下記⑥</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
       <div class="label" style="justify-content:center">全体 当残（基準）</div>
@@ -197,10 +197,10 @@
       <div class="dd" id="dd-a-base"></div>
       <div class="foot" id="mb-base-foot">2026-07末・前月264→新規31・退会45</div>
     </div>
-    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num">37</div><div class="dd" id="dd-a-mentor"></div><div class="foot" style="color:var(--navy);font-weight:700">基準<span class="mbase">250</span>のうち <b id="mb-r-mentor">—</b>名</div><div class="foot" id="mb-q-mentor">7月 退会9</div></div>
-    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num">25</div><div class="dd" id="dd-a-leader"></div><div class="foot" style="color:var(--navy);font-weight:700">基準<span class="mbase">250</span>のうち <b id="mb-r-leader">—</b>名</div><div class="foot" id="mb-q-leader">7月 退会9</div></div>
-    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num">300</div><div class="dd" id="dd-a-crew"></div><div class="foot" style="color:var(--navy);font-weight:700">基準<span class="mbase">250</span>のうち <b id="mb-r-crew">—</b>名</div><div class="foot" id="mb-q-crew">7月 退会27</div></div>
-    <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num">0</div><div class="dd" id="dd-a-sup"></div><div class="foot" style="color:var(--navy);font-weight:700">基準<span class="mbase">250</span>のうち <b id="mb-r-sup">—</b>名</div><div class="foot" id="mb-q-sup">7月 退会0</div></div>
+    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="mb-r-mentor">—</div><div class="dd" id="dd-a-mentor"></div><div class="foot">配信リスト（MyASP）<b class="ml-mentor">37</b>名</div><div class="foot" id="mb-q-mentor">7月 退会9</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="mb-r-leader">—</div><div class="dd" id="dd-a-leader"></div><div class="foot">配信リスト（MyASP）<b class="ml-leader">25</b>名</div><div class="foot" id="mb-q-leader">7月 退会9</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="mb-r-crew">—</div><div class="dd" id="dd-a-crew"></div><div class="foot">配信リスト（MyASP）<b class="ml-crew">300</b>名</div><div class="foot" id="mb-q-crew">7月 退会27</div></div>
+    <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="mb-r-sup">—</div><div class="dd" id="dd-a-sup"></div><div class="foot">配信リスト（MyASP）<b class="ml-sup">0</b>名</div><div class="foot" id="mb-q-sup">7月 退会0</div></div>
   </div>
   <div class="grid g5" style="margin-top:10px">
     <div class="card kpi" style="text-align:center;padding:18px 12px">
@@ -527,24 +527,26 @@
 
 <!-- ================= RANK ================= -->
 <section class="tab" id="rank">
-  <p class="lead">資格ランク別の構成と、月次の入会・更新・退会の内訳です。<b>クルー層が全体の6割超</b>——ここをメンター／リーダーへ引き上げる階段（アップグレード動線）が伸びしろです。</p>
+  <p class="lead">資格ランク別の構成と、月次の入会・更新・退会の内訳です。構成比は<b>顧客DB基準（会員数の正）</b>で表示し、MyASP配信リストは参考として併記します。<b>クルー層が全体の約半分</b>——ここをメンター／リーダーへ引き上げる階段（アップグレード動線）が伸びしろです。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
-  <div class="sec"><span class="badge">A</span><h2>ランク構成</h2><span class="note">総会員 362名</span></div>
+  <div class="sec"><span class="badge">A</span><h2>ランク構成</h2><span class="note">総会員 <b id="rk-base">—</b>名（顧客DB基準＝会員数の正）／配信リスト（週刊パブロス購読者）<span class="ml-total">362</span>名 併記</span></div>
   <div class="grid g2">
-    <div class="chart"><h3>資格ランク別 構成比</h3><div id="chart-donut"></div>
-      <div class="legend">
+    <div class="chart"><h3>資格ランク別 構成比（顧客DB基準・<span class="mbym">2026年7月</span>末）</h3><div id="chart-donut"></div>
+      <div class="legend" id="rk-legend"></div>
+      <div class="legend" style="margin-top:6px;padding-top:6px;border-top:1px dashed #dde3ec">配信リスト（MyASP・参考）<span class="ml-total">362</span>名：
         <span><i class="dot b-mentor"></i>メンター 37（10.2%）</span>
         <span><i class="dot b-leader"></i>リーダー 25（6.9%）</span>
         <span><i class="dot b-crew"></i>クルー 300（82.9%）</span>
       </div>
     </div>
-    <div class="chart"><h3>月別 入会の資格ランク内訳</h3><div id="chart-stack"></div>
+    <div class="chart"><h3>月別 入会の資格ランク内訳（MyASP配信リスト）</h3><div id="chart-stack"></div>
       <div class="legend">
         <span><i class="dot b-mentor"></i>メンター</span>
         <span><i class="dot b-leader"></i>リーダー</span>
         <span><i class="dot b-crew"></i>クルー</span>
       </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px">※週刊パブロス購読リストへの追加（MyASPシート集計）ベース。顧客DB基準の月次推移は「長期推移」タブをご覧ください</div>
     </div>
   </div>
 
@@ -1218,12 +1220,13 @@ const unpaid=[
 const toppaRoutes={updated:'2026/09/04',reading:93,line:1,note:27,x:0,youtube:0,kubota:0,pr:0,direct:2,norec:8,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者131名（解約済み94名は除外）。うちfree9記録あり123名＝reading 93・note 27・line 1・direct 2、未記録8名。MyASP MCP実測・毎朝自動更新。'};
 /*TOPPA-ROUTES-END*/
 /*TOPPA-UPSELL-START*/const toppaUpsell={"updated":"2026/09/04","hist":[{"d":"2026/09/02","c":126,"l":4,"m":5,"o":0},{"d":"2026/09/03","c":124,"l":4,"m":4,"o":0},{"d":"2026/09/04","c":119,"l":5,"m":3,"o":0}]};/*TOPPA-UPSELL-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/09/04","cur":{"base":366,"aM":37,"aL":25,"aC":300,"aS":0,"bT":509,"bM":152,"bL":103,"bC":233,"bS":20,"sM":222,"sC":223,"sA":2742900,"tBase":366,"tM":115,"tL":60,"tC":186,"tS":5,"sRM":85,"sRL":44,"sRC":62,"sRO":31},"prev":{"base":364,"aM":37,"aL":25,"aC":297,"aS":0,"bT":513,"bM":152,"bL":104,"bC":236,"bS":20,"sM":223,"sC":225,"sA":2789100,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":86,"sRL":43,"sRC":62,"sRO":32,"date":"2026/09/03"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/09/04","cur":{"base":366,"aM":37,"aL":25,"aC":300,"aS":0,"bT":509,"bM":152,"bL":103,"bC":233,"bS":20,"sM":222,"sC":223,"sA":2742900,"tBase":366,"tM":115,"tL":60,"tC":186,"tS":5,"rM":115,"rL":60,"rC":186,"rS":5,"sRM":85,"sRL":44,"sRC":62,"sRO":31},"prev":{"base":364,"aM":37,"aL":25,"aC":297,"aS":0,"bT":513,"bM":152,"bL":104,"bC":236,"bS":20,"sM":223,"sC":225,"sA":2789100,"tBase":364,"tM":114,"tL":60,"tC":185,"tS":5,"sRM":86,"sRL":43,"sRC":62,"sRO":32,"date":"2026/09/03"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/09/04',total:509,ranks:{mentor:152,leader:103,crew:233,sup:20,member:1},up:[{t:'リーダー→メンター',n:37},{t:'クルー→リーダー',n:6},{t:'クルー→メンター',n:5}],upTotal:48,down:[{t:'メンター→リーダー',n:14},{t:'リーダー→クルー',n:10},{t:'メンター→クルー',n:8}],downTotal:32};
 /*DBMASTER-END*/
 /*GAPLIST-START*/const gapList=[];/*GAPLIST-END*/
 /*MASTERDB-START*/const masterdb={updated:'2026/09/04',ym:'2026-08',base:366,prevBase:250,newTotal:163,quitTotal:47,ranks:{mentor:115,leader:60,crew:186,sup:5},quit:{mentor:11,leader:11,crew:17,sup:8},today:{date:'2026/09/04',base:366,ranks:{mentor:115,leader:60,crew:186,sup:5}}};/*MASTERDB-END*/
+/*MYASP-START*/const myaspList={total:362,mentor:37,leader:25,crew:300,sup:0};/*MYASP-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07','2026-08'];
 const ltTotal=[168,168,276,276,276,276,276,473,473,473,473,474,449,449,384,384,400,444,481,330,347,349,358,408,264,250,366];
@@ -1447,7 +1450,10 @@ function multiline(mount,labels,series,{showVal=false,trend=false}={}){
 barNet($('#chart-net'),monthly,'ym','net');
 barGroup($('#chart-joinleave'),monthly.map(m=>({ym:m.ym.slice(5),join:m.mj+m.lj+m.cj,lv:m.lv})));
 // Rank
-donut($('#chart-donut'),[{v:37,c:RANK.mentor},{v:25,c:RANK.leader},{v:300,c:RANK.crew}]);
+{const mr=masterdb.ranks,tt=mr.mentor+mr.leader+mr.crew+mr.sup,pc=v=>tt?(v/tt*100).toFixed(1):'0.0';
+ donut($('#chart-donut'),[{v:mr.mentor,c:RANK.mentor},{v:mr.leader,c:RANK.leader},{v:mr.crew,c:RANK.crew},{v:mr.sup,c:RANK.sup}].filter(d=>d.v>0));
+ const lg=$('#rk-legend');if(lg)lg.innerHTML=[['mentor','メンター'],['leader','リーダー'],['crew','クルー'],['sup','サポーター']].map(([k,n])=>`<span><i class="dot b-${k}"></i>${n} ${mr[k]}（${pc(mr[k])}%）</span>`).join('');
+ const rb=$('#rk-base');if(rb)rb.textContent=tt;}
 stack($('#chart-stack'),monthly);
 // month table（MyASP実測 05〜07 ＋ DBマスター遡及 01〜04・降順）
 {const tb=$('#tbl-month tbody');
@@ -1838,11 +1844,11 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  const set=(id,cur,prev)=>{const e=$('#'+id);if(e==null||cur==null||prev==null)return;const d=cur-prev;
   const cls=d>0?'pos':(d<0?'neg':'');const t=d>0?'+'+d:(d<0?String(d):'±0');
   e.innerHTML=`前日比 <b class="${cls}">${t}</b>`;e.title=`前日（${p.date} 9時時点）との差`;};
- set('dd-a-base',c.base,p.base);set('dd-a-mentor',c.aM,p.aM);set('dd-a-leader',c.aL,p.aL);set('dd-a-crew',c.aC,p.aC);set('dd-a-sup',c.aS,p.aS);
+ set('dd-a-base',c.base,p.base);set('dd-a-mentor',c.rM,p.rM);set('dd-a-leader',c.rL,p.rL);set('dd-a-crew',c.rC,p.rC);set('dd-a-sup',c.rS,p.rS);
  set('dd-t-base',c.tBase,p.tBase);set('dd-t-m',c.tM,p.tM);set('dd-t-l',c.tL,p.tL);set('dd-t-c',c.tC,p.tC);set('dd-t-s',c.tS,p.tS);
  set('dd-b-total',c.bT,p.bT);set('dd-b-mentor',c.bM,p.bM);set('dd-b-leader',c.bL,p.bL);set('dd-b-crew',c.bC,p.bC);set('dd-b-sup',c.bS,p.bS);}}
 groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポーター'],[
-  {name:'MyASP',color:'#9aa4b2',data:[31,21,87,0]},
+  {name:'MyASP',color:'#9aa4b2',data:[myaspList.mentor,myaspList.leader,myaspList.crew,myaspList.sup]},
   {name:'DBマスター',color:'#2f6fb0',data:[masterdb.ranks.mentor,masterdb.ranks.leader,masterdb.ranks.crew,masterdb.ranks.sup]},
   {name:'Campus',color:'#c99a2e',data:[146,101,129,0]},
   {name:'NFT台帳',color:'#7a53c4',data:[80,108,64,75]},
