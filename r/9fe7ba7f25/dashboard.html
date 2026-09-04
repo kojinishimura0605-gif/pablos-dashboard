@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PABLOS 読書会×突破Ai 月次経営レポート 2026年8月版</title>
+<style>
+  :root{
+    --text:#000000; --label:#626264; --link:#233a66;
+    --bg-page:#FFFFFF; --bg-card:#F7F7FA; --bg-control:#F1F1F4;
+    --chart-1:#1a2233; --chart-2:#233a66; --chart-3:#3560c9; --chart-4:#7096F8; --chart-5:#C5D7FB; --chart-6:#E8EEF9;
+    --brand:#D0000D; --brand-soft:#FBE9EA;
+    --accent-1:#A58000; --accent-2:#D2A400; --accent-3:#FFC700;
+    --neg:#CE0000; --neg-soft:#FDEEEE;
+    --none:#8b93a3; --none-soft:#EEF0F3;
+    --neutral-2:#666666; --neutral-4:#CCCCCC;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Meiryo UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;margin:0;background:var(--bg-card);color:var(--text);line-height:1.65;font-size:13px}
+  .wrap{max-width:900px;margin:0 auto;padding:18px 20px 60px}
+  .page{background:var(--bg-page);border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.06);padding:26px 30px;margin-top:18px}
+  h1{font-size:22px;margin:4px 0 2px;line-height:1.4}
+  h2{font-size:17px;border-left:6px solid var(--brand);padding-left:10px;margin:2px 0 4px}
+  h3{font-size:14px;margin:16px 0 6px;color:var(--chart-1)}
+  .h2note{font-size:11px;color:var(--label);margin:0 0 14px;padding-left:16px}
+  .hero{background:linear-gradient(135deg,var(--chart-1),var(--chart-2));color:#fff;border-radius:8px;padding:30px 34px;margin-top:0;border-top:6px solid var(--brand)}
+  .hero .sub{color:var(--chart-5);font-size:12px;margin:0 0 8px}
+  .hero h1{color:#fff}
+  .hero .flag{background:rgba(255,255,255,.12);border-left:4px solid var(--brand);padding:12px 16px;margin-top:16px;font-size:15px;font-weight:bold;border-radius:0 6px 6px 0}
+  .hero .meta{font-size:11px;color:var(--chart-5);margin-top:16px}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .tile{background:var(--bg-card);border-radius:6px;padding:10px 12px;border-top:4px solid var(--chart-2)}
+  .tile.warn{border-top-color:var(--neg)}
+  .tile.gold{border-top-color:var(--accent-2)}
+  .tile.none{border-top-color:var(--none)}
+  .tile .k{font-size:10.5px;color:var(--label)}
+  .tile .v{font-size:18px;font-weight:bold;line-height:1.3}
+  .tile .v.none{color:var(--none)}
+  .tile .s{font-size:10px;color:var(--label)}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12px}
+  th{background:var(--chart-6);color:var(--chart-1);font-size:11.5px;padding:6px 8px;border:1px solid var(--neutral-4);text-align:left}
+  td{padding:6px 8px;border:1px solid var(--neutral-4);vertical-align:top}
+  tr:nth-child(even) td{background:var(--bg-card)}
+  td.r{text-align:right;white-space:nowrap}
+  .callout{background:var(--chart-6);border-left:5px solid var(--chart-2);padding:10px 14px;border-radius:0 6px 6px 0;margin:12px 0;font-size:12.5px}
+  .callout.prop{background:#FDF6E3;border-left-color:var(--accent-2)}
+  .callout.neg{background:var(--neg-soft);border-left-color:var(--neg)}
+  .badge{display:inline-block;font-size:10px;font-weight:bold;border-radius:3px;padding:1px 7px;margin-right:6px;vertical-align:middle}
+  .badge.fact{background:var(--chart-2);color:#fff}
+  .badge.calc{background:var(--chart-4);color:#fff}
+  .badge.prop{background:var(--accent-2);color:#fff}
+  .badge.chk{background:var(--neutral-2);color:#fff}
+  .badge.none{background:var(--none);color:#fff}
+  .neg-v{color:var(--neg);font-weight:bold}
+  .pos-v{color:var(--chart-2);font-weight:bold}
+  .flat-v{color:var(--neutral-2);font-weight:bold}
+  .none-v{color:var(--none);font-weight:bold}
+  .note{font-size:10.5px;color:var(--label);margin:6px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:var(--bg-card);border-radius:6px;padding:12px 14px;border-top:3px solid var(--chart-3)}
+  .card.prop{border-top-color:var(--accent-2)}
+  .card.warn{border-top-color:var(--neg)}
+  .card h4{margin:0 0 6px;font-size:12.5px;color:var(--chart-1)}
+  .bar{display:flex;align-items:center;gap:8px;margin:2px 0;font-size:11px}
+  .bar .lb{width:150px;color:var(--label);text-align:right;flex:none}
+  .bar .tr{flex:1;background:var(--bg-control);border-radius:3px;height:13px;position:relative}
+  .bar .fl{background:var(--chart-3);height:13px;border-radius:3px}
+  .bar .fl.last{background:var(--chart-1)}
+  .bar .fl.gold{background:var(--accent-2)}
+  .bar .fl.hatch{background:repeating-linear-gradient(135deg,var(--none) 0 3px,transparent 3px 7px)}
+  .bar .vl{width:120px;flex:none;font-weight:bold;font-size:10.5px}
+  .footer{font-size:10.5px;color:var(--label);text-align:center;margin-top:22px}
+  a.dl{position:fixed;right:18px;bottom:18px;background:var(--brand);color:#fff;text-decoration:none;font-weight:bold;font-size:13px;padding:12px 20px;border-radius:24px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  a.dl:hover{background:#a3000a}
+  @media (max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.bar .lb{width:100px}}
+  @media print{
+    @page{size:A4;margin:12mm 11mm}
+    body{background:#fff;font-size:11.5px}
+    .wrap{max-width:none;padding:0}
+    .page{box-shadow:none;border-radius:0;padding:2mm 1mm;margin-top:0;page-break-after:always}
+    .page:last-child{page-break-after:auto}
+    .hero{border-radius:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .tile,.card,.callout,table,.bar{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+    a.dl{display:none}
+    .tiles{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- P1 表紙 -->
+<section class="page hero">
+  <p class="sub">PABLOS 読書会×突破Ai 月次経営レポート｜2026年8月版（最新回 2026-08-21・Stripe 8月度・分析基準日 2026年9月4日）</p>
+  <h1>集める力は8月に最高値。留める力は歴代最低。<br>次の主戦場は「読書会→突破Aiの100日」です。</h1>
+  <div class="flag">読書会申込937名（前月+467名）・突破Aiクルー新規流入137名・Stripe売上¥6,328,900（前月+¥1,225,900）は、いずれも2026年1月以降の最大値です。<br>一方で当日参加率22.6%・NPS 10.0は全20回で最低。無料期間の第1陣16件は課金7件（43.8%）にとどまり、解約9件のうち7件が登録から7日以内でした。</div>
+  <p class="meta">
+    2026年9月4日｜作成: 西村公児（CMO・ファネル設計士）｜宛先: 神田CEO・関係者（9月7日ミーティング用）<br>
+    数値出典: PABLOS会員ステータス司令塔（9/4朝の自動更新断面）／PABLOSエキスパート読書会ダッシュボード（8/24更新・8/21回時点・ハッシュ化ID集計）／Stripe（8/31昼再取得・9/4 11:17突合）<br>
+    <span style="color:#FFC700">■社外秘</span>｜本資料の数値は各データソースからの転記（<b>実測</b>）または転記値からの機械計算（<b>計算値</b>）のみで構成し、推測による補完は行っていません。取得の仕組みが無い指標は<b>未計測</b>として空欄にしています。
+  </p>
+</section>
+
+<!-- P2 主要KPI -->
+<section class="page">
+  <h2>1. 主要KPI（今月 2026年8月 vs 前月 2026年7月）</h2>
+  <p class="h2note">凡例: <span class="badge fact">実測</span>データソースの転記値　<span class="badge calc">計算値</span>転記値からの機械計算　<span class="badge none">未計測</span>取得の仕組みなし　<span class="badge prop">提案</span>ファネル設計士のご提案　／　数値の色: <span class="pos-v">青=改善方向</span> ・ <span class="neg-v">赤=注視</span> ・ <span class="flat-v">グレー=横ばい／比較不能</span></p>
+  <div class="tiles">
+    <div class="tile"><div class="k">読書会 申込人数（延べ） <span class="badge fact">実測</span></div><div class="v">937 名</div><div class="s">前月比 <span class="pos-v">+467名</span>（+99.4%）｜ユニーク929名・歴代3位</div></div>
+    <div class="tile"><div class="k">読書会 当日参加 <span class="badge fact">実測</span></div><div class="v">212 名</div><div class="s">前月比 <span class="pos-v">+70名</span>（+49.3%）</div></div>
+    <div class="tile warn"><div class="k">当日参加率（Show-up率） <span class="badge calc">計算値</span></div><div class="v">22.6%</div><div class="s">前月比 <span class="neg-v">-7.6pt</span>｜全20回で最低（目安30%）</div></div>
+    <div class="tile warn"><div class="k">NPS <span class="badge fact">実測</span></div><div class="v">10.0</div><div class="s">前月比 <span class="neg-v">-52.5pt</span>｜全20回で最低（優良の目安+50）</div></div>
+    <div class="tile"><div class="k">F2転換率（申込ベース） <span class="badge fact">実測</span></div><div class="v">11.4%</div><div class="s">前回集計比 <span class="pos-v">+6.3pt</span>（5.1%→）｜目標25%は未達</div></div>
+    <div class="tile"><div class="k">ロイヤル継続率（申込ベース） <span class="badge fact">実測</span></div><div class="v">44.4%</div><div class="s">前回集計比 <span class="pos-v">+12.9pt</span>（31.5%→）｜目標60%は未達</div></div>
+    <div class="tile"><div class="k">突破Aiクルー 新規流入（Stripe登録・8月） <span class="badge fact">実測</span></div><div class="v">137 名</div><div class="s">前月比 <span class="pos-v">+125名</span>（7月12名・確定値）｜9/1朝断面で固定（解約で減る定義・9/4断面では113名）</div></div>
+    <div class="tile warn"><div class="k">無料期間→課金（第1陣 Trial→Paid） <span class="badge calc">計算値</span></div><div class="v">43.8%</div><div class="s">7件／16件｜前月 <span class="flat-v">―</span>（初回判定）｜解約9件中7件が登録7日以内</div></div>
+    <div class="tile"><div class="k">Stripe売上（返金後） <span class="badge fact">実測</span></div><div class="v">¥6,328,900</div><div class="s">前月比 <span class="pos-v">+¥1,225,900</span>（+24.0%）｜267件・1月以降最大</div></div>
+    <div class="tile"><div class="k">月会員資格系 受注 <span class="badge fact">実測</span></div><div class="v">137 件</div><div class="s">¥1,452,000｜前月比 <span class="pos-v">+15件・+¥310,200</span>（+27.2%）</div></div>
+    <div class="tile"><div class="k">会員数の正（当残・8月末） <span class="badge fact">実測</span></div><div class="v">366 名</div><div class="s">前月比 <span class="pos-v">+116名</span>（+46.4%）｜7月末250名（6月末比-14）から反転</div></div>
+    <div class="tile warn"><div class="k">未決済（決済失敗後の未回収） <span class="badge fact">実測</span></div><div class="v">2 名</div><div class="s">7/24・8/26の各1件｜前月 <span class="flat-v">―</span>（集計開始）</div></div>
+  </div>
+  <div class="callout"><b>総評</b>: 8月は「集める」がすべて最高値を更新しました。読書会申込937名（+467）、突破Aiクルー流入137名（7月12名）、Stripe売上¥6,328,900（+24.0%）、会員数の正366名（+116）です。一方で「留める」は逆方向に動いています。当日参加率22.6%とNPS 10.0は全20回で最低、無料期間の第1陣は入口16件のうち課金7件（43.8%）で、解約9件中7件が登録から7日以内でした。F2転換率11.4%・ロイヤル継続率44.4%は前回集計から大きく改善しましたが目標（25%・60%）には届いていません。入口は拡大・出口は未確定、中間工程（読書会の当日参加と登録直後の2週間）の立て直しが、読書会→突破Ai→クルーというベルトコンベアの要衝です。</div>
+  <p class="note">※注記（データ整合性）: ①会員数の正366名は②月次増減表の8月末値（9/1切替）です。無料期間中のクルー予備軍がこの数に含まれるかは未検証で、含まれる場合は課金前の会員が先に乗っています。②突破Aiクルーの母集団は3ソースで一致していません（Stripe登録累計205件・解約78件・無料期間中119名＋課金開始8名／顧客DB176名／MyASPシナリオ有効131名・いずれも9/1〜9/4断面）。③司令塔の突破AIタブ内で、予備軍カード「今月末まで34名」とカレンダー「9月33名（クルー30）」が同じ9/4断面で一致していません。④F2転換率・ロイヤル継続率は「前月」ではなく読書会ダッシュボードの前回集計値との比較です。</p>
+</section>
+
+<!-- P3 アラート信号機＋差異一覧 -->
+<section class="page">
+  <h2>2. アラート信号機と前月対比 差異一覧</h2>
+  <p class="h2note">毎月同一ロジックで再集計した12KPIの当月値・前月値・差異。▲=改善方向／▼=注視方向 <span class="badge fact">実測</span><span class="badge calc">計算値</span></p>
+  <h3>アラート信号機（毎月チェック）</h3>
+  <table>
+    <tr><th style="width:70px">信号</th><th>KPI / 今月の状況</th></tr>
+    <tr><td>🔴 赤</td><td>留める力: 当日参加率22.6%・NPS 10.0が全20回で最低（7月30.2%・62.5）。集める力（申込937）が留める力を追い越しました</td></tr>
+    <tr><td>🔴 赤</td><td>登録直後の解約: 第1陣16件のうち解約9件、その7件が登録7日以内（3件は当日）。8/21登録61件も8/31時点で12件（19.7%）が解約済み</td></tr>
+    <tr><td>🔴 赤</td><td>神田CEOメモ9カードのうち7枚が未計測（Action創出率・自由選択認知率・紹介意向／経由率・違和感率・eLTV・CPA・eLTV/CPA）。今出せるのはNPSとリピート参加率の2枚。9/16回が初回取得の機会</td></tr>
+    <tr><td>🟡 黄</td><td>F2転換率11.4%（目標25%）・ロイヤル継続率44.4%（目標60%）: 前回集計（5.1%・31.5%）から大幅改善も未達。直近3回のコホート継続率は46.7→52.4→57.4%と右肩上がり</td></tr>
+    <tr><td>🟡 黄</td><td>課金判定の山: 9/27〜10/4の8日間に103名（8/31昼断面・クルー限定・無料期間中135名の日別分布。10/4に49名＝全員8/21登録）。9月判定33名・10月94名（9/4断面・全資格127名。別集計のため103名とは母数が異なります）</td></tr>
+    <tr><td>🟢 緑</td><td>集める力: 申込937名・流入137名・売上¥6,328,900・月会員資格系137件が、いずれも2026年1月以降の最大値</td></tr>
+    <tr><td>🟢 緑</td><td>会員数の正: 8月末366名（+116）。7月末の前月比マイナス（-14）から反転</td></tr>
+  </table>
+  <h3>前月対比 差異一覧（全12KPI）</h3>
+  <table>
+    <tr><th>KPI</th><th>前月（2026年7月）</th><th>今月（2026年8月）</th><th>差異</th><th>方向</th></tr>
+    <tr><td>読書会 申込人数（延べ）</td><td>470名</td><td><b>937名</b></td><td class="pos-v">+467名（+99.4%）</td><td class="pos-v">▲ 改善（歴代3位）</td></tr>
+    <tr><td>読書会 当日参加</td><td>142名</td><td><b>212名</b></td><td class="pos-v">+70名（+49.3%）</td><td class="pos-v">▲ 改善</td></tr>
+    <tr><td>当日参加率</td><td>30.2%</td><td><b>22.6%</b></td><td class="neg-v">-7.6pt</td><td class="neg-v">▼ 注視（全20回で最低）</td></tr>
+    <tr><td>NPS</td><td>62.5</td><td><b>10.0</b></td><td class="neg-v">-52.5pt</td><td class="neg-v">▼ 注視（全20回で最低）</td></tr>
+    <tr><td>F2転換率（申込ベース）</td><td>5.1% ※</td><td><b>11.4%</b></td><td class="pos-v">+6.3pt</td><td class="pos-v">▲ 改善（目標25%は未達）</td></tr>
+    <tr><td>ロイヤル継続率（申込ベース）</td><td>31.5% ※</td><td><b>44.4%</b></td><td class="pos-v">+12.9pt</td><td class="pos-v">▲ 改善（目標60%は未達）</td></tr>
+    <tr><td>突破Aiクルー 新規流入</td><td>12名（確定値）</td><td><b>137名</b></td><td class="pos-v">+125名</td><td class="pos-v">▲ 改善（導線開設は7/17）</td></tr>
+    <tr><td>無料期間→課金（Trial→Paid）</td><td>―</td><td><b>43.8%（7/16件）</b></td><td class="flat-v">―（初回判定）</td><td class="neg-v">▼ 注視（解約は登録直後に集中）</td></tr>
+    <tr><td>Stripe売上（返金後）</td><td>¥5,103,000（230件）</td><td><b>¥6,328,900（267件）</b></td><td class="pos-v">+¥1,225,900（+24.0%）</td><td class="pos-v">▲ 改善（1月以降最大）</td></tr>
+    <tr><td>月会員資格系 受注</td><td>122件・¥1,141,800</td><td><b>137件・¥1,452,000</b></td><td class="pos-v">+15件・+¥310,200（+27.2%）</td><td class="pos-v">▲ 改善</td></tr>
+    <tr><td>会員数の正（当残・月末）</td><td>250名（7月末）</td><td><b>366名（8月末）</b></td><td class="pos-v">+116名（+46.4%）</td><td class="pos-v">▲ 改善（前月は-14）</td></tr>
+    <tr><td>未決済（未回収）</td><td>―</td><td><b>2名</b></td><td class="flat-v">―（集計開始）</td><td class="flat-v">― 個別追跡でゼロ運用</td></tr>
+  </table>
+  <p class="note">※F2転換率・ロイヤル継続率の「前月」欄は、読書会ダッシュボードの前回集計値（司令塔の読書会タブに記載）です。突破Aiクルー7月の12名は内部テストアカウントを除いた確定値、8月の137名は登録日ベース・9/1朝断面の当時有効分で、本レポートではこの断面で固定します（同じ定義は解約が進むと減り、9/4断面では113名。次回9月版からは登録累計（解約含む）を併記します。集計方法が異なるため7月との差異は参考値）。</p>
+</section>
+
+<!-- P4 ファネル＋区分 -->
+<section class="page">
+  <h2>3. 読書会→突破Ai ファネル（100人換算）と顧客区分</h2>
+  <p class="h2note">8/21回コホート（申込ユニーク929名＝100）。神田CEOメモ2-3の仮置き（Show-up 30%・Trial→Paid 50%・欠席者再活性20%）を司令塔の実測に置き換えた表です <span class="badge fact">実測</span><span class="badge calc">計算値</span></p>
+  <div class="bar"><div class="lb">新規読書会登録（申込）</div><div class="tr"><div class="fl" style="width:100%"></div></div><div class="vl">929名＝100</div></div>
+  <div class="bar"><div class="lb">└ 当日参加</div><div class="tr"><div class="fl gold" style="width:22.8%"></div></div><div class="vl">212名＝22.8</div></div>
+  <div class="bar"><div class="lb">└ 欠席</div><div class="tr"><div class="fl hatch" style="width:77.2%"></div></div><div class="vl">717名＝77.2</div></div>
+  <div class="bar"><div class="lb">クレカ登録（8/21当日）</div><div class="tr"><div class="fl" style="width:6.6%"></div></div><div class="vl">61件＝6.6</div></div>
+  <div class="bar"><div class="lb">└ 登録後に解約（8/31時点）</div><div class="tr"><div class="fl hatch" style="width:1.3%"></div></div><div class="vl">12件＝1.3（19.7%）</div></div>
+  <div class="bar"><div class="lb">10/4の課金判定に残る</div><div class="tr"><div class="fl last" style="width:5.3%"></div></div><div class="vl">49名＝5.3</div></div>
+  <div class="bar"><div class="lb">有料化（Trial→Paid）</div><div class="tr"></div><div class="vl none-v">10/4判定待ち</div></div>
+  <div class="bar"><div class="lb">30日／90日継続・上位プラン</div><div class="tr"></div><div class="vl none-v">未計測（9月末から）</div></div>
+  <table>
+    <tr><th>段階</th><th>神田メモの仮置き</th><th>司令塔の実測（8/21回）</th><th>備考</th></tr>
+    <tr><td>Show-up率</td><td class="r">30%</td><td class="r"><b>22.8%</b>（延べ基準22.6%）</td><td>2026年平均30.1%・2025年平均53.1%</td></tr>
+    <tr><td>参加者からクレカ登録</td><td class="r">100%（30/30）</td><td class="r"><b>28.8%</b>（61/212・参考）</td><td>当日登録61件が全員参加者経由かは未分離（欠席経由が混入し得る）</td></tr>
+    <tr><td>欠席者再活性率</td><td class="r">20%</td><td class="r none-v">未計測</td><td>再告知の専用リンクが無く経路を分けられない</td></tr>
+    <tr><td>Trial→Paid</td><td class="r">50%</td><td class="r"><b>43.8%</b>（第1陣7/16件）</td><td>8/21登録組は10/4判定</td></tr>
+    <tr><td>上位プラン移行</td><td class="r">各1.8%</td><td class="r"><b>6.3%</b>（登録時の資格選択）</td><td>クルー119・リーダー5・メンター3。課金後の移行とは別定義</td></tr>
+  </table>
+
+  <h3>顧客区分マトリクス：読書会・講座の購入歴 × 突破Aiの状態（神田メモ3-5）</h3>
+  <table>
+    <tr><th>読書会・講座の区分</th><th>突破Ai 無料期間中</th><th>有料（課金開始）</th><th>解約済み</th><th>案内の扱い</th></tr>
+    <tr><td><b>講座・イベントの購入歴あり</b><br><span class="note">Book＆Pen 25件・有料読書会9件・10Xフューチャーマッピング5件・講座費用2件・フォトリーディング1件</span></td><td class="r"><b>30名</b> <span class="badge fact">実測</span></td><td class="r">0名 <span class="badge fact">実測</span></td><td class="r">10名 <span class="badge fact">実測</span></td><td>再無料を約束しない。クレカ登録の一律案内は分母から外す</td></tr>
+    <tr><td>読書会の申込あり（購入なし）</td><td class="r none-v">未計測</td><td class="r none-v">未計測</td><td class="r none-v">未計測</td><td>MyASP申込ハッシュID×Stripe顧客IDの接続が前提</td></tr>
+    <tr><td>読書会の申込なし</td><td class="r none-v">未計測</td><td class="r none-v">未計測</td><td class="r none-v">未計測</td><td>同上（free9=reading以外の経路38名が候補）</td></tr>
+  </table>
+  <table>
+    <tr><th>顧客DB基準の重複（9/4決定・計上）</th><th class="r">購入者</th><th class="r">うち会員（メンター・リーダー・クルー）</th><th class="r">うち現在有効</th><th>内訳</th></tr>
+    <tr><td><b>コーチファイ講座購入者</b>（フューチャーマッピング・フォトリーディング系・Stripe）× 顧客DBマスター「購入者」タブ</td><td class="r">48名</td><td class="r"><b>30名</b> <span class="badge fact">実測</span></td><td class="r">16名</td><td>最上位資格：メンター19・リーダー8・クルー3。期限切れ14名。メール完全一致・顧客DB 1,177行（843メール）</td></tr>
+  </table>
+  <table>
+    <tr><th>30名 ÷ 顧客DB数（分母の定義）</th><th class="r">分母</th><th class="r">分子</th><th class="r">割合</th></tr>
+    <tr><td>顧客DBのユニークメール全体（資格問わず）</td><td class="r">843名</td><td class="r">30名</td><td class="r"><b>3.6%</b> <span class="badge calc">計算値</span></td></tr>
+    <tr><td>メンター・リーダー・クルーの資格者（全期間・期限切れ含む）</td><td class="r">717名</td><td class="r">30名</td><td class="r"><b>4.2%</b> <span class="badge calc">計算値</span></td></tr>
+    <tr><td>メンター・リーダー・クルーの現在有効者（今日基準）</td><td class="r">354名</td><td class="r">16名（現在有効の重複）</td><td class="r"><b>4.5%</b> <span class="badge calc">計算値</span></td></tr>
+  </table>
+  <p class="note">※分母は顧客DBマスター「購入者」タブ（2026-09-04時点）の実測。資格者717名の内訳はメンター225・リーダー224・クルー345、現在有効354名の内訳はメンター115・リーダー60・クルー186。司令塔の当残366名との差は、当残が8月末基準でサポーター5名を含むため。代表値は分子・分母の期間が揃う4.2%（全期間）または4.5%（現在有効）。<br>※上のマトリクス（30名）はStripeサブスク基準＝突破Ai以降の契約者だけの母集団で、顧客DB基準の30名とは別集計です。数字が同じ30でも中身は違います。会員かどうかの判定は顧客DBを正とします。</p>
+  <h3>突破Aiクルー 流入経路（MyASP free9・有効131名・9/4断面）</h3>
+  <table>
+    <tr><th>経路</th><th class="r">人数</th><th class="r">構成比</th><th>読み解き</th></tr>
+    <tr><td>reading（読書会）</td><td class="r"><b>93名</b></td><td class="r">71%</td><td>読書会が突破Aiの上流。読書会の定着がそのまま新規500名の生命線</td></tr>
+    <tr><td>note</td><td class="r">27名</td><td class="r">21%</td><td>第2の経路。読書会と独立した流入源として育てる価値あり</td></tr>
+    <tr><td>direct／line</td><td class="r">3名</td><td class="r">2%</td><td>direct 2・line 1</td></tr>
+    <tr><td>x／YouTube／kubota／PR</td><td class="r">0名</td><td class="r">0%</td><td>記録0件</td></tr>
+    <tr><td>未記録</td><td class="r">8名</td><td class="r">6%</td><td>free9未入力</td></tr>
+  </table>
+  <div class="callout"><b>読み解き</b>: 講座購入歴のある30名は資格登録が8月28名・9月2名で、講座の購入は2025年10月〜2026年1月に集中しています。「先に講座を買った人が、後から突破Ai経由でクルーに入った」層です。神田CEOメモが最も避けたい「一律のクレカ登録案内」の対象外にすべき名簿が、すでに30名実在します。逆向きの数字（読書会申込929名のうち突破Ai登録は何名か）は、ハッシュIDとStripe顧客IDの接続が無いため出せません。メンター0名はメンター会費がInvoice払い中心でStripeサブスクに乗らないためです。</div>
+</section>
+
+<!-- P5 コホート -->
+<section class="page">
+  <h2>4. コホート分析：読書会の継続率と突破Aiの課金判定</h2>
+  <p class="h2note">読書会＝各開催回の申込者のうち直近回（8/21）も申込した比率（申込ベース・ハッシュ化ID）。突破Ai＝Stripeサブスクの無料期間終了日（課金判定日）別 <span class="badge fact">実測</span></p>
+  <h3>読書会コホート：基準回 → 8/21回 継続率</h3>
+  <table>
+    <tr><th>基準回</th><th class="r">申込ユニーク</th><th class="r">8/21回もリピート</th><th class="r">継続率</th><th>判定</th></tr>
+    <tr><td>2025-07-23</td><td class="r">33名</td><td class="r">11名</td><td class="r">33.3%</td><td>🔴 要対策</td></tr>
+    <tr><td>2025-08-28</td><td class="r">52名</td><td class="r">14名</td><td class="r">26.9%</td><td>🔴 要対策</td></tr>
+    <tr><td>2025-09-10</td><td class="r">67名</td><td class="r">12名</td><td class="r">17.9%</td><td>🔴 要対策</td></tr>
+    <tr><td>2025-09-19</td><td class="r">56名</td><td class="r">19名</td><td class="r">33.9%</td><td>🔴 要対策</td></tr>
+    <tr><td>2025-10-21</td><td class="r">63名</td><td class="r">22名</td><td class="r">34.9%</td><td>🔴 要対策</td></tr>
+    <tr><td>2025-12-03</td><td class="r">303名</td><td class="r">75名</td><td class="r">24.8%</td><td>🔴 要対策</td></tr>
+    <tr><td>2026-01-27</td><td class="r">94名</td><td class="r">35名</td><td class="r">37.2%</td><td>🟡 注意</td></tr>
+    <tr><td>2026-02-18</td><td class="r">595名</td><td class="r">158名</td><td class="r">26.6%</td><td>🔴 要対策</td></tr>
+    <tr><td>2026-03-18</td><td class="r">984名</td><td class="r">237名</td><td class="r">24.1%</td><td>🔴 要対策</td></tr>
+    <tr><td>2026-04-23</td><td class="r">1,047名</td><td class="r">364名</td><td class="r">34.8%</td><td>🔴 要対策</td></tr>
+    <tr><td>2026-05-15</td><td class="r">411名</td><td class="r">192名</td><td class="r">46.7%</td><td>🟡 注意</td></tr>
+    <tr><td>2026-06-23</td><td class="r">458名</td><td class="r">240名</td><td class="r">52.4%</td><td>🟢 健全</td></tr>
+    <tr><td>2026-07-17</td><td class="r">470名</td><td class="r">270名</td><td class="r"><b>57.4%</b></td><td>🟢 健全</td></tr>
+  </table>
+  <p class="note">※判定基準（毎月同一・本レポートで設定）: 継続率50%以上=🟢健全／35%以上50%未満=🟡注意／35%未満=🔴要対策。古い基準回ほど経過回数が多く、率が下がるのは構造的です。直近3回（5/15→6/23→7/17）は46.7→52.4→57.4%と右肩上がりで、「留める力」が集める力に追いつき始めた兆しです。8/21回の申込929名が次回9/16回にどれだけ残るかが、9月版の最重要コホートになります。</p>
+
+  <h3>突破Ai 課金判定コホート（Stripeサブスク・無料期間14日＋30日）</h3>
+  <table>
+    <tr><th>コホート</th><th class="r">入口</th><th class="r">課金開始</th><th class="r">解約</th><th class="r">判定待ち</th><th>状況</th></tr>
+    <tr><td>第1陣（判定日〜8/31）</td><td class="r">16件</td><td class="r"><b>7件（43.8%）</b></td><td class="r">9件（56.3%）</td><td class="r">0</td><td>解約9件の登録→解約日数: 0・0・0・1・3・5・6・13・14日（7日以内が7件）</td></tr>
+    <tr><td>9月判定組</td><td class="r">33名</td><td class="r">―</td><td class="r">―</td><td class="r">33名</td><td>クルー30・リーダー2・メンター1（9/4断面）。9/3の1名から順次。ステップメール5通の初回検証対象</td></tr>
+    <tr><td>10月判定組</td><td class="r">94名</td><td class="r">―</td><td class="r">―</td><td class="r">94名</td><td>クルー89・リーダー3・メンター2（9/4断面）。10/4だけで49名（8/31昼のクルー限定分布・8/21登録組）</td></tr>
+    <tr><td>8/21登録コホート（参考）</td><td class="r">61件</td><td class="r">―</td><td class="r">12件（19.7%）</td><td class="r">49名</td><td>8/31時点。判定日10/4。読書会当日登録の最大ロット</td></tr>
+  </table>
+  <div class="callout neg"><b>経営参謀メモ</b>: 勝負は無料期間の「終了日」ではなく登録直後の2週間で決まっています。第1陣の解約9件のうち7件が登録7日以内、残る2件も13日・14日でした。9/3投入のステップメール5通は登録30日後から始まる設計ですので、最初の落ち口（登録0〜7日）には届きません。9月判定33名の結果を待たず、登録翌日からの初週オンボードを別建てで置くことをご提案します（第7章）。</div>
+</section>
+
+<!-- P6 効果検証 -->
+<section class="page">
+  <h2>5. 効果検証：8月に動いた施策と実測</h2>
+  <p class="h2note">実施した施策と、実測で確認できた結果。効果の有無を断定できないものは「検証待ち」と記載 <span class="badge fact">実測</span><span class="badge calc">計算値</span></p>
+  <table>
+    <tr><th>施策・出来事</th><th>実施</th><th>実測結果</th><th>判定</th></tr>
+    <tr><td>読書会8/21回（SHOWKO氏『感性のある人が習慣にしていること』）</td><td>8/21</td><td>申込937（歴代3位）・当日212・参加率22.6%・NPS 10.0（いずれも参加率・NPSは最低）。当日のStripe登録61件（クルー登録が最も集中した日）</td><td>🟡 集客は成功・当日体験は要改善</td></tr>
+    <tr><td>突破Aiクルー導線（LP→Stripe 14日＋30日無料→MyASP）</td><td>7/17開設・8月本格稼働</td><td>8月登録137名（9/1朝断面・うち8/21の読書会当日に61件集中）。無料期間中119名・課金開始8名・累計205件・解約78件（9/4。205−78＝127＝119＋8）</td><td>🟢 常設ファネルとして機能</td></tr>
+    <tr><td>無料期間 第1陣の課金判定</td><td>〜8/31</td><td>16件→課金7件（43.8%）・初回課金¥23,100計上。解約9件中7件が登録7日以内</td><td>🔴 登録直後の離脱が主因</td></tr>
+    <tr><td>突破Aiクルー ステップメール5通（30日後〜45日後）</td><td>9/3投入・既存133名に予約適用</td><td>初回配信は9/3判定組から。9月判定33名の課金率で検証</td><td>⏳ 検証待ち（9月版）</td></tr>
+    <tr><td>資格者×講座購入歴の突合（Stripe）</td><td>9/4</td><td>資格者134名中30名に購入歴（Book＆Pen 25件が最多）。元資格者10名</td><td>🟢 一律案内の除外名簿として使用可</td></tr>
+    <tr><td>未更新者47名への個別案内（方針3の先行着手）</td><td>8/24〜予定</td><td>8/24と8/31のリストが人数・名簿とも完全同一。送付0/44名（担当報告待ち）</td><td>🔴 未着手</td></tr>
+    <tr><td>Ken式 実装プログラム（7/20〜）</td><td>継続</td><td>累計45件・¥2,475,000（8/21時点の手動再実測。以降は未検証）</td><td>🟢 講座・イベント系売上の柱</td></tr>
+  </table>
+  <div class="callout"><b>読み解き</b>: 8月に効いたのは「集める」側の2施策（読書会8/21回と突破Aiクルー導線）で、どちらも数字は最高値です。ただし、その直後の工程（当日参加・登録直後の2週間）で落ちています。9月版では、ステップメール5通の初回結果（9月判定33名）と、8/21登録61件の10/4判定を同じ表で追います。</div>
+</section>
+
+<!-- P7 神田メモ9カード -->
+<section class="page">
+  <h2>6. 神田CEOメモ「3領域9カード」の取得状況</h2>
+  <p class="h2note">9月7日ミーティング用メモ（v1.2）第3章の指標を、司令塔・読書会ダッシュボード・Stripeで今出せるかどうかで判定 <span class="badge fact">実測</span><span class="badge none">未計測</span></p>
+  <table>
+    <tr><th>領域</th><th>指標</th><th>今月の値</th><th>状態</th><th>初回取得の機会</th></tr>
+    <tr><td rowspan="3">A．顧客価値</td><td>Action創出率（北極星）</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>9/16回の終了時60秒アンケート</td></tr>
+    <tr><td>満足度／NPS</td><td class="r"><b>10.0</b></td><td><span class="badge fact">実測</span></td><td>取得済み（回答者数は未掲載）</td></tr>
+    <tr><td>リピート参加率（F2転換率）</td><td class="r"><b>11.4%</b>（ロイヤル44.4%）</td><td><span class="badge fact">実測</span></td><td>取得済み（申込ベース）</td></tr>
+    <tr><td rowspan="3">B．信頼・レピュテーション</td><td>自由選択認知率</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>9/16回の60秒アンケート（仮基準95%）</td></tr>
+    <tr><td>紹介意向率・紹介経由率</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>申込フォームの紹介元項目＋アンケート（「招待」セグメントは直近5回ゼロ）</td></tr>
+    <tr><td>クレーム・違和感率</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>アンケート任意欄＋問い合わせ分類</td></tr>
+    <tr><td rowspan="3">C．経営価値</td><td>新規登録者eLTV</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>30日継続が出る9月末以降に推計</td></tr>
+    <tr><td>新規登録CPA</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>読書会集客費の記録開始が前提（分子の新規申込319名は実測あり）</td></tr>
+    <tr><td>eLTV／CPA</td><td class="r none-v">―</td><td><span class="badge none">未計測</span></td><td>上記2つがそろってから</td></tr>
+  </table>
+  <div class="callout"><b>ファネル設計士メモ</b>: 9カードのうち今出せるのは2枚（NPS・リピート参加率）、残り7枚は取得の仕組みそのものがありません（CESは60秒アンケートの設問で、9カードには含まれません。Trial→Paidはファネル側の実測で、こちらも9カード外です）。神田CEOメモは「未確認を取得済みとも不足とも断定しない」としていますので、本レポートも空欄のまま提示します。9/16回を初回取得にしない場合、10月末の3か月方針の判定に、この7枚は間に合いません（9/16回の60秒アンケートで取れるのはAction創出率・自由選択認知率・紹介意向・違和感率の4枚。eLTV・CPA・eLTV/CPAの3枚は集客費の記録と30日継続のデータが前提です）。</div>
+</section>
+
+<!-- P8 次の一手 -->
+<section class="page">
+  <h2>7. 次の一手（ご提案）</h2>
+  <p class="h2note">※提案です。実測データではありません。最終判断は西村CMO・神田CEOにて <span class="badge prop">提案</span></p>
+  <div class="grid2">
+    <div class="card prop"><h4>① 9/16回で終了時60秒アンケートを初回取得</h4>Action創出率・CES・NPS・自由選択認知率の必須4問（神田メモ8-2）。回答率も表示。7日後フォロー（3問）を9/23に送付。<br><span class="note">担当案: Read For Action運営責任者＋横川さん（計測）</span></div>
+    <div class="card prop"><h4>② 登録翌日からの「初週オンボード」を別建て</h4>解約の7割が登録7日以内。30日後から始まるステップメール5通の前に、登録翌日・3日目・7日目の3通（UMU初回ログイン→指定コンテンツ→次の行動決定）を置く。<br><span class="note">担当案: 豊留さん・荒川さん／9月判定33名の結果と併せて効果を比較</span></div>
+    <div class="card prop"><h4>③ 「終了3日前リスト」を9/24までに稼働</h4>9/27〜10/4の103名（8/31昼・クルー限定の分布。10/4に49名）に向け、課金判定日リストから毎朝「3日前の人数と対象」を出す。初回課金の成功／カード拒否を週内に確認し未決済ゼロ運用。<br><span class="note">担当案: 柴さん・木村学長＋横川さん</span></div>
+    <div class="card prop"><h4>④ 講座購入歴あり30名を一律案内の分母から外す</h4>9/16回の当日案内で「無料体験のためのクレカ登録」を全員一律に説明せず、購入歴・体験歴のある方には現在の利用条件を個別表示。非利用者には同一ワークシートを配布。<br><span class="note">担当案: CS／決済確認担当（再無料可否の商品仕様確認を含む）</span></div>
+    <div class="card prop"><h4>⑤ P0: 突破Ai正本GPTの確定と配布リンク棚卸し</h4>MyASP・LP・会員サイト・メール・QR・ステップメール5通の短縮URLを9/16前に照合し、プロンプトスターターv1.1を正本に反映。<br><span class="note">担当案: 突破Aiプロダクト／リリース担当</span></div>
+    <div class="card prop"><h4>⑥ 計測の下ごしらえ2件</h4>（a）MyASP free9を reading-live／reading-absent に分け、参加経由と欠席再告知経由を分離（既存のA2集計に乗る）。（b）読書会の集客費を月次1行で記録し、CPAの分母を作る。<br><span class="note">担当案: 横川さん（a）／西村CMO（b・金額の所在確認）</span></div>
+  </div>
+  <div class="callout prop"><b>旗印</b>: 経営参謀として申し上げます。集める力は8月に届くところまで来ました。9月からの主戦場は「読書会→突破Aiの100日」、つまり当日参加と登録直後の2週間です。<b>9/16回で北極星（Action創出率）を初めて測る・登録初週の落ち口を塞ぐ・10/4の49名に判定日の3日前から届く</b>。この3つが9月の北極星です。</div>
+</section>
+
+<!-- P9 計算式・出典 -->
+<section class="page">
+  <h2>8. 計算式（KPIの算出方法）とデータ出典</h2>
+  <p class="h2note">毎月同一ロジック。検算のため分母・分子・断面を明記 <span class="badge chk">検算</span></p>
+  <table>
+    <tr><th style="width:36px">№</th><th>KPI</th><th>算出方法</th><th>今月の検算</th></tr>
+    <tr><td>1</td><td>読書会 申込人数（延べ）</td><td>読書会ダッシュボード月次テーブルの申込人数（重複除去前）</td><td>937（ユニーク929）</td></tr>
+    <tr><td>2</td><td>当日参加率</td><td>当日参加÷申込人数（延べ）</td><td>212÷937＝22.6%</td></tr>
+    <tr><td>3</td><td>NPS</td><td>推奨者%−批判者%（0〜10点アンケート）。読書会ダッシュボード転記</td><td>10.0（回答者数は未掲載）</td></tr>
+    <tr><td>4</td><td>F2転換率</td><td>過去ちょうど1回申込→直近回も申込÷過去1回申込者（ハッシュID）</td><td>200÷1,759＝11.4%</td></tr>
+    <tr><td>5</td><td>ロイヤル継続率</td><td>過去2回以上申込→直近回も申込÷過去2回以上申込者</td><td>410÷923＝44.4%</td></tr>
+    <tr><td>6</td><td>コホート継続率</td><td>基準回申込者のうち直近回も申込÷基準回申込ユニーク</td><td>270÷470＝57.4%（7/17基準）</td></tr>
+    <tr><td>7</td><td>突破Aiクルー 新規流入（月）</td><td>Stripeサブスクの登録日（start_date）が当月・現在有効分（商品名にクルー）</td><td>8月137名（9/1朝断面）</td></tr>
+    <tr><td>8</td><td>Trial→Paid（第1陣）</td><td>無料期間終了日が8/31以前のサブスク（解約含む入口）のうちactive÷入口件数</td><td>7÷16＝43.8%</td></tr>
+    <tr><td>9</td><td>登録→解約日数</td><td>canceled_at−start_date（日）</td><td>0・0・0・1・3・5・6・13・14</td></tr>
+    <tr><td>10</td><td>課金判定月別人数</td><td>無料期間中（trialing・課金開始前・顧客ユニーク・全資格）のtrial_endを月別集計</td><td>9月33・10月94（計127・9/4）</td></tr>
+    <tr><td>11</td><td>Stripe売上（返金後）</td><td>成功決済の合計−全額返金。当月created基準</td><td>268件¥6,375,100−返金1件¥46,200＝267件¥6,328,900（決済サービス別タブ・9/4集計の確定値）</td></tr>
+    <tr><td>12</td><td>会員数の正（当残）</td><td>②月次増減表の月末在籍数（前月末＋入会−退会）。月末を過ぎた直近月まで確定</td><td>250＋163−47＝366（8月末）</td></tr>
+    <tr><td>13</td><td>100人換算</td><td>各段階人数÷申込ユニーク929×100（小数1桁）</td><td>212→22.8／61→6.6／49→5.3</td></tr>
+    <tr><td>14</td><td>資格者×講座購入歴</td><td>Stripeサブスク商品名にメンター/リーダー/クルーを含む顧客（active/trialing/past_due）と、charges（成功・返金なし）の説明文を講座・イベント系／図書館・リスキリング系に分類したものを顧客ID（＋メール）で突合</td><td>134名中30名（解約済み86名中10名）</td></tr>
+    <tr><td>15</td><td>差異・％の表示規約</td><td>差分＝表示値の差。％＝真値でhalf-up、小数1桁。pt＝率の差</td><td>例: (937−470)÷470＝99.4%</td></tr>
+  </table>
+  <h3>データ出典と断面</h3>
+  <table>
+    <tr><th>ソース</th><th>断面</th><th>使った指標</th></tr>
+    <tr><td>PABLOS会員ステータス司令塔（index.html・GitHub Pages）</td><td>2026/09/04 朝9:15自動更新</td><td>突破AIタブ（流入・判定日・free9・アップセル）、②月次増減表（当残）、決済サービス別タブ（Stripe月次）、今週・今月タブ（方針KPI・第1陣）</td></tr>
+    <tr><td>PABLOSエキスパート読書会ダッシュボード（tkaska-cell.github.io）</td><td>2026/08/24 22:23更新（8/21回時点）</td><td>申込・当日参加・NPS・F2・ロイヤル・コホート（dashboard_data.json）</td></tr>
+    <tr><td>Stripe（読み取り専用キー）</td><td>8/31昼（判定日分布・第1陣）／9/4 11:17（資格者×講座突合）</td><td>trial_end分布・第1陣コホート・顧客区分マトリクス</td></tr>
+    <tr><td>神田CEOメモ「Read For Action×突破Ai 認識共有メモ」</td><td>Discussion Draft v1.2（9/4追加反映）</td><td>9カードの定義・100人モデルの仮置き・顧客区分</td></tr>
+  </table>
+  <p class="note">※既知のデータ論点: ①突破Aiクルー母集団の3ソース不一致（Stripe205/119・顧客DB176・MyASP131）②司令塔内の予備軍34名⇔カレンダー33名の不一致 ③当残366名に無料期間中クルーが含まれるかの未検証 ④読書会KPIは申込ベースで当日参加を含まない。いずれも9月版までに担当（横川さん）確認をお願いします。</p>
+  <p class="footer">PABLOS株式会社 内部資料｜読書会×突破Ai 月次経営レポート 2026年8月版｜作成: 西村公児（CMO・ファネル設計士）｜個人を特定する氏名・メールアドレスは含みません（実名の名簿は司令塔exports・権限保持者のみ）｜次回: 2026年9月版（9/16回集計後・10月上旬）</p>
+</section>
+
+</div>
+<a class="dl" href="pablos-rfa-toppa-202608.pdf" download="PABLOS読書会×突破Ai_月次経営レポート_2026年8月版.pdf">📄 PDFで保存</a>
+</body>
+</html>
