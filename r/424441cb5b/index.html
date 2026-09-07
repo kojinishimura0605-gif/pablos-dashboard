@@ -190,6 +190,7 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
   <div class="bh"><span>中段｜読書会〜突破Ai 100人ファネル</span><small id="funnel-q">📊 顧客の流れとボトルネックを一目で把握</small></div>
   <div class="bi"><div class="funnel" id="funnel"></div></div>
   <div class="callout" id="funnel-note"></div>
+  <div class="callout" id="funnel-all" style="border-left-color:var(--none);background:var(--none-soft)"></div>
 </div>
 
 <!-- ===== 3段目 ===== -->
@@ -263,6 +264,11 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
   const dayReg = S.day_cohort.n;
   const mc = S.month_cohort;
   const cardPct = dayReg*100/B.unique;
+  const dc = S.day_cohort;                       // 当日登録コホート（②③④の分母）
+  const jdD = Object.keys(dc.judge_days).sort();
+  const dcJudge = jdD.length ? (jdD[0]===jdD[jdD.length-1] ? md(jdD[0]) : md(jdD[0])+'〜'+md(jdD[jdD.length-1])) : '—';
+  const cUp = (dc.rank.leader||0)+(dc.rank.mentor||0);  // 当日コホートの登録時アップセル
+  const pc = a => (dc.n? (a*100/dc.n).toFixed(1) : '—');  // 対 登録62名
   const paidRate = S.judged.n ? S.judged.paid*100/S.judged.n : null;
   const tri = S.trialing; const triTotal = S.trialing_total;
   const up = (tri.leader||0)+(tri.mentor||0);
@@ -323,34 +329,35 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
     '<div class="stack">'+
       mini('cyan','当日参加率', showupU.toFixed(1)+'<small>%</small>', f(B.attend)+'／'+f(B.unique)+'名・目標'+T.showup_pct+'%')+
       mini('red','欠席者率', (100-showupU).toFixed(1)+'<small>%</small>', f(absent)+'／'+f(B.unique)+'名（延べ基準では'+(B.gross!=null? f(B.gross-B.attend):'—')+'名）・目標'+T.absent_pct+'%')+
-      mini('purple','🔄 欠席者再活性率', null, '目標'+T.reactivate_pct+'%（'+reactN+'／'+T.absent_pct+'名）。再告知の専用リンクが無く経路を分けられません。当日登録'+f(dayReg)+'名に欠席経由が混入し得ます')+
+      mini('purple','🔄 欠席者再活性率', null, '目標'+T.reactivate_pct+'%（'+reactN+'／'+T.absent_pct+'名）。再告知の専用リンクが無く経路を分けられません。翌日〜月末の登録'+f(mc.n-dayReg)+'名（累計'+f(mc.n)+'）に欠席経由が含まれ得ます')+
     '</div>',
-    '<span class="st c">計算値</span> 当日のStripe初回登録・全経路。'+md(mc.from)+'〜'+md(mc.to)+'累計'+f(mc.n)+'名（100人換算 '+per100(mc.n)+'）。'+(R ? 'MyASP free9（全期間・有効'+f(R.valid)+'名）：読書会経由'+f(R.reading)+'・note '+f(R.note)+'・その他'+f(R.valid-R.reading-R.note-R.norec)+'・未記録'+f(R.norec) : '')));
+    '<span class="st c">計算値</span> '+md(dc.date)+'当日のStripe初回登録・全経路（'+rkStr(dc.rank)+'）。翌日〜月末を足すと'+f(mc.n)+'名（'+p1(mc.n,B.unique)+'%）。'+(R ? 'MyASP free9（全期間・有効'+f(R.valid)+'名）：読書会経由'+f(R.reading)+'・note '+f(R.note)+'・その他'+f(R.valid-R.reading-R.note-R.norec)+'・未記録'+f(R.norec) : '')));
   h.push('<div class="arrow">▶</div>');
-  h.push(fs('orange','3','無料体験 → 有料化','対 登録者',
-    '<div class="big">'+f(triTotal)+'<small>名 体験中</small></div>',
-    '母集団：<b>全コホート・全経路</b>（登録累計'+f(S.customers_total)+'名）｜'+md(mc.from)+'〜'+md(mc.to)+'登録コホート'+f(mc.n)+'名＝体験中'+f(mc.trialing)+'・解約'+f(mc.canceled)+'・課金'+f(mc.active)+'（判定'+cohortJudge+'）',
+  h.push(fs('orange','3','無料体験 → 有料化','対 登録者 '+f(dc.n)+'名',
+    '<div class="big">'+f(dc.trialing)+'<small>名 体験中</small></div>',
+    '対 登録<b>'+f(dc.n)+'</b>名 <b>'+pc(dc.trialing)+'%</b>（100人換算 '+per100(dc.trialing)+'）｜離脱＝解約'+f(dc.canceled)+'名（'+pc(dc.canceled)+'%）｜課金判定 '+dcJudge,
     '目標 有料転換'+T.trial_to_paid_pct+'%（'+T.paid_overall_pct+'名／100）',
     '<div class="sub4">'+
-      sc('3-1 現在無料体験中', f(triTotal)+'<small>名</small>', (teKeys.length? teKeys.map(k=>ym(k)+' '+teSum(k)+'名').join('／')+'に判定' : '判定待ちなし'))+
-      sc('3-2 解約（無料期間内）', f(S.cancel_in_trial)+'<small>名</small>', '登録累計'+f(S.customers_total)+'名中 '+p1(S.cancel_in_trial,S.customers_total)+'%（判定日到来前の解約を含む）。うち登録14日以内'+f(c14)+'件（'+f(c14)+'／'+f(S.cancel_total)+'件＝'+p1(c14,S.cancel_total)+'%）')+
-      sc('3-3 正式メンバー化', f(S.judged.paid)+'<small>名</small>', 'Trial→Paid '+pf(paidRate)+'%（'+f(S.judged.paid)+'／判定日到来'+f(S.judged.n)+'名。残り'+f(S.judged.cancel)+'名は無料期間内の解約で3-2の'+f(S.cancel_in_trial)+'名に含みます）・目標'+T.trial_to_paid_pct+'%。Stripe課金開始基準（顧客DBの会員判定とは別集計）')+
-      sc('3-4 アップセル（登録時）', f(up)+'<small>名</small>', 'リーダー'+(tri.leader||0)+'・メンター'+(tri.mentor||0)+'／体験中'+f(triTotal)+'＝'+pf(upPct)+'%。目標（有料会員に対しメンター'+T.upsell_mentor_pct+'%・リーダー'+T.upsell_leader_pct+'%）とは定義が別')+
+      sc('3-1 現在無料体験中', f(dc.trialing)+'<small>名</small>', '対 登録'+f(dc.n)+'名 '+pc(dc.trialing)+'%。課金判定は'+dcJudge+'。この'+f(dc.trialing)+'名が④へ進む母数')+
+      sc('3-2 解約（無料期間内・離脱）', f(dc.canceled)+'<small>名</small>', '対 登録'+f(dc.n)+'名 '+pc(dc.canceled)+'%（判定日前の解約・本線から離脱）。100人換算 '+per100(dc.canceled)+'。全コホートでは'+f(S.cancel_in_trial)+'／'+f(S.customers_total)+'（'+p1(S.cancel_in_trial,S.customers_total)+'%）')+
+      sc('3-3 正式メンバー化（課金開始）', f(dc.active)+'<small>名</small>', '対 登録'+f(dc.n)+'名 '+pc(dc.active)+'%。判定'+dcJudge+'のため現時点0。参考：全コホートのTrial→Paid '+pf(paidRate)+'%（'+f(S.judged.paid)+'／判定日到来'+f(S.judged.n)+'名）・目標'+T.trial_to_paid_pct+'%。Stripe課金開始基準（顧客DBの会員判定とは別集計）')+
+      sc('3-4 アップセル（登録時）', f(cUp)+'<small>名</small>', 'リーダー'+(dc.rank.leader||0)+'・メンター'+(dc.rank.mentor||0)+'／登録'+f(dc.n)+'＝'+pc(cUp)+'%。全コホート体験中では'+f(up)+'／'+f(triTotal)+'（'+pf(upPct)+'%）。目標（有料会員に対しメンター'+T.upsell_mentor_pct+'%・リーダー'+T.upsell_leader_pct+'%）とは定義が別')+
     '</div>',
-    '<span class="st m">実測</span> 全資格・課金開始前・顧客ユニーク（'+rkStr(tri)+'）。'+(jmRows||'判定済みなし')+'。<b>無料期間は'+trialDays+'＝14日間の無料体験＋初月1か月無料</b>。Stripe上は44日間ずっとtrialingで、15日目の正式メンバー化に対応するイベントはありません。本画面の「正式メンバー化」は課金開始（45日目）を代理指標にしています'));
+    '<span class="st m">実測</span> '+md(dc.date)+'当日登録'+f(dc.n)+'名（'+rkStr(dc.rank)+'・顧客ユニーク・全経路）＝体験中'+f(dc.trialing)+'＋解約'+f(dc.canceled)+'＋課金'+f(dc.active)+'。<b>無料期間は'+trialDays+'＝14日間の無料体験＋初月1か月無料</b>。Stripe上は44日間ずっとtrialingで、15日目の正式メンバー化に対応するイベントはありません。本画面の「正式メンバー化」は課金開始（45日目）を代理指標にしています'));
   h.push('<div class="arrow">▶</div>');
-  h.push(fs('green','4','正式メンバーのオンボード完了（A/B/C）','定着指標',
-    '<div class="big na">未計測</div>',
-    '対 正式メンバー <b>'+f(S.judged.paid)+'名</b>（Stripe課金開始・全コホート）',
-    '目標 '+T.onboard_pct+'%以上（'+onboardN+'名／100）',
-    '<div class="stack">'+mini('green','平均有料継続期間', null, '目標'+T.retention_months+'か月以上。初回課金が'+(jmKeys[0]?ym(jmKeys[0]):'—')+'開始のため9月末から30日継続を集計')+'</div>',
-    '<span class="st n">未計測</span> 条件A投稿・B朝活・C予約のいずれも取得の仕組みがありません（下段の判定ロジック参照）。正式メンバーは顧客DBの会員判定とは別集計'));
+  h.push(fs('green','4','正式メンバー → オンボード完了','定着指標',
+    '<div class="big">'+f(dc.active)+'<small>名 正式メンバー</small></div>',
+    '対 体験中'+f(dc.trialing)+'名 <b>'+p1(dc.active,dc.trialing)+'%</b>（100人換算 '+per100(dc.active)+'）｜'+md(dc.date)+'登録組は'+dcJudge+'の課金判定前',
+    '目標 有料化'+T.paid_overall_pct+'名／100・オンボード完了'+T.onboard_pct+'%以上（'+onboardN+'名／100）',
+    '<div class="stack">'+
+      mini('green','コミュニティ・オンボード完了率（A/B/C）', null, '正式メンバー'+f(dc.active)+'名が母数。条件A投稿・B朝活・C予約の取得の仕組みがありません（下段の判定ロジック参照）')+
+      mini('green','平均有料継続期間', null, '目標'+T.retention_months+'か月以上。初回課金が'+(jmKeys[0]?ym(jmKeys[0]):'—')+'開始のため9月末から30日継続を集計')+
+    '</div>',
+    '<span class="st m">実測</span> 正式メンバー＝Stripe課金開始（顧客DBの会員判定とは別集計）。全コホートでは課金開始'+f(S.judged.paid)+'名（参考欄）'));
   $('#funnel').innerHTML = h.join('');
-  $('#funnel-q').textContent = '基準：'+B.latest_date+'回コホート（申込ユニーク'+f(B.unique)+'名＝100）。③④は全コホート';
-  const cohortLine = jd.length
-    ? md(mc.from)+'〜'+md(mc.to)+'の登録コホート'+f(mc.n)+'名は'+cohortJudge+'に課金判定が来ます（'+md(jdPeak)+'に'+f(mc.judge_days[jdPeak])+'名が集中）。現時点でこのコホートは体験中'+f(mc.trialing)+'・解約'+f(mc.canceled)+'・課金'+f(mc.active)+'です。'
-    : md(mc.from)+'〜'+md(mc.to)+'の登録コホートは'+f(mc.n)+'名です。';
-  $('#funnel-note').innerHTML = '<b>100人換算の読み方：</b>①②は'+md(B.latest_date)+'回コホート（申込100名に対して当日参加'+showupU.toFixed(1)+'・目標'+T.showup_pct+'／当日クレカ登録'+per100(dayReg)+'・目標'+T.card_pct+'）、③④は全コホート・全経路の実測です。'+cohortLine+'判定を待たず、<b>登録14日以内の解約が全解約の'+p1(c14,S.cancel_total)+'%（'+f(c14)+'／'+f(S.cancel_total)+'件）</b>を占める点が最初のボトルネックです。';
+  $('#funnel-q').textContent = '基準：'+B.latest_date+'回コホート（申込ユニーク'+f(B.unique)+'名＝100・登録は'+md(dc.date)+'当日'+f(dc.n)+'名）。全コホートの値は下の参考欄';
+  $('#funnel-note').innerHTML = '<b>100人換算の読み方：</b>申込100名 → 当日参加'+showupU.toFixed(1)+'（目標'+T.showup_pct+'）→ 当日クレカ登録'+per100(dayReg)+'（目標'+T.card_pct+'）→ 体験中'+per100(dc.trialing)+'（離脱＝解約'+per100(dc.canceled)+'）→ 正式メンバー'+per100(dc.active)+'（目標 有料化'+T.paid_overall_pct+'）。本線は'+f(B.unique)+'→'+f(dc.n)+'→'+f(dc.trialing)+'→'+f(dc.active)+'名で、①〜④は同じ'+md(B.latest_date)+'回コホートの生き残り人数です。登録'+f(dc.n)+'名の課金判定は'+dcJudge+'に来ます。判定を待たず、<b>登録直後の解約（'+f(dc.canceled)+'／'+f(dc.n)+'＝'+pc(dc.canceled)+'%）</b>が最初のボトルネックです。翌日〜月末の登録を含めた'+md(mc.from)+'〜'+md(mc.to)+'累計は'+f(mc.n)+'名（体験中'+f(mc.trialing)+'・解約'+f(mc.canceled)+'・課金'+f(mc.active)+'・判定'+cohortJudge+'）です。';
+  $('#funnel-all').innerHTML = '<b>参考｜全コホート（登録累計'+f(S.customers_total)+'名・'+(Object.keys(S.first_reg_by_month)[0]? ym(Object.keys(S.first_reg_by_month)[0]):'—')+'〜・全経路）：</b>体験中'+f(triTotal)+'名（'+rkStr(tri)+'）／無料期間内の解約'+f(S.cancel_in_trial)+'名（'+p1(S.cancel_in_trial,S.customers_total)+'%・うち登録14日以内'+f(c14)+'件＝'+p1(c14,S.cancel_total)+'%）／課金開始'+f(S.judged.paid)+'名／Trial→Paid '+pf(paidRate)+'%（'+f(S.judged.paid)+'／判定日到来'+f(S.judged.n)+'名。'+(jmRows||'')+'）／登録時アップセル'+f(up)+'名（'+pf(upPct)+'%）。3段目のアクションカードと目標値表の有料転換はこの全コホートの値です。';
 
   // ---- 3段目 アクション ----
   const ac = (col, t, num, do_, foot) => '<div class="ac" style="--c:var(--'+col+');--cs:var(--'+col+'-soft)"><div class="t">'+t+'</div>'+num+'<div class="do">→ '+do_+'</div><div class="foot">'+foot+'</div></div>';
@@ -380,10 +387,10 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
     row('欠席者再活性', T.reactivate_pct+'%（'+reactN+'名）', '未計測', verdict(null,0))+
     row('突破Ai登録', T.card_pct+'%（'+T.card_pct+'名）', cardPct.toFixed(1)+'%（'+f(dayReg)+'）', verdict(cardPct,T.card_pct))+
     row('有料転換', T.trial_to_paid_pct+'%（'+T.paid_overall_pct+'名）', pf(paidRate)+'%（'+f(S.judged.paid)+'／'+f(S.judged.n)+'）<br><span style="font-size:10px;color:var(--muted)">全コホート・判定日到来分</span>', verdict(paidRate,T.trial_to_paid_pct))+
-    row('無料期間内の解約', '（目標なし）', p1(S.cancel_in_trial,S.customers_total)+'%（'+f(S.cancel_in_trial)+'／'+f(S.customers_total)+'）', '<span class="v warn">注視</span>')+
+    row('無料期間内の解約', '（目標なし）', pc(dc.canceled)+'%（'+f(dc.canceled)+'／'+f(dc.n)+'）<br><span style="font-size:10px;color:var(--muted)">全コホート '+p1(S.cancel_in_trial,S.customers_total)+'%（'+f(S.cancel_in_trial)+'／'+f(S.customers_total)+'）</span>', '<span class="v warn">注視</span>')+
     row('有料化率（全体）', T.paid_overall_pct+'%（'+T.paid_overall_pct+'名）', '判定待ち（'+cohortJudge+'）', '<span class="v none">判定待ち</span>')+
-    row('アップセル メンター', T.upsell_mentor_pct+'%', p1(tri.mentor||0,triTotal)+'%（'+(tri.mentor||0)+'／'+f(triTotal)+'・登録時）', '<span class="v none">定義差</span>')+
-    row('アップセル リーダー', T.upsell_leader_pct+'%', p1(tri.leader||0,triTotal)+'%（'+(tri.leader||0)+'／'+f(triTotal)+'・登録時）', '<span class="v none">定義差</span>')+
+    row('アップセル メンター', T.upsell_mentor_pct+'%', pc(dc.rank.mentor||0)+'%（'+(dc.rank.mentor||0)+'／'+f(dc.n)+'・登録時）', '<span class="v none">定義差</span>')+
+    row('アップセル リーダー', T.upsell_leader_pct+'%', pc(dc.rank.leader||0)+'%（'+(dc.rank.leader||0)+'／'+f(dc.n)+'・登録時）', '<span class="v none">定義差</span>')+
     row('オンボード完了（A/B/C）', T.onboard_pct+'%以上（'+onboardN+'名）', '未計測', verdict(null,0))+
     row('平均継続', T.retention_months+'か月以上', '未計測', verdict(null,0));
 
@@ -443,7 +450,7 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
     ['正式メンバー','Stripe課金開始（status=active・登録45日目〜）。無料期間44日＝14日間の無料体験＋初月1か月無料（西村さん確認 2026-09-07）。15日目の正式メンバー化はStripe上にイベントが無いため課金開始を代理指標にする。顧客DBマスターの会員判定（司令塔の正）とは別集計'],
     ['アップセル（登録時）','無料体験中のうちリーダー・メンター ÷ 無料体験中全体。改修計画の目標（有料会員に対する課金後の移行率）とは定義が異なるため判定しません'],
     ['コミュニティ・オンボード完了率（A/B/C）','正式メンバー化（課金開始）から7日以内に条件A・B・Cのうち2つ以上達成 ÷ 正式メンバー。未計測。方針【2】の「行動オンボード完了率」（UMU初回行動）とは別'],
-    ['100人換算','各段の実数 ÷ 申込ユニーク × 100（小数1位）'],
+    ['100人換算','各段の実数 ÷ 申込ユニーク × 100（小数1位）。①〜④はすべて直近回コホート（申込ユニーク／開催日当日の登録者）の人数で揃え、翌日〜月末の登録と全コホートの値は併記・参考欄に分ける（2026-09-07 西村さん指示：③は②の登録者数を分母にする）'],
     ['目標値','改修計画（豊留さん・Googleドキュメント）の100人ファネルモデルをそのまま定数化（6か月・12か月eLTV、CAC 2,440円以下も原文記載）。器の変更は西村さん承認制'],
   ];
   $('#formula-table').innerHTML = '<tr><th>項目</th><th>定義・計算式</th></tr>'+fm.map(r=>'<tr><td style="white-space:nowrap">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
