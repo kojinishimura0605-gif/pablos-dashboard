@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>読書会〜突破Ai フロー司令塔</title>
+<style>
+:root{
+  --paper:#eef2f9;--card:#fff;--ink:#14202e;--ink-2:#3b4556;--muted:#6a7382;--line:#d6dce8;--line-2:#e8ecf4;
+  --blue:#2563eb;--blue-soft:#e7eefc;--purple:#7c3aed;--purple-soft:#f1eafd;--orange:#f97316;--orange-soft:#fff1e6;
+  --cyan:#0891b2;--cyan-soft:#e3f6fa;--indigo:#4f46e5;--indigo-soft:#ebeafc;--green:#16a34a;--green-soft:#e6f6ec;
+  --red:#dc2626;--red-soft:#fde8e8;--none:#8b93a3;--none-soft:#eef0f3;--tgt:#5b4b8a;
+  --band:#2563eb;--band-ink:#fff;
+  --mono:"Consolas","Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12161d;--card:#1a2029;--ink:#eef0f4;--ink-2:#c9cfd9;--muted:#8e97a6;--line:#2f3743;--line-2:#242b35;
+  --blue:#6d9bff;--blue-soft:#1c2a4a;--purple:#b08cff;--purple-soft:#2a2144;--orange:#ffa15c;--orange-soft:#3a2a1a;
+  --cyan:#4fc3e6;--cyan-soft:#12313a;--indigo:#9b95ff;--indigo-soft:#252350;--green:#5cc98a;--green-soft:#173328;
+  --red:#f07a72;--red-soft:#3d1c19;--none:#7d8797;--none-soft:#222932;--tgt:#b3a5e0;--band:#1e3a8a;--band-ink:#eef0f4;
+}}
+:root[data-theme="dark"]{
+  --paper:#12161d;--card:#1a2029;--ink:#eef0f4;--ink-2:#c9cfd9;--muted:#8e97a6;--line:#2f3743;--line-2:#242b35;
+  --blue:#6d9bff;--blue-soft:#1c2a4a;--purple:#b08cff;--purple-soft:#2a2144;--orange:#ffa15c;--orange-soft:#3a2a1a;
+  --cyan:#4fc3e6;--cyan-soft:#12313a;--indigo:#9b95ff;--indigo-soft:#252350;--green:#5cc98a;--green-soft:#173328;
+  --red:#f07a72;--red-soft:#3d1c19;--none:#7d8797;--none-soft:#222932;--tgt:#b3a5e0;--band:#1e3a8a;--band-ink:#eef0f4;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Meiryo UI","Hiragino Kaku Gothic ProN","BIZ UDPGothic",sans-serif;font-size:13.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding:16px 20px 60px}
+/* header */
+.top{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
+h1{font-weight:900;font-size:30px;line-height:1.2;margin:0;letter-spacing:.01em}
+.h-sub{font-weight:700;font-size:15px;color:var(--ink);margin:6px 0 0}
+.h-lead{font-size:12.5px;color:var(--ink-2);margin:4px 0 0}
+.asof{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
+.asof b{color:var(--ink);font-size:13px}
+.purpose{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.purpose .pl{display:inline-block;background:var(--band);color:var(--band-ink);font-weight:700;font-size:12px;padding:2px 12px;border-radius:6px;margin-bottom:8px}
+.purpose .pg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.purpose .pi{display:flex;gap:8px;align-items:flex-start;background:var(--blue-soft);border-radius:8px;padding:8px 10px}
+.purpose .pi .ic{font-size:20px;line-height:1}
+.purpose .pi b{display:block;font-size:12.5px;color:var(--blue)}
+.purpose .pi span{font-size:11px;color:var(--ink-2)}
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:11.5px;color:var(--muted);margin:0 0 12px}
+.st{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:4px;line-height:1.6;white-space:nowrap}
+.st.m{background:var(--blue-soft);color:var(--blue)}.st.c{background:var(--green-soft);color:var(--green)}.st.t{background:var(--indigo-soft);color:var(--tgt)}.st.n{background:var(--none-soft);color:var(--none)}
+/* band */
+.band{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 0 12px;margin-top:14px;box-shadow:0 1px 3px rgba(20,32,46,.05)}
+.bh{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--band);color:var(--band-ink);border-radius:12px 12px 0 0;padding:6px 14px;font-weight:700;font-size:14px}
+.bh small{font-weight:500;font-size:11.5px;opacity:.95}
+.bh.green{background:var(--green)}.bh.orange{background:var(--orange)}
+.bi{padding:12px 12px 0}
+/* verdict pill */
+.v{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:1px 8px;border-radius:12px;white-space:nowrap}
+.v::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.v.good{background:var(--green-soft);color:var(--green)}.v.crit{background:var(--red-soft);color:var(--red)}.v.none{background:var(--none-soft);color:var(--none)}.v.warn{background:var(--orange-soft);color:var(--orange)}
+/* KPI cards */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.kc{--c:var(--blue);--cs:var(--blue-soft);background:var(--card);border:2px solid var(--c);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.kc .hd{display:flex;gap:8px;align-items:center}
+.kc .ic{width:34px;height:34px;border-radius:8px;background:var(--cs);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.kc .t{font-weight:900;font-size:14px;line-height:1.2}
+.kc .d{font-size:11px;color:var(--muted)}
+.kc .pill{background:var(--cs);border-radius:8px;padding:6px 10px;margin-top:4px;text-align:center}
+.kc .pill .lab{font-size:11px;color:var(--c);font-weight:700}
+.kc .pill .num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--c);line-height:1.15}
+.kc .pill .num small{font-size:12px;margin-left:2px}
+.kc .pill .num.na{font-size:18px;color:var(--none)}
+.kc .ln{font-size:11.5px;color:var(--ink-2);text-align:center}
+.kc .ln b{color:var(--tgt)}
+.kc .foot{font-size:10.5px;color:var(--muted);margin-top:auto;padding-top:5px;border-top:1px dashed var(--line-2);line-height:1.5}
+/* funnel */
+.funnel{display:grid;grid-template-columns:.85fr 22px 1.05fr 22px 2.55fr 22px 1.1fr;gap:8px;align-items:stretch}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:26px;opacity:.6}
+.fs{--c:var(--blue);--cs:var(--blue-soft);background:var(--card);border:2px solid var(--c);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;position:relative}
+.fs .hd{display:flex;gap:8px;align-items:center}
+.fs .no{width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none}
+.fs .t{font-weight:900;font-size:14px;line-height:1.2}
+.fs .badge{margin-left:auto;background:#fde68a;color:#7c5a00;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:10px;white-space:nowrap}
+.fs .big{font-family:var(--mono);font-size:40px;font-weight:700;color:var(--c);line-height:1.05;text-align:center;margin-top:2px}
+.fs .big small{font-size:14px;margin-left:2px}
+.fs .big.na{font-size:22px;color:var(--none)}
+.fs .per{font-size:11.5px;color:var(--ink-2);text-align:center;background:var(--cs);border-radius:6px;padding:3px 6px}
+.fs .per b{font-family:var(--mono);color:var(--c)}
+.fs .tg{font-size:11.5px;color:var(--tgt);font-weight:700;text-align:center}
+.fs .foot{font-size:10.5px;color:var(--muted);margin-top:auto;padding-top:5px;border-top:1px dashed var(--line-2);line-height:1.5}
+.stack{display:flex;flex-direction:column;gap:5px;margin-top:2px}
+.mini{--mc:var(--blue);background:var(--paper);border:1px solid var(--line-2);border-radius:7px;padding:6px 9px;display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:center}
+.mini .ml{font-size:11px;color:var(--ink-2);font-weight:700}
+.mini .mn{font-family:var(--mono);font-size:19px;font-weight:700;color:var(--mc);line-height:1.15;text-align:right}
+.mini .mn small{font-size:11px}
+.mini .mn.na{font-size:12.5px;color:var(--none)}
+.mini .mf{grid-column:1/-1;font-size:10.5px;color:var(--muted);line-height:1.45}
+.sub4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:2px}
+.sc{--mc:var(--orange);background:var(--card);border:1px solid var(--line);border-top:3px solid var(--mc);border-radius:7px;padding:6px 9px}
+.sc .sl{font-size:11px;font-weight:700;color:var(--mc)}
+.sc .sn{font-family:var(--mono);font-size:20px;font-weight:700;line-height:1.15}
+.sc .sn small{font-size:11px;color:var(--ink-2)}
+.sc .sf{font-size:10px;color:var(--muted);line-height:1.4}
+.callout{background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:6px;padding:8px 12px;margin:10px 12px 0;font-size:12.5px}
+.callout b{color:var(--blue)}
+/* actions */
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ac{--c:var(--orange);--cs:var(--orange-soft);background:var(--card);border:2px solid var(--c);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.ac .t{font-weight:900;font-size:13.5px}
+.ac .num{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--c);line-height:1.1}
+.ac .num small{font-size:12px;margin-left:2px}
+.ac .num.na{font-size:18px;color:var(--none)}
+.ac .do{font-size:12px;color:var(--ink-2);background:var(--cs);border-radius:6px;padding:3px 8px}
+.ac .foot{font-size:10.5px;color:var(--muted);margin-top:auto;padding-top:5px;border-top:1px dashed var(--line-2);line-height:1.5}
+/* bottom row */
+.bottom{display:grid;grid-template-columns:1.9fr 1fr;gap:14px;margin-top:14px}
+.ob{background:var(--card);border:2px solid var(--green);border-radius:12px;padding:12px 14px}
+.ob .hd{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.ob .hd .t{font-weight:900;font-size:19px}
+.ob .hd .win{background:var(--green);color:#fff;font-size:11.5px;font-weight:700;padding:3px 12px;border-radius:14px}
+.ob .rule{background:var(--green-soft);border-radius:8px;text-align:center;font-weight:900;font-size:19px;padding:8px;margin:10px 0}
+.ob .rule em{font-style:normal;color:var(--red);font-size:22px}
+.ob .rule .na{font-size:13px;color:var(--none);font-weight:700;display:block}
+.conds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cd{--c:var(--blue);--cs:var(--blue-soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:3px}
+.cd .hd2{display:flex;gap:8px;align-items:center}
+.cd .ic{width:32px;height:32px;border-radius:8px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.cd .t{font-weight:900;color:var(--c);font-size:13px}
+.cd .need{font-size:11.5px;color:var(--ink-2)}
+.cd .stt{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--none)}
+.cd .foot{font-size:10.5px;color:var(--muted);margin-top:auto;padding-top:4px;border-top:1px dashed var(--line-2);line-height:1.45}
+.ob .warn{margin-top:8px;font-size:12px;color:var(--red);font-weight:700;text-align:center}
+.ob .note{margin-top:8px;font-size:11.5px;color:var(--ink-2);background:var(--paper);border-radius:6px;padding:6px 10px}
+.side{display:flex;flex-direction:column;gap:12px}
+.rules{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.rules .bh{border-radius:12px 12px 0 0;font-size:13px}
+.rules .rb{padding:8px 12px;font-size:12px;color:var(--ink-2)}
+.rules .rb .n{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;font-size:12px;align-items:center;justify-content:center;margin-right:6px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:11.5px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}
+th{background:var(--blue-soft);font-weight:700;white-space:nowrap}
+td.n{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* appendix */
+.app{margin-top:18px}
+.app h2{font-size:15px;font-weight:900;margin:14px 0 6px;padding-left:10px;border-left:5px solid var(--blue)}
+.app .q{font-size:11.5px;color:var(--muted);font-weight:500;margin-left:8px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.chart svg{width:100%;height:auto;display:block}
+.foot-src{font-size:11px;color:var(--muted);margin-top:6px}
+footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}.funnel{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:24px}.bottom{grid-template-columns:1fr}.top{grid-template-columns:1fr}.sub4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.kpis,.acts,.conds,.sub4,.purpose .pg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>読書会〜突破Ai フロー司令塔</h1>
+    <p class="h-sub">読書会〜突破Aiフロー・LTV可視化・オンボード定義の追加（改修版）</p>
+    <p class="h-lead">100人ファネルモデルの目標値を組み込み、未達ポイントを毎朝ひと目で把握｜PABLOS株式会社 マーケα｜改修計画：豊留さん／器：西村公児</p>
+    <p class="asof">データ断面 <b id="stamp">—</b>（毎朝9時の自動便で更新）｜<span id="src-line">—</span></p>
+  </div>
+  <div class="purpose">
+    <span class="pl">改修の目的</span>
+    <div class="pg">
+      <div class="pi"><span class="ic">📊</span><div><b>フロー可視化</b><span>新規申込 → 参加 → 登録 → 課金 → 定着</span></div></div>
+      <div class="pi"><span class="ic">🎯</span><div><b>広告判断の明確化</b><span>eLTV・CAC・LTV/CACを可視化</span></div></div>
+      <div class="pi"><span class="ic">💡</span><div><b>今日の行動に直結</b><span>誰にアプローチすべきかが分かる</span></div></div>
+    </div>
+  </div>
+</header>
+<div class="legend">
+  <span>凡例：</span><span class="st m">実測</span><span>取得元の値そのまま</span>
+  <span class="st c">計算値</span><span>実測どうしの割り算</span>
+  <span class="st t">目標</span><span>100人ファネルモデル</span>
+  <span class="st n">未計測</span><span>取得の仕組みが無い指標。数値を置かず必要な仕組みを明記</span>
+  <span style="margin-left:auto">率（%）は分母と分子（人数）を必ず併記</span>
+</div>
+
+<!-- ===== 最上段 ===== -->
+<div class="band">
+  <div class="bh"><span>最上段｜経営・広告判断用メインKPI</span><small>📊 数字で全体を把握し、素早い意思決定を</small></div>
+  <div class="bi"><div class="kpis" id="kpis"></div></div>
+  <div class="callout" id="kpi-note"></div>
+</div>
+
+<!-- ===== 中段 ===== -->
+<div class="band">
+  <div class="bh"><span>中段｜読書会〜突破Ai 100人ファネル</span><small id="funnel-q">📊 顧客の流れとボトルネックを一目で把握</small></div>
+  <div class="bi"><div class="funnel" id="funnel"></div></div>
+  <div class="callout" id="funnel-note"></div>
+</div>
+
+<!-- ===== 3段目 ===== -->
+<div class="band">
+  <div class="bh orange"><span>3段目｜今日のアクションカード</span><small>💡 誰にアプローチすべきかが分かる（人数のみ。名簿は司令塔の課金判定日リスト）</small></div>
+  <div class="bi"><div class="acts" id="acts"></div></div>
+</div>
+
+<!-- ===== 4段目：下段左右 ===== -->
+<div class="bottom">
+  <div class="ob">
+    <div class="hd"><span style="font-size:22px">👥</span><span class="t">オンボード完了の判定ロジック</span><span class="win" id="ob-win">—</span></div>
+    <div class="rule">3条件のうち <em>2つ以上達成</em> で『オンボード完了』<span class="na" id="ob-rate">—</span></div>
+    <div class="conds" id="conds"></div>
+    <div class="warn">※ 単なるログインではなく、コミュニティへの定着・習慣化を判定</div>
+    <div class="note" id="ob-note"></div>
+  </div>
+  <div class="side">
+    <div class="rules">
+      <div class="bh"><span>📊 率（%）の表記ルール</span></div>
+      <div class="rb"><span class="n">1</span>分母と分子（人数）を必ず併記<br><span style="font-size:11px;color:var(--muted)" id="rule-ex">—</span></div>
+      <div class="rb"><span class="n">2</span>推計で埋めない。取れない指標は「未計測」＋必要な仕組み</div>
+      <div class="rb"><span class="n">3</span>同じ言葉で違う数字を指さない（オンボード3定義・無料期間44日＝14日体験＋初月無料・アップセル定義差は参考Dに記載）</div>
+    </div>
+    <div class="rules">
+      <div class="bh" style="background:var(--indigo)"><span>🎯 100人ファネル目標値 × 実測</span></div>
+      <div class="tw"><table id="tgt-table"></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 参考 ===== -->
+<div class="app">
+  <h2>参考A｜読書会 月次推移（申込・当日参加・参加率）<span class="q" id="trend-q"></span></h2>
+  <div class="chart" id="chart"></div>
+  <h2>参考B｜ユニットエコノミクス目標と実測<span class="q">eLTV／許容CAC／LTV÷CAC</span></h2>
+  <div class="tw"><table id="ue-table"></table></div>
+  <h2>参考C｜データ可否と次に必要な仕組み<span class="q">未計測を埋める順番（9/16読書会を初回にする前提）</span></h2>
+  <div class="tw"><table id="avail-table"></table></div>
+  <h2>参考D｜定義・計算式<span class="q">同じ言葉で違う数字を指さないための取り決め</span></h2>
+  <div class="tw"><table id="formula-table"></table></div>
+</div>
+
+<footer>
+  ■社外秘：PABLOS株式会社の役員・関係者限りでお取り扱いください。個人名・メールアドレスは掲載しません（人数のみ）。<br>
+  元データ：読書会ダッシュボード（tkaska-cell.github.io・ハッシュ化済み申込集計＋アンケート月次）／Stripeサブスクリプション（読み取り専用キー・毎朝実測）／MyASP free9（司令塔 突破AIタブA2）。目標値：改修計画（Googleドキュメント）。
+</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const D = (typeof FLOW !== 'undefined') ? FLOW : null; if(!D){document.body.insertAdjacentHTML('afterbegin','<p style="color:#dc2626;padding:20px">data.js が読めません</p>');return;}
+  const T = D.targets, B = D.bookclub, S = D.stripe, R = D.routes;
+  const $ = s => document.querySelector(s);
+  const f = n => (n==null? '—' : Number(n).toLocaleString('ja-JP'));
+  const pf = v => (v==null ? '—' : Number(v).toFixed(1));
+  const p1 = (a,b) => (b? (a*100/b).toFixed(1) : '—');
+  const per100 = a => (B.unique? (a*100/B.unique).toFixed(1) : '—');
+  const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const ym = s => s.slice(0,4)+'年'+parseInt(s.slice(5,7))+'月';
+  const md = s => parseInt(s.slice(5,7))+'/'+parseInt(s.slice(8,10));
+  const verdict = (val, tgt) => val==null ? '<span class="v none">未計測</span>' : (val>=tgt ? '<span class="v good">達成</span>' : '<span class="v crit">未達 '+(val-tgt).toFixed(1)+'pt</span>');
+  const rk = {crew:'クルー',leader:'リーダー',mentor:'メンター',supporter:'サポーター',other:'その他'};
+  const rkOrder = ['crew','leader','mentor','supporter','other'];
+  const rkStr = o => { const a = rkOrder.filter(k=>o && o[k]).map(k=>rk[k]+o[k]); return a.length ? a.join('・') : '該当なし'; };
+
+  // ---- 派生値（計算値） ----
+  const absent = B.unique - B.attend;
+  const showupU = B.attend*100/B.unique;
+  const dayReg = S.day_cohort.n;
+  const mc = S.month_cohort;
+  const cardPct = dayReg*100/B.unique;
+  const paidRate = S.judged.n ? S.judged.paid*100/S.judged.n : null;
+  const tri = S.trialing; const triTotal = S.trialing_total;
+  const up = (tri.leader||0)+(tri.mentor||0);
+  const upPct = triTotal ? up*100/triTotal : null;
+  const cd = S.cancel_days; const c14 = (cd.d7||0)+(cd.d14||0);
+  const jm = S.judged_by_month; const jmKeys = Object.keys(jm);
+  const jmRows = jmKeys.map(k => ym(k)+'判定：課金'+(jm[k].paid||0)+'／解約'+(jm[k].cancel||0)).join('、');
+  const teKeys = Object.keys(S.trial_end_by_month);
+  const teSum = k => Object.values(S.trial_end_by_month[k]).reduce((a,b)=>a+b,0);
+  const jd = Object.keys(mc.judge_days).sort();
+  const jdPeak = jd.length ? jd.reduce((a,k)=>mc.judge_days[k]>(mc.judge_days[a]||0)?k:a, jd[0]) : null;
+  const trialDays = mc.trial_days_min!=null ? mc.trial_days_min+'日' : '—';
+  const onboardN = Math.round(T.paid_overall_pct*T.onboard_pct/100);
+  const reactN = (T.reactivate_pct*T.absent_pct/100).toFixed(0);
+
+  $('#stamp').textContent = D.stamp;
+  $('#src-line').textContent = '読書会：'+B.latest_date+'回（集計 '+B.generated_at+'）／Stripe：'+D.stamp.slice(0,10)+'実測／free9：'+(R?R.updated:'—');
+  $('#rule-ex').textContent = '例：Trial→Paid '+pf(paidRate)+'%（'+f(S.judged.paid)+'／'+f(S.judged.n)+'名）、クレカ獲得率 '+cardPct.toFixed(1)+'%（'+f(dayReg)+'／'+f(B.unique)+'名）';
+
+  // ---- 最上段 KPI（パワポと同じ5枚・配色） ----
+  const kc = (col, ic, t, d, pill, ln, foot) => '<div class="kc" style="--c:var(--'+col+');--cs:var(--'+col+'-soft)"><div class="hd"><div class="ic">'+ic+'</div><div><div class="t">'+t+'</div><div class="d">'+d+'</div></div></div>'+pill+'<div class="ln">'+ln+'</div><div class="foot">'+foot+'</div></div>';
+  const pillNum = (lab, num, unit) => '<div class="pill"><div class="lab">'+lab+'</div><div class="num">'+num+'<small>'+unit+'</small></div></div>';
+  const pillNA = (lab) => '<div class="pill"><div class="lab">現状</div><div class="num na">未計測</div></div>';
+  $('#kpis').innerHTML =
+    kc('blue','👥','新規申込者 eLTV','申込1名あたりの期待売上', pillNA('実測'),
+       '<b>目標 '+f(T.eltv_month)+'円／月</b><br>6か月LTV：'+f(T.eltv_6m)+'円／12か月LTV：'+f(T.eltv_12m)+'円',
+       '算式＝有料化率×月額×平均継続月数。初回課金が'+(jmKeys[0]?ym(jmKeys[0]):'—')+'開始のため、30日継続が出そろう9月末以降に計算開始。推計値は置きません')+
+    kc('purple','🗄️','実績CAC','新規申込1名の獲得単価', pillNA('実測'),
+       '<b>許容 '+f(T.cac_min)+'〜'+f(T.cac_max)+'円</b><br>6か月継続基準：'+f(T.cac_ideal)+'円以下が理想',
+       '読書会の集客費（広告費・外注費）の記録が存在しません。月次1行の入力欄と記録者の決定が先です')+
+    kc('orange','📈','LTV / CAC倍率','投資回収効率', pillNA('実測'),
+       '<b>目標 '+T.ltv_cac.toFixed(1)+'倍以上</b><br>健全な広告投資ライン',
+       'eLTVとCACの両方が揃ってから計算します。どちらか一方でも推計なら「推計」ラベルで表示します')+
+    kc('cyan','👥','当日参加率','読書会ショーアップ率（'+md(B.latest_date)+'回）', pillNum('実測', showupU.toFixed(1), '%（'+f(B.attend)+'／'+f(B.unique)+'名）'),
+       '<b>目標 '+T.showup_pct+'%</b>（標準30〜40%）　'+verdict(showupU, T.showup_pct),
+       '<span class="st c">計算値</span> 申込ユニーク基準。延べ基準は'+pf(B.showup_gross_pct)+'%（'+f(B.attend)+'／'+f(B.gross)+'）。'+B.year+'年の加重平均 '+pf(B.year_showup_weighted_pct)+'%（'+f(B.year_attend)+'／'+f(B.year_apply)+'）')+
+    kc('indigo','💳','突破Aiクレカ獲得率','申込全体に対する登録率（'+md(B.latest_date)+'当日）', pillNum('実測', cardPct.toFixed(1), '%（'+f(dayReg)+'／'+f(B.unique)+'名）'),
+       '<b>目標 '+T.card_pct+'%</b>　'+verdict(cardPct, T.card_pct),
+       '<span class="st c">計算値</span> 分子＝当日のStripe初回登録（顧客ユニーク・全資格：'+rkStr(S.day_cohort.rank)+'・全経路・解約含む）。'+md(mc.from)+'〜'+md(mc.to)+'累計'+f(mc.n)+'名（'+p1(mc.n,B.unique)+'%）。参加経由と欠席経由は未分離');
+  $('#kpi-note').innerHTML = '<b>読み方：</b>5枚のうち実測で埋まるのは右の2枚です。左の3枚（eLTV・CAC・LTV/CAC）は「集客費の記録」と「平均継続月数」という材料が無く、推計で埋めると広告判断を誤るため空欄にしています。当日参加率は目標'+T.showup_pct+'%に対し'+showupU.toFixed(1)+'%、クレカ獲得率は目標'+T.card_pct+'%に対し'+cardPct.toFixed(1)+'%で、<b>入口2段の未達がそのまま下流の全KPIを縮めています</b>。';
+
+  // ---- 中段 ファネル ----
+  const mini = (col, l, n, fo) => '<div class="mini" style="--mc:var(--'+col+')"><div class="ml">'+l+'</div><div class="mn'+(n==null?' na':'')+'">'+(n==null?'未計測':n)+'</div><div class="mf">'+fo+'</div></div>';
+  const sc = (l, n, fo) => '<div class="sc"><div class="sl">'+l+'</div><div class="sn">'+n+'</div><div class="sf">'+fo+'</div></div>';
+  const fs = (col, no, t, badge, big, per, tg, inner, foot) => '<div class="fs" style="--c:var(--'+col+');--cs:var(--'+col+'-soft)"><div class="hd"><div class="no">'+no+'</div><div class="t">'+t+'</div>'+(badge?'<span class="badge">'+badge+'</span>':'')+'</div>'+big+(per?'<div class="per">'+per+'</div>':'')+(tg?'<div class="tg">'+tg+'</div>':'')+(inner||'')+'<div class="foot">'+foot+'</div></div>';
+  const cohortJudge = jd.length ? md(jd[0])+'〜'+md(jd[jd.length-1]) : '—';
+  const h = [];
+  h.push(fs('blue','1','新規読書会申込','',
+    '<div class="big">'+f(B.unique)+'<small>名</small></div>',
+    '母数：<b>100</b>（100人換算）',
+    '目標 '+T.apply+'名／月（集客ベース）', '',
+    '<span class="st m">実測</span> '+B.latest_date+'回・申込ユニーク（延べ'+f(B.gross)+'）。新規'+f(B.new)+'／リピート'+f(B.repeat)+'。ハッシュ化IDで集計'));
+  h.push('<div class="arrow">▶</div>');
+  h.push(fs('purple','2','突破Ai登録人数','',
+    '<div class="big">'+f(dayReg)+'<small>名</small></div>',
+    '対 新規申込 <b>'+cardPct.toFixed(1)+'%</b>（'+f(dayReg)+'／'+f(B.unique)+'名・100人換算 '+per100(dayReg)+'）',
+    '目標 '+T.card_pct+'名／100（参加'+T.showup_pct+'＋欠席再活性'+reactN+'）',
+    '<div class="stack">'+
+      mini('cyan','当日参加率', showupU.toFixed(1)+'<small>%</small>', f(B.attend)+'／'+f(B.unique)+'名・目標'+T.showup_pct+'%')+
+      mini('red','欠席者率', (100-showupU).toFixed(1)+'<small>%</small>', f(absent)+'／'+f(B.unique)+'名（延べ基準では'+(B.gross!=null? f(B.gross-B.attend):'—')+'名）・目標'+T.absent_pct+'%')+
+      mini('purple','🔄 欠席者再活性率', null, '目標'+T.reactivate_pct+'%（'+reactN+'／'+T.absent_pct+'名）。再告知の専用リンクが無く経路を分けられません。当日登録'+f(dayReg)+'名に欠席経由が混入し得ます')+
+    '</div>',
+    '<span class="st c">計算値</span> 当日のStripe初回登録・全経路。'+md(mc.from)+'〜'+md(mc.to)+'累計'+f(mc.n)+'名（100人換算 '+per100(mc.n)+'）。'+(R ? 'MyASP free9（全期間・有効'+f(R.valid)+'名）：読書会経由'+f(R.reading)+'・note '+f(R.note)+'・その他'+f(R.valid-R.reading-R.note-R.norec)+'・未記録'+f(R.norec) : '')));
+  h.push('<div class="arrow">▶</div>');
+  h.push(fs('orange','3','無料体験 → 有料化','対 登録者',
+    '<div class="big">'+f(triTotal)+'<small>名 体験中</small></div>',
+    '母集団：<b>全コホート・全経路</b>（登録累計'+f(S.customers_total)+'名）｜'+md(mc.from)+'〜'+md(mc.to)+'登録コホート'+f(mc.n)+'名＝体験中'+f(mc.trialing)+'・解約'+f(mc.canceled)+'・課金'+f(mc.active)+'（判定'+cohortJudge+'）',
+    '目標 有料転換'+T.trial_to_paid_pct+'%（'+T.paid_overall_pct+'名／100）',
+    '<div class="sub4">'+
+      sc('3-1 現在無料体験中', f(triTotal)+'<small>名</small>', (teKeys.length? teKeys.map(k=>ym(k)+' '+teSum(k)+'名').join('／')+'に判定' : '判定待ちなし'))+
+      sc('3-2 解約（無料期間内）', f(S.cancel_in_trial)+'<small>名</small>', '登録累計'+f(S.customers_total)+'名中 '+p1(S.cancel_in_trial,S.customers_total)+'%（判定日到来前の解約を含む）。うち登録14日以内'+f(c14)+'件（'+f(c14)+'／'+f(S.cancel_total)+'件＝'+p1(c14,S.cancel_total)+'%）')+
+      sc('3-3 正式メンバー化', f(S.judged.paid)+'<small>名</small>', 'Trial→Paid '+pf(paidRate)+'%（'+f(S.judged.paid)+'／判定日到来'+f(S.judged.n)+'名。残り'+f(S.judged.cancel)+'名は無料期間内の解約で3-2の'+f(S.cancel_in_trial)+'名に含みます）・目標'+T.trial_to_paid_pct+'%。Stripe課金開始基準（顧客DBの会員判定とは別集計）')+
+      sc('3-4 アップセル（登録時）', f(up)+'<small>名</small>', 'リーダー'+(tri.leader||0)+'・メンター'+(tri.mentor||0)+'／体験中'+f(triTotal)+'＝'+pf(upPct)+'%。目標（有料会員に対しメンター'+T.upsell_mentor_pct+'%・リーダー'+T.upsell_leader_pct+'%）とは定義が別')+
+    '</div>',
+    '<span class="st m">実測</span> 全資格・課金開始前・顧客ユニーク（'+rkStr(tri)+'）。'+(jmRows||'判定済みなし')+'。<b>無料期間は'+trialDays+'＝14日間の無料体験＋初月1か月無料</b>。Stripe上は44日間ずっとtrialingで、15日目の正式メンバー化に対応するイベントはありません。本画面の「正式メンバー化」は課金開始（45日目）を代理指標にしています'));
+  h.push('<div class="arrow">▶</div>');
+  h.push(fs('green','4','正式メンバーのオンボード完了（A/B/C）','定着指標',
+    '<div class="big na">未計測</div>',
+    '対 正式メンバー <b>'+f(S.judged.paid)+'名</b>（Stripe課金開始・全コホート）',
+    '目標 '+T.onboard_pct+'%以上（'+onboardN+'名／100）',
+    '<div class="stack">'+mini('green','平均有料継続期間', null, '目標'+T.retention_months+'か月以上。初回課金が'+(jmKeys[0]?ym(jmKeys[0]):'—')+'開始のため9月末から30日継続を集計')+'</div>',
+    '<span class="st n">未計測</span> 条件A投稿・B朝活・C予約のいずれも取得の仕組みがありません（下段の判定ロジック参照）。正式メンバーは顧客DBの会員判定とは別集計'));
+  $('#funnel').innerHTML = h.join('');
+  $('#funnel-q').textContent = '基準：'+B.latest_date+'回コホート（申込ユニーク'+f(B.unique)+'名＝100）。③④は全コホート';
+  const cohortLine = jd.length
+    ? md(mc.from)+'〜'+md(mc.to)+'の登録コホート'+f(mc.n)+'名は'+cohortJudge+'に課金判定が来ます（'+md(jdPeak)+'に'+f(mc.judge_days[jdPeak])+'名が集中）。現時点でこのコホートは体験中'+f(mc.trialing)+'・解約'+f(mc.canceled)+'・課金'+f(mc.active)+'です。'
+    : md(mc.from)+'〜'+md(mc.to)+'の登録コホートは'+f(mc.n)+'名です。';
+  $('#funnel-note').innerHTML = '<b>100人換算の読み方：</b>①②は'+md(B.latest_date)+'回コホート（申込100名に対して当日参加'+showupU.toFixed(1)+'・目標'+T.showup_pct+'／当日クレカ登録'+per100(dayReg)+'・目標'+T.card_pct+'）、③④は全コホート・全経路の実測です。'+cohortLine+'判定を待たず、<b>登録14日以内の解約が全解約の'+p1(c14,S.cancel_total)+'%（'+f(c14)+'／'+f(S.cancel_total)+'件）</b>を占める点が最初のボトルネックです。';
+
+  // ---- 3段目 アクション ----
+  const ac = (col, t, num, do_, foot) => '<div class="ac" style="--c:var(--'+col+');--cs:var(--'+col+'-soft)"><div class="t">'+t+'</div>'+num+'<div class="do">→ '+do_+'</div><div class="foot">'+foot+'</div></div>';
+  $('#acts').innerHTML =
+    ac('none','欠席者のうち突破Ai未登録','<div class="num na">未計測</div>','再告知メールの対象者','読書会側はハッシュ化IDのため、Stripe顧客と人単位で突合できません。MyASP申込リスト（メール）×Stripe顧客メールの照合を運営側で行えば算出できます')+
+    ac('orange','無料期間終了3日前','<div class="num">'+f(S.trial_end_within3)+'<small>名</small></div>','継続の意思確認・価値提供の最後の接点','<span class="st m">実測</span> 7日以内 '+f(S.trial_end_within7)+'名（断面時刻依存）。月別：'+(teKeys.length? teKeys.map(k=>ym(k)+' '+teSum(k)+'名（'+rkStr(S.trial_end_by_month[k])+'）').join('／') : '—')+'。名簿は司令塔「課金判定日リスト」')+
+    ac(S.past_due? 'red':'green','課金失敗（past_due／unpaid）','<div class="num">'+f(S.past_due)+'<small>名</small></div>','カード更新の案内','<span class="st m">実測</span> Stripeサブスクの状態がpast_due・unpaidの件数。決済失敗後の未回収（司令塔の未決済）は請求単位の別集計')+
+    ac('red','登録7日以内の解約（累計）','<div class="num">'+f(cd.d7||0)+'<small>件</small></div>','登録直後の初期体験の見直し','<span class="st m">実測</span> 全解約'+f(S.cancel_total)+'件の内訳：7日以内'+f(cd.d7||0)+'・8〜14日'+f(cd.d14||0)+'・15〜30日'+f(cd.d30||0)+'・31日超'+f(cd.over||0)+'。件＝サブスク件数（解約顧客ユニーク'+f(S.cancel_customers)+'名'+(S.cancel_customers===S.cancel_total?'＝件数と一致':'')+'）');
+
+  // ---- 下段左 オンボード判定ロジック ----
+  $('#ob-win').textContent = '正式メンバー化（15日目）から7日以内（21日目まで）';
+  $('#ob-rate').innerHTML = 'コミュニティ・オンボード完了率（A/B/C）：<span style="font-family:var(--mono)">未計測</span>（目標'+T.onboard_pct+'%以上・分母＝正式メンバー'+f(S.judged.paid)+'名＝Stripe課金開始。顧客DBの会員判定とは別集計）';
+  const conds = [
+    ['blue','📝','条件A（投稿）','コミュニティサイトで「自己紹介トピック」へ投稿完了','UMUの投稿ログ（トピック別・日付つき）のエクスポート。現在はLooker月初断面のログイン有無しか取れない'],
+    ['purple','👥','条件B（習慣）','毎週月曜朝8時の「朝活」へのリアルタイム参加 または 朝活スレッド発言','Zoom出席レポート＋UMUスレッド投稿ログ。どちらも取得の仕組み未設置'],
+    ['orange','📅','条件C（予約）','次回イベント（月1回読書会等）への参加申込み（RSVP）完了','UMUイベント機能の「参加する」ボタン化（改修計画・構造的アプローチ）。実装されれば自動取得'],
+  ];
+  $('#conds').innerHTML = conds.map(c => '<div class="cd" style="--c:var(--'+c[0]+')"><div class="hd2"><div class="ic">'+c[1]+'</div><div class="t">'+c[2]+'</div></div><div class="need">'+c[3]+'</div><div class="stt">未計測</div><div class="foot">必要な仕組み：'+c[4]+'</div></div>').join('');
+  $('#ob-note').innerHTML = '<b>言葉の取り決め：</b>この画面の「オンボード完了」は改修計画の定義（条件A・B・Cのうち2つ以上）だけを指し、<b>「コミュニティ・オンボード完了率（A/B/C）」</b>と呼びます。司令塔「今週・今月」タブのKPI【2】（無料期間者の課金転換＝Trial→Paid）、方針【2】の「行動オンボード完了率」（UMU初回行動・目標80%）、神田メモの「オンボーディング」（有料化＋継続）とは、いずれも別の数字です。無料期間は'+trialDays+'（14日間の無料体験＋初月1か月無料）で、改修計画の「正式メンバー化＝15日目」は無料体験の終了日にあたります。Stripe上はその日にイベントが無いため、本画面の「正式メンバー化」は課金開始（45日目）を代理指標にしています。<b>オンボード判定の窓（15〜21日目）は登録日＋14日で機械的に決まる</b>ので、条件A・B・Cのデータが取れれば改修計画どおりの日付で集計できます。';
+
+  // ---- 下段右 目標値表 ----
+  const row = (name, tgt, act, v) => '<tr><td>'+name+'</td><td class="n">'+tgt+'</td><td class="n">'+act+'</td><td>'+v+'</td></tr>';
+  $('#tgt-table').innerHTML = '<tr><th>指標</th><th>目標</th><th>実測</th><th>判定</th></tr>'+
+    row('新規申込', T.apply+'名', f(B.unique)+'名', '<span class="v none">母数</span>')+
+    row('当日参加', T.showup_pct+'%（'+T.showup_pct+'名）', showupU.toFixed(1)+'%（'+f(B.attend)+'）', verdict(showupU,T.showup_pct))+
+    row('欠席者', T.absent_pct+'%（'+T.absent_pct+'名）', (100-showupU).toFixed(1)+'%（'+f(absent)+'）', '<span class="v none">上限</span>')+
+    row('欠席者再活性', T.reactivate_pct+'%（'+reactN+'名）', '未計測', verdict(null,0))+
+    row('突破Ai登録', T.card_pct+'%（'+T.card_pct+'名）', cardPct.toFixed(1)+'%（'+f(dayReg)+'）', verdict(cardPct,T.card_pct))+
+    row('有料転換', T.trial_to_paid_pct+'%（'+T.paid_overall_pct+'名）', pf(paidRate)+'%（'+f(S.judged.paid)+'／'+f(S.judged.n)+'）<br><span style="font-size:10px;color:var(--muted)">全コホート・判定日到来分</span>', verdict(paidRate,T.trial_to_paid_pct))+
+    row('無料期間内の解約', '（目標なし）', p1(S.cancel_in_trial,S.customers_total)+'%（'+f(S.cancel_in_trial)+'／'+f(S.customers_total)+'）', '<span class="v warn">注視</span>')+
+    row('有料化率（全体）', T.paid_overall_pct+'%（'+T.paid_overall_pct+'名）', '判定待ち（'+cohortJudge+'）', '<span class="v none">判定待ち</span>')+
+    row('アップセル メンター', T.upsell_mentor_pct+'%', p1(tri.mentor||0,triTotal)+'%（'+(tri.mentor||0)+'／'+f(triTotal)+'・登録時）', '<span class="v none">定義差</span>')+
+    row('アップセル リーダー', T.upsell_leader_pct+'%', p1(tri.leader||0,triTotal)+'%（'+(tri.leader||0)+'／'+f(triTotal)+'・登録時）', '<span class="v none">定義差</span>')+
+    row('オンボード完了（A/B/C）', T.onboard_pct+'%以上（'+onboardN+'名）', '未計測', verdict(null,0))+
+    row('平均継続', T.retention_months+'か月以上', '未計測', verdict(null,0));
+
+  // ---- 参考A 月次推移チャート ----
+  (function(){
+    const rows = B.monthly; const W=1100, H=320, L=56, Rr=56, Tt=24, Bt=44;
+    const maxA = Math.max(...rows.map(r=>r.apply))*1.08; const n=rows.length; const bw=(W-L-Rr)/n;
+    const y = v => Tt + (H-Tt-Bt)*(1-v/maxA); const yr = v => Tt + (H-Tt-Bt)*(1-v/100);
+    let s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="読書会 月次推移">';
+    for(let g=0; g<=4; g++){ const v=maxA/4*g; s += '<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line-2)"/><text x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="10" fill="var(--muted)">'+Math.round(v)+'</text>'; }
+    for(let g=0; g<=4; g++){ const v=25*g; s += '<text x="'+(W-Rr+6)+'" y="'+(yr(v)+4)+'" font-size="10" fill="var(--muted)">'+v+'%</text>'; }
+    s += '<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+yr(T.showup_pct)+'" y2="'+yr(T.showup_pct)+'" stroke="var(--tgt)" stroke-dasharray="5 4"/><text x="'+(W-Rr-4)+'" y="'+(yr(T.showup_pct)-4)+'" text-anchor="end" font-size="10" fill="var(--tgt)">目標 '+T.showup_pct+'%</text>';
+    rows.forEach((r,i)=>{ const x0=L+bw*i+bw*0.15, w=bw*0.32;
+      s += '<rect x="'+x0+'" y="'+y(r.apply)+'" width="'+w+'" height="'+(y(0)-y(r.apply))+'" fill="var(--blue)" opacity=".85"><title>'+esc(r.m)+' 申込 '+r.apply+'</title></rect>';
+      s += '<rect x="'+(x0+w+2)+'" y="'+y(r.attend)+'" width="'+w+'" height="'+(y(0)-y(r.attend))+'" fill="var(--orange)" opacity=".9"><title>'+esc(r.m)+' 当日参加 '+r.attend+'</title></rect>';
+      s += '<text x="'+(L+bw*i+bw/2)+'" y="'+(H-Bt+16)+'" text-anchor="middle" font-size="11" fill="var(--ink-2)">'+r.m.slice(5)+'月</text>';
+      s += '<text x="'+(L+bw*i+bw/2)+'" y="'+(H-Bt+30)+'" text-anchor="middle" font-size="10" fill="var(--muted)">'+r.apply+'／'+r.attend+'</text>';
+    });
+    const pts = rows.map((r,i)=>(L+bw*i+bw/2)+','+yr(r.rate)).join(' ');
+    s += '<polyline points="'+pts+'" fill="none" stroke="var(--green)" stroke-width="2.5"/>';
+    rows.forEach((r,i)=>{ const cx=L+bw*i+bw/2; s += '<circle cx="'+cx+'" cy="'+yr(r.rate)+'" r="4" fill="var(--green)"/><text x="'+cx+'" y="'+(yr(r.rate)-9)+'" text-anchor="middle" font-size="11" font-weight="700" fill="var(--green)">'+r.rate.toFixed(1)+'%</text>'; });
+    s += '<g font-size="11" fill="var(--ink-2)"><rect x="'+L+'" y="4" width="10" height="10" fill="var(--blue)"/><text x="'+(L+14)+'" y="13">申込人数（延べ）</text><rect x="'+(L+120)+'" y="4" width="10" height="10" fill="var(--orange)"/><text x="'+(L+134)+'" y="13">当日参加</text><line x1="'+(L+210)+'" x2="'+(L+230)+'" y1="9" y2="9" stroke="var(--green)" stroke-width="2.5"/><text x="'+(L+234)+'" y="13">当日参加率（右軸）</text></g>';
+    s += '</svg>';
+    $('#chart').innerHTML = s + '<div class="foot-src"><span class="st m">実測</span> エキスパート読書会'+B.year+'_アンケート（Google Sheets）月次集計。'+B.year+'年 申込'+f(B.year_apply)+'・当日参加'+f(B.year_attend)+'・加重平均参加率'+pf(B.year_showup_weighted_pct)+'%。ラベルは「申込／当日」</div>';
+    $('#trend-q').textContent = B.year+'年1月〜'+parseInt(B.latest_date.slice(5,7))+'月（'+rows.length+'回）';
+  })();
+
+  // ---- 参考B ユニットエコノミクス ----
+  const r4 = (a,b,c,d) => '<tr><td>'+a+'</td><td class="n">'+b+'</td><td class="n">'+c+'</td><td>'+d+'</td></tr>';
+  $('#ue-table').innerHTML = '<tr><th>指標</th><th>目標</th><th>実測</th><th>算式・必要な材料</th></tr>'+
+    r4('新規申込者 eLTV（月額換算）', f(T.eltv_month)+'円／月（6か月 '+f(T.eltv_6m)+'円・12か月 '+f(T.eltv_12m)+'円）', '未計測', '有料化率×月額×平均継続月数。継続月数は初回課金'+(jmKeys[0]?ym(jmKeys[0]):'—')+'開始のため9月末から')+
+    r4('許容CAC', f(T.cac_min)+'〜'+f(T.cac_max)+'円（理想 '+f(T.cac_ideal)+'円以下）', '未計測', '読書会の集客費（広告費・外注費・ツール費）÷ 新規申込。集客費の記録が無い')+
+    r4('LTV / CAC', T.ltv_cac.toFixed(1)+'倍以上', '未計測', '上2つが揃ってから。片方でも推計なら「推計」ラベル');
+
+  // ---- 参考C データ可否 ----
+  const av = [
+    ['欠席者再活性率（参加経由／欠席経由の分離）','未計測','MyASPの登録リンクの free9 を「reading-live」「reading-absent」の2値に分け、当日案内と欠席者再告知でリンクを使い分ける。司令塔A2の既存集計に乗るので改修は最小','9/16回から適用できれば10月版で初回実測'],
+    ['欠席者のうち突破Ai未登録（名簿）','未計測','MyASP読書会申込リスト（メール）×Stripe顧客メールの人単位照合。読書会ダッシュボード側はハッシュ化のため不可。運営側の照合スクリプト（メアド基軸）を新設','照合は一時領域で実施し公開版には人数のみ'],
+    ['実績CAC','未計測','読書会の集客費（広告費・外注費・ツール費）を月次1行で記録する欄と記録者を決める','記録者が決まれば翌月から'],
+    ['eLTV・LTV/CAC','未計測','有料化率（実測）×月額（実測）×平均継続月数（Stripeの課金継続から算出）。30日継続は9月末、90日継続は11月末から','それまで「推計」を置かない'],
+    ['オンボード条件A（自己紹介投稿）','未計測','UMUの投稿ログ（トピック・投稿日・ユーザー）のエクスポートまたはAPI','UMU管理者（立松さん）に取得可否を確認'],
+    ['オンボード条件B（朝活参加・発言）','未計測','Zoom出席レポート＋UMUスレッド投稿ログ。改修計画の「マイスピ→UMU起点」導線変更が前提','導線変更後に取得設計'],
+    ['オンボード条件C（RSVP）','未計測','UMUイベント機能の「参加する」ボタン化。押下者だけにZoomリンク表示','実装されれば自動取得'],
+    ['平均有料継続期間・30日／90日継続','未計測','Stripeサブスクの課金継続（active継続月数）をパイプラインに追加','9月末から'],
+  ];
+  $('#avail-table').innerHTML = '<tr><th>指標</th><th>現状</th><th>必要な仕組み</th><th>時期・備考</th></tr>'+av.map(r=>'<tr><td>'+r[0]+'</td><td><span class="st n">'+r[1]+'</span></td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('');
+
+  // ---- 参考D 計算式 ----
+  const fm = [
+    ['新規読書会申込','読書会ダッシュボード dashboard_data.json の直近回 申込ユニーク（ハッシュ化ID・複数経路の同一人物は1名）。延べは同アンケート月次の申込人数'],
+    ['当日参加','アンケート月次（Google Sheets）の当日参加。ユニーク化されていないため、参加率はユニーク基準（÷申込ユニーク）と延べ基準（÷延べ申込）を併記'],
+    ['欠席者','申込ユニーク − 当日参加（計算値）。延べ基準なら延べ申込 − 当日参加'],
+    ['突破Aiクレカ獲得率','読書会当日（PCローカル＝JSTの created 日付）のStripe初回登録（顧客ユニーク・最初のサブスク・解約含む・全資格・全経路）÷ 申込ユニーク。参加経由と欠席経由は未分離。月次レポート2026年9月版の「61件」はクルーのみで、本画面はメンター1名を含めた全資格'],
+    ['無料体験中','Stripeサブスク status=trialing かつ同一顧客にactiveが無い顧客ユニーク・全資格（司令塔の課金判定日カレンダーと同一定義）'],
+    ['Trial→Paid（有料転換率）','trial_end（判定日）が現在以前の顧客ユニークのうち status=active（past_due含む）÷ 判定日到来分全体。判定日が未来の人（体験中・体験中に解約）は分母に含めない。月別は trial_end の月で区分'],
+    ['解約（無料期間内）＝3-2','status=canceled かつ canceled_at ≦ trial_end の件数（判定日が未来のまま解約した人を含む）÷ 登録累計（顧客ユニーク）。別枠で全解約を「登録日から解約日までの日数」で 7／14／30日に区分。件＝サブスク件数'],
+    ['正式メンバー','Stripe課金開始（status=active・登録45日目〜）。無料期間44日＝14日間の無料体験＋初月1か月無料（西村さん確認 2026-09-07）。15日目の正式メンバー化はStripe上にイベントが無いため課金開始を代理指標にする。顧客DBマスターの会員判定（司令塔の正）とは別集計'],
+    ['アップセル（登録時）','無料体験中のうちリーダー・メンター ÷ 無料体験中全体。改修計画の目標（有料会員に対する課金後の移行率）とは定義が異なるため判定しません'],
+    ['コミュニティ・オンボード完了率（A/B/C）','正式メンバー化（課金開始）から7日以内に条件A・B・Cのうち2つ以上達成 ÷ 正式メンバー。未計測。方針【2】の「行動オンボード完了率」（UMU初回行動）とは別'],
+    ['100人換算','各段の実数 ÷ 申込ユニーク × 100（小数1位）'],
+    ['目標値','改修計画（豊留さん・Googleドキュメント）の100人ファネルモデルをそのまま定数化（6か月・12か月eLTV、CAC 2,440円以下も原文記載）。器の変更は西村さん承認制'],
+  ];
+  $('#formula-table').innerHTML = '<tr><th>項目</th><th>定義・計算式</th></tr>'+fm.map(r=>'<tr><td style="white-space:nowrap">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
+})();
+</script>
+</body>
+</html>
