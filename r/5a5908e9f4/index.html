@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<title>経営判断OS クラファン検証デモ機</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F5F6F8; --paper:#FFFFFF; --ink:#1B2430; --ink-2:#4A5563; --ink-3:#7C8794;
+  --line:#DCE0E6; --line-2:#EBEEF2;
+  --accent:#D0000D; --accent-ink:#A3000A; --accent-soft:#FBE9EA;
+  --cockpit:#0F1A2B; --cockpit-2:#16243A; --cockpit-line:#25344D; --cockpit-ink:#E8EDF5; --cockpit-ink-2:#9FB0C8;
+  --ok:#2E9E6B; --warn:#D99A1E; --crit:#D0000D;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:'Noto Sans JP','Meiryo UI','Hiragino Sans',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111820; --paper:#18212C; --ink:#EAF0F7; --ink-2:#B8C3D1; --ink-3:#7F8DA0;
+    --line:#2A3542; --line-2:#222C38; --accent:#FF3B45; --accent-ink:#FF6B72; --accent-soft:#3A1519;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111820; --paper:#18212C; --ink:#EAF0F7; --ink-2:#B8C3D1; --ink-3:#7F8DA0;
+  --line:#2A3542; --line-2:#222C38; --accent:#FF3B45; --accent-ink:#FF6B72; --accent-soft:#3A1519;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:800;line-height:1.35;text-wrap:balance;margin:0}
+h1{font-size:30px}
+h2{font-size:22px;margin-bottom:6px}
+h3{font-size:16px;font-family:var(--sans);font-weight:700}
+p{margin:0 0 12px;max-width:42em}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;font-family:var(--mono)}
+.muted{color:var(--ink-2)}
+.small{font-size:13px;color:var(--ink-3)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+header{border-bottom:1px solid var(--line);background:var(--paper)}
+header .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-top:28px;padding-bottom:22px}
+.flag{display:flex;align-items:center;gap:12px}
+.flag .bar{width:6px;height:44px;background:var(--accent);border-radius:2px}
+.stamp{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--accent);color:var(--accent-ink);border-radius:4px;padding:6px 12px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;font-weight:600}
+nav{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:0;padding-bottom:0}
+nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--accent-ink);border-bottom-color:var(--accent);outline:none}
+
+section{padding:40px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.lead{font-size:16px;color:var(--ink-2);max-width:44em}
+
+/* hypothesis trio */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.hyp{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px}
+.hyp .q{font-family:var(--serif);font-size:20px;font-weight:800}
+.hyp .ans{font-weight:700;color:var(--accent-ink)}
+.hyp ul{margin:0;padding-left:1.2em;color:var(--ink-2);font-size:14px}
+.hyp li{margin-bottom:4px}
+.hyp .rule{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-3)}
+.hyp .rule b{color:var(--ink)}
+
+/* dropped list */
+.dropped{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:13px}
+.dropped .tag{color:var(--ink-3);text-decoration:line-through}
+
+/* persona switch */
+.switch{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 12px}
+.switch button{font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-2);cursor:pointer}
+.switch button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.persona{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px}
+.persona h3{margin-bottom:6px}
+.persona .who{font-family:var(--serif);font-size:19px;font-weight:800;margin-bottom:6px}
+.persona dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.persona dt{color:var(--ink-3);white-space:nowrap}
+.persona dd{margin:0}
+.words{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.words li{padding:8px 12px;border:1px solid var(--line);border-radius:4px;font-size:14px;background:var(--bg)}
+.words li.top{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.words li .k{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:8px}
+.tierpick{display:flex;flex-direction:column;gap:8px}
+.tierpick .t{padding:10px 12px;border-radius:4px;border:1px solid var(--line);font-size:14px;background:var(--bg)}
+.tierpick .t.main{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.tierpick .t.off{opacity:.45}
+
+/* price table */
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tablewrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:6px}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line-2);vertical-align:top;text-align:left}
+th{font-size:12px;letter-spacing:.06em;color:var(--ink-3);font-weight:600;background:var(--bg);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td .big{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--ink)}
+td .tier{font-family:var(--serif);font-size:18px;font-weight:800}
+td .tier small{display:block;font-family:var(--sans);font-size:12px;font-weight:500;color:var(--ink-3)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);font-family:var(--mono);letter-spacing:.04em}
+.badge.hold{border-color:var(--warn);color:var(--warn)}
+.badge.fixed{border-color:var(--ok);color:var(--ok)}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.sum .cell{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.sum .cell .l{font-size:12px;color:var(--ink-3)}
+.sum .cell .v{font-family:var(--mono);font-size:20px;font-weight:600}
+.sum .cell .v small{font-size:12px;color:var(--ink-3);font-weight:400}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.rule-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px}
+.rule-card h3{margin-bottom:10px}
+.rule-card ol{margin:0;padding-left:1.2em;font-size:14px;color:var(--ink-2)}
+.rule-card li{margin-bottom:8px}
+.rule-card li b{color:var(--ink)}
+.rule-card .then{display:block;color:var(--accent-ink);font-weight:700}
+
+/* cockpit */
+.cockpit{background:var(--cockpit);color:var(--cockpit-ink);border-radius:8px;padding:22px;margin-top:20px;font-family:var(--sans)}
+.cockpit *{color:inherit}
+.cp-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid var(--cockpit-line);padding-bottom:12px;margin-bottom:16px}
+.cp-head .co{font-family:var(--serif);font-size:20px;font-weight:800}
+.cp-head .meta{font-family:var(--mono);font-size:12px;color:var(--cockpit-ink-2)}
+.sample{display:inline-block;background:#3A1519;border:1px solid #FF3B45;color:#FFB3B7;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:3px;font-weight:600;margin-left:8px}
+.brief{display:grid;grid-template-columns:3fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.brief .b{background:var(--cockpit-2);border:1px solid var(--cockpit-line);border-radius:6px;padding:12px 14px}
+.brief .b .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--cockpit-ink-2);margin-bottom:6px}
+.brief .b ul{margin:0;padding-left:1.1em;font-size:14px}
+.brief .b .one{font-size:15px;font-weight:700;line-height:1.5}
+.brief .b.crit{border-color:#FF3B45}
+.brief .b.dec{border-color:#F2C14E}
+.zones{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.zone{background:var(--cockpit-2);border:1px solid var(--cockpit-line);border-radius:6px;padding:14px 16px}
+.zone.next{opacity:.55}
+.zone .zl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.zone .zl .t{font-family:var(--mono);font-size:12px;letter-spacing:.14em;font-weight:600}
+.zone .zl .sub{font-size:12px;color:var(--cockpit-ink-2)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.kpi{border-left:3px solid var(--cockpit-line);padding-left:10px}
+.kpi.ok{border-left-color:var(--ok)}
+.kpi.warn{border-left-color:var(--warn)}
+.kpi.crit{border-left-color:#FF3B45}
+.kpi .l{font-size:11px;color:var(--cockpit-ink-2);white-space:nowrap}
+.kpi .v{font-family:var(--mono);font-size:20px;font-weight:600;line-height:1.3;white-space:nowrap}
+.kpi .v small{font-size:11px;color:var(--cockpit-ink-2);font-weight:400}
+.kpi .d{font-family:var(--mono);font-size:12px;color:var(--cockpit-ink-2)}
+.light{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.light.g{background:var(--ok)}.light.y{background:var(--warn)}.light.r{background:#FF3B45}
+.risks{list-style:none;margin:0;padding:0;font-size:14px;display:flex;flex-direction:column;gap:6px}
+.timebars{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.timebars .row{display:grid;grid-template-columns:120px 1fr 44px;align-items:center;gap:8px}
+.timebars .bar{height:8px;background:var(--cockpit-line);border-radius:4px;overflow:hidden}
+.timebars .bar i{display:block;height:100%;background:var(--cockpit-ink-2)}
+.decision{grid-column:1/-1;border-color:#F2C14E}
+.dcards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dcard{background:var(--cockpit);border:1px solid var(--cockpit-line);border-radius:6px;padding:12px 14px;font-size:13px}
+.dcard .what{font-weight:700;font-size:15px;line-height:1.4;margin-bottom:8px}
+.dcard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
+.dcard dt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--cockpit-ink-2);padding-top:3px}
+.dcard dd{margin:0}
+.dcard .rec{color:#F2C14E;font-weight:700}
+.dcard .own{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 6px;border:1px solid var(--cockpit-line);border-radius:3px}
+.cp-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--cockpit-line);font-size:12px;color:var(--cockpit-ink-2);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+/* spec */
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.spec .box{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px}
+.spec ul{margin:0;padding-left:1.2em;font-size:14px;color:var(--ink-2)}
+.spec li{margin-bottom:6px}
+.spec code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:1px 6px;border-radius:3px;border:1px solid var(--line)}
+
+/* pending */
+.pending{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:6px;padding:18px 20px;margin-top:16px}
+.pending ol{margin:0;padding-left:1.2em;font-size:14px}
+.pending li{margin-bottom:6px}
+footer{padding:24px 0 40px;font-size:12px;color:var(--ink-3)}
+
+@media (max-width:860px){
+  .trio,.rules,.sum{grid-template-columns:1fr 1fr}
+  .persona{grid-template-columns:1fr}
+  .brief{grid-template-columns:1fr}
+  .zones{grid-template-columns:1fr}
+  .dcards{grid-template-columns:1fr}
+  .spec{grid-template-columns:1fr}
+}
+@media (max-width:560px){ .trio,.rules,.sum{grid-template-columns:1fr} h1{font-size:24px} }
+@media (prefers-reduced-motion: no-preference){ nav a{transition:color .15s,border-color .15s} }
+</style>
+
+<header>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">PABLOS × Sophia Bliss ｜ 経営判断OS事業</div>
+      <div class="flag" style="margin-top:8px">
+        <div class="bar"></div>
+        <h1>経営判断OS クラファン検証デモ機</h1>
+      </div>
+      <p class="muted" style="margin:10px 0 0">主仮説を3点に絞り、価格帯と上限数を仮置きし、AI CFOコックピットの「器」を先に見せるための1枚です。</p>
+    </div>
+    <div class="stamp">仮置き版 2026-09-08 改訂 ／ 価格・上限は西村さん・定居さん承認制</div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#hyp">1 主仮説3点</a><a href="#who">2 誰に</a><a href="#price">3 価格帯と上限数</a><a href="#rules">4 判定ルール</a><a href="#cockpit">5 AI CFO デモ画面</a><a href="#spec">6 初期版の範囲</a><a href="#pending">7 未確定</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="hyp">
+  <div class="eyebrow">1 ／ 主仮説</div>
+  <h2>クラファンで確かめるのは、この3点だけ</h2>
+  <p class="lead">クラファンから返ってくるのは「支援数・金額・コメント・申込者の属性」だけです。提案書の検証項目6つを、そこから読み切れる3点に絞ります。</p>
+  <div class="trio">
+    <div class="hyp">
+      <div class="q">誰に</div>
+      <div class="ans">社長＋右腕1名。社員2〜3名、業務委託等を含めて10名ぐらいの会社</div>
+      <ul>
+        <li>既存LPの想定（10〜30名）より一回り小さい層。ここが刺さるかが今回の主仮説</li>
+        <li>右腕は1名で足りる。「幹部会議」ではなく「社長と右腕の二人」で判断が回る会社</li>
+        <li>会員層（会社員・ソロプレナー）は「従」として別枠で測る</li>
+      </ul>
+      <div class="rule"><b>測り方</b>：申込フォームに「社員数」「右腕の有無」「役職」の3問を必須にする</div>
+    </div>
+    <div class="hyp">
+      <div class="q">どの言葉で</div>
+      <div class="ans">「結局、社長に聞かないと決まらない」</div>
+      <ul>
+        <li>クラファン冒頭はこの1本に固定する（旗は1本）</li>
+        <li>残り4本は、メルマガ件名・SNS投稿の見出しでローテして反応を比べる</li>
+        <li>typeform診断の回答で「自分の課題はどれか」を取る</li>
+      </ul>
+      <div class="rule"><b>測り方</b>：件名別クリック率＋診断回答の分布＋支援コメントの自由記述</div>
+    </div>
+    <div class="hyp">
+      <div class="q">いくらなら払われるか</div>
+      <div class="ans">既存定価 298,000円を軸に、早割と上位2段で読む</div>
+      <ul>
+        <li>A｜早割（限定5）と通常（限定10）の埋まり方で価格感度を見る</li>
+        <li>B｜右腕育成つきで「講座単体の市場性」を見る</li>
+        <li>C｜創設企業1社で「仕組み化にいくら払うか」を見る</li>
+      </ul>
+      <div class="rule"><b>測り方</b>：枠ごとの到達日数と、枠が埋まらなかった段の位置</div>
+    </div>
+  </div>
+  <div class="dropped">
+    <b style="font-size:13px">今回は測らない（次回以降）：</b>
+    <span class="tag">⑤ 既存サービスとの違い</span>
+    <span class="tag">⑥ 成果の可視化（判断できた割合・社長時間）</span>
+    <span class="small">→ ⑥はC創設企業のDecision Objectログから自動で出る設計にする（デモ画面参照）</span>
+  </div>
+</section>
+
+<section id="who">
+  <div class="eyebrow">2 ／ 誰に</div>
+  <h2>3つの顧客像で、言葉と商品の当たりが変わる</h2>
+  <p class="lead">切り替えると、その顧客像に刺さる言葉の順位と、主に買われる枠が変わります。主仮説はP1です。</p>
+  <div class="switch" role="tablist" aria-label="顧客像">
+    <button type="button" role="tab" aria-pressed="true" data-p="p1">P1 社長＋右腕1名（10名ぐらい）</button>
+    <button type="button" role="tab" aria-pressed="false" data-p="p2">P2 右腕本人・後継者</button>
+    <button type="button" role="tab" aria-pressed="false" data-p="p3">P3 ソロプレナー・会員層</button>
+  </div>
+
+  <div class="persona" data-persona="p1">
+    <div>
+      <div class="who">社長＋右腕1名の会社（10名ぐらい）</div>
+      <dl>
+        <dt>規模</dt><dd>社員2〜3名。業務委託・パート等を含めて10名ぐらい</dd>
+        <dt>状態</dt><dd>右腕は1名いるが、判断も数字も社長の頭の中で止まる</dd>
+        <dt>流入源</dt><dd>出版導線・マゼロ経営LP・診断（主）／パブロス会員（従）</dd>
+        <dt>優先度</dt><dd><b>主仮説</b>（クラファンの申込の6割以上をここで取る）</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>刺さる言葉の仮順位</h3>
+      <ul class="words">
+        <li class="top"><span class="k">W1</span>結局、社長に聞かないと決まらない</li>
+        <li><span class="k">W2</span>幹部が「どうしましょうか」で止まる</li>
+        <li><span class="k">W3</span>会議が報告会で終わる</li>
+        <li><span class="k">W4</span>社長の時間が未来に戻らない</li>
+        <li><span class="k">W5</span>AIは使っているが、経営判断は変わっていない</li>
+      </ul>
+    </div>
+    <div>
+      <h3>主に買われる枠</h3>
+      <div class="tierpick">
+        <div class="t main">A｜マゼロ経営（社長＋右腕1名で受ける）</div>
+        <div class="t">B｜＋右腕育成（社長が右腕を送り込む）</div>
+        <div class="t">C｜＋AI CFO（データが整った1社のみ）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona" data-persona="p2" hidden>
+    <div>
+      <div class="who">右腕本人・後継者候補</div>
+      <dl>
+        <dt>立場</dt><dd>管理責任者・経営企画・事業責任者・後継者</dd>
+        <dt>状態</dt><dd>「情報を集めて報告する人」から抜け出したい</dd>
+        <dt>流入源</dt><dd>パブロス会員（社会リーダー層）・出版導線</dd>
+        <dt>優先度</dt><dd>副仮説（本人申込が何件あるかを見る）</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>刺さる言葉の仮順位</h3>
+      <ul class="words">
+        <li class="top"><span class="k">W2</span>「どうしましょうか」ではなく「私はB案です」と言いたい</li>
+        <li><span class="k">W5</span>AIは使っているが、経営判断は変わっていない</li>
+        <li><span class="k">W3</span>会議が報告会で終わる</li>
+        <li><span class="k">W1</span>結局、社長に聞かないと決まらない</li>
+        <li><span class="k">W4</span>社長の時間が未来に戻らない</li>
+      </ul>
+    </div>
+    <div>
+      <h3>主に買われる枠</h3>
+      <div class="tierpick">
+        <div class="t">A｜マゼロ経営（社長を巻き込めれば）</div>
+        <div class="t main">B｜右腕育成（本人が申し込む・社長が費用負担）</div>
+        <div class="t off">C｜＋AI CFO（対象外）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona" data-persona="p3" hidden>
+    <div>
+      <div class="who">ソロプレナー・パブロス会員層</div>
+      <dl>
+        <dt>立場</dt><dd>30〜40代の会社員・個人事業主・一人社長</dd>
+        <dt>状態</dt><dd>右腕はいない。自分の判断を数字で整えたい</dd>
+        <dt>流入源</dt><dd>週刊PABLOS・クラファンライブ・リスキリング事業部</dd>
+        <dt>優先度</dt><dd>従（会員導線が「主」になると主仮説が測れなくなる）</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>刺さる言葉の仮順位</h3>
+      <ul class="words">
+        <li class="top"><span class="k">W5</span>AIは使っているが、経営判断は変わっていない</li>
+        <li><span class="k">W4</span>自分の時間が未来に戻らない</li>
+        <li><span class="k">W1</span>（右腕がいないので刺さらない）</li>
+        <li><span class="k">W2</span>（同上）</li>
+        <li><span class="k">W3</span>（同上）</li>
+      </ul>
+    </div>
+    <div>
+      <h3>主に買われる枠</h3>
+      <div class="tierpick">
+        <div class="t off">A｜マゼロ経営（幹部同席が前提のため弱い）</div>
+        <div class="t off">B｜右腕育成（対象外）</div>
+        <div class="t main">D（検討）｜経営者本人＋AI CFO 入門枠。今回は作らず、会員向けは説明会1回で反応だけ取る</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="eyebrow">3 ／ 価格帯と上限数（仮置き）</div>
+  <h2>既存定価を崩さず、段差で読む</h2>
+  <p class="lead">価格の根拠は、公開中のマゼロ経営LPの実測値です。セッション費用 298,000円（税込）、90日実装プログラム 3,600,000円。ここを崩すと既存導線の顧客と矛盾するので、クラファンは「特典と上限数」で差をつけます。</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>枠</th><th>内容</th><th>仮置き価格（税込）</th><th>上限数</th><th>根拠・算式</th><th>状態</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tier">A-早割<small>マゼロ経営単体</small></span></td>
+        <td>90分セッション＋会社専用の経営判断OSレポート＋チャットフォロー30日（通常10日）＋書籍『未来地図』</td>
+        <td><span class="big num">248,000</span><div class="small">定価比 ▲50,000</div></td>
+        <td><span class="big num">5</span><div class="small">社</div></td>
+        <td class="small">定価298,000を軸に、早割5枠の到達日数で価格感度を読む。値引きは早割のみに限定し、LP定価は守る</td>
+        <td><span class="badge hold">承認待ち</span></td>
+      </tr>
+      <tr>
+        <td><span class="tier">A-通常<small>マゼロ経営単体</small></span></td>
+        <td>同上（チャットフォロー10日＋書籍）</td>
+        <td><span class="big num">298,000</span><div class="small">既存LP定価と同額</div></td>
+        <td><span class="big num">10</span><div class="small">社</div></td>
+        <td class="small">既存LP実測値。早割が埋まったあと通常枠が動くかで「定価の妥当性」を読む</td>
+        <td><span class="badge fixed">定価は実測</span></td>
+      </tr>
+      <tr>
+        <td><span class="tier">B<small>マゼロ＋右腕CFO育成</small></span></td>
+        <td>Aの内容＋『社長の右腕・経営判断力養成講座（仮）』全6回（社長＋右腕1名の2名）＋修了時の推奨案レビュー1回</td>
+        <td><span class="big num">880,000</span><div class="small">A 298,000＋講座 582,000</div></td>
+        <td><span class="big num">5</span><div class="small">社</div></td>
+        <td class="small">講座6回×2名で1回あたり約97,000。既存CFO講座の価格は<b>未確認</b>のため、定居さんの現行価格で置き換える</td>
+        <td><span class="badge hold">承認待ち</span></td>
+      </tr>
+      <tr>
+        <td><span class="tier">C<small>マゼロ＋AI CFO 創設企業</small></span></td>
+        <td>Aの内容＋初期版コックピット（MONEY・GOALKEEPER・DECISIONの3領域・CSV標準入力）を90日で構築し、実際の経営会議で3回使う＋事例公開への協力</td>
+        <td><span class="big num">3,000,000</span><div class="small">90日実装3,600,000比 ▲600,000</div></td>
+        <td><span class="big num">1</span><div class="small">社（補欠1社）</div></td>
+        <td class="small">既存の90日実装プログラム3,600,000をアンカーに、創設企業特典（標準版ライセンス優遇・事例掲載）分を下げる。実装側の工数・費用は<b>別途確定</b></td>
+        <td><span class="badge hold">承認待ち</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="sum">
+    <div class="cell"><div class="l">上限到達時の総額（税込）</div><div class="v num">11,620,000<small> 円</small></div></div>
+    <div class="cell"><div class="l">成立ライン（仮）</div><div class="v num">A 5件<small>＋B 2件</small></div></div>
+    <div class="cell"><div class="l">主仮説が立つ最低ライン</div><div class="v num">P1 6割<small> 以上</small></div></div>
+    <div class="cell"><div class="l">募集期間（仮）</div><div class="v num">30<small> 日</small></div></div>
+  </div>
+  <p class="small" style="margin-top:12px">※ 総額は 5×248,000＋10×298,000＋5×880,000＋1×3,000,000。クラファン手数料・決済費・配分率は未反映。金額の確定は西村さんと定居さんの合意後。</p>
+</section>
+
+<section id="rules">
+  <div class="eyebrow">4 ／ 判定ルール</div>
+  <h2>終わったあとに「次の一手」が決まる読み方</h2>
+  <p class="lead">結果が出てから解釈を考えると、都合よく読んでしまいます。先に「この結果ならこうする」を決めておきます。</p>
+  <div class="rules">
+    <div class="rule-card">
+      <h3>誰に（申込者の属性）</h3>
+      <ol>
+        <li><b>P1（10名ぐらい・右腕1名）が6割以上</b><span class="then">→ 主仮説確定。本番LPの想定規模を10〜30名から書き換える</span></li>
+        <li><b>P2（本人申込）が3件以上</b><span class="then">→ 右腕育成を単体商品として切り出す</span></li>
+        <li><b>P3が過半</b><span class="then">→ 会員導線が主になっている。次回は「経営者本人＋AI CFO」枠を別途設計</span></li>
+      </ol>
+    </div>
+    <div class="rule-card">
+      <h3>どの言葉で（件名と診断）</h3>
+      <ol>
+        <li><b>W1のクリック率が最高</b><span class="then">→ 本番LPの冒頭はW1のまま</span></li>
+        <li><b>W2またはW3が最高</b><span class="then">→ 冒頭を差し替え、W1は2段目へ</span></li>
+        <li><b>W5が最高</b><span class="then">→ AI CFOを前に出す構成へ。3商品の並び順を変える</span></li>
+      </ol>
+    </div>
+    <div class="rule-card">
+      <h3>いくら（枠の埋まり方）</h3>
+      <ol>
+        <li><b>A-早割5が7日以内に完売</b><span class="then">→ 定価は妥当。値上げ余地あり</span></li>
+        <li><b>早割のみ完売・通常0</b><span class="then">→ 価格抵抗あり。特典設計で再検証</span></li>
+        <li><b>B 3件以上</b><span class="then">→ 講座の市場性あり。標準プログラム化</span></li>
+        <li><b>C 応募2社以上</b><span class="then">→ 選定基準（データの整い・発信協力）で1社を選ぶ。0件なら本デモ機を見せて再募集</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="cockpit">
+  <div class="eyebrow">5 ／ AI CFO コックピット</div>
+  <h2>「何が起きたか」ではなく「だから、何を決めるか」を1画面に</h2>
+  <p class="lead">クラファンページとC枠の説明会で見せる「器」です。数値はすべて架空のサンプルで、形の確認用です。実在データ以外を本番に載せることはしません。</p>
+
+  <div class="cockpit" aria-label="AI CFO コックピット サンプル画面">
+    <div class="cp-head">
+      <div><span class="co">サンプル株式会社</span><span class="sample">SAMPLE ／ 架空の数値</span></div>
+      <div class="meta">社員3名＋業務委託7名 ／ 年商1.2億円 ／ 2026年8月末 断面 ／ 更新：月次CSV投入</div>
+    </div>
+
+    <div class="brief">
+      <div class="b">
+        <div class="l">今週見るべき変化 ／ 3つ</div>
+        <ul>
+          <li>売掛回収日数（DSO）が <span class="num">41 → 48日</span>。大口2社の支払サイト延長が原因</li>
+          <li>EBITDA着地見込が予算比 <span class="num">87%</span>。粗利は伸びているが人件費先行</li>
+          <li>現金耐久月数が <span class="num">6.0 → 5.1か月</span>。設備・ソフト更新420万円の払い出し後</li>
+        </ul>
+      </div>
+      <div class="b crit">
+        <div class="l">最大の注意 ／ 1つ</div>
+        <div class="one">耐久月数が「6か月線」を割った。回収条件の見直しを今月中に</div>
+      </div>
+      <div class="b dec">
+        <div class="l">社長が決めること ／ 1つ</div>
+        <div class="one">主力商品の値上げ+5%を、10/15までにYES／NO</div>
+      </div>
+    </div>
+
+    <div class="zones">
+      <div class="zone">
+        <div class="zl"><span class="t">SCORE</span><span class="sub">会社は勝てる状態か</span></div>
+        <div class="kpis">
+          <div class="kpi ok"><div class="l">粗利成長額（累計）</div><div class="v">+360<small>万円</small></div><div class="d">前年比 +7.9%</div></div>
+          <div class="kpi warn"><div class="l">EBITDA 着地見込</div><div class="v">1,000<small>万円</small></div><div class="d">予算 1,150 ／ 87%</div></div>
+          <div class="kpi ok"><div class="l">ROIC</div><div class="v">9.8<small>%</small></div><div class="d">前期 8.1%</div></div>
+          <div class="kpi warn"><div class="l">売上 着地見込</div><div class="v">1.17<small>億円</small></div><div class="d">予算 1.22 ／ ▲500万</div></div>
+        </div>
+      </div>
+      <div class="zone">
+        <div class="zl"><span class="t">GOALKEEPER</span><span class="sub">キャッシュは守れているか</span></div>
+        <div class="kpis">
+          <div class="kpi ok"><div class="l">営業CF（3か月）</div><div class="v">+220<small>万円</small></div><div class="d">前期同期 +190</div></div>
+          <div class="kpi"><div class="l">投資CF（3か月）</div><div class="v">▲420<small>万円</small></div><div class="d">設備・ソフト更新</div></div>
+          <div class="kpi ok"><div class="l">現金残高</div><div class="v">1,580<small>万円</small></div><div class="d">前月 2,000</div></div>
+          <div class="kpi crit"><div class="l">耐久月数</div><div class="v">5.1<small>か月</small></div><div class="d">固定費 310万/月 ／ 線 6.0</div></div>
+          <div class="kpi warn"><div class="l">DSO</div><div class="v">48<small>日</small></div><div class="d">前月 41</div></div>
+        </div>
+      </div>
+
+      <div class="zone next">
+        <div class="zl"><span class="t">TIME</span><span class="sub">次版 ／ カレンダー未接続（分類イメージ）</span></div>
+        <div class="timebars">
+          <div class="row"><span>売上をつくる</span><div class="bar"><i style="width:28%"></i></div><span class="num">28%</span></div>
+          <div class="row"><span>組織を育てる</span><div class="bar"><i style="width:17%"></i></div><span class="num">17%</span></div>
+          <div class="row"><span>会社を回す（承認・調整）</span><div class="bar"><i style="width:35%"></i></div><span class="num">35%</span></div>
+          <div class="row"><span>未来を構想する</span><div class="bar"><i style="width:8%"></i></div><span class="num">8%</span></div>
+          <div class="row"><span>委譲・削減候補</span><div class="bar"><i style="width:12%"></i></div><span class="num">12%</span></div>
+        </div>
+      </div>
+      <div class="zone next">
+        <div class="zl"><span class="t">BACKLINE RISK</span><span class="sub">次版 ／ 手入力サンプル</span></div>
+        <ul class="risks">
+          <li><span class="light g"></span>人事：社員3名＋業務委託7名・採用計画差 ▲1名・離脱の急変なし</li>
+          <li><span class="light y"></span>法務：重要契約1件が10/31更新期限（未着手）</li>
+          <li><span class="light g"></span>IT：重大障害なし・主要ITコスト前月比 ±0</li>
+        </ul>
+      </div>
+
+      <div class="zone decision">
+        <div class="zl"><span class="t">DECISION</span><span class="sub">今、何を決めるべきか（最大3件）── Decision Object の型</span></div>
+        <div class="dcards">
+          <div class="dcard">
+            <div class="what">主力商品の値上げ +5%</div>
+            <dl>
+              <dt>WHEN</dt><dd class="num">10/15 までに</dd>
+              <dt>MONEY</dt><dd>粗利 +370万円/年（離反考慮後）</dd>
+              <dt>PROB.</dt><dd class="num">70%</dd>
+              <dt>OPTIONS</dt><dd>A 10月一斉／B 新規のみ先行／C 見送り</dd>
+              <dt>RECOMM.</dt><dd class="rec">A案。既存は1月から</dd>
+              <dt>RISK</dt><dd>上位5社の離反</dd>
+              <dt>OWNER</dt><dd><span class="own">社長</span></dd>
+              <dt>RETURN</dt><dd>社長決裁のため戻しなし</dd>
+            </dl>
+          </div>
+          <div class="dcard">
+            <div class="what">売掛回収条件の変更（DSO 48→40日）</div>
+            <dl>
+              <dt>WHEN</dt><dd class="num">9/20 までに</dd>
+              <dt>MONEY</dt><dd>現金 +260万円相当</dd>
+              <dt>PROB.</dt><dd class="num">80%</dd>
+              <dt>OPTIONS</dt><dd>A 全社一律／B 大口2社は個別交渉</dd>
+              <dt>RECOMM.</dt><dd class="rec">B案</dd>
+              <dt>RISK</dt><dd>大口2社の反発</dd>
+              <dt>OWNER</dt><dd><span class="own">右腕</span></dd>
+              <dt>RETURN</dt><dd>大口2社が拒否したら社長へ</dd>
+            </dl>
+          </div>
+          <div class="dcard">
+            <div class="what">業務委託の営業1名を正社員化</div>
+            <dl>
+              <dt>WHEN</dt><dd class="num">9/30 までに</dd>
+              <dt>MONEY</dt><dd>委託費との差額 +180万円/年＋社会保険</dd>
+              <dt>PROB.</dt><dd class="num">65%</dd>
+              <dt>OPTIONS</dt><dd>A 10月に正社員化／B 半年延長し受注残で判断</dd>
+              <dt>RECOMM.</dt><dd class="rec">B案。3月に再判断</dd>
+              <dt>RISK</dt><dd>受注残未達で固定費だけ増える</dd>
+              <dt>OWNER</dt><dd><span class="own">右腕</span></dd>
+              <dt>RETURN</dt><dd>委託費が月45万超、または本人が辞退</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cp-foot">
+      <span>標準6指標：粗利成長額・EBITDA・ROIC・営業CF・投資CF・現金残高</span>
+      <span>会社固有：DSO・売上着地（2指標）</span>
+      <span>AIの役割：変化を見つける・つなぐ・選択肢を整理する・短くまとめる。最終判断はしない</span>
+      <span>成果指標は Decision Object の OWNER と判断日時のログから自動集計</span>
+    </div>
+  </div>
+</section>
+
+<section id="spec">
+  <div class="eyebrow">6 ／ 初期版の範囲</div>
+  <h2>「2社目を80%同じ構造で」を成立させる線引き</h2>
+  <p class="lead">標準化できるのは判断の型（Decision Object）と画面の器です。会計・銀行・給与の接続層は会社ごとに違うので、初期版はAPI接続を約束せず、決まった形のCSVを月次で投入する方式を標準にします。</p>
+  <div class="spec">
+    <div class="box">
+      <h3>創設企業1社で作るもの（90日）</h3>
+      <ul>
+        <li>SCORE（MONEY）・GOALKEEPER・DECISION の3領域だけを完成させる</li>
+        <li>標準入力3本：<code>月次試算表.csv</code>／<code>資金繰り.csv</code>／<code>decision-objects.csv</code></li>
+        <li>会社固有指標は2つまで（例：DSO・売上着地）</li>
+        <li>実際の経営会議で3回使い、不要な情報を削る</li>
+        <li>氏名・取引先名はマスクした公開版を作り、事例として出せる状態にする</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>初期版ではやらないこと</h3>
+      <ul>
+        <li>会計ソフト・銀行・給与・電子契約のAPI自動接続（2社目以降、共通化できた接続だけ追加）</li>
+        <li>TIME（カレンダー分類）。分類ルールが会社固有のため、創設企業での実測後に判断</li>
+        <li>BACKLINE RISK の自動取得。初期版は月1回の手入力（G／Y／R）</li>
+        <li>個別の業務改善・データ整備。数字が手作業でしか出ない会社は今回の対象外</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pending">
+  <div class="eyebrow">7 ／ 未確定</div>
+  <h2>デモ機を本番に進めるまえに決めること</h2>
+  <div class="pending">
+    <ol>
+      <li><b>価格と上限数の承認</b>（A-早割・B・Cの3つ。定価298,000と90日実装3,600,000は既存LPの実測値。ただしLPの想定規模は10〜30名で、主仮説の10名ぐらいの会社にこの価格が通るかは検証対象）</li>
+      <li><b>右腕CFO育成講座の現行価格</b>（未確認。B枠の算式を差し替える）</li>
+      <li><b>クラファン実施時期と『未来地図』の出版日</b>（募集30日の起点）</li>
+      <li><b>C枠の実装側の担い手・工数・費用・器の所有者</b>（役員としての賛否とは切り分けて別途）</li>
+      <li><b>会員導線の扱い</b>（主にするか従にするか。神田館長の「静かな導線」方針との整合）</li>
+      <li><b>配分率・提供責任・返金ルール</b>（クラファン前に3点を確定）</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">経営判断OS事業（提案：定居美徳／Sophia Bliss株式会社）のクラファン検証用デモ機。価格・上限数は仮置きで、確定は西村公児・定居美徳の合意後。コックピットの数値は架空のサンプル。2026-09-08 作成。</footer>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.switch button');
+  var panels = document.querySelectorAll('.persona');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var p = b.getAttribute('data-p');
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true' : 'false'); });
+      panels.forEach(function(el){ el.hidden = el.getAttribute('data-persona') !== p; });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

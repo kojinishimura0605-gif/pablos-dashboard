@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<title>経営判断OS事業 所見</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F5F6F8; --paper:#FFFFFF; --ink:#1B2430; --ink-2:#4A5563; --ink-3:#7C8794;
+  --line:#DCE0E6; --line-2:#EBEEF2;
+  --accent:#D0000D; --accent-ink:#A3000A; --accent-soft:#FBE9EA;
+  --ok:#2E9E6B; --ok-soft:#E6F4EC; --warn:#D99A1E; --warn-soft:#FBF3E0;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:'Noto Sans JP','Meiryo UI','Hiragino Sans',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111820; --paper:#18212C; --ink:#EAF0F7; --ink-2:#B8C3D1; --ink-3:#7F8DA0;
+    --line:#2A3542; --line-2:#222C38; --accent:#FF3B45; --accent-ink:#FF6B72; --accent-soft:#3A1519;
+    --ok-soft:#14301F; --warn-soft:#332A12;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111820; --paper:#18212C; --ink:#EAF0F7; --ink-2:#B8C3D1; --ink-3:#7F8DA0;
+  --line:#2A3542; --line-2:#222C38; --accent:#FF3B45; --accent-ink:#FF6B72; --accent-soft:#3A1519;
+  --ok-soft:#14301F; --warn-soft:#332A12;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink)}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:800;line-height:1.35;text-wrap:balance;margin:0}
+h1{font-size:30px}
+h2{font-size:22px;margin-bottom:8px}
+h3{font-size:16px;font-family:var(--sans);font-weight:700}
+p{margin:0 0 14px;max-width:40em}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;font-family:var(--mono)}
+.muted{color:var(--ink-2)}
+.small{font-size:13px;color:var(--ink-3)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+header{border-bottom:1px solid var(--line);background:var(--paper)}
+header .wrap{padding-top:32px;padding-bottom:24px}
+.flag{display:flex;align-items:center;gap:12px;margin-top:8px}
+.flag .bar{width:6px;height:44px;background:var(--accent);border-radius:2px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:14px;font-size:13px;color:var(--ink-2)}
+.meta b{color:var(--ink);font-weight:500}
+nav{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto}
+nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--accent-ink);border-bottom-color:var(--accent);outline:none}
+section{padding:40px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.lead{font-size:16px;color:var(--ink-2);max-width:42em}
+
+/* verdict */
+.verdict{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:6px;padding:22px 24px;margin-top:18px}
+.verdict .v{font-family:var(--serif);font-size:22px;font-weight:800;line-height:1.5;margin-bottom:8px}
+.verdict p{margin-bottom:0}
+
+/* summary */
+.sumlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.sumlist li{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 18px;display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
+.sumlist .k{font-family:var(--serif);font-weight:800;font-size:16px;color:var(--accent-ink)}
+
+/* good points */
+.good{display:grid;gap:10px;margin-top:18px}
+.good .g{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 18px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.good .g .mark{width:26px;height:26px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;font-weight:700;font-size:14px;margin-top:3px}
+.good .g b{display:block;margin-bottom:2px}
+.good .g span{font-size:14px;color:var(--ink-2)}
+
+/* concerns */
+.concern{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:22px 24px;margin-top:16px}
+.concern .t{display:flex;gap:12px;align-items:baseline;margin-bottom:12px}
+.concern .t .n{font-family:var(--mono);font-size:12px;color:var(--accent-ink);font-weight:600;letter-spacing:.08em}
+.concern .t h3{font-family:var(--serif);font-size:18px;font-weight:800}
+.spin{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:14px;margin:0}
+.spin dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);padding-top:4px;white-space:nowrap}
+.spin dd{margin:0;color:var(--ink-2)}
+.spin dd.np{color:var(--ink);background:var(--warn-soft);border-left:3px solid var(--warn);padding:8px 12px;border-radius:0 4px 4px 0}
+.spin dd.np b{color:var(--ink)}
+
+/* funnel adds */
+.adds{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.add{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px}
+.add h3{margin-bottom:8px;font-family:var(--serif);font-size:16px}
+.add p{font-size:14px;color:var(--ink-2);margin:0}
+
+/* demo link */
+.demo{background:var(--paper);border:1.5px solid var(--accent);border-radius:6px;padding:20px 24px;margin-top:18px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.demo .d b{font-family:var(--serif);font-size:17px;display:block;margin-bottom:4px}
+.demo .d span{font-size:14px;color:var(--ink-2)}
+.demo a.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;padding:10px 18px;border-radius:4px;white-space:nowrap}
+.demo a.btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tablewrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-top:16px}
+th,td{padding:11px 14px;border-bottom:1px solid var(--line-2);vertical-align:top;text-align:left}
+th{font-size:12px;letter-spacing:.06em;color:var(--ink-3);font-weight:600;background:var(--bg);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td .big{font-family:var(--mono);font-size:18px;font-weight:600}
+
+/* asks */
+.asks{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;counter-reset:ask}
+.asks li{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:6px;padding:14px 18px 14px 56px;position:relative}
+.asks li::before{counter-increment:ask;content:counter(ask);position:absolute;left:18px;top:14px;font-family:var(--mono);font-weight:600;color:var(--warn)}
+.asks li b{display:block;margin-bottom:2px}
+.asks li span{font-size:14px;color:var(--ink-2)}
+.closing{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+.closing p:last-child{margin-bottom:0}
+footer{padding:24px 0 40px;font-size:12px;color:var(--ink-3)}
+@media (max-width:760px){
+  .adds{grid-template-columns:1fr}
+  .demo{grid-template-columns:1fr}
+  .sumlist li{grid-template-columns:1fr;gap:4px}
+  h1{font-size:24px}
+}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">PABLOS × Sophia Bliss ｜ 経営判断OS事業・クラファン実証提案</div>
+    <div class="flag"><div class="bar"></div><h1>経営判断OS事業 所見</h1></div>
+    <p class="muted" style="margin:10px 0 0">定居さんの提案書（a〜f）を、ファネル設計士・経営参謀の立ち位置で読んだ評価と、クラファン検証の設計案です。</p>
+    <div class="meta">
+      <span>宛先：<b>定居美徳さん</b></span>
+      <span>書き手：<b>西村公児</b></span>
+      <span>日付：<b class="num">2026-09-08</b></span>
+      <span>対象：<b>経営判断OS事業・クラファン実証提案（Googleドキュメント）</b></span>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#verdict">結論</a><a href="#summary">要約</a><a href="#good">評価できる点</a><a href="#concerns">懸念と提案</a><a href="#funnel">ファネルから足す点</a><a href="#design">検証設計</a><a href="#asks">決めたいこと</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="verdict">
+  <div class="eyebrow">結論</div>
+  <h2>旗と構造には賛成です。検証の絞り込みと、初期版の線引きを先に決めたいです</h2>
+  <div class="verdict">
+    <div class="v">「社長しか決められない会社から、会社として決められる会社へ。」<br>この旗が一本に絞れていることが、この提案の一番の強みだと感じました。</div>
+    <p>マゼロ経営・右腕CFO育成・AI CFOが別々の商品ではなく、設計図・運転する人・コックピットという一つの構造に見えます。そのうえで、クラファンで確かめることを三点に絞り、AI CFOの初期版を「受託開発に流れない線」で切ることを、実証に入る前に一緒に決めさせてください。</p>
+  </div>
+</section>
+
+<section id="summary">
+  <div class="eyebrow">要約</div>
+  <h2>提案書を三行で読むと</h2>
+  <ul class="sumlist">
+    <li><span class="k">旗印</span><span>社長個人の経営判断を、①言語化する（マゼロ経営）→②人に移す（右腕CFO育成講座・全6回）→③仕組みに移す（AI CFO＝経営コックピット）の三段で「会社の能力」に変える事業です。</span></li>
+    <li><span class="k">クラファン</span><span>『未来地図』出版記念のクラファンで、A｜マゼロ経営単体、B｜マゼロ＋右腕CFO育成、C｜マゼロ＋AI CFO創設企業限定枠の三本を提示し、完成商品を売るのではなく、市場と一緒にPMFを作ります。</span></li>
+    <li><span class="k">体制</span><span>パブロスがクラファン主体・販売・プロデュース、Sophia BlissがCFOコンテンツ・講座・判断ロジックの設計、技術実装は専門技術側と連携します。価格・配分率・クラファン後のスキームは未定です。</span></li>
+  </ul>
+</section>
+
+<section id="good">
+  <div class="eyebrow">評価できる点</div>
+  <h2>残すべき芯は、この五つです</h2>
+  <div class="good">
+    <div class="g"><div class="mark">1</div><div><b>旗が一本に絞れています</b><span>「何が変わるのか（判断が社長個人に属している）」から「何に変わるのか（会社の能力）」まで一本で通っていて、二本目の旗が出ていません。</span></div></div>
+    <div class="g"><div class="mark">2</div><div><b>三商品が一つの構造になっています</b><span>WHAT・WHEN・MONEY・PROBABILITY・OPTIONS・RECOMMENDATION・RISK・OWNER・RETURN CONDITIONというDecision Objectの共通仕様で束ねられています。実装する側から見ても、これが「器」になります。</span></div></div>
+    <div class="g"><div class="mark">3</div><div><b>「受けない会社」を先に線引きされています</b><span>数字の定義が部署でズレる会社、手作業でしか数字が出ない会社を初期段階では対象外にされています。私が普段ダッシュボードで守っている「実在データしか載せない」と同じ思想で、安心しました。</span></div></div>
+    <div class="g"><div class="mark">4</div><div><b>初期版の優先順位が絞れています</b><span>MONEY・GOALKEEPER・DECISIONを先に、TIMEとBACKLINE RISKは後に。標準6指標＋会社固有2〜4という上限も置かれています。</span></div></div>
+    <div class="g"><div class="mark">5</div><div><b>クラファンを「売上」ではなく「検証」と定義されています</b><span>完成商品を売らないと、最初に宣言されています。市場と一緒に作る姿勢は、私の「集めて売る」とも相性が良いです。</span></div></div>
+  </div>
+</section>
+
+<section id="concerns">
+  <div class="eyebrow">懸念と提案</div>
+  <h2>穴があると感じた六点を、状況・問題・示唆・提案の順で書きます</h2>
+  <p class="lead">否定ではなく、実証に入る前に埋めておくと結果が読みやすくなる、という意味での指摘です。</p>
+
+  <div class="concern">
+    <div class="t"><span class="n">01</span><h3>検証項目が六つあり、クラファン一回では読み切れません</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>10節で「強い顧客課題・最初の顧客像・何を買うか・どの言葉・既存との違い・成果の可視化」の六項目を同時に検証するとされています。</dd>
+      <dt>問題</dt><dd>クラファンから返ってくるのは、支援数・金額・コメント・申込者の属性だけです。六項目を一度に読むと、どの変数が効いたのか分かりません。</dd>
+      <dt>示唆</dt><dd>結果が出ても「Aは売れたが理由は不明」で終わり、二回目の打ち手が決まりません。</dd>
+      <dt>提案</dt><dd class="np"><b>主仮説を「誰に・どの言葉で・いくらなら払われるか」の三点に絞ります。</b>価格帯・上限数・訴求文言を先に仮置きし、「この結果ならこうする」という判定ルールを結果が出る前に固定します（検証設計の章にまとめました）。</dd>
+    </dl>
+  </div>
+
+  <div class="concern">
+    <div class="t"><span class="n">02</span><h3>パブロスの流入源と、想定顧客がズレています</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>マゼロ経営LPの想定は社員10〜30名の会社です。一方パブロスの会員は30〜40代の会社員とソロプレナーが中心です。</dd>
+      <dt>問題</dt><dd>クラファンの集客をパブロス会員とクラファンライブに頼ると、届く相手は「右腕を持つ社長」ではなく「会社員・個人事業主」になります。</dd>
+      <dt>示唆</dt><dd>AとBは「自分には右腕がいない」層に刺さらず、Cの創設企業はほぼ会員外から探すことになります。</dd>
+      <dt>提案</dt><dd class="np"><b>今回の主仮説は「社長＋右腕1名。社員2〜3名、業務委託等を含めて10名ぐらいの会社」に置きます。</b>集客は出版導線と既存のマゼロ経営LP・診断を主、会員導線は従と割り切り、会員向けには「経営者本人＋AI CFO」の型を説明会一回で反応だけ取ります。あわせて、神田館長の「静かな導線」の方針とクラファンの訴求の強さの整合も確認したいです。</dd>
+    </dl>
+  </div>
+
+  <div class="concern">
+    <div class="t"><span class="n">03</span><h3>「2社目を80％同じ構造で」は、接続層では成立しません</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>AI CFOは会計・銀行・販売管理・人事・電子契約・カレンダーを接続し、創設企業1社で標準版を作る構想です。</dd>
+      <dt>問題</dt><dd>会計ソフト・銀行・給与・電子契約は会社ごとにバラバラで、APIの有無も違います。私の実感では、標準化できるのはDecision Objectと画面の器で、データ接続層は毎回個社対応になります。</dd>
+      <dt>示唆</dt><dd>「80％同じ」と社内外に約束すると、2社目で接続工数が読めず、定居さんご自身が提案書で最大リスクと書かれている受託開発化に向かいます。</dd>
+      <dt>提案</dt><dd class="np"><b>初期版はAPI自動接続を約束せず、決まった形のCSV（月次試算表・資金繰り・Decision Object）を月次で投入する方式を標準にします。</b>パブロスの会員司令塔やクライアントの月次CRMは「同じ器に数字だけ入れ替える」で回っている実績があり、同じ原則で作れます。TIME（カレンダー分類）を初期版から外す判断は正しいと思います。</dd>
+    </dl>
+  </div>
+
+  <div class="concern">
+    <div class="t"><span class="n">04</span><h3>技術実装の担い手・範囲・条件が空欄です</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>a-3とe-15では私のClaude Code実践が根拠に挙げられ、f-3では「専門技術側との連携」と書かれています。</dd>
+      <dt>問題</dt><dd>取締役会が承認した時点で、誰が・どの範囲を・どの工数と費用で作り、器（コックピット）を誰が所有するのかが決まっていません。</dd>
+      <dt>示唆</dt><dd>範囲が決まらないまま始めると、創設企業の要望に合わせて初期版が膨らみ、標準版に戻せなくなります。</dd>
+      <dt>提案</dt><dd class="np"><b>承認前に「創設企業1社の初期版（MONEY・GOALKEEPER・DECISION・CSV標準入力・90日）」の範囲を一枚で定義します。</b>役員としての賛否と、実装の受け方は切り分けて、範囲が決まった段階で別途ご相談させてください。器の所有はパブロス（事業主体）、CFOロジックはSophia Bliss、実装は受託、が自然な切り分けだと考えています。</dd>
+    </dl>
+  </div>
+
+  <div class="concern">
+    <div class="t"><span class="n">05</span><h3>クラファン主体＝パブロスの「責任」と「配分」が非対称です</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>募集・決済・返礼責任・顧客窓口はパブロス、提供（セッション・講座・レポート）はSophia Blissです。配分率はクラファン前に、恒久スキームは後で決めるとされています。</dd>
+      <dt>問題</dt><dd>返礼の遅れ・品質のクレーム・返金は、支援者から見るとパブロスに来ます。</dd>
+      <dt>示唆</dt><dd>万一の際、ブランドの毀損はパブロス側に残ります。</dd>
+      <dt>提案</dt><dd class="np"><b>取締役会の承認条件に、「直接費控除後の配分率」「提供責任・品質責任の所在」「未達時の返金ルール」の三点の事前確定を含めます。</b>金額の配分そのものは、市場検証を踏まえて後で決める方針で異論ありません。</dd>
+    </dl>
+  </div>
+
+  <div class="concern">
+    <div class="t"><span class="n">06</span><h3>成果指標の測り方が未定です</h3></div>
+    <dl class="spin">
+      <dt>状況</dt><dd>10-⑥で「適切な権限レベルで判断できた割合」「社長が社内判断に使う時間」などを成果として確認するとされています。</dd>
+      <dt>問題</dt><dd>これらをアンケートや手集計で取ると、創設企業の負担になり、e-12の「情報を作らない」原則と矛盾します。</dd>
+      <dt>示唆</dt><dd>測れない成果は、2社目の営業で使えません。</dd>
+      <dt>提案</dt><dd class="np"><b>Decision ObjectのOWNERと判断日時のログを、そのまま成果指標の元データにします。</b>AI CFOの中に計測が内蔵され、「社長へ戻った判断の割合」「右腕が決めた件数」が追加作業なしで出ます。これは提案書に乗せる価値があると思います。</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="funnel">
+  <div class="eyebrow">ファネル設計士として足すなら</div>
+  <h2>導線はすでにあります。足りないのは接続と、買った後の設計です</h2>
+  <div class="adds">
+    <div class="add">
+      <h3>AISASの接続</h3>
+      <p>Attention＝出版・クラファンライブ、Interest＝typeform診断「任せたのに止まる理由」、Search＝マゼロ経営LP、Action＝A・B・C、Share＝創設企業の公開事例。部品は揃っているので、診断→LP→クラファンページの接続と、「誰の名簿になるか」の交通整理だけが未整備です。</p>
+    </div>
+    <div class="add">
+      <h3>100日ファン化計画</h3>
+      <p>A（マゼロ経営）を買った社長を、100日で「経営判断OSの語り部」にする設計がまだありません。レポート納品後の30日・60日・100日に「右腕の推奨案が通った件数」を報告してもらう接点を入れると、それがそのままBへの階段になります。</p>
+    </div>
+    <div class="add">
+      <h3>ベルトコンベア理論</h3>
+      <p>C（創設企業）の1社が熱中者になれば、2社目以降は紹介で来ます。創設企業の選定基準に「データが整っているか」に加えて「発信してくれる社長か」を入れておきたいです。</p>
+    </div>
+  </div>
+</section>
+
+<section id="design">
+  <div class="eyebrow">検証設計</div>
+  <h2>主仮説三点と、仮置きの価格帯・上限数</h2>
+  <p class="lead">価格の根拠は、公開中のマゼロ経営LPの実測値（セッション298,000円税込、90日実装プログラム3,600,000円。後者はLP上に税区分の記載なし）です。既存定価を崩さず、早割と上位二段の「段差」で価格感度を読みます。金額の確定は、定居さんと私の合意後です。</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>主仮説</th><th>仮置き</th><th>測り方</th></tr></thead>
+    <tbody>
+      <tr><td><b>誰に</b></td><td>社長＋右腕1名。社員2〜3名、業務委託等を含めて10名ぐらいの会社（既存LPの10〜30名より一回り小さい層）</td><td>申込フォームに「社員数」「右腕の有無」「役職」を必須化。この層が6割以上なら主仮説を確定します</td></tr>
+      <tr><td><b>どの言葉で</b></td><td>クラファン冒頭は「結局、社長に聞かないと決まらない」の一本に固定</td><td>残り四本（幹部が「どうしましょうか」で止まる／会議が報告会で終わる／社長の時間が未来に戻らない／AIは使っているが経営判断は変わっていない）はメルマガ件名でローテし、クリック率で比べます</td></tr>
+      <tr><td><b>いくらなら</b></td><td>下表の四枠。早割が7日以内に埋まれば定価は妥当、早割のみ埋まり通常が0なら価格抵抗あり</td><td>枠ごとの到達日数と、埋まらなかった段の位置</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>枠</th><th>内容</th><th>仮置き価格（税込）</th><th>上限</th></tr></thead>
+    <tbody>
+      <tr><td>A-早割</td><td>マゼロ経営90分＋会社専用レポート＋チャットフォロー30日＋書籍</td><td><span class="big num">248,000</span></td><td class="num">5社</td></tr>
+      <tr><td>A-通常</td><td>同上（フォロー10日）。既存LP定価と同額</td><td><span class="big num">298,000</span></td><td class="num">10社</td></tr>
+      <tr><td>B</td><td>A＋右腕CFO育成講座 全6回（社長＋右腕1名）＋推奨案レビュー1回。算式はA 298,000＋講座6回 582,000（1回あたり約97,000）。講座の現行価格で差し替える前提です</td><td><span class="big num">880,000</span></td><td class="num">5社</td></tr>
+      <tr><td>C</td><td>A＋初期版コックピット（3領域・CSV標準入力）を90日で構築し、経営会議で3回使う＋事例公開への協力</td><td><span class="big num">3,000,000</span></td><td class="num">1社＋補欠1</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small" style="margin-top:10px">上限到達時の総額は11,620,000円（クラファン手数料・決済費・配分率は未反映）。</p>
+  <div class="demo">
+    <div class="d"><b>クラファン検証デモ機</b><span>顧客像の切替、判定ルール、AI CFOコックピットのサンプル画面（架空の数値）、初期版の線引きを一枚にまとめています。</span></div>
+    <a class="btn" href="https://kojinishimura0605-gif.github.io/pablos-dashboard/r/5a5908e9f4/" target="_blank" rel="noopener">デモ機を開く</a>
+  </div>
+</section>
+
+<section id="asks">
+  <div class="eyebrow">決めたいこと</div>
+  <h2>実証に入る前に、六つだけ一緒に決めさせてください</h2>
+  <ol class="asks">
+    <li><b>主仮説三点の確定</b><span>誰に（10名ぐらいの会社・右腕1名）、どの言葉で（一本固定）、いくら（四枠の段差）で進めてよいか。</span></li>
+    <li><b>価格帯と上限数の仮置きの承認</b><span>A-早割・B・Cの三つ。右腕CFO育成講座の現行価格を教えていただければ、B枠の算式を差し替えます。</span></li>
+    <li><b>クラファンの実施時期と『未来地図』の出版日</b><span>募集30日の起点になります。</span></li>
+    <li><b>AI CFO初期版の範囲と、実装の担い手・工数・費用・器の所有者</b><span>範囲を一枚で定義してから、実装の受け方を別途ご相談したいです。</span></li>
+    <li><b>会員導線の扱い</b><span>出版導線と既存LPを主、会員導線を従とする割り切りでよいか。神田館長の「静かな導線」との整合も含めて。</span></li>
+    <li><b>配分率・提供責任・返金ルールの三点</b><span>取締役会の承認条件として、クラファン前に確定させたいです。</span></li>
+  </ol>
+  <div class="closing">
+    <p>論点が多いので、一度30分ほど口頭で歩きながら確認できると早いと思います。定居さんのご都合に合わせますので、候補をいただけますか。神田館長の同席が必要でしたら、その前提で調整します。</p>
+    <p>AIが分析する時代に、人間がより良く判断できる環境をつくる。この事業の芯には賛成です。だからこそ、最初の一社で「2社目に渡せる器」を残す線引きを、一緒に引かせてください。</p>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">経営判断OS事業・クラファン実証提案（定居美徳さん／Sophia Bliss株式会社）への所見。書き手：西村公児。2026-09-08。価格・上限数は仮置きで、確定は両者の合意後。</footer>
+
+</body>
+</html>
