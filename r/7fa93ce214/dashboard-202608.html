@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<title>つくりおきCRMダッシュボード</title>
+<style>
+  :root{
+    --text:#000000; --label:#626264; --link:#0017C1;
+    --bg-page:#FFFFFF; --bg-card:#F8F8FB; --bg-control:#F1F1F4;
+    --chart-1:#000060; --chart-2:#0017C1; --chart-3:#3460FB; --chart-4:#7096F8; --chart-5:#C5D7FB; --chart-6:#E8F1FE;
+    --accent-1:#A58000; --accent-2:#D2A400; --accent-3:#FFC700;
+    --neg:#CE0000; --neg-soft:#FDEEEE;
+    --neutral-2:#666666; --neutral-4:#CCCCCC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Meiryo UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;background:var(--bg-page);color:var(--text);line-height:1.65;font-size:14px}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+  header.top{border-bottom:4px solid var(--chart-2);padding-bottom:14px;margin-bottom:22px}
+  header.top h1{font-size:22px;font-weight:700}
+  header.top .sub{color:var(--label);font-size:12.5px;margin-top:4px}
+  .draft{display:inline-block;background:var(--bg-control);border:1px solid var(--neutral-4);color:var(--label);font-size:11px;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle}
+  .hero{background:var(--chart-6);border-left:6px solid var(--chart-2);padding:18px 22px;margin-bottom:26px;border-radius:4px}
+  .hero .flag{font-size:19px;font-weight:700;line-height:1.5}
+  .hero p{margin-top:8px;font-size:13.5px}
+  h2{font-size:16.5px;font-weight:700;margin:34px 0 4px;padding-left:10px;border-left:5px solid var(--chart-2)}
+  h2.proposal{border-left-color:var(--accent-2)}
+  .h2note{color:var(--label);font-size:12px;margin-bottom:12px;padding-left:15px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:6px}
+  .tile{background:var(--bg-card);border-radius:6px;padding:14px 16px 12px}
+  .tile .k{font-size:11.5px;color:var(--label);margin-bottom:2px}
+  .tile .v{font-size:25px;font-weight:700;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+  .tile .v small{font-size:13px;font-weight:600}
+  .tile .d{font-size:11px;color:var(--label);margin-top:2px}
+  .tile.warn{background:var(--neg-soft)}
+  .tile.warn .v{color:var(--neg)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--bg-card);border-radius:6px;padding:16px 18px;margin-top:14px}
+  .card h3{font-size:14px;font-weight:700;margin-bottom:2px}
+  .card .note{font-size:11.5px;color:var(--label);margin-bottom:8px}
+  .chartbox{position:relative;overflow-x:auto}
+  svg text{font-family:inherit}
+  .src{font-size:10.5px;color:var(--label);margin-top:6px}
+  details{margin-top:8px;font-size:12px}
+  details summary{cursor:pointer;color:var(--link)}
+  table.dt{border-collapse:collapse;margin-top:6px;font-size:11.5px;background:#fff}
+  table.dt th,table.dt td{border:1px solid var(--neutral-4);padding:3px 8px;text-align:right;font-variant-numeric:tabular-nums}
+  table.dt th:first-child,table.dt td:first-child{text-align:left}
+  .tooltip{position:fixed;pointer-events:none;background:#333;color:#fff;font-size:11.5px;padding:5px 9px;border-radius:4px;z-index:99;display:none;white-space:nowrap}
+  .callout{background:#fff;border:2px solid var(--neg);border-radius:6px;padding:14px 18px;margin-top:14px;font-size:13.5px}
+  .callout b{color:var(--neg)}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px}
+  .step{background:#fff;border-top:5px solid var(--accent-2);border-radius:6px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+  .step .no{font-size:11px;font-weight:700;color:var(--accent-1);letter-spacing:.06em}
+  .step h4{font-size:14px;margin:2px 0 6px}
+  .step p{font-size:12.5px}
+  /* 両輪分解 */
+  .engine{display:grid;gap:8px;max-width:760px;margin-top:8px}
+  .engine .row{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center}
+  .engine .lbl{font-size:12.5px;text-align:right}
+  .engine .track{background:var(--chart-6);border-radius:4px;position:relative;height:30px}
+  .engine .fill{position:absolute;left:0;top:0;bottom:0;background:var(--chart-3);border-radius:4px;color:#fff;font-size:12px;font-weight:bold;display:flex;align-items:center;padding:0 10px;white-space:nowrap}
+  /* RF帯 */
+  .rfbar{display:flex;height:38px;border-radius:5px;overflow:hidden;margin-top:10px;font-size:12px;font-weight:bold}
+  .rfbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:0;overflow:hidden}
+  .rflegend{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;margin-top:8px}
+  .rflegend span::before{content:"■ ";font-size:13px}
+  /* 課題テーブル */
+  table.issues{border-collapse:collapse;width:100%;margin-top:12px;background:#fff;font-size:12.5px}
+  table.issues th,table.issues td{border:1px solid var(--neutral-4);padding:8px 12px;text-align:left;vertical-align:top}
+  table.issues th{background:var(--chart-6);font-size:12px}
+  table.issues td.pri{white-space:nowrap;font-weight:bold;color:var(--chart-2)}
+  footer{margin-top:44px;border-top:1px solid var(--neutral-4);padding-top:12px;font-size:11px;color:var(--label)}
+  footer li{margin-left:1.2em}
+  .pdfbtn{float:right;background:var(--chart-2);color:#fff;border:none;border-radius:5px;padding:8px 16px;font-size:12.5px;font-weight:bold;cursor:pointer;font-family:inherit}
+  .pdfbtn:hover{background:var(--chart-3)}
+  .pdfbtn:disabled{opacity:.6;cursor:wait}
+  @page{size:A4;margin:12mm}
+  @media print{
+    body{font-size:10.5px}
+    .wrap{max-width:100%;padding:0}
+    .pdfbtn,.tooltip{display:none !important}
+    details{display:none}
+    .tile,.card,.step,.callout,.hero,.channels,table.issues tr{break-inside:avoid}
+    h2{break-after:avoid}
+    .chartbox{overflow:visible}
+    .chartbox svg{min-width:0 !important}
+    .tiles{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr}
+  }
+</style>
+
+<div class="tooltip" id="tt"></div>
+<div class="wrap">
+
+<header class="top">
+  <button class="pdfbtn" id="pdfBtn" type="button">📄 PDFで保存</button>
+  <h1>つくりおき（AIVICK様）CRM分析ダッシュボード<span class="draft">社内確認用ドラフト</span></h1>
+  <div class="sub">2026年8月度（分析対象: 2025年9月1日〜2026年8月31日・受注ベース・12か月年計）｜作成: 社外アイデア企画室 2026-09-10｜数値はすべてご提供データ（顧客分析_つくりおき.xlsx）からの実測です（推測補完なし・出典は文末）</div>
+</header>
+
+<div class="hero">
+  <div class="flag">LTV103,842円、17か月連続プラス。——売上の3輪のうち回数が14か月ぶりに足踏みし、単価が牽引役に交代。8月は月次売上と定期稼働が過去最高。</div>
+  <p>8月度のLTVは<b>103,842円</b>。前月対比プラスは<b>17か月連続</b>で、10万円台に定着しました。ただし売上の3輪（数量×単価×回数）のうち、<b>回数が14.33→14.32回と14か月ぶりに前月比マイナス（▲0.1%）</b>。伸びを支えたのは数量+2.6%と単価+0.9%です。</p>
+  <p style="margin-top:6px">月次では、8月の<b>売上高2.60億円（出荷ベース）と定期稼働11,521件がともに過去最高</b>、新規1,754＞解約1,565と2か月連続の新規超過。一方で<b>休眠（最終購入90日以上）が10,402人・43.0%へ増え、優良休眠は624→745人</b>。——この層の掘り起こしが、次の分水嶺です。</p>
+</div>
+
+<!-- ================= KPI ================= -->
+<h2>8月度の数字（前月対比ビュー）</h2>
+<div class="h2note">12か月年計（2025/9〜2026/8）の実測値。前月対比＝7月度年計（2025/8〜2026/7）との比較です</div>
+<div class="tiles">
+  <div class="tile"><div class="k">年計売上（＝数量×単価×回数）</div><div class="v">25.09<small>億円</small></div><div class="d">前月比 +3.4%｜受注345,984件</div></div>
+  <div class="tile"><div class="k">数量＝有効会員数（期間内購入者）</div><div class="v">24,166<small>人</small></div><div class="d">前月比 +608人（+2.6%）｜前年比 +34.4%</div></div>
+  <div class="tile"><div class="k">平均購入単価</div><div class="v">7,253<small>円</small></div><div class="d">前月比 +0.9%｜前年比 +4.1%（前月+1.8%から拡大）</div></div>
+  <div class="tile warn"><div class="k">平均購入回数</div><div class="v">14.32<small>回</small></div><div class="d">前月比 ▲0.1%（14か月ぶりのマイナス）｜前年比 +19.4%</div></div>
+  <div class="tile"><div class="k">LTV（単価×回数）</div><div class="v">103,842<small>円</small></div><div class="d">前月比 +0.8%｜17か月連続プラス</div></div>
+  <div class="tile"><div class="k">優良顧客（購入21回以上）</div><div class="v">6,181<small>人</small></div><div class="d">構成比25.58%｜売上の68.9%を創出</div></div>
+</div>
+<div class="tiles">
+  <div class="tile"><div class="k">定期稼働数（2026/8）</div><div class="v">11,521<small>件</small></div><div class="d">過去最高を更新（7月11,205→8月11,521）</div></div>
+  <div class="tile"><div class="k">初月継続率（2026/8）</div><div class="v">86.4<small>%</small></div><div class="d">直近12か月 82.0〜88.3%（7月87.0%）</div></div>
+  <div class="tile warn"><div class="k">解約率（2026/8）</div><div class="v">13.6<small>%</small></div><div class="d">7月13.0%から小幅に再上昇。新規超過は2か月連続</div></div>
+  <div class="tile warn"><div class="k">休眠（最終購入90日以上）</div><div class="v">10,402<small>人</small></div><div class="d">43.0%（前月41.7%）｜うち優良休眠745人（前月624人）</div></div>
+</div>
+<div style="background:#fff;border:1px solid var(--neutral-4);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--label)">
+⚠️ <b style="color:var(--text)">表現の注意</b>: 上位25.6%の売上構成比は68.9%（実測）。パレート則（20:80）を売上比で上回ってはいないため、対外的には「<b style="color:var(--text)">上位4分の1が売上の約7割を支え、残り75%も3割を稼ぐ、一極依存しない健全な収益構造</b>」という表現が正確です。
+</div>
+
+<!-- ================= LTVの旅路 ================= -->
+<h2>LTVの旅路 — 4.5万円から10.4万円へ、17か月連続プラス</h2>
+<div class="h2note">12か月年計LTVの全推移（43窓）。金の点線が10万円ラインです</div>
+<div class="card">
+  <h3>年計LTVの推移（2023/2月度〜2026/8月度）</h3>
+  <div class="note">2025/1〜3月度に足踏み（前月比1.0割れ）した後、2025/4月度から17か月連続プラス。2026/6月度に10万円を突破し、8月度は103,842円で定着</div>
+  <div class="chartbox" id="chartLTV"></div>
+  <div class="src">出典: 顧客分析_つくりおき.xlsx「LTV」シート（受注ベース・LTV=平均購入単価×平均購入回数）</div>
+  <details><summary>データ表を開く</summary><table class="dt" id="ltvTable"></table></details>
+</div>
+<div class="card">
+  <h3>成長の分解 — 売上＝数量×単価×回数の順で読む</h3>
+  <div class="note">売上の伸びを3つのエンジンに分解（数量＝有効会員数）。掛け算の検算は一致済みです</div>
+  <div class="engine">
+    <div class="row"><div class="lbl"><b>売上 前月比 +3.4%</b></div><div class="track"><div class="fill" style="width:100%">数量 +2.6% × 単価 +0.9% × 回数 ▲0.1% ＝ 2輪プラス・回数が足踏み</div></div></div>
+    <div class="row"><div class="lbl"><b>売上 前年比 +66.9%</b></div><div class="track"><div class="fill" style="width:100%;background:var(--chart-2)">数量 +34.4% × 単価 +4.1% × 回数 +19.4% ＝ 主エンジンは数量と回数、単価の寄与が拡大</div></div></div>
+  </div>
+  <p style="font-size:13px;margin-top:12px">顧客あたりで見るLTV（単価×回数）は前月比+0.8%・前年比+24.2%。単価の前年比は前月度の+1.8%から<b>+4.1%へ拡大</b>し、値上げ（6/5出荷〜）が年計にしっかり乗りました。一方、月次単価は7,622円（6月）→7,564円（7月）→7,527円（8月）と微減、平均購入回数は<b>14か月ぶりに前月比マイナス</b>。<b>単価が牽引役に交代した月であり、回数の再点火が次のテーマ</b>です。</p>
+</div>
+
+<!-- ================= 顧客構造 ================= -->
+<h2>顧客構造 — ベルトコンベアの上に、いま誰が乗っているか</h2>
+<div class="h2note">購入回数の分布と、リセンシー（最終購入からの日数）の実測です</div>
+<div class="grid2">
+  <div class="card">
+    <h3>購入回数の分布 — 優良6,181人が売上の68.9%</h3>
+    <div class="note">濃い青＝優良顧客（21回以上）。「毎週組」（41回以上）は2,681人（11.1%）で売上の39.2%。一方で5回以下が10,799人（44.7%）・売上6.5%と、浅い層も分厚い。1回のみは4,266人（前月4,025人）</div>
+    <div class="chartbox" id="chartDist"></div>
+    <div class="src">出典: 「回数分布」シート（2025/9/1〜2026/8/31）</div>
+  </div>
+  <div class="card">
+    <h3>リセンシー構成 — 44%が直近30日に稼働、43%が休眠</h3>
+    <div class="note">有効会員24,166人の最終購入からの日数。休眠比率は前月41.7%→43.0%へ悪化（+588人）です</div>
+    <div class="rfbar">
+      <div style="width:43.8%;background:var(--chart-2);color:#fff">稼働 10,596人（43.8%）</div>
+      <div style="width:13.1%;background:var(--chart-4);color:#fff">3,168人</div>
+      <div style="width:43.0%;background:var(--chart-6);color:var(--text);border:1px solid var(--neutral-4)">休眠 10,402人（43.0%）</div>
+    </div>
+    <div class="rflegend">
+      <span style="color:var(--chart-2)">直近30日以内に購入（稼働）</span>
+      <span style="color:var(--chart-4)">30〜89日（離脱予備軍 13.1%）</span>
+      <span style="color:var(--neutral-2)">90日以上（休眠）</span>
+    </div>
+    <div class="callout" style="margin-top:16px">
+      <b>優良休眠が745人に増加（前月624人・2か月連続で増加）。</b>
+      購入21回以上まで育った方が、90日以上戻っていません。30〜89日の「離脱予備軍」にも優良層が543人（前月575人）。
+      前月度の優良離脱予備軍575人の一部が休眠帯へ移った可能性があり、<b>LTV実績が高く回収効率が最も良いこの層</b>が、掘り起こしの最優先ターゲットです。
+    </div>
+    <div class="src">出典: 「RF値」シート（2025/9/1〜2026/8/31マトリクス・行和列和の検算一致を確認済み）</div>
+  </div>
+</div>
+
+<!-- ================= 月次の動き ================= -->
+<h2>月次の動き — 過去最高の8月と、解約再上昇の芽</h2>
+<div class="h2note">出荷ベースの月次実測（2025/9〜2026/8）。値上げは4/30・5/12に告知、6/5出荷分から実施です</div>
+<div class="grid2">
+  <div class="card">
+    <h3>新規申込 vs 解約 — 新規超過は2か月連続、解約は小幅に再上昇</h3>
+    <div class="note">5〜6月は解約が新規を上回りましたが、7月（新規1,763＞解約1,454）・8月（新規1,754＞解約1,565）と新規超過を維持。ただし8月の解約率は13.6%（7月13.0%）</div>
+    <div class="chartbox" id="chartFlow"></div>
+    <div class="src">出典: 「売上管理」シート 新規申込数・解約数</div>
+    <details><summary>データ表を開く</summary><table class="dt" id="flowTable"></table></details>
+  </div>
+  <div class="card">
+    <h3>定期稼働数 — 8月に過去最高11,521件</h3>
+    <div class="note">5〜6月の足踏み（10,754）を経て7月11,205→8月11,521と2か月連続で最高を更新。会員基盤は伸び続けています</div>
+    <div class="chartbox" id="chartActive"></div>
+    <div class="src">出典: 「売上管理」シート 定期稼働数</div>
+  </div>
+</div>
+<div class="grid2">
+  <div class="card">
+    <h3>売上達成率 — 2026年度は目標が再設定、8月は113.5%</h3>
+    <div class="note">2025年度（8月〜7月・出荷ベース）は実績24.20億／目標34.01億＝71.2%で確定。2026年度は年度目標37.81億・8月目標2.29億で、8月実績2.60億（月次過去最高）＝113.5%。金の点線が100%ラインです</div>
+    <div class="chartbox" id="chartRate"></div>
+    <div class="src">出典: 「売上管理」シート 売上目標・売上高・達成率（月次目標の水準は7月4.17億→8月2.29億へ変更。設定根拠はご提供データに記載なし）</div>
+  </div>
+  <div class="card">
+    <h3>月次購入単価 — 値上げ後7,500円台で推移、微減傾向</h3>
+    <div class="note">6月7,622円→7月7,564円→8月7,527円。値上げ前（2026/1〜5月: 6,913〜7,229円）から一段上の水準は維持</div>
+    <div class="chartbox" id="chartPrice"></div>
+    <div class="src">出典: 「売上管理」シート 購入単価（出荷ベース）</div>
+  </div>
+</div>
+
+<!-- ================= 課題 ================= -->
+<h2>課題 — データが示しているもの</h2>
+<div class="h2note">優先度: ★★★＝高。すべて実測にもとづく指摘です</div>
+<table class="issues">
+  <tr><th style="width:90px">優先度</th><th style="width:230px">課題</th><th>実測の根拠</th></tr>
+  <tr><td class="pri">★★★</td><td><b>休眠の拡大</b></td><td>90日以上10,402人（43.0%・前月41.7%、+588人）。<b>優良休眠は624→745人（+121人）と2か月連続で増加</b>＋優良の離脱予備軍543人。獲得コストゼロで戻せる資産</td></tr>
+  <tr><td class="pri">★★★</td><td><b>浅い層の厚さ</b></td><td>購入5回以下が10,799人（44.7%）で売上貢献は6.5%。1回のみ4,266人（前月4,025人から+241人）・2〜5回6,533人。F2転換と「11回の壁」（6〜10回層3,486人）が主戦場</td></tr>
+  <tr><td class="pri">★★☆</td><td><b>回数の足踏みと単価の定着</b></td><td>平均購入回数が14.33→14.32回と<b>14か月ぶりの前月比マイナス</b>。単価プラスは値上げによるもので、「値上げに頼らない単価レバー」は未着手。月次単価も6月7,622円→8月7,527円と微減</td></tr>
+  <tr><td class="pri">★★☆</td><td><b>解約の再上昇の芽</b></td><td>8月の解約率13.6%（7月13.0%）・解約1,565件（7月1,454件）と小幅に再上昇。新規超過は2か月連続で維持。値上げショック（5月18.0%・6月16.1%）の再燃かどうかを9月で見極め</td></tr>
+  <tr><td class="pri">★★☆</td><td><b>売上目標の再設定</b></td><td>2025年度は達成率71.2%で確定。2026年度は月次目標の水準が変わり（7月4.17億→8月2.29億）、8月は113.5%。新規申込は直近12か月1,063〜1,828件のレンジ → <b>新目標の根拠と実力値のすり合わせが論点</b></td></tr>
+  <tr><td class="pri">★☆☆</td><td><b>スキップ率の上昇</b></td><td>8月は36%と直近12か月（29〜36%）の最高値。スキップは解約の前兆行動。解約対応とセットで対処</td></tr>
+</table>
+
+<!-- ================= 次の一手 ================= -->
+<h2 class="proposal">次の一手 — 社外アイデア企画室からのご提案</h2>
+<div class="h2note">ここから先は実測ではなくご提案です（最終判断はAIVICK様・施策の確定は商談でのすり合わせ事項です）</div>
+<div class="steps">
+  <div class="step"><div class="no">第1手｜最優先</div><h4>優良休眠745人の掘り起こし</h4><p>購入21回以上×90日休眠の745人へ最優先で復帰施策。LTV実績が高く、獲得コストゼロで戻せる資産です。離脱予備軍543人には休眠化する前の先回り接点を（課題①）。</p></div>
+  <div class="step"><div class="no">第2手｜前兆の定点観測</div><h4>解約・スキップの前兆対応</h4><p>8月の解約率13.6%・スキップ率36%を9月も定点観測。スキップ時には隔週コース・品目変更の代替提案を標準化し、解約の再燃を手前で止めます（課題④⑥）。</p></div>
+  <div class="step"><div class="no">第3手｜主戦場</div><h4>「11回の壁」プログラム</h4><p>6〜10回層3,486人に100日ファン化計画を適用し、11回以降の定着へ運ぶ階段設計。1回のみ4,266人のF2転換も並走し、優良顧客の入口（21回）まで運ぶベルトコンベアを太くします（課題②）。</p></div>
+  <div class="step"><div class="no">第4手｜両輪化の完成</div><h4>回数の再点火と単価レバーの第2弾</h4><p>回数の足踏みを止めるため、お届け間隔の内訳（隔週→毎週）を計測。あわせて品目数アップ・季節セット・同梱クロスセルで「値上げに頼らない単価+3〜5%」を検討します（課題③）。</p></div>
+</div>
+
+<!-- ================= 総括 ================= -->
+<h2>総括 — 評価と課題を一枚で</h2>
+<div class="hero" style="margin-top:14px">
+  <div class="flag">LTVは103,842円で17か月連続プラス。8月は月次売上2.60億円・定期稼働11,521件がともに過去最高を更新しました。</div>
+  <p>ただし成長の3輪のうち回数が14か月ぶりに足踏み（▲0.1%）し、休眠が43.0%・優良休眠が745人へ拡大しています。残る燃費改善余地は<b>「①優良休眠745人の掘り起こし ②回数の再点火（お届け間隔の計測） ③解約13.6%・スキップ36%の抑制」</b>の3つです。売上目標は2026年度から水準が変わったため、新目標の根拠と実力値のすり合わせをお願いしたい論点です。</p>
+</div>
+
+<footer>
+  <p><b>出典と注記</b></p>
+  <ul>
+    <li>LTV・回数・単価・有効会員数・年計売上: 顧客分析_つくりおき.xlsx「LTV」シート（受注ベース・12か月年計）</li>
+    <li>回数分布・優良顧客・売上構成比: 同「回数分布」シート（2025/9/1〜2026/8/31）</li>
+    <li>リセンシー・休眠・優良休眠: 同「RF値」シート（同期間マトリクス）</li>
+    <li>月次の新規・解約・定期稼働・達成率・単価・初月継続率・スキップ率: 同「売上管理」シート（出荷ベース）。年計売上（受注ベース25.09億）と年度実績（出荷ベース）は集計基準が異なります</li>
+    <li>数値はすべて実測（data-integrity-analyst準拠・推測補完なし）。検算: data-integrity-auditor 2026-09-10実施・全主要数値の再現一致を確認済み。文章検品: content-reviewer 同日実施</li>
+    <li>増減は色に加えて記号（＋・▲・＞）で併記しています（色覚多様性への配慮）</li>
+    <li>優良顧客の定義: 購入21回以上／毎週組: 41回以上／休眠: 最終購入90日以上／有効会員数: 期間内購入者（総登録数とは別）</li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  const tt = document.getElementById('tt');
+  function showTT(e, html){ tt.innerHTML = html; tt.style.display='block'; tt.style.left=(e.clientX+14)+'px'; tt.style.top=(e.clientY-10)+'px'; }
+  function hideTT(){ tt.style.display='none'; }
+  const NS='http://www.w3.org/2000/svg';
+  function el(n,attrs,parent){ const x=document.createElementNS(NS,n); for(const k in attrs) x.setAttribute(k,attrs[k]); if(parent) parent.appendChild(x); return x; }
+  function fmt(n){ return n.toLocaleString('ja-JP'); }
+
+  // ---------- LTV年計推移（折れ線・43窓） ----------
+  (function(){
+    const labels=['23/2','23/3','23/4','23/5','23/6','23/7','23/8','23/9','23/10','23/11','23/12','24/1','24/2','24/3','24/4','24/5','24/6','24/7','24/8','24/9','24/10','24/11','24/12','25/1','25/2','25/3','25/4','25/5','25/6','25/7','25/8','25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5','26/6','26/7','26/8'];
+    const vals=[44994,42926,43653,44522,47946,46820,49090,51135,53535,54224,54458,57165,59055,60539,63978,67717,71458,76343,76762,76645,78237,78993,80871,77021,76812,76340,78572,79884,80855,83057,83640,84926,85891,87928,91478,92626,94551,96938,97670,99303,101419,102992,103842];
+    const W=1120,H=300,padL=56,padB=30,padT=18,min=40000,max=110000;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',style:'min-width:820px',role:'img','aria-label':'年計LTVの推移'},document.getElementById('chartLTV'));
+    for(let g=40000;g<=110000;g+=10000){ const y=padT+(H-padT-padB)*(1-(g-min)/(max-min));
+      el('line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'#E5E5EA','stroke-width':1},svg);
+      el('text',{x:padL-6,y:y+4,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=(g/10000)+'万';
+    }
+    const gy=padT+(H-padT-padB)*(1-(100000-min)/(max-min));
+    el('line',{x1:padL,x2:W-10,y1:gy,y2:gy,stroke:'#A58000','stroke-width':1.5,'stroke-dasharray':'6 4'},svg);
+    el('text',{x:W-12,y:gy-6,'text-anchor':'end','font-size':10.5,'font-weight':'bold',fill:'#A58000'},svg).textContent='10万円ライン';
+    const xs=i=>padL+(W-padL-24)*i/(vals.length-1);
+    const ys=v=>padT+(H-padT-padB)*(1-(v-min)/(max-min));
+    el('path',{d:vals.map((v,i)=>(i?'L':'M')+xs(i)+','+ys(v)).join(' ')+` L${xs(vals.length-1)},${H-padB} L${xs(0)},${H-padB} Z`,fill:'#E8F1FE',stroke:'none',opacity:.7},svg);
+    el('path',{d:vals.map((v,i)=>(i?'L':'M')+xs(i)+','+ys(v)).join(' '),fill:'none',stroke:'#3460FB','stroke-width':2},svg);
+    vals.forEach((v,i)=>{
+      const hit=el('circle',{cx:xs(i),cy:ys(v),r:10,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',e=>showTT(e,`${labels[i]}月度（12か月年計）: ${fmt(v)}円`));
+      hit.addEventListener('mouseleave',hideTT);
+      if(i%4===0||i===42) el('text',{x:xs(i),y:H-padB+14,'text-anchor':'middle','font-size':9.5,fill:'#626264'},svg).textContent=labels[i];
+    });
+    el('circle',{cx:xs(42),cy:ys(vals[42]),r:5,fill:'#0017C1',stroke:'#fff','stroke-width':2},svg);
+    el('text',{x:xs(42)-6,y:ys(vals[42])-12,'text-anchor':'end','font-size':11,'font-weight':'bold',fill:'#000'},svg).textContent='103,842円（26/8月度）';
+    el('circle',{cx:xs(26),cy:ys(vals[26]),r:4,fill:'#3460FB',stroke:'#fff','stroke-width':2},svg);
+    el('text',{x:xs(26),y:ys(vals[26])+20,'text-anchor':'middle','font-size':10,fill:'#626264'},svg).textContent='ここから17か月連続プラス';
+    const tbl=document.getElementById('ltvTable');
+    let html='<tr><th>月度</th><th>年計LTV（円）</th></tr>';
+    labels.forEach((l,i)=>{ html+=`<tr><td>${l}</td><td>${fmt(vals[i])}</td></tr>`; });
+    tbl.innerHTML=html;
+  })();
+
+  // ---------- 回数分布（横棒） ----------
+  (function(){
+    const buckets=['101回〜','91〜100','81〜90','71〜80','61〜70','51〜60','41〜50','31〜40','21〜30','11〜20','6〜10','2〜5','1回'];
+    const people=[41,59,48,47,56,730,1700,1394,2106,3700,3486,6533,4266];
+    const share=[1.19,1.49,1.12,0.94,1.03,10.89,22.54,14.35,15.37,16.79,7.82,5.59,0.89];
+    const W=540,H=330,padL=64,padT=24,rowH=(H-padT-14)/buckets.length,max=6800;
+    const box=document.getElementById('chartDist');
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'購入回数の分布'},box);
+    el('text',{x:padL,y:14,'font-size':10,fill:'#626264'},svg).textContent='人数（バー）と売上構成比（右の%）';
+    buckets.forEach((b,i)=>{
+      const y=padT+i*rowH+rowH*0.14, bh=rowH*0.66, bw=Math.max(3,(W-padL-92)*people[i]/max);
+      el('text',{x:padL-6,y:y+bh*0.72,'text-anchor':'end','font-size':10.5,fill:'#000'},svg).textContent=b;
+      const r=el('path',{d:`M${padL},${y} L${padL+bw-4},${y} Q${padL+bw},${y} ${padL+bw},${y+4} L${padL+bw},${y+bh-4} Q${padL+bw},${y+bh} ${padL+bw-4},${y+bh} L${padL},${y+bh} Z`,fill:i<9?'#0017C1':'#7096F8'},svg);
+      r.addEventListener('mousemove',e=>showTT(e,`${b}: ${fmt(people[i])}人 ／ 売上構成比 ${share[i]}%`));
+      r.addEventListener('mouseleave',hideTT);
+      el('text',{x:padL+bw+5,y:y+bh*0.72,'font-size':10,fill:'#000'},svg).textContent=fmt(people[i])+'人';
+      el('text',{x:W-8,y:y+bh*0.72,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=`${share[i]}%`;
+    });
+    el('text',{x:padL,y:H-2,'font-size':9.5,fill:'#626264'},svg).textContent='濃い青＝優良顧客（21回以上・6,181人）で売上の68.9%';
+  })();
+
+  // ---------- 新規 vs 解約（2本折れ線） ----------
+  (function(){
+    const labels=['25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5','26/6','26/7','26/8'];
+    const NEW_=[1474,1616,1295,1063,1590,1346,1618,1828,1731,1579,1763,1754];
+    const CXL=[1270,1316,1332,1099,1201,1222,1444,1650,1937,1731,1454,1565];
+    const series=[{n:'新規申込',d:NEW_,c:'#3460FB'},{n:'解約（要注意）',d:CXL,c:'#CE0000'}];
+    const W=540,H=270,padL=48,padB=42,padT=14,min=900,max=2100;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'新規申込と解約の推移'},document.getElementById('chartFlow'));
+    for(let g=1000;g<=2000;g+=250){ const y=padT+(H-padT-padB)*(1-(g-min)/(max-min));
+      el('line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'#E5E5EA','stroke-width':1},svg);
+      el('text',{x:padL-6,y:y+4,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=fmt(g);
+    }
+    const xs=i=>padL+(W-padL-24)*i/(labels.length-1);
+    const ys=v=>padT+(H-padT-padB)*(1-(v-min)/(max-min));
+    // 値上げ帯（5〜6月）
+    el('rect',{x:xs(7.5),y:padT,width:xs(9.5)-xs(7.5),height:H-padT-padB,fill:'#FDEEEE'},svg);
+    el('text',{x:xs(8.5),y:padT+12,'text-anchor':'middle','font-size':9.5,fill:'#CE0000','font-weight':'bold'},svg).textContent='解約＞新規';
+    series.forEach(s=>{
+      el('path',{d:s.d.map((v,i)=>(i?'L':'M')+xs(i)+','+ys(v)).join(' '),fill:'none',stroke:s.c,'stroke-width':2},svg);
+      s.d.forEach((v,i)=>{
+        const hit=el('circle',{cx:xs(i),cy:ys(v),r:9,fill:'transparent'},svg);
+        hit.addEventListener('mousemove',e=>showTT(e,`${labels[i]} ${s.n}: ${fmt(v)}件`));
+        hit.addEventListener('mouseleave',hideTT);
+      });
+    });
+    labels.forEach((l,i)=>{ if(i%2===0||i===11) el('text',{x:xs(i),y:H-padB+14,'text-anchor':'middle','font-size':9.5,fill:'#626264'},svg).textContent=l; });
+    const lg=[['新規申込','#3460FB'],['解約','#CE0000']];
+    lg.forEach((p,i)=>{ el('rect',{x:padL+i*110,y:H-16,width:18,height:5,rx:2,fill:p[1]},svg);
+      el('text',{x:padL+i*110+23,y:H-10,'font-size':10.5,fill:'#000'},svg).textContent=p[0]; });
+    const tbl=document.getElementById('flowTable');
+    let html='<tr><th>月</th><th>新規申込</th><th>解約</th><th>差引</th></tr>';
+    labels.forEach((l,i)=>{ const d=NEW_[i]-CXL[i]; html+=`<tr><td>${l}</td><td>${fmt(NEW_[i])}</td><td>${fmt(CXL[i])}</td><td>${d>=0?'+':'▲'}${fmt(Math.abs(d))}</td></tr>`; });
+    tbl.innerHTML=html;
+  })();
+
+  // ---------- 定期稼働（折れ線） ----------
+  (function(){
+    const labels=['25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5','26/6','26/7','26/8'];
+    const vals=[8801,9219,9306,9382,9907,10136,10451,10796,10754,10754,11205,11521];
+    const W=540,H=270,padL=52,padB=28,padT=18,min=8000,max=12000;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'定期稼働数の推移'},document.getElementById('chartActive'));
+    for(let g=8000;g<=12000;g+=500){ const y=padT+(H-padT-padB)*(1-(g-min)/(max-min));
+      el('line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'#E5E5EA','stroke-width':1},svg);
+      el('text',{x:padL-6,y:y+4,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=fmt(g);
+    }
+    const xs=i=>padL+(W-padL-24)*i/(vals.length-1);
+    const ys=v=>padT+(H-padT-padB)*(1-(v-min)/(max-min));
+    el('path',{d:vals.map((v,i)=>(i?'L':'M')+xs(i)+','+ys(v)).join(' '),fill:'none',stroke:'#3460FB','stroke-width':2},svg);
+    vals.forEach((v,i)=>{
+      const c=el('circle',{cx:xs(i),cy:ys(v),r:4,fill:'#3460FB',stroke:'#F8F8FB','stroke-width':2},svg);
+      const hit=el('circle',{cx:xs(i),cy:ys(v),r:12,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',e=>showTT(e,`${labels[i]}: 定期稼働 ${fmt(v)}件`));
+      hit.addEventListener('mouseleave',hideTT);
+      if(i%2===0||i===11) el('text',{x:xs(i),y:H-padB+14,'text-anchor':'middle','font-size':9.5,fill:'#626264'},svg).textContent=labels[i];
+    });
+    el('circle',{cx:xs(11),cy:ys(vals[11]),r:5,fill:'#0017C1',stroke:'#fff','stroke-width':2},svg);
+    el('text',{x:xs(11)-6,y:ys(vals[11])-10,'text-anchor':'end','font-size':10.5,'font-weight':'bold',fill:'#000'},svg).textContent='11,521件（過去最高）';
+    el('text',{x:xs(8.5),y:ys(vals[8])+18,'text-anchor':'middle','font-size':9.5,fill:'#626264'},svg).textContent='5〜6月は足踏み';
+  })();
+
+  // ---------- 売上達成率（棒） ----------
+  (function(){
+    const labels=['25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5','26/6','26/7','26/8'];
+    const vals=[94.9,94.3,98.7,77.1,68.6,67.7,65.4,61.5,67.8,54.8,56.3,113.5];
+    const W=540,H=270,padL=40,padB=30,padT=16,max=130;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'売上達成率の推移'},document.getElementById('chartRate'));
+    for(let g=0;g<=125;g+=25){ const y=padT+(H-padT-padB)*(1-g/max);
+      el('line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'#E5E5EA','stroke-width':1},svg);
+      el('text',{x:padL-6,y:y+4,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=g+'%';
+    }
+    const gy=padT+(H-padT-padB)*(1-100/max);
+    el('line',{x1:padL,x2:W-10,y1:gy,y2:gy,stroke:'#A58000','stroke-width':1.5,'stroke-dasharray':'6 4'},svg);
+    el('text',{x:W-12,y:gy-5,'text-anchor':'end','font-size':10,'font-weight':'bold',fill:'#A58000'},svg).textContent='100%ライン';
+    const iw=(W-padL-16)/labels.length;
+    labels.forEach((l,i)=>{
+      const v=vals[i], bh=(H-padT-padB)*v/max, x=padL+i*iw+iw*0.16, bw=iw*0.68, y=H-padB-bh;
+      const r=el('path',{d:`M${x},${H-padB} L${x},${y+3} Q${x},${y} ${x+3},${y} L${x+bw-3},${y} Q${x+bw},${y} ${x+bw},${y+3} L${x+bw},${H-padB} Z`,fill:v>=100?'#0017C1':'#7096F8'},svg);
+      r.addEventListener('mousemove',e=>showTT(e,`${l}: 達成率 ${v}%`));
+      r.addEventListener('mouseleave',hideTT);
+      if(i%2===0||i===11) el('text',{x:x+bw/2,y:H-padB+14,'text-anchor':'middle','font-size':9,fill:'#626264'},svg).textContent=l;
+      if(i===0||i===9||i===10||i===11) el('text',{x:x+bw/2,y:y-5,'text-anchor':'middle','font-size':9.5,'font-weight':'bold',fill:'#000'},svg).textContent=v+'%';
+    });
+    el('text',{x:padL+10.5*iw,y:padT+10,'text-anchor':'middle','font-size':9,fill:'#A58000','font-weight':'bold'},svg).textContent='8月〜目標再設定';
+  })();
+
+  // ---------- 月次単価（折れ線） ----------
+  (function(){
+    const labels=['25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5','26/6','26/7','26/8'];
+    const vals=[6964,7072,7094,7314,6913,7069,7229,7116,7193,7622,7564,7527];
+    const W=540,H=270,padL=52,padB=28,padT=18,min=6800,max=7800;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'月次購入単価の推移'},document.getElementById('chartPrice'));
+    for(let g=6800;g<=7800;g+=200){ const y=padT+(H-padT-padB)*(1-(g-min)/(max-min));
+      el('line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'#E5E5EA','stroke-width':1},svg);
+      el('text',{x:padL-6,y:y+4,'text-anchor':'end','font-size':10,fill:'#626264'},svg).textContent=fmt(g);
+    }
+    const xs=i=>padL+(W-padL-24)*i/(vals.length-1);
+    const ys=v=>padT+(H-padT-padB)*(1-(v-min)/(max-min));
+    // 値上げ実施線（6/5 ≒ 9本目手前）
+    const vx=xs(8.6);
+    el('line',{x1:vx,x2:vx,y1:padT,y2:H-padB,stroke:'#A58000','stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+    el('text',{x:vx-4,y:padT+12,'text-anchor':'end','font-size':9.5,fill:'#A58000','font-weight':'bold'},svg).textContent='値上げ（6/5出荷〜）';
+    el('path',{d:vals.map((v,i)=>(i?'L':'M')+xs(i)+','+ys(v)).join(' '),fill:'none',stroke:'#3460FB','stroke-width':2},svg);
+    vals.forEach((v,i)=>{
+      const c=el('circle',{cx:xs(i),cy:ys(v),r:4,fill:'#3460FB',stroke:'#F8F8FB','stroke-width':2},svg);
+      const hit=el('circle',{cx:xs(i),cy:ys(v),r:12,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',e=>showTT(e,`${labels[i]}: 購入単価 ${fmt(v)}円`));
+      hit.addEventListener('mouseleave',hideTT);
+      if(i%2===0||i===11) el('text',{x:xs(i),y:H-padB+14,'text-anchor':'middle','font-size':9.5,fill:'#626264'},svg).textContent=labels[i];
+    });
+    el('text',{x:xs(9),y:ys(vals[9])-10,'text-anchor':'middle','font-size':10.5,'font-weight':'bold',fill:'#000'},svg).textContent='7,622円';
+    el('text',{x:xs(11),y:ys(vals[11])+18,'text-anchor':'middle','font-size':10.5,'font-weight':'bold',fill:'#000'},svg).textContent='7,527円';
+  })();
+})();
+</script>
+<script>
+(function(){
+  const btn=document.getElementById('pdfBtn');
+  if(!btn) return;
+  let printed=false;
+  window.addEventListener('beforeprint',()=>{printed=true;});
+  btn.addEventListener('click',()=>{
+    printed=false;
+    try{window.print();}catch(_){}
+    setTimeout(()=>{
+      if(!printed){
+        let bar=document.getElementById('pdfhint');
+        if(!bar){
+          bar=document.createElement('div');
+          bar.id='pdfhint';
+          bar.style.cssText='position:fixed;top:0;left:0;right:0;background:#0017C1;color:#fff;font-size:13px;padding:10px 16px;z-index:100;text-align:center';
+          bar.innerHTML='この画面では自動で印刷ダイアログを開けませんでした。<b>Ctrl+P（Macは &#8984;P）</b>→ プリンターで「<b>PDFに保存</b>」を選ぶと、このページがそのままA4のPDFになります。<button style="margin-left:14px;border:none;border-radius:3px;padding:3px 10px;cursor:pointer" onclick="this.parentNode.remove()">閉じる</button>';
+          document.body.appendChild(bar);
+        }
+      }
+    },900);
+  });
+})();
+</script>
+
+</body>
+</html>
