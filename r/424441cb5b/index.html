@@ -365,7 +365,7 @@ footer{margin-top:28px;font-size:11px;color:var(--muted);border-top:1px solid va
     ac('none','欠席者のうち突破Ai未登録','<div class="num na">未計測</div>','再告知メールの対象者','読書会側はハッシュ化IDのため、Stripe顧客と人単位で突合できません。MyASP申込リスト（メール）×Stripe顧客メールの照合を運営側で行えば算出できます')+
     ac('orange','無料期間終了3日前','<div class="num">'+f(S.trial_end_within3)+'<small>名</small></div>','継続の意思確認・価値提供の最後の接点','<span class="st m">実測</span> 7日以内 '+f(S.trial_end_within7)+'名（断面時刻依存）。月別：'+(teKeys.length? teKeys.map(k=>ym(k)+' '+teSum(k)+'名（'+rkStr(S.trial_end_by_month[k])+'）').join('／') : '—')+'。名簿は司令塔「課金判定日リスト」')+
     ac(S.past_due? 'red':'green','課金失敗（past_due／unpaid）','<div class="num">'+f(S.past_due)+'<small>名</small></div>','カード更新の案内','<span class="st m">実測</span> Stripeサブスクの状態がpast_due・unpaidの件数。決済失敗後の未回収（司令塔の未決済）は請求単位の別集計')+
-    ac('red','登録7日以内の解約（累計）','<div class="num">'+f(cd.d7||0)+'<small>件</small></div>','登録直後の初期体験の見直し','<span class="st m">実測</span> 全解約'+f(S.cancel_total)+'件の内訳：7日以内'+f(cd.d7||0)+'・8〜14日'+f(cd.d14||0)+'・15〜30日'+f(cd.d30||0)+'・31日超'+f(cd.over||0)+'。件＝サブスク件数（解約顧客ユニーク'+f(S.cancel_customers)+'名'+(S.cancel_customers===S.cancel_total?'＝件数と一致':'')+'）');
+    ac('red','登録7日以内の解約（累計）','<div class="num">'+f(cd.d7||0)+'<small>件</small></div>','登録直後の初期体験の見直し','<span class="st m">実測</span> 全解約'+f(S.cancel_total)+'件の内訳：1〜7日目'+f(cd.d7||0)+'・8〜14日目'+f(cd.d14||0)+'・15〜30日目'+f(cd.d30||0)+'・31日目以降'+f(cd.over||0)+'（無料期間開始からの経過を24時間単位で数え、「14日以内」＝14×24時間未満。追加30日は15日目から／8〜15日目は'+f(S.cancel_day8_15||0)+'件）。件＝サブスク件数（解約顧客ユニーク'+f(S.cancel_customers)+'名'+(S.cancel_customers===S.cancel_total?'＝件数と一致':'')+'）');
 
   // ---- 下段左 オンボード判定ロジック ----
   $('#ob-win').textContent = '正式メンバー化（15日目）から7日以内（21日目まで）';
