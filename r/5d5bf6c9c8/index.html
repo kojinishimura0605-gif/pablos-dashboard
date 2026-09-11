@@ -20,11 +20,15 @@ table{width:100%;border-collapse:collapse;font-size:13px}th{background:var(--blu
 td{padding:6px 10px;border-bottom:1px solid var(--bg-control)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}tr.total td{font-weight:bold;background:var(--blue-50)}
 tr.focus td{background:#fff8e6}.warn{color:var(--error);font-weight:bold}
 .hbar{height:10px;background:var(--blue-600);border-radius:2px;display:inline-block;vertical-align:middle}
+.scale{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border:1px solid var(--bg-control);border-radius:8px;overflow:hidden;background:#fff}
+.stile{padding:22px 20px;border-right:1px solid var(--bg-control);border-bottom:1px solid var(--bg-control)}
+.stile .sv{font-size:30px;font-weight:bold;color:var(--blue-1200);font-variant-numeric:tabular-nums;line-height:1.2}.stile .su{font-size:13px;color:var(--text-label);margin-left:4px;font-weight:normal}
+.stile .sd{font-size:12px;color:var(--text-label);margin-top:8px;line-height:1.6}
 .wrap{overflow-x:auto}footer{color:var(--text-label);font-size:11px;margin-top:8px}footer p{margin-bottom:4px}
 @media print{.tab{display:none}.panel{display:block!important}.panel:before{content:attr(data-label);display:block;font-size:18px;font-weight:bold;color:var(--blue-1200);margin:16px 0 8px}}
 </style></head><body>
 <header><h1>株式会社ヒューマンプラス様 業務稼働レポート</h1>
-<div class="meta">対象期間 2026年7月1日〜9月9日｜作成 社外アイデア企画室株式会社（西村公児）｜作成日 2026年09月10日</div></header>
+<div class="meta">対象期間 2026年7月1日〜9月9日｜作成 社外アイデア企画室株式会社（西村公児）｜作成日 2026年09月11日</div></header>
 <div class="lead">本レポートは、貴社の経理引き継ぎ・データ整備・決済連携・共有ドライブ保全ほか貴社関連業務に関する当社の稼働を、<b>作業記録・電話対応・Chatworkの3系統</b>からまとめたものです。作業記録の件数・時間、電話の通話時間、Chatworkの投稿件数・文字数は記録値です。電話は当社の通話記録のうち貴社対応分として集計しています。Chatwork対応の時間だけは当社の見積で、投稿の内容を1件ずつ確認し、読み書きの時間に加えて、投稿から判明した作業（請求書確認・送金手配・資料作成など）と記録された会議を積み上げています（各タブに内訳と根拠）。ご請求はお見積りに基づき別途ご相談いたします。</div>
 <div class="tabs">
 <button class="tab" data-tab="2026-07">2026年7月度</button>
@@ -123,6 +127,14 @@ tr.focus td{background:#fff8e6}.warn{color:var(--error);font-weight:bold}
 <div class="card"><div class="label">Chatwork対応（当社からの投稿）</div><div class="value">71件</div><div class="sub">15日・14ルーム・8,613字｜換算 910分（内容ベース）</div></div>
 </div>
 <section><h2>8月度の範囲について</h2><div class="desc">8月分の経理業務（顧客データベース整備・8月分講師報酬の振込指示書・資金繰り表8月版・8月実績明細・決済連携）は9月に実施したため、9月度タブに計上しています。お見積り（2026年8月度）の品目はこの9月度分に対応します。</div></section>
+<section><h2>数字で見る規模（8月分 講師報酬・振込業務）</h2><div class="desc">担当者の退職で引き継ぎがない状態から、8月末の振込期限までに当社が対応した業務の規模です（2026年8月21日〜8月31日）。</div><div class="scale">
+<div class="stile"><div class="sv">78<span class="su">時間+</span></div><div class="sd">主要8日間の記録に残る実働時間（並行対応の他業務含む・未記録の時間帯は除く最小値）</div></div>
+<div class="stile"><div class="sv">6<span class="su">系統</span></div><div class="sd">講師1名あたり突き合わせた独立システム数（銀行・会計・決済3社・契約書・個別Excel）</div></div>
+<div class="stile"><div class="sv">30<span class="su">枚+</span></div><div class="sd">実際に開いて突き合わせたスプレッドシートのシート・タブ数（1講座の入金状況タブだけで10枚以上）</div></div>
+<div class="stile"><div class="sv">8<span class="su">名</span></div><div class="sd">正式な報酬明細書（Excel＋PDF計16ファイル）を作成・発行した講師数</div></div>
+<div class="stile"><div class="sv">¥6,841,092<span class="su"></span></div><div class="sd">確定・発行した振込指示書の合計金額（15件）</div></div>
+<div class="stile"><div class="sv">¥2,850,000<span class="su">相当</span></div><div class="sd">期日内に着金まで完了させた国際送金2件の合計</div></div>
+</div></section>
 <section><h2>業務の系統別</h2><div class="desc">見積時間はAIを使わずに手作業で行った場合の想定時間（記録時の見積）です。実作業は実際に人が指示・確認に要した時間です。</div><div class="wrap"><table><thead><tr><th>系統</th><th class="num">件数</th><th class="num">見積時間（分）</th><th class="num">実作業（分）</th><th class="num">短縮（分）</th><th class="num">短縮率</th><th style="width:22%"></th></tr></thead><tbody>
 <tr><td>契約書精査（三者間業務委託）</td><td class="num">2</td><td class="num">90</td><td class="num">16</td><td class="num">74</td><td class="num">82%</td><td><span class="hbar" style="width:16%"></span></td></tr>
 <tr><td>ドライブ保全・権限整理</td><td class="num">9</td><td class="num">720</td><td class="num">260</td><td class="num">460</td><td class="num">64%</td><td><span class="hbar" style="width:100%"></span></td></tr>
