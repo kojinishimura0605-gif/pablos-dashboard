@@ -84,6 +84,17 @@
 </section>
 
 <section>
+  <h2>読む・判断する時間（直近30日・実測）</h2>
+  <div class="desc" id="read-desc"></div>
+  <div class="chart" id="read-chart"></div>
+  <div class="axis" id="read-axis"></div>
+  <table id="read-table" style="margin-top:12px">
+    <thead><tr><th>週（月曜始まり）</th><th class="num">回数</th><th class="num">合計（30分打切）</th><th class="num">合計（5分打切）</th><th class="num">1回あたり平均</th><th></th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
   <h2>日別 タスク件数と時短時間（直近30日）</h2>
   <div class="desc">棒＝タスク件数。カーソルを乗せると時短分数を表示。</div>
   <div class="chart" id="task-chart"></div>
@@ -183,6 +194,7 @@
     { label: "人日換算（目安）", value: personDays + "人日", sub: "1人日=8時間で換算", cls: "hero" },
     { label: "直近30日 タスク件数", value: fmt(wt.tasks) + "件", sub: "X発信ネタ候補 " + wt.x_potential + "件" },
     { label: "検品品質(30日)", value: (D.reviews && D.reviews.targets ? "初回PASS " + D.reviews.first_pass_rate + "%" : "—"), sub: (D.reviews && D.reviews.targets ? "平均巡数 " + D.reviews.avg_rounds + "回・対象" + D.reviews.targets + "件（条件付きPASSは合格扱い）" : "検品記録なし（review-log.jsonl）") },
+    { label: "読む・判断する時間(30日・実測)", value: (D.readtime && D.readtime.available && D.readtime.window_total && D.readtime.window_total.n ? hrs(D.readtime.window_total.sec / 60) : "—"), sub: (D.readtime && D.readtime.available && D.readtime.window_total && D.readtime.window_total.n ? fmt(D.readtime.window_total.n) + "回・中央値 " + D.readtime.window_total.median_sec + "秒・5分打切なら " + hrs(D.readtime.window_total.sec5 / 60) + "（AI出力→次の指示の間隔）" : "セッションログに記録なし") },
     { label: "最新日の概算コスト", value: usd(costLatest), sub: "対象日 " + latest + "・" + fmt((tDaily[latest] || {}).msgs || 0) + "メッセージ" },
     { label: "直近30日 概算コスト", value: usd(cost30), sub: "API換算・実請求とは異なる" },
     { label: "自動更新 成功率(30日)", value: pw.runs ? pw.success_rate + "%" : "—", sub: pw.runs ? "✓" + pw.ok + " / 全" + pw.runs + "回・ERROR " + pw.errors + "・WARN " + pw.warns : "実行記録なし", cls: pw.runs ? (rateOk ? "ok" : "ng") : "" },
@@ -210,6 +222,29 @@
   drawChart("cost-chart", "cost-axis",
     days.map(d => ({ d, v: (tDaily[d] || {}).cost || 0 })),
     v => v.d + "｜" + usd(v.v) + "｜出力 " + tok((tDaily[v.d] || {}).out || 0));
+
+  // ---- 読む・判断する時間（分母の実測・2026-09-14 追加）
+  {
+    const R = D.readtime || {};
+    const rDaily = R.daily || {};
+    document.getElementById("read-desc").textContent = R.available
+      ? "AIが出力を終えてから、人が次の指示を打つまでの間隔の合計（Claude Codeセッションログの時刻差・実測）。" + R.cap_min + "分超は離席として除外。承認クリック待ちは含めない。" + fmt(R.sessions || 0) + "セッション走査。倍率の分母（会議時間）に足す実測値。"
+      : "セッションログが見つからないため欠測（0ではありません）";
+    drawChart("read-chart", "read-axis",
+      days.map(d => ({ d, v: (rDaily[d] || {}).sec || 0 })),
+      v => v.d + "｜" + hrs(v.v / 60) + "｜" + ((rDaily[v.d] || {}).n || 0) + "回");
+    const weeks = Object.entries(R.weekly || {}).sort((a, b) => a[0].localeCompare(b[0]));
+    const maxSec = Math.max(...weeks.map(([, v]) => v.sec), 1);
+    const wrows = weeks.map(([w, v]) =>
+      "<tr><td>" + w + '</td><td class="num">' + fmt(v.n) + '</td><td class="num"><b>' + hrs(v.sec / 60) + '</b></td><td class="num">' + hrs(v.sec5 / 60) +
+      '</td><td class="num">' + (v.n ? Math.round(v.sec / v.n) + "秒" : "—") +
+      '</td><td><span class="hbar" style="width:' + Math.round(v.sec / maxSec * 100) + '%"></span></td></tr>');
+    if (R.window_total && R.window_total.n) {
+      wrows.push('<tr class="total"><td>合計（30日）</td><td class="num">' + fmt(R.window_total.n) + '</td><td class="num">' + hrs(R.window_total.sec / 60) +
+        '</td><td class="num">' + hrs(R.window_total.sec5 / 60) + '</td><td class="num">' + R.window_total.mean_sec + "秒（中央値 " + R.window_total.median_sec + "秒）</td><td></td></tr>");
+    }
+    document.querySelector("#read-table tbody").innerHTML = wrows.length ? wrows.join("") : '<tr><td colspan="6">記録なし</td></tr>';
+  }
 
   // ---- ルーティン別 時短実績
   const cats = Object.entries(D.worklog.by_category).sort((a, b) => b[1].saved - a[1].saved);
@@ -254,7 +289,7 @@
     "<p>キャッシュ: " + D.pricing_note.cache + "。" + (D.pricing_note.assumption || "") + "</p>" +
     "<p>※ " + D.pricing_note.disclaimer + "。単価出典: " + D.pricing_note.source + "</p>" +
     "<p>※ 「手作業見積」「人日換算」は目安（見積値ベース）。トークン・実行回数・ERROR/WARNは実測値。</p>" +
-    "<p>※ データ源: ①作業ログ（work-log-作業ログ/log.jsonl）②Claude Codeセッションログ実測トークン（" + fmt(D.tokens.files_scanned) + "ファイル走査・サブエージェント含む）③PABLOSダッシュボード日次更新ログ（update-log.txt）④検品ログ（work-log-作業ログ/review-log.jsonl・検品1巡=1行）</p>" +
+    "<p>※ データ源: ①作業ログ（work-log-作業ログ/log.jsonl）②Claude Codeセッションログ実測トークン（" + fmt(D.tokens.files_scanned) + "ファイル走査・サブエージェント含む）③PABLOSダッシュボード日次更新ログ（update-log.txt）④検品ログ（work-log-作業ログ/review-log.jsonl・検品1巡=1行）⑤読む・判断する時間＝セッションログの「AI出力→次の人の入力」の時刻差（30分超は離席除外・承認待ちは含めない・上限値）</p>" +
     "<p>※ 更新: 毎朝9時の日次パイプラインで自動集計（手動は collect.py 実行）。配色: デジタル庁ダッシュボードガイドブック準拠 Blue系統 ©2026 Digital Agency</p>";
 })();
 </script>
