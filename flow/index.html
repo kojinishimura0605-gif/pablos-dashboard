@@ -102,7 +102,7 @@
 </section>
 
 <section>
-  <h2>日別 概算コスト（直近30日・API換算USD）</h2>
+  <h2>日別 概算コスト（直近30日・API換算・円）</h2>
   <div class="chart" id="cost-chart"></div>
   <div class="axis" id="cost-axis"></div>
 </section>
@@ -129,7 +129,7 @@
 <section>
   <h2>単価表と注記</h2>
   <table>
-    <thead><tr><th>モデル</th><th class="num">入力 $/1M</th><th class="num">出力 $/1M</th></tr></thead>
+    <thead><tr><th>モデル</th><th class="num">入力 $/1M</th><th class="num">出力 $/1M</th><th class="num">入力 円/1M</th><th class="num">出力 円/1M</th></tr></thead>
     <tbody id="price-body"></tbody>
   </table>
   <footer id="foot"></footer>
@@ -143,6 +143,11 @@
   const fmt = (n) => n.toLocaleString("ja-JP");
   const tok = (n) => n >= 1e9 ? (n / 1e9).toFixed(2) + "G" : n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e3 ? (n / 1e3).toFixed(0) + "K" : String(n);
   const usd = (n) => "$" + n.toLocaleString("ja-JP", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  // 円換算（2026-09-14 西村さん指示）: 前日の USD/JPY（collect.py が取得・fx.usd_jpy）。取得できない日は USD 表示に退避
+  const FX = D.fx || {};
+  const RATE = FX.usd_jpy || null;
+  const money = (n) => RATE ? "¥" + Math.round(n * RATE).toLocaleString("ja-JP") : usd(n);
+  const fxNote = RATE ? "1ドル=" + RATE + "円（" + (FX.rate_date || "") + "・前日の" + (FX.source || "為替") + (FX.stale ? "・取得失敗のため前回値" : "") + "）" : "為替未取得のためUSD表示";
   const hrs = (min) => (min / 60).toFixed(1) + "h";
   const pad = (n) => String(n).padStart(2, "0");
   const localYmd = (d) => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
@@ -159,7 +164,7 @@
   const latest = D.window.end;
 
   document.getElementById("meta").textContent =
-    "生成: " + D.generated_at + "｜集計期間: " + D.window.start + " 〜 " + D.window.end + "（" + D.window.days + "日間）｜トークン・実行回数は実測／時短は記録時の見積ベース（目安）／コストは単価表による概算";
+    "生成: " + D.generated_at + "｜集計期間: " + D.window.start + " 〜 " + D.window.end + "（" + D.window.days + "日間）｜トークン・実行回数は実測／時短は記録時の見積ベース（目安）／コストは単価表による概算（円換算: " + fxNote + "）";
 
   // 生成日と閲覧日の乖離警告（「本日」カードの誤読防止）
   if (localYmd(new Date()) !== latest) {
@@ -195,8 +200,8 @@
     { label: "直近30日 タスク件数", value: fmt(wt.tasks) + "件", sub: "X発信ネタ候補 " + wt.x_potential + "件" },
     { label: "検品品質(30日)", value: (D.reviews && D.reviews.targets ? "初回PASS " + D.reviews.first_pass_rate + "%" : "—"), sub: (D.reviews && D.reviews.targets ? "平均巡数 " + D.reviews.avg_rounds + "回・対象" + D.reviews.targets + "件（条件付きPASSは合格扱い）" : "検品記録なし（review-log.jsonl）") },
     { label: "読む・判断する時間(30日・実測)", value: (D.readtime && D.readtime.available && D.readtime.window_total && D.readtime.window_total.n ? hrs(D.readtime.window_total.sec / 60) : "—"), sub: (D.readtime && D.readtime.available && D.readtime.window_total && D.readtime.window_total.n ? fmt(D.readtime.window_total.n) + "回・中央値 " + D.readtime.window_total.median_sec + "秒・5分打切なら " + hrs(D.readtime.window_total.sec5 / 60) + "（AI出力→次の指示の間隔）" : "セッションログに記録なし") },
-    { label: "最新日の概算コスト", value: usd(costLatest), sub: "対象日 " + latest + "・" + fmt((tDaily[latest] || {}).msgs || 0) + "メッセージ" },
-    { label: "直近30日 概算コスト", value: usd(cost30), sub: "API換算・実請求とは異なる" },
+    { label: "最新日の概算コスト", value: money(costLatest), sub: "対象日 " + latest + "・" + fmt((tDaily[latest] || {}).msgs || 0) + "メッセージ" + (RATE ? "・" + usd(costLatest) : "") },
+    { label: "直近30日 概算コスト", value: money(cost30), sub: (RATE ? usd(cost30) + "・" : "") + fxNote + "・API換算・実請求とは異なる" },
     { label: "自動更新 成功率(30日)", value: pw.runs ? pw.success_rate + "%" : "—", sub: pw.runs ? "✓" + pw.ok + " / 全" + pw.runs + "回・ERROR " + pw.errors + "・WARN " + pw.warns : "実行記録なし", cls: pw.runs ? (rateOk ? "ok" : "ng") : "" },
     { label: "最終自動更新", value: lr ? (lr.result === "完了" ? "✓成功" : "✗" + lr.result) : "—", sub: lr ? lr.date + " " + lr.time + (lr.warns ? "（WARN " + lr.warns + "）" : "") : "", cls: lr ? (lr.result === "完了" ? "ok" : "ng") : "" },
   ];
@@ -221,7 +226,7 @@
 
   drawChart("cost-chart", "cost-axis",
     days.map(d => ({ d, v: (tDaily[d] || {}).cost || 0 })),
-    v => v.d + "｜" + usd(v.v) + "｜出力 " + tok((tDaily[v.d] || {}).out || 0));
+    v => v.d + "｜" + money(v.v) + "｜出力 " + tok((tDaily[v.d] || {}).out || 0));
 
   // ---- 読む・判断する時間（分母の実測・2026-09-14 追加）
   {
@@ -267,7 +272,7 @@
   document.querySelector("#model-table tbody").innerHTML = models.map(([m, v]) =>
     "<tr><td>" + m + '</td><td class="num">' + fmt(v.msgs) + '</td><td class="num">' + tok(v.in) +
     '</td><td class="num">' + tok(v.out) + '</td><td class="num">' + tok(v.c5 + v.c1h) +
-    '</td><td class="num">' + tok(v.read) + '</td><td class="num"><b>' + usd(v.cost) + "</b></td></tr>"
+    '</td><td class="num">' + tok(v.read) + '</td><td class="num"><b>' + money(v.cost) + "</b></td></tr>"
   ).join("");
 
   // ---- 日次更新履歴（記録がある直近14日分）
@@ -283,11 +288,13 @@
 
   // ---- 単価表・注記
   document.getElementById("price-body").innerHTML = Object.entries(D.pricing_note.models).map(([m, p]) =>
-    "<tr><td>" + m + '</td><td class="num">$' + p.input.toFixed(2) + '</td><td class="num">$' + p.output.toFixed(2) + "</td></tr>"
+    "<tr><td>" + m + '</td><td class="num">$' + p.input.toFixed(2) + '</td><td class="num">$' + p.output.toFixed(2) +
+    '</td><td class="num">' + (RATE ? "¥" + Math.round(p.input * RATE).toLocaleString("ja-JP") : "—") + '</td><td class="num">' + (RATE ? "¥" + Math.round(p.output * RATE).toLocaleString("ja-JP") : "—") + "</td></tr>"
   ).join("");
   document.getElementById("foot").innerHTML =
     "<p>キャッシュ: " + D.pricing_note.cache + "。" + (D.pricing_note.assumption || "") + "</p>" +
     "<p>※ " + D.pricing_note.disclaimer + "。単価出典: " + D.pricing_note.source + "</p>" +
+    "<p>※ 円換算: " + fxNote + "。毎朝の集計時に前日のレートを取得（前日が休場の日は直近の公表日）。取得できない日は前回値を使い、その旨を表示</p>" +
     "<p>※ 「手作業見積」「人日換算」は目安（見積値ベース）。トークン・実行回数・ERROR/WARNは実測値。</p>" +
     "<p>※ データ源: ①作業ログ（work-log-作業ログ/log.jsonl）②Claude Codeセッションログ実測トークン（" + fmt(D.tokens.files_scanned) + "ファイル走査・サブエージェント含む）③PABLOSダッシュボード日次更新ログ（update-log.txt）④検品ログ（work-log-作業ログ/review-log.jsonl・検品1巡=1行）⑤読む・判断する時間＝セッションログの「AI出力→次の人の入力」の時刻差（30分超は離席除外・承認待ちは含めない・上限値）</p>" +
     "<p>※ 更新: 毎朝9時の日次パイプラインで自動集計（手動は collect.py 実行）。配色: デジタル庁ダッシュボードガイドブック準拠 Blue系統 ©2026 Digital Agency</p>";
