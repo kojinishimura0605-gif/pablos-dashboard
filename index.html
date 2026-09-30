@@ -211,6 +211,7 @@
   <div class="callout"><b>会員数の正は「Stripeで課金が確認できる方」です。</b>①直近<span id="ms-win">31</span>日にStripe課金がある方＋②年払い・分割払いの方（毎月の課金が出ないのは正常）を会員として数えます。<b>無料期間中の方と、無料期間が明けて初回決済がまだの方は「見込み」</b>（課金が確認できた時点で会員数に入ります）、<b>付与・関係者と要確認は「関係者」</b>として別枠にし、<b>Stripeで解約済みなのに顧客DBに資格が残っている方は数えません</b>（顧客DBの修正対象）。母数＝会員数＋見込み＋関係者＋除外で、顧客DBの本日有効（退会欄に記載のある方を除く）と必ず一致します。人数は資格ごと（メール×資格）に数えており、2つの資格を持つ方は両方に入ります（実人数は総数の下に表示）。「Stripe課金あり」は会費に限らず、講座などの決済も含みます。サポーターも突合の対象です（10/1〜）。
     <div class="act-owner">判定ロジック＝9/30「顧客DB×Stripe突合 DB修正リスト」と同一（member-stripe-pipeline.py）</div></div>
 
+<div hidden data-hidden="A 顧客DB基準の当残（2026/10/1 西村さん指示で非表示・会員数はA0のStripe決済基準のみ）">
   <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--warn);font-weight:700">※参考（9/30までの旧・会員数の正）</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字＝<b>顧客DB基準の内訳（会員数の正）</b>／小さい併記＝MyASP配信リスト（週刊パブロス購読者・参考）／金額は下記⑥</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
@@ -243,6 +244,7 @@
     <span id="gap-dl-note" style="font-size:11px;color:var(--muted)">—</span>
   </div>
 
+</div>
   <div class="sec"><span class="badge">B</span><h2>サブスク以外の一括＆ミコシー経由</h2><span class="note">重複除去・退会除外・最新資格</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
@@ -268,6 +270,7 @@
     <div class="card"><div class="label" style="color:var(--neg);font-weight:800;font-size:14px;margin-bottom:8px">⬇ 降格 <span id="dbm-down-total">—</span>件</div><div id="dbm-down-list" style="font-size:13px;line-height:2"></div></div>
   </div>
 
+<div hidden data-hidden="D 配信ベース（MyASP到達）（2026/10/1 西村さん指示で非表示・会員数はA0のStripe決済基準のみ）">
   <div class="sec"><span class="badge">D</span><h2>本日現在の会員状況 <span style="font-size:12px;color:var(--warn);font-weight:700">※参考・非正（配信ベース）</span></h2><span class="note">MyASP到達会員（配信可能）719名の内訳／会員数の正はA=<span class="mbase">250</span></span></div>
   <div class="grid g5">
     <div class="card kpi accent-top">
@@ -297,6 +300,7 @@
     </div>
   </div>
 
+</div>
   <div class="sec"><span class="badge">E</span><h2>今月（9月）の動き</h2><span class="note">前月対比つき（MyASP断面）</span></div>
   <div class="grid g4">
     <div class="card kpi">
