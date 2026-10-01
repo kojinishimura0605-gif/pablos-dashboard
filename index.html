@@ -189,30 +189,7 @@
   <p class="lead"><b>2026年10月1日</b>時点の実数です。毎朝ここだけ見れば、会員の現在地・今月の増減・注視ポイントが一目で決まります。数値はすべて資格者一覧シートの実測値です（推測・補完なし）。</p>
   <div class="srcbar">データ出典：<a class="src" href="https://docs.google.com/spreadsheets/d/1P-wkTq9eqJKgKnqAD8QHphULwfrRYxAVpiXBqmsNp3Q/edit" target="_blank" rel="noopener">① PABLOS資格者一覧（MyASP）</a></div>
 
-  <div class="sec"><span class="badge">A0</span><h2>会員数の正（Stripe決済基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正（2026/9/30〜）</span></h2><span class="note">顧客DBで本日有効のメンター・リーダー・クルー・サポーターを、Stripeの決済・サブスクと人単位（メール×資格）で突合／更新 <span id="ms-upd">—</span>・毎朝自動</span></div>
-  <div class="grid g5">
-    <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
-      <div class="label" style="justify-content:center">会員数（Stripe決済基準）</div>
-      <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0"><span id="ms-total">—</span><span class="unit">名</span></div>
-      <div class="foot" id="ms-total-foot">—</div>
-    </div>
-    <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="ms-m">—</div><div class="foot" id="ms-m-foot">—</div></div>
-    <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="ms-l">—</div><div class="foot" id="ms-l-foot">—</div></div>
-    <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="ms-c">—</div><div class="foot" id="ms-c-foot">—</div></div>
-    <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="ms-s">—</div><div class="foot" id="ms-s-foot">—</div></div>
-  </div>
-  <div class="grid g5" style="margin-top:10px">
-    <div class="card kpi"><div class="label">年払い・分割のうち未回収の可能性</div><div class="num" style="color:var(--warn)" id="ms-unc">—</div><div class="foot">分割払い（明細に「分割」）なのに先月1日以降のStripe課金なし。一括払い済みの方は含みません（会員数には含めています）</div></div>
-    <div class="card kpi"><div class="label">見込み（無料期間中）<span style="font-size:10px;color:var(--muted)">別枠</span></div><div class="num" style="color:var(--crew)" id="ms-pro">—</div><div class="foot" id="ms-pro-foot">—</div></div>
-    <div class="card kpi"><div class="label">関係者（付与・要確認）<span style="font-size:10px;color:var(--muted)">別枠</span></div><div class="num" id="ms-rel">—</div><div class="foot" id="ms-rel-foot">—</div></div>
-    <div class="card kpi"><div class="label">除外（Stripe解約済み・DBに資格残り）</div><div class="num" style="color:var(--neg)" id="ms-exc">—</div><div class="foot" id="ms-exc-foot">—</div></div>
-    <div class="card kpi"><div class="label">突合の母数（顧客DB 本日有効）</div><div class="num" id="ms-db">—</div><div class="foot" id="ms-db-foot">—</div></div>
-  </div>
-  <div class="callout"><b>会員数の正は「Stripeで課金が確認できる方」です。</b>①直近<span id="ms-win">31</span>日にStripe課金がある方＋②年払い・分割払いの方（毎月の課金が出ないのは正常）を会員として数えます。<b>無料期間中の方と、無料期間が明けて初回決済がまだの方は「見込み」</b>（課金が確認できた時点で会員数に入ります）、<b>付与・関係者と要確認は「関係者」</b>として別枠にし、<b>Stripeで解約済みなのに顧客DBに資格が残っている方は数えません</b>（顧客DBの修正対象）。母数＝会員数＋見込み＋関係者＋除外で、顧客DBの本日有効（退会欄に記載のある方を除く）と必ず一致します。人数は資格ごと（メール×資格）に数えており、2つの資格を持つ方は両方に入ります（実人数は総数の下に表示）。「Stripe課金あり」は会費に限らず、講座などの決済も含みます。サポーターも突合の対象です（10/1〜）。
-    <div class="act-owner">判定ロジック＝9/30「顧客DB×Stripe突合 DB修正リスト」と同一（member-stripe-pipeline.py）</div></div>
-
-<div hidden data-hidden="A 顧客DB基準の当残（2026/10/1 西村さん指示で非表示・会員数はA0のStripe決済基準のみ）">
-  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--warn);font-weight:700">※参考（9/30までの旧・会員数の正）</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字＝<b>顧客DB基準の内訳（会員数の正）</b>／小さい併記＝MyASP配信リスト（週刊パブロス購読者・参考）／金額は下記⑥</span></div>
+  <div class="sec"><span class="badge">A</span><h2>現在の有効会員（顧客DB基準） <span style="font-size:12px;color:var(--pos);font-weight:700">＝会員数の正</span></h2><span class="note">資格有効期限内の在籍ユニーク・当残／資格カードの大きい数字＝<b>顧客DB基準の内訳（会員数の正）</b>／小さい併記＝MyASP配信リスト（週刊パブロス購読者・参考）／金額は下記⑥</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
       <div class="label" style="justify-content:center">全体 当残（基準）</div>
@@ -244,36 +221,31 @@
     <span id="gap-dl-note" style="font-size:11px;color:var(--muted)">—</span>
   </div>
 
-</div>
-  <div class="sec"><span class="badge">B</span><h2>パブロス過去会員ALL</h2><span class="note">顧客DBで資格を持ったことのある全員（退会者を含む）・メールで重複除去・最新資格／会員数ではありません</span></div>
+  <div class="sec"><span class="badge">B</span><h2>サブスク以外の一括＆ミコシー経由</h2><span class="note">重複除去・退会除外・最新資格</span></div>
   <div class="grid g5">
     <div class="card kpi accent-top" style="text-align:center;padding:18px 12px">
-      <div class="label" style="justify-content:center">過去会員ALL 合計</div>
+      <div class="label" style="justify-content:center">有効会員 合計</div>
       <div class="num" style="color:var(--navy);font-size:42px;margin:4px 0" id="dbm-total">—<span class="unit">名</span></div>
       <div class="dd" id="dd-b-total"></div>
-      <div class="foot" id="dbm-all-foot">顧客DB（購入者タブ）</div>
+      <div class="foot">顧客DBマスター（一括・ミコシー経由）</div>
     </div>
     <div class="card kpi accent-top at-mentor"><div class="label"><span class="dot b-mentor"></span>メンター</div><div class="num" id="dbm-mentor">—</div><div class="dd" id="dd-b-mentor"></div><div class="foot" id="dbm-mentor-pct">—</div></div>
     <div class="card kpi accent-top at-leader"><div class="label"><span class="dot b-leader"></span>リーダー</div><div class="num" id="dbm-leader">—</div><div class="dd" id="dd-b-leader"></div><div class="foot" id="dbm-leader-pct">—</div></div>
     <div class="card kpi accent-top at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="dbm-crew">—</div><div class="dd" id="dd-b-crew"></div><div class="foot" id="dbm-crew-pct">—</div></div>
     <div class="card kpi accent-top at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="dbm-sup">—</div><div class="dd" id="dd-b-sup"></div><div class="foot">＋メンバー <span id="dbm-member">—</span></div></div>
   </div>
-  <div class="callout"><b>パブロスの会員資格を一度でも持ったことのある方の累計です（会員数ではありません）。</b>顧客DB（購入者タブ）の全顧客を、メールアドレスで1人1件にまとめ、最新の資格で数えています。<b>退会した方・有効期限が切れた方も含みます。</b>今お金を払っている会員数は上のA0（Stripe決済基準）をご覧ください。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
-
-<div hidden data-hidden="旧B差異コールアウト（2026/10/1 過去会員ALL化に伴い非表示）">  <div class="callout"><b>サブスク以外の一括＆ミコシー経由の有効会員です。</b>顧客DBマスターを重複除去・退会除外・最新資格で数えた<b><span id="dbm-total2">—</span>名</b>。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
+  <div class="callout"><b>サブスク以外の一括＆ミコシー経由の有効会員です。</b>顧客DBマスターを重複除去・退会除外・最新資格で数えた<b><span id="dbm-total2">—</span>名</b>。<span style="color:var(--muted)">更新 <span id="dbm-upd">—</span></span></div>
 
   <div class="callout warn">
     <b>差異＝<span id="dbm-diff">—</span>名（B <span id="dbm-diffB">—</span> − A <span class="mbase">250</span>）＝まだサブスク会員に移行していない顧客</b>です。顧客DB全体のうち、現行の有効会員（DBマスター基準<span class="mbase">250</span>）を除いた分が<b>一括／ミコシー経由のまま未移行</b>——ここが<b>サブスク移行アプローチの対象リスト</b>になります。<span style="color:var(--muted)">（数字はDB更新で自動再計算）</span>
   </div>
 
-</div>
   <div class="sec"><span class="badge">C</span><h2>資格の昇降格</h2><span class="note">クルー・リーダー・メンター間／内部除外</span></div>
   <div class="grid g2">
     <div class="card"><div class="label" style="color:var(--pos);font-weight:800;font-size:14px;margin-bottom:8px">⬆ 昇格 <span id="dbm-up-total">—</span>件</div><div id="dbm-up-list" style="font-size:13px;line-height:2"></div></div>
     <div class="card"><div class="label" style="color:var(--neg);font-weight:800;font-size:14px;margin-bottom:8px">⬇ 降格 <span id="dbm-down-total">—</span>件</div><div id="dbm-down-list" style="font-size:13px;line-height:2"></div></div>
   </div>
 
-<div hidden data-hidden="D 配信ベース（MyASP到達）（2026/10/1 西村さん指示で非表示・会員数はA0のStripe決済基準のみ）">
   <div class="sec"><span class="badge">D</span><h2>本日現在の会員状況 <span style="font-size:12px;color:var(--warn);font-weight:700">※参考・非正（配信ベース）</span></h2><span class="note">MyASP到達会員（配信可能）737名の内訳／会員数の正はA=<span class="mbase">250</span></span></div>
   <div class="grid g5">
     <div class="card kpi accent-top">
@@ -303,7 +275,6 @@
     </div>
   </div>
 
-</div>
   <div class="sec"><span class="badge">E</span><h2>今月（9月）の動き</h2><span class="note">前月対比つき（MyASP断面）</span></div>
   <div class="grid g4">
     <div class="card kpi">
@@ -334,7 +305,7 @@
   </div>
 
   <div class="callout warn">
-    <b>"正"の定義（2026/9/30改定）：会員数の正＝Stripe決済基準（<span class="ms-total2">—</span>名・Aタブ冒頭のA0）。顧客DBの当残は参考（<span class="mbase">250</span>名・資格有効期限内の在籍・<span class="mbym">2026年7月</span>末）／課金の正＝Stripe決済（直近30日の実課金・人数と金額は⑥参照）。</b>この2つを意思決定の基準とします。<b>数字の最終判断は顧客DB＋Stripeに置きます。</b>
+    <b>"正"の定義：会員数の正＝顧客DB（<span class="mbase">250</span>名・資格有効期限内の在籍・<span class="mbym">2026年7月</span>末）／課金の正＝Stripe決済（直近30日の実課金・人数と金額は⑥参照）。</b>この2つを意思決定の基準とします。<b>数字の最終判断は顧客DB＋Stripeに置きます。</b>
   </div>
 
   <div class="sec"><span class="badge">F</span><h2>月次トレンド</h2><span class="note">純増減・新規入会・退会（2026年5〜7月）</span></div>
@@ -350,8 +321,7 @@
     <table>
       <thead><tr><th class="l">ソース</th><th>人数</th><th class="l">測っているもの</th><th class="l"><span class="mbase">250</span>との差の理由</th></tr></thead>
       <tbody>
-        <tr style="background:#eaf2ff;font-weight:700"><td class="l">A0 Stripe決済基準（会員数の正）</td><td class="mono"><b class="ms-total2">—</b></td><td class="l">顧客DB有効×Stripe課金（直近31日）＋年払い・分割</td><td class="l">見込み・関係者は別枠／Stripe解約済みは除外</td></tr>
-        <tr style="font-weight:700"><td class="l">A DBマスター基準（参考・旧正）</td><td class="mono"><b class="mbase">250</b></td><td class="l">資格有効期限内の在籍・当残</td><td class="l">— 基準</td></tr>
+        <tr style="background:#fff6e0;font-weight:700"><td class="l">A DBマスター基準（正）</td><td class="mono"><b class="mbase">250</b></td><td class="l">資格有効期限内の在籍・当残</td><td class="l">— 基準</td></tr>
         <tr><td class="l">B 顧客DB全体（一括＆ミコシー）</td><td class="mono"><b id="g-total">—</b></td><td class="l">一括・ミコシー含む全顧客</td><td class="l">＋<span id="g-diff2">—</span>（未移行分）</td></tr>
         <tr style="background:#fdf1e0;font-weight:700"><td class="l">└ 差異＝<b>未移行顧客</b></td><td class="mono"><b style="color:var(--warn)" id="g-diff">—</b></td><td class="l">まだサブスク会員に未移行</td><td class="l"><b>サブスク移行アプローチの対象</b></td></tr>
         <tr style="background:#eaf7f0;font-weight:700"><td class="l">⑥ Stripe実課金（課金の正）</td><td class="mono"><b id="g-stp-n">178</b></td><td class="l">直近30日に実際に課金（<span id="g-stp-amt">¥2,112,000</span>）</td><td class="l">課金の実態基準／年払い一括は別</td></tr>
@@ -1292,7 +1262,6 @@ const toppaRoutes={updated:'2026/10/01',reading:115,line:1,note:29,x:28,youtube:
 const dbmaster={updated:'2026/10/01',total:672,ranks:{mentor:165,leader:107,crew:378,sup:20,member:2},up:[{t:'リーダー→メンター',n:40},{t:'クルー→メンター',n:9},{t:'クルー→リーダー',n:8}],upTotal:57,down:[{t:'メンター→リーダー',n:14},{t:'リーダー→クルー',n:13},{t:'メンター→クルー',n:9}],downTotal:36,all:{total:1081,withdrawn:409,mentor:220,leader:182,crew:554,sup:103,member:22}};
 /*DBMASTER-END*/
 /*GAPLIST-START*/const gapList=[];/*GAPLIST-END*/
-/*MEMBERSTRIPE-START*/const memberStripe={"updated": "2026/10/01", "window": 31, "member": {"mentor": 87, "leader": 44, "crew": 49, "sup": 5, "total": 185}, "paid": {"mentor": 63, "leader": 30, "crew": 45, "sup": 0, "total": 138}, "annual": {"mentor": 24, "leader": 14, "crew": 4, "sup": 5, "total": 47}, "people": 176, "uncollected": {"mentor": 4, "leader": 0, "crew": 0, "sup": 0, "total": 4}, "prospect": {"mentor": 13, "leader": 7, "crew": 234, "sup": 0, "total": 254}, "pending": {"mentor": 0, "leader": 0, "crew": 1, "sup": 0, "total": 1}, "related": {"mentor": 16, "leader": 14, "crew": 1, "sup": 0, "total": 31}, "grant": {"mentor": 15, "leader": 14, "crew": 1, "sup": 0, "total": 30}, "check": {"mentor": 1, "leader": 0, "crew": 0, "sup": 0, "total": 1}, "excluded": {"mentor": 1, "leader": 1, "crew": 2, "sup": 0, "total": 4}, "db": {"mentor": 117, "leader": 66, "crew": 286, "sup": 5, "total": 474}};/*MEMBERSTRIPE-END*/
 /*MASTERDB-START*/const masterdb={updated:'2026/10/01',ym:'2026-09',base:473,prevBase:341,newTotal:205,quitTotal:73,ranks:{mentor:117,leader:65,crew:286,sup:5},quit:{mentor:15,leader:2,crew:56,sup:0},today:{date:'2026/10/01',base:474,ranks:{mentor:117,leader:66,crew:286,sup:5}}};/*MASTERDB-END*/
 /*MYASP-START*/const myaspList={total:737,mentor:43,leader:27,crew:664,sup:0};/*MYASP-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
@@ -2180,12 +2149,6 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
 }
 /* DBマスター（決定版）レンダリング */
 {const d=dbmaster,r=d.ranks,set=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
- if(d.all){const a=d.all,pa=n=>a.total?(n/a.total*100).toFixed(1)+'%':'—';
-  const sa=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
-  setTimeout(()=>{sa('dbm-total',a.total+'<span class="unit">名</span>');
-   sa('dbm-mentor',a.mentor);sa('dbm-leader',a.leader);sa('dbm-crew',a.crew);sa('dbm-sup',a.sup);sa('dbm-member',a.member);
-   sa('dbm-mentor-pct','構成比 '+pa(a.mentor));sa('dbm-leader-pct','構成比 '+pa(a.leader));sa('dbm-crew-pct','構成比 '+pa(a.crew));
-   sa('dbm-all-foot',`うち退会欄に記載あり ${a.withdrawn}名／なし ${a.total-a.withdrawn}名`);},0);}
  const pct=n=>d.total?(n/d.total*100).toFixed(1)+'%':'—';
  set('dbm-total',d.total+'<span class="unit">名</span>');set('dbm-total2',d.total);set('dbm-upd',d.updated);
  set('dbm-diff',d.total-masterdb.base);set('dbm-diffB',d.total);
@@ -2198,18 +2161,6 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  // 整合性タブ ⑦行
  set('dbm-upd2',d.updated);set('dbm-t2',d.total);set('dbm-m2',r.mentor);set('dbm-l2',r.leader);set('dbm-c2',r.crew);set('dbm-s2',r.sup);
 }
-/* A0 会員数の正（Stripe決済基準）レンダリング */
-if(memberStripe){const s=memberStripe,set=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
- const br=o=>`メンター${o.mentor}・リーダー${o.leader}・クルー${o.crew}${o.sup!=null?`・サポーター${o.sup}`:''}`;
- set('ms-upd',s.updated);set('ms-win',s.window);set('ms-total',s.member.total);
- document.querySelectorAll('.ms-total2').forEach(e=>e.textContent=s.member.total);
- set('ms-total-foot',`Stripe課金あり${s.paid.total}＋年払い・分割${s.annual.total}（資格ごとに数えた合計）${s.people!=null?`<br>実人数 <b>${s.people}</b>名（2つの資格を持つ方を1名で数えた人数）`:''}`);
- [['m','mentor'],['l','leader'],['c','crew'],['s','sup']].forEach(([k,r])=>{set('ms-'+k,s.member[r]);set('ms-'+k+'-foot',`課金あり${s.paid[r]}＋年払い・分割${s.annual[r]}`);});
- set('ms-unc',s.uncollected.total);
- set('ms-pro',s.prospect.total);set('ms-pro-foot',br(s.prospect)+(s.pending&&s.pending.total?`（うち無料期間明け・初回決済待ち${s.pending.total}）`:'')+'／課金開始で会員数へ');
- set('ms-rel',s.related.total);set('ms-rel-foot',`付与・関係者${s.grant.total}＋要確認${s.check.total}（${br(s.related)}）`);
- set('ms-exc',s.excluded.total);set('ms-exc-foot',br(s.excluded)+'／顧客DBの修正対象');
- set('ms-db',s.db.total);set('ms-db-foot',br(s.db)+'／＝会員数＋見込み＋関係者＋除外');}
 /* ②月次増減表（masterdb・会員数の正）レンダリング */
 {const m=masterdb,set=(id,v)=>{const e=$('#'+id);if(e)e.innerHTML=v;};
  const[yy,mm]=m.ym.split('-');const ymj=`${yy}年${+mm}月`;
@@ -2260,7 +2211,7 @@ if(memberStripe){const s=memberStripe,set=(id,v)=>{const e=$('#'+id);if(e)e.inne
   e.innerHTML=`前日比 <b class="${cls}">${t}</b>`;e.title=`前日（${p.date} 9時時点）との差`;};
  set('dd-a-base',c.base,p.base);set('dd-a-mentor',c.rM,p.rM);set('dd-a-leader',c.rL,p.rL);set('dd-a-crew',c.rC,p.rC);set('dd-a-sup',c.rS,p.rS);
  set('dd-t-base',c.tBase,p.tBase);set('dd-t-m',c.tM,p.tM);set('dd-t-l',c.tL,p.tL);set('dd-t-c',c.tC,p.tC);set('dd-t-s',c.tS,p.tS);
- set('dd-b-total',c.pT,p.pT);set('dd-b-mentor',c.pM,p.pM);set('dd-b-leader',c.pL,p.pL);set('dd-b-crew',c.pC,p.pC);set('dd-b-sup',c.pS,p.pS);}}
+ set('dd-b-total',c.bT,p.bT);set('dd-b-mentor',c.bM,p.bM);set('dd-b-leader',c.bL,p.bL);set('dd-b-crew',c.bC,p.bC);set('dd-b-sup',c.bS,p.bS);}}
 groupedBars($('#int-compare'),['メンター','リーダー','クルー','サポーター'],[
   {name:'MyASP',color:'#9aa4b2',data:[myaspList.mentor,myaspList.leader,myaspList.crew,myaspList.sup]},
   {name:'DBマスター',color:'#2f6fb0',data:[masterdb.ranks.mentor,masterdb.ranks.leader,masterdb.ranks.crew,masterdb.ranks.sup]},
