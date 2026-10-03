@@ -165,7 +165,7 @@
       <h1>PABLOS 会員ステータス司令塔</h1>
       <div class="sub">パブロス株式会社 ｜ 資格者データベース連動ダッシュボード</div>
     </div>
-    <div class="updated">データ最終更新<br><b id="upd">2026/10/02</b></div>
+    <div class="updated">データ最終更新<br><b id="upd">2026/10/03</b></div>
   </div>
   <nav class="tabs" id="tabs">
     <button data-t="home" class="active">ホーム</button>
@@ -214,7 +214,7 @@
     <div class="card kpi at-crew"><div class="label"><span class="dot b-crew"></span>クルー</div><div class="num" id="mb-today-c">—</div><div class="dd" id="dd-t-c"></div><div class="foot">本日時点</div></div>
     <div class="card kpi at-sup"><div class="label"><span class="dot b-sup"></span>サポーター</div><div class="num" id="mb-today-s">—</div><div class="dd" id="dd-t-s"></div><div class="foot">本日時点</div></div>
   </div>
-  <div class="callout"><b><span class="mbase">250</span>が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝<span class="mbase">250</span>名</b>（<span class="mbym">2026年7月</span>末基準・日次再集計）。上段が<b>月末確定の基準値</b>、下段の「本日時点」は<b>速報（毎朝9時更新・入退会と継続手続きを即日反映）</b>です。<span id="mb-gap-note"><b>基準<span class="mbase">250</span>との差<span id="mb-gap">28</span>名</b>は、<span id="mb-gap-from">8/1</span>以降に資格期限を迎えてまだ更新手続きが済んでいない方々です（継続手続きが反映されると翌朝の速報に戻ります）。</span></div>
+  <div class="callout"><b><span class="mbase">250</span>が基準の会員数です。</b>資格別月次増減表の<b>資格有効期限内に在籍するユニーク会員（当残）＝<span class="mbase">250</span>名</b>（<span class="mbym">2026年7月</span>末基準・日次再集計）。上段が<b>月末確定の基準値</b>、下段の「本日時点」は<b>速報（毎朝9時更新・入退会と継続手続きを即日反映）</b>です。<span id="mb-gap-note"><b>基準<span class="mbase">250</span>との差<span id="mb-gap">28</span>名</b>の内訳（2026/10/03 手動再集計）：<b>無料期間中（Stripe課金開始前）の突破Aiクルー 225名</b>＋<span id="mb-gap-from">8/1</span>以降に資格期限を迎えて未更新の方 5名。課金開始・継続手続きが反映されると速報に戻ります。</span></div>
   <div style="margin:8px 0 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
     <button id="gap-dl" style="padding:8px 14px;border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;font-weight:700;cursor:pointer">⬇ 未更新者リスト（名前・メール・資格）をExcel用にダウンロード</button>
     <a href="https://docs.google.com/spreadsheets/d/191fhWA6D_JAzlL0VdPiaDuWt-SBqr1F7bo48OSazpqc/edit#gid=1596284460" target="_blank" rel="noopener" style="padding:8px 14px;border:1px solid var(--pos);background:#fff;color:var(--pos);border-radius:8px;font-weight:700;text-decoration:none">📄 フル版（実名）を開く — ②シート「未更新者リスト」タブ</a>
@@ -1227,12 +1227,13 @@ const unpaid=[
 const toppaRoutes={updated:'2026/10/02',reading:113,line:1,note:28,x:29,youtube:0,kubota:0,pr:0,direct:98,facebook:5,akagawa:0,rokuga:2,ad:4,norec:6,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者286名（解約済み186名は除外・同一メールの重複2組を含む）。うちfree9記録あり280名＝reading 113・note 28・line 1・x 29・direct 98・facebook 5・rokuga 2・ad 4、未記録6名。MyASP MCP実測・毎朝自動更新。'};
 /*TOPPA-ROUTES-END*/
 /*TOPPA-UPSELL-START*/const toppaUpsell={"updated":"2026/10/02","hist":[{"d":"2026/09/02","c":126,"l":4,"m":5,"o":0},{"d":"2026/09/03","c":124,"l":4,"m":4,"o":0},{"d":"2026/09/04","c":119,"l":5,"m":3,"o":0},{"d":"2026/09/05","c":115,"l":5,"m":3,"o":0},{"d":"2026/09/06","c":109,"l":5,"m":3,"o":0},{"d":"2026/09/07","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/08","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/09","c":101,"l":5,"m":3,"o":0},{"d":"2026/09/10","c":97,"l":5,"m":3,"o":0},{"d":"2026/09/11","c":99,"l":4,"m":3,"o":0},{"d":"2026/09/12","c":104,"l":6,"m":3,"o":0},{"d":"2026/09/13","c":123,"l":6,"m":9,"o":0},{"d":"2026/09/14","c":131,"l":6,"m":12,"o":0},{"d":"2026/09/15","c":140,"l":6,"m":12,"o":0},{"d":"2026/09/16","c":154,"l":6,"m":13,"o":0},{"d":"2026/09/17","c":190,"l":8,"m":18,"o":0},{"d":"2026/09/18","c":202,"l":8,"m":18,"o":0},{"d":"2026/09/19","c":216,"l":9,"m":18,"o":0},{"d":"2026/09/20","c":218,"l":9,"m":18,"o":0},{"d":"2026/09/21","c":219,"l":9,"m":18,"o":0},{"d":"2026/09/22","c":224,"l":9,"m":19,"o":0},{"d":"2026/09/23","c":235,"l":9,"m":19,"o":0},{"d":"2026/09/24","c":238,"l":9,"m":18,"o":0},{"d":"2026/09/25","c":250,"l":9,"m":18,"o":0},{"d":"2026/09/26","c":251,"l":9,"m":17,"o":0},{"d":"2026/09/27","c":259,"l":9,"m":16,"o":0},{"d":"2026/09/28","c":255,"l":8,"m":13,"o":0},{"d":"2026/09/30","c":246,"l":7,"m":13,"o":0},{"d":"2026/10/01","c":244,"l":9,"m":13,"o":0},{"d":"2026/10/02","c":236,"l":9,"m":14,"o":0}]};/*TOPPA-UPSELL-END*/
-/*DAYSNAP-START*/const daySnap={"date":"2026/10/02","cur":{"base":466,"aM":43,"aL":27,"aC":620,"aS":0,"bT":669,"bM":165,"bL":107,"bC":375,"bS":20,"sM":244,"sC":244,"sA":2726100,"tBase":470,"tM":116,"tL":66,"tC":283,"tS":5,"rM":115,"rL":64,"rC":282,"rS":5,"sRM":84,"sRL":45,"sRC":55,"sRO":60,"pT":1084,"pM":220,"pL":183,"pC":556,"pS":103},"prev":{"base":473,"aM":43,"aL":27,"aC":664,"aS":0,"bT":672,"bM":165,"bL":107,"bC":378,"bS":20,"sM":241,"sC":241,"sA":2752500,"tBase":474,"tM":117,"tL":66,"tC":286,"tS":5,"rM":117,"rL":65,"rC":286,"rS":5,"sRM":84,"sRL":45,"sRC":55,"sRO":57,"pT":1081,"pM":220,"pL":182,"pC":554,"pS":103,"date":"2026/10/01"}};/*DAYSNAP-END*/
+/*DAYSNAP-START*/const daySnap={"date":"2026/10/02","cur":{"base":466,"aM":43,"aL":27,"aC":620,"aS":0,"bT":669,"bM":165,"bL":107,"bC":375,"bS":20,"sM":244,"sC":244,"sA":2726100,"tBase":236,"tM":113,"tL":63,"tC":55,"tS":5,"rM":115,"rL":64,"rC":282,"rS":5,"sRM":84,"sRL":45,"sRC":55,"sRO":60,"pT":1084,"pM":220,"pL":183,"pC":556,"pS":103},"prev":{"base":473,"aM":43,"aL":27,"aC":664,"aS":0,"bT":672,"bM":165,"bL":107,"bC":378,"bS":20,"sM":241,"sC":241,"sA":2752500,"tBase":null,"tM":null,"tL":null,"tC":null,"tS":null,"rM":117,"rL":65,"rC":286,"rS":5,"sRM":84,"sRL":45,"sRC":55,"sRO":57,"pT":1081,"pM":220,"pL":182,"pC":554,"pS":103,"date":"2026/10/01"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
 const dbmaster={updated:'2026/10/02',total:669,ranks:{mentor:165,leader:107,crew:375,sup:20,member:2},up:[{t:'リーダー→メンター',n:40},{t:'クルー→メンター',n:9},{t:'クルー→リーダー',n:8}],upTotal:57,down:[{t:'メンター→リーダー',n:14},{t:'リーダー→クルー',n:13},{t:'メンター→クルー',n:10}],downTotal:37,all:{total:1084,withdrawn:415,mentor:220,leader:183,crew:556,sup:103,member:22}};
 /*DBMASTER-END*/
 /*GAPLIST-START*/const gapList=[];/*GAPLIST-END*/
-/*MASTERDB-START*/const masterdb={updated:'2026/10/02',ym:'2026-09',base:466,prevBase:341,newTotal:199,quitTotal:74,ranks:{mentor:115,leader:64,crew:282,sup:5},quit:{mentor:16,leader:2,crew:56,sup:0},today:{date:'2026/10/02',base:470,ranks:{mentor:116,leader:66,crew:283,sup:5}}};/*MASTERDB-END*/
+/*MASTERDB-START*/const masterdb={updated:'2026/10/03',ym:'2026-09',base:466,prevBase:341,newTotal:199,quitTotal:74,ranks:{mentor:115,leader:64,crew:282,sup:5},quit:{mentor:16,leader:2,crew:56,sup:0},today:{date:'2026/10/03',base:236,ranks:{mentor:113,leader:63,crew:55,sup:5},note:'資格有効期限内かつ課金ベース（無料期間中の突破Aiクルー225名を除外・クルーはStripe実課金55名=10/2実測）'}};
+/* 2026/10/03 定義変更（西村さん指示）: マスターに記載があってもStripe決済が無い=無料期間の層は当残から除外する。クルーはStripe実課金数で計上。pipeline側も同ルールへの追随が必要 *//*MASTERDB-END*/
 /*MYASP-START*/const myaspList={total:693,mentor:43,leader:27,crew:620,sup:0};/*MYASP-END*/
 /* Sheet2: 顧客DBマスター（購入者・資格有効期限ベース）②月次増減表と同期・範囲はltMonths参照（masterdb-pipeline.pyが日次更新） */
 const ltMonths=['2024-06','2024-07','2024-08','2024-09','2024-10','2024-11','2024-12','2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07','2026-08','2026-09'];
@@ -1830,7 +1831,7 @@ document.querySelectorAll('#bc-views button').forEach(b=>b.onclick=()=>{
  set('lt-k-sup',m.ranks.sup);set('lt-k-sup-foot',`${+mm}月 退会${m.quit.sup}`);
  set('int2-date',m.ym.replace('-','/')+'末');set('int2-total',m.base);set('int2-m',m.ranks.mentor);set('int2-l',m.ranks.leader);set('int2-c',m.ranks.crew);set('int2-s',m.ranks.sup);
  set('cmp2-m',m.ranks.mentor);set('cmp2-l',m.ranks.leader);set('cmp2-c',m.ranks.crew);set('cmp2-s',m.ranks.sup);
- if(m.today){set('mb-today',m.today.base);set('mb-today-foot',m.today.date+' 時点・資格有効期限内の在籍');
+ if(m.today){set('mb-today',m.today.base);set('mb-today-foot',m.today.date+' 時点・'+(m.today.note||'資格有効期限内の在籍'));
   set('mb-today-m',m.today.ranks.mentor);set('mb-today-l',m.today.ranks.leader);set('mb-today-c',m.today.ranks.crew);set('mb-today-s',m.today.ranks.sup);
   const gap=m.base-m.today.base,gn=$('#mb-gap-note');
   if(gn){if(gap>0){set('mb-gap',gap);const nm=+mm===12?1:+mm+1;set('mb-gap-from',nm+'/1');}else{gn.style.display='none';}}}
