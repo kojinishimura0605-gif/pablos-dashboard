@@ -719,10 +719,19 @@
 
   <div class="sec"><span class="badge">B</span><h2>Stripe決済エラー（件数とご連絡）</h2><span class="note" id="pe-period">直近10日</span></div>
   <div class="srcbar">データ出典：Stripe決済（読み取り専用・前日まで）
-    <a class="src" id="pe-dl" href="#" target="_blank" rel="noopener">⬇ 連絡先リスト（氏名・メール）をダウンロード</a>
+    <a class="src" id="pe-dl" href="#" onclick="peGate();return false;">⬇ 連絡先リスト（氏名・メール）をダウンロード</a>
     <a class="src" id="pe-open" href="#" target="_blank" rel="noopener">📋 連絡先リストを開く</a>
     <a class="src" href="https://m.pablos.co.jp/member/" target="_blank" rel="noopener">✉ パブロスのマイスピーで開く</a>
     <span class="src">このページのメールはマスク表示。氏名・メールは連絡先リストで確認</span></div>
+  <div id="pe-gate" class="callout" style="display:none;font-size:12px">
+    <b>連絡先リストをダウンロード</b>：登録されているメールアドレスと合言葉を入れると、氏名・メールアドレスの入った一覧（CSV）が落ちます。合言葉は役員の方へ別にお伝えしているものです。
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="pe-mail" type="email" placeholder="メールアドレス" autocomplete="username" style="padding:6px 10px;border:1px solid #cfd6e2;border-radius:8px;font-size:13px;min-width:230px">
+      <input id="pe-pass" type="password" placeholder="合言葉" autocomplete="current-password" style="padding:6px 10px;border:1px solid #cfd6e2;border-radius:8px;font-size:13px;min-width:200px" onkeydown="if(event.key==='Enter')peUnlock();">
+      <a class="src" href="#" onclick="peUnlock();return false;">ダウンロード</a>
+      <span id="pe-gate-msg" style="color:var(--neg);font-weight:700"></span>
+    </div>
+  </div>
   <div class="grid g3">
     <div class="card kpi accent-top at-mentor"><div class="label">決済エラー（直近10日）</div><div class="num" style="color:var(--neg)" id="pe-ng">—</div><div class="foot" id="pe-ng-foot">—</div></div>
     <div class="card kpi accent-top"><div class="label">決済エラー率（直近10日）</div><div class="num" id="pe-rate">—</div><div class="foot" id="pe-rate-foot">—</div></div>
@@ -745,7 +754,7 @@
     </table>
   </div>
   <div class="callout warn" id="pe-callout">
-    <b>ご連絡の手順</b>：①「連絡先リスト（氏名・メール）をダウンロード」を押すと、お名前とメールアドレスの入った一覧がCSVで落ちます（スプレッドシートを共有されているGoogleアカウントでログインしている方だけが開けます。この表と同じ並びです）。②「パブロスのマイスピーで開く」から、メールアドレスで検索して、その方の登録状況とこれまでのやり取りを確認します。③「連絡文をコピー」で、日付・金額の入った文面のひな形をコピーします。<b>宛名・決済の内容（お客様向けの名称に直します）・更新の方法を書き直してから</b>お送りください。「新規」とある行は、お申し込みの途中のエラーなのか、無料期間が明けたあとの自動の決済のエラーなのかを、マイスピーで確かめてから文面を決めます。「ご確認」の行は、状況の確認が先のため、連絡文のボタンを出していません。<br>
+    <b>ご連絡の手順</b>：①「連絡先リスト（氏名・メール）をダウンロード」を押し、登録されているメールアドレスと合言葉を入れると、お名前とメールアドレスの入った一覧がCSVで落ちます（この表と同じ並びです。合言葉を知っている方だけが開けます）。②「パブロスのマイスピーで開く」から、メールアドレスで検索して、その方の登録状況とこれまでのやり取りを確認します。③「連絡文をコピー」で、日付・金額の入った文面のひな形をコピーします。<b>宛名・決済の内容（お客様向けの名称に直します）・更新の方法を書き直してから</b>お送りください。「新規」とある行は、お申し込みの途中のエラーなのか、無料期間が明けたあとの自動の決済のエラーなのかを、マイスピーで確かめてから文面を決めます。「ご確認」の行は、状況の確認が先のため、連絡文のボタンを出していません。<br>
     <b>区分</b>：<b>ご連絡</b>＝決済エラーのあとに、成功した決済が1件もない方です。<b>ご確認</b>＝別の金額の決済が成功している方です（プランの変更や、別の商品のお申し込みの可能性があります）。ご連絡の前に、状況をご確認ください。<br>
     <b>数え方</b>：決済エラー＝Stripeで結果が「失敗」になった決済です（同じ方の再試行も1件ずつ数えます）。人はメールアドレス単位で数え、同じStripeの顧客番号で決済しているメールは同じ方としてまとめます。エラー率は、お申し込みの途中の入力のやり直しと、自動の再試行を含みます。<span id="pe-callout-num"></span><br>
     <b>一覧から消えるとき</b>：同じ方・同じ金額の決済が成功すると、翌朝の更新で消えます。<b>エラーから60日を過ぎた行も消えます</b>（回収できたとは限りません）。銀行振込など、Stripe以外でお支払いいただいた分は反映されないため、行が残ります。連絡先リストは毎朝作り直しますので、「連絡済み」の記録は別の場所に残してください。「整合性チェック」タブのE（未決済者一覧）は、直近60日に同じメールの成功決済が1件もない方だけを出す別の数え方のため、人数が違います。
@@ -1268,7 +1277,7 @@ const unpaid=[
 ];
 /*UNPAID-END*/
 /*PAYERR-START*/
-const payErr={"updated":"2026/10/06","days":[{"d":"2026/09/26","att":15,"ok":13,"ng":2,"who":2,"rate":13.3},{"d":"2026/09/27","att":12,"ok":10,"ng":2,"who":2,"rate":16.7},{"d":"2026/09/28","att":15,"ok":14,"ng":1,"who":1,"rate":6.7},{"d":"2026/09/29","att":13,"ok":12,"ng":1,"who":1,"rate":7.7},{"d":"2026/09/30","att":30,"ok":29,"ng":1,"who":1,"rate":3.3},{"d":"2026/10/01","att":17,"ok":14,"ng":3,"who":3,"rate":17.6},{"d":"2026/10/02","att":12,"ok":9,"ng":3,"who":3,"rate":25.0},{"d":"2026/10/03","att":11,"ok":9,"ng":2,"who":2,"rate":18.2},{"d":"2026/10/04","att":27,"ok":23,"ng":4,"who":4,"rate":14.8},{"d":"2026/10/05","att":14,"ok":12,"ng":2,"who":2,"rate":14.3}],"sum10":{"att":166,"ok":145,"ng":21,"who":9,"rate":12.7,"frm":"2026/09/26","to":"2026/10/05"},"listDays":60,"listFrom":"2026/08/07","listTo":"2026/10/05","ngAll":71,"ngPeople":29,"recovered":23,"need":5,"check":1,"needAmt":56100,"checkAmt":126500,"sheetId":"191fhWA6D_JAzlL0VdPiaDuWt-SBqr1F7bo48OSazpqc","sheetGid":null,"rows":[{"k":"ご連絡","d":"2026/10/05 00:22","s":"新規　GPTs付_月会員初月無料　資格（クルー）","a":3300,"e":"m***@gmail.com","r":"残高・利用枠の不足","n":6,"later":""},{"k":"ご連絡","d":"2026/10/05 00:21","s":"新規入学月会員　資格（リーダー）","a":9900,"e":"s***@yahoo.co.jp","r":"残高・利用枠の不足","n":5,"later":""},{"k":"ご連絡","d":"2026/09/29 06:00","s":"突破Ai クルー（Stripe直販）","a":3300,"e":"l***@mac.com","r":"残高・利用枠の不足","n":1,"later":""},{"k":"ご連絡","d":"2026/09/16 00:54","s":"継続　第6期デジタル図書館パブロスメンター","a":19800,"e":"c***@gmail.com","r":"カード会社が拒否","n":17,"later":""},{"k":"ご連絡","d":"2026/08/26 17:40","s":"メンター会費202608","a":19800,"e":"k***@gmail.com","r":"カード会社が拒否","n":1,"later":""},{"k":"ご確認","d":"2026/08/08 13:50","s":"20260801.02_フォトリーディング・マスター講座","a":126500,"e":"0***@gmail.com","r":"カード会社が拒否","n":1,"later":"あり"}]};
+const payErr={"updated":"2026/10/06","days":[{"d":"2026/09/26","att":15,"ok":13,"ng":2,"who":2,"rate":13.3},{"d":"2026/09/27","att":12,"ok":10,"ng":2,"who":2,"rate":16.7},{"d":"2026/09/28","att":15,"ok":14,"ng":1,"who":1,"rate":6.7},{"d":"2026/09/29","att":13,"ok":12,"ng":1,"who":1,"rate":7.7},{"d":"2026/09/30","att":30,"ok":29,"ng":1,"who":1,"rate":3.3},{"d":"2026/10/01","att":17,"ok":14,"ng":3,"who":3,"rate":17.6},{"d":"2026/10/02","att":12,"ok":9,"ng":3,"who":3,"rate":25.0},{"d":"2026/10/03","att":11,"ok":9,"ng":2,"who":2,"rate":18.2},{"d":"2026/10/04","att":27,"ok":23,"ng":4,"who":4,"rate":14.8},{"d":"2026/10/05","att":14,"ok":12,"ng":2,"who":2,"rate":14.3}],"sum10":{"att":166,"ok":145,"ng":21,"who":9,"rate":12.7,"frm":"2026/09/26","to":"2026/10/05"},"listDays":60,"listFrom":"2026/08/07","listTo":"2026/10/05","ngAll":71,"ngPeople":29,"recovered":23,"need":5,"check":1,"needAmt":56100,"checkAmt":126500,"sheetId":"191fhWA6D_JAzlL0VdPiaDuWt-SBqr1F7bo48OSazpqc","sheetGid":null,"enc":null,"rows":[{"k":"ご連絡","d":"2026/10/05 00:22","s":"新規　GPTs付_月会員初月無料　資格（クルー）","a":3300,"e":"m***@gmail.com","r":"残高・利用枠の不足","n":6,"later":""},{"k":"ご連絡","d":"2026/10/05 00:21","s":"新規入学月会員　資格（リーダー）","a":9900,"e":"s***@yahoo.co.jp","r":"残高・利用枠の不足","n":5,"later":""},{"k":"ご連絡","d":"2026/09/29 06:00","s":"突破Ai クルー（Stripe直販）","a":3300,"e":"l***@mac.com","r":"残高・利用枠の不足","n":1,"later":""},{"k":"ご連絡","d":"2026/09/16 00:54","s":"継続　第6期デジタル図書館パブロスメンター","a":19800,"e":"c***@gmail.com","r":"カード会社が拒否","n":17,"later":""},{"k":"ご連絡","d":"2026/08/26 17:40","s":"メンター会費202608","a":19800,"e":"k***@gmail.com","r":"カード会社が拒否","n":1,"later":""},{"k":"ご確認","d":"2026/08/08 13:50","s":"20260801.02_フォトリーディング・マスター講座","a":126500,"e":"0***@gmail.com","r":"カード会社が拒否","n":1,"later":"あり"}]};
 /*PAYERR-END*/
 /*TOPPA-ROUTES-START*/
 const toppaRoutes={updated:'2026/10/06',reading:150,line:1,note:29,x:29,youtube:0,kubota:0,pr:0,direct:49,facebook:5,akagawa:0,rokuga:4,ad:4,norec:6,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者277名（解約済み205名は除外）。うちfree9記録あり271名＝reading 150・note 29・line 1・x 29・direct 49・facebook 5・rokuga 4・ad 4、未記録6名。MyASP MCP実測・毎朝自動更新。'};
@@ -1886,9 +1895,9 @@ if(typeof payErr!=='undefined'&&payErr&&payErr.days){const p=payErr,s=p.sum10,se
  set('pe-need',`${p.need+p.check}<span class="unit">名</span>`);set('pe-need-foot',`ご連絡 ${p.need}名（エラーになった金額の計 ${yen(p.needAmt)}）・ご確認 ${p.check}名（${yen(p.checkAmt)}）`);
  set('pe-list-note',`直近${p.listDays}日（${md(p.listFrom)}〜${md(p.listTo)}）・ご連絡 ${p.need}名／ご確認 ${p.check}名`);
  set('pe-callout-num',`直近${p.listDays}日の決済エラーは${p.ngAll}件・${p.ngPeople}名で、そのうち${p.recovered}名は回収済み、${p.need}名がご連絡、${p.check}名がご確認の対象です。`);
- const base=p.sheetId?`https://docs.google.com/spreadsheets/d/${p.sheetId}`:'',dl=$('#pe-dl'),op=$('#pe-open');
- if(base&&p.sheetGid!=null){if(dl)dl.href=`${base}/export?format=csv&gid=${p.sheetGid}`;if(op)op.href=`${base}/edit#gid=${p.sheetGid}`;}
- else{[dl,op].forEach(e=>{if(e)e.style.display='none';});const w=document.createElement('span');w.className='src';w.style.color='var(--neg)';w.textContent='連絡先リスト（氏名・メール）は準備中です：置き場のスプレッドシートの共有を「制限付き」にすると、翌朝からダウンロードできます';if(op&&op.parentNode)op.parentNode.insertBefore(w,op);}
+ const dl=$('#pe-dl'),op=$('#pe-open');
+ if(op){if(p.sheetId&&p.sheetGid!=null)op.href=`https://docs.google.com/spreadsheets/d/${p.sheetId}/edit#gid=${p.sheetGid}`;else op.style.display='none';}
+ if(dl&&!(p.enc&&p.enc.items&&p.enc.items.length)){dl.removeAttribute('onclick');dl.removeAttribute('href');dl.style.color='var(--muted)';dl.textContent='連絡先リスト（氏名・メール）は準備中です（合言葉の設定待ち）';}
  const td=$('#tbl-payerr-day tbody');
  if(td){td.innerHTML=p.days.slice().reverse().map(x=>`<tr><td class="l mono">${x.d}</td><td class="mono">${x.att}</td><td class="mono">${x.ok}</td><td class="mono">${x.ng?`<b>${x.ng}</b>`:0}</td><td class="mono">${x.who}</td><td class="mono">${pct(x.rate)}</td></tr>`).join('')
   +`<tr style="background:#eef4ff;font-weight:800"><td class="l">直近10日 計</td><td class="mono">${s.att}</td><td class="mono">${s.ok}</td><td class="mono">${s.ng}</td><td class="mono">${s.who}<div style="font-size:10px;font-weight:400;color:var(--muted)">同じ方は1名に数えます</div></td><td class="mono">${pct(s.rate)}</td></tr>`;}
@@ -1896,6 +1905,21 @@ if(typeof payErr!=='undefined'&&payErr&&payErr.days){const p=payErr,s=p.sum10,se
  if(tb){if(!p.rows.length)tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--pos)">ご連絡・ご確認が必要な方はいません（健全）</td></tr>';
   else tb.innerHTML=p.rows.map((u,i)=>`<tr><td><span class="pill ${u.k==='ご連絡'?'neg':''}"${u.k==='ご連絡'?'':' style="background:#fdf6ec;color:var(--warn)"'}>${escH(u.k)}</span></td><td class="l mono">${u.d}</td><td class="l" style="white-space:normal">${escH(u.s)}</td><td class="mono">${yen(u.a)}</td><td class="l mono" style="color:#6b7688">${escH(u.e)}</td><td>${escH(u.r)}</td><td class="mono">${u.n}</td><td style="white-space:nowrap">${u.k==='ご連絡'?`<a class="src" href="#" onclick="peCopy(${i},this);return false;">連絡文をコピー</a>`:'<span style="font-size:11px;color:var(--muted)">状況の確認が先</span>'}</td></tr>`).join('');}
 }
+function peGate(){const g=$('#pe-gate');if(!g)return;g.style.display=g.style.display==='none'?'block':'none';if(g.style.display==='block'){const m=$('#pe-mail');if(m)m.focus();}}
+async function peDecrypt(enc,mail,pass){const B=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0)),te=new TextEncoder();
+ const base=await crypto.subtle.importKey('raw',te.encode(mail.trim().toLowerCase()+'\n'+pass.trim().normalize('NFC')),'PBKDF2',false,['deriveKey']);
+ const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:B(enc.salt),iterations:enc.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+ for(const it of enc.items){try{return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:B(it.iv)},key,B(it.ct)));}catch(e){}}
+ return null;}
+async function peUnlock(){const msg=$('#pe-gate-msg'),mail=$('#pe-mail').value,pass=$('#pe-pass').value;
+ if(!mail.trim()||!pass.trim()){msg.textContent='メールアドレスと合言葉を入れてください';return;}
+ if(!(window.crypto&&crypto.subtle)){msg.textContent='このブラウザでは開けません（https のページで開いてください）';return;}
+ msg.style.color='var(--muted)';msg.textContent='確認しています…';
+ let t=null;try{t=await peDecrypt(payErr.enc,mail,pass);}catch(e){t=null;}
+ if(t==null){msg.style.color='var(--neg)';msg.textContent='メールアドレスか合言葉が違います';return;}
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+t],{type:'text/csv;charset=utf-8'}));a.download='決済エラー連絡先リスト_'+payErr.updated.replace(/\//g,'')+'.csv';
+ document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+ $('#pe-pass').value='';msg.style.color='var(--pos)';msg.textContent='ダウンロードしました';}
 function peCopy(i,el){const u=payErr.rows[i];if(!u)return;const dt=u.d.split(' ')[0].split('/');
  const t=['【送る前に：宛名・内容の名称・更新の方法を書き直し、この行を消します】','件名：【パブロス】お支払い方法のご確認のお願い','','（お名前）様','','パブロス事務局です。','',
   `下記のお支払いについて、${+dt[1]}月${+dt[2]}日の時点で、クレジットカードでの決済が完了しておりません。`,'',
