@@ -319,9 +319,14 @@ if (draft) {
     openLetter();
   }
 }
-if (/^#part[1-5]$/.test(location.hash) && letter.classList.contains("open")) {
-  document.querySelector(location.hash).scrollIntoView();
+// 目次から来た人は、手紙が開いて画面が組み上がってから、その部まで進める
+function goToPart(){
+  if (/^#part[1-5]$/.test(location.hash) && letter.classList.contains("open")) {
+    document.querySelector(location.hash).scrollIntoView();
+  }
 }
+window.addEventListener("load", () => setTimeout(goToPart, 300));
+window.addEventListener("hashchange", goToPart);
 </script>
 </body>
 </html>
