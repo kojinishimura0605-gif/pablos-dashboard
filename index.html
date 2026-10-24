@@ -660,7 +660,7 @@
     <!--TOPPA-INFLOW-END-->
   </div>
 
-  <div class="sec"><span class="badge">A2</span><h2>流入経路別（free9）</h2><span class="note">MyASP読者項目 free9＝reading／line／note／x／youtube／kubota／pr／direct／facebook／akagawa／rokuga／ad（＋未記録）｜※構成比の分母は未記録を含む有効購読者の合計です。実数・更新日・記録ありの内訳は下のカード群と注記（毎朝自動更新）をご覧ください</span></div>
+  <div class="sec"><span class="badge">A2</span><h2>流入経路別（free9・旧シナリオ「突破Aiクルー」）</h2><span class="note">MyASP読者項目 free9＝reading／line／note／x／youtube／kubota／pr／direct／facebook／akagawa／rokuga／ad（＋未記録）｜※構成比の分母は未記録を含む有効購読者の合計です。実数・更新日・記録ありの内訳は下のカード群と注記（毎朝自動更新）をご覧ください</span></div>
   <div class="grid g4" id="toppa-routes-cards">
     <div class="card kpi accent-top"><div class="label">📖 reading（読書会）</div><div class="num" id="tr-reading">—</div><div class="foot">free9=reading</div></div>
     <div class="card kpi accent-top at-crew"><div class="label">💬 line（LINE）</div><div class="num" id="tr-line">—</div><div class="foot">free9=line</div></div>
@@ -686,6 +686,19 @@
 
   <div class="callout">
     <b>ファネル設計士メモ：</b>7月はクルー入会21名のうち突破Aiクルーが12名（約57%）、8月はさらに集中が進み、クルー流入の大半がこの導線経由です（実数は上のカード参照）。<b>単一チャネルへの依存度が高い</b>状態は良い兆しである一方、この流入が細ると全体純増も鈍化します。突破Aiクルー→クルー→リーダー／メンターへ引き上げる<b>ベルトコンベア（100日設計）</b>を敷いて、単発の山を常設の流れに変えるのが次の設計テーマです。
+  </div>
+
+  <div class="sec"><span class="badge" style="width:auto;padding:0 7px;white-space:nowrap">A2-2</span><h2>新しい申込ページ（10/23〜・14日間無料）経路別</h2><span class="note">申込ページ entry-14days（14日間無料）からの登録。登録先はMyASPシナリオ「神田昌典 突破Ai｜新規・14日間無料」で、URLの free9 がそのまま流入経路として記録されます｜2026/10/23 0:00以降・人単位（メールでユニーク化）・<b>合計は解除した方も含む登録者数</b>・試験の登録は除外｜上のA2（旧シナリオ「突破Aiクルー」の有効購読者）とは別に数えており、合算はしません（毎朝9:15の便で自動更新）</span></div>
+  <div class="grid g4" id="entry14-cards">
+    <div class="card kpi accent-top at-mentor"><div class="label">🆕 合計（10/23〜）</div><div class="num" id="e14-total">—</div><div class="foot" id="e14-total-foot">解除した方を含む登録者数</div></div>
+    <div class="card kpi accent-top"><div class="label">📖 reading（読書会）</div><div class="num" id="e14-reading">—</div><div class="foot">free9=reading</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label">🌲 forest（フォレスト）</div><div class="num" id="e14-forest">—</div><div class="foot">free9=forest</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label">➡️ direct（ダイレクト）</div><div class="num" id="e14-direct">—</div><div class="foot">free9=direct（印なし・URL直アクセス等）</div></div>
+    <div class="card kpi accent-top"><div class="label">🧩 その他</div><div class="num" id="e14-other">—</div><div class="foot">上記以外の経路と未記録（内訳は下の注記）</div></div>
+  </div>
+  <div class="callout" id="entry14-days" style="margin-top:10px">直近7日の登録（暦日・0件の日も表示・当日は集計時刻まで）：—</div>
+  <div class="callout" id="entry14-note" style="margin-top:10px">
+    <b>実測 7名</b>（free9集計・更新 2026/10/24 18:00）。集計対象はシナリオ「神田昌典 突破Ai｜新規・14日間無料」の10/23 0時以降の登録7名。合計は解除した方も含む登録者数で、うち登録中7名・登録中以外（解除など）0名です。経路（free9）の内訳＝forest 7。最終登録 10/23 12:53。試験の登録（経路がtest、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録（動作確認や既存会員の振り分けなど）は数に入りません。A2の「forest（カード外）」は旧シナリオの有効購読者の数で、この欄のforestとは別の数です。MyASP MCP実測・18:00集計（毎朝9:15の便で自動更新）。
   </div>
 
   <div class="sec"><span class="badge">A3</span><h2>アップセル人数（リーダー／メンター）</h2><span class="note">標準＝クルー。上位プランを選んだ人数の実測｜Stripe無料期間中（課金開始前・顧客ユニーク・全資格）＝課金判定日カレンダーと同一母集団・毎朝自動更新</span></div>
@@ -1290,6 +1303,9 @@ const payErr={"updated":"2026/10/24","days":[{"d":"2026/10/14","att":11,"ok":11,
 /*TOPPA-ROUTES-START*/
 const toppaRoutes={updated:'2026/10/24',reading:149,line:1,note:28,x:32,youtube:0,kubota:0,pr:0,direct:47,facebook:8,akagawa:0,rokuga:3,ad:3,norec:6,detail:'集計対象はシナリオ「突破Aiクルー」の有効購読者391名（解約済み238名は除外・同一メールの重複1組を含む）。うちfree9記録あり385名＝reading 149・note 28・line 1・x 32・direct 47・facebook 8・rokuga 3・ad 3・その他 forest 114（カード外）、未記録6名。MyASP MCP実測・毎朝自動更新。'};
 /*TOPPA-ROUTES-END*/
+/*ENTRY14-START*/
+const entry14={updated:'2026/10/24',total:7,reading:0,forest:7,direct:0,other:0,active:7,cancelled:0,at:'18:00',days:[{d:'10/23',n:7,reading:0,cum:7},{d:'10/24',n:0,reading:0,cum:7}],detail:"集計対象はシナリオ「神田昌典 突破Ai｜新規・14日間無料」の10/23 0時以降の登録7名。合計は解除した方も含む登録者数で、うち登録中7名・登録中以外（解除など）0名です。経路（free9）の内訳＝forest 7。最終登録 10/23 12:53。試験の登録（経路がtest、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録（動作確認や既存会員の振り分けなど）は数に入りません。A2の「forest（カード外）」は旧シナリオの有効購読者の数で、この欄のforestとは別の数です。MyASP MCP実測・18:00集計（毎朝9:15の便で自動更新）。"};
+/*ENTRY14-END*/
 /*TOPPA-UPSELL-START*/const toppaUpsell={"updated":"2026/10/24","hist":[{"d":"2026/09/02","c":126,"l":4,"m":5,"o":0},{"d":"2026/09/03","c":124,"l":4,"m":4,"o":0},{"d":"2026/09/04","c":119,"l":5,"m":3,"o":0},{"d":"2026/09/05","c":115,"l":5,"m":3,"o":0},{"d":"2026/09/06","c":109,"l":5,"m":3,"o":0},{"d":"2026/09/07","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/08","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/09","c":101,"l":5,"m":3,"o":0},{"d":"2026/09/10","c":97,"l":5,"m":3,"o":0},{"d":"2026/09/11","c":99,"l":4,"m":3,"o":0},{"d":"2026/09/12","c":104,"l":6,"m":3,"o":0},{"d":"2026/09/13","c":123,"l":6,"m":9,"o":0},{"d":"2026/09/14","c":131,"l":6,"m":12,"o":0},{"d":"2026/09/15","c":140,"l":6,"m":12,"o":0},{"d":"2026/09/16","c":154,"l":6,"m":13,"o":0},{"d":"2026/09/17","c":190,"l":8,"m":18,"o":0},{"d":"2026/09/18","c":202,"l":8,"m":18,"o":0},{"d":"2026/09/19","c":216,"l":9,"m":18,"o":0},{"d":"2026/09/20","c":218,"l":9,"m":18,"o":0},{"d":"2026/09/21","c":219,"l":9,"m":18,"o":0},{"d":"2026/09/22","c":224,"l":9,"m":19,"o":0},{"d":"2026/09/23","c":235,"l":9,"m":19,"o":0},{"d":"2026/09/24","c":238,"l":9,"m":18,"o":0},{"d":"2026/09/25","c":250,"l":9,"m":18,"o":0},{"d":"2026/09/26","c":251,"l":9,"m":17,"o":0},{"d":"2026/09/27","c":259,"l":9,"m":16,"o":0},{"d":"2026/09/28","c":255,"l":8,"m":13,"o":0},{"d":"2026/09/30","c":246,"l":7,"m":13,"o":0},{"d":"2026/10/01","c":244,"l":9,"m":13,"o":0},{"d":"2026/10/02","c":236,"l":9,"m":14,"o":0},{"d":"2026/10/04","c":226,"l":8,"m":12,"o":0},{"d":"2026/10/05","c":209,"l":8,"m":12,"o":0},{"d":"2026/10/06","c":199,"l":8,"m":12,"o":0},{"d":"2026/10/07","c":201,"l":8,"m":12,"o":0},{"d":"2026/10/08","c":193,"l":9,"m":12,"o":0},{"d":"2026/10/09","c":190,"l":9,"m":12,"o":0},{"d":"2026/10/10","c":188,"l":9,"m":11,"o":0},{"d":"2026/10/11","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/12","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/13","c":186,"l":9,"m":11,"o":0},{"d":"2026/10/14","c":187,"l":9,"m":10,"o":0},{"d":"2026/10/15","c":187,"l":9,"m":10,"o":0},{"d":"2026/10/16","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/17","c":196,"l":9,"m":11,"o":0},{"d":"2026/10/18","c":202,"l":9,"m":11,"o":0},{"d":"2026/10/19","c":211,"l":9,"m":11,"o":0},{"d":"2026/10/20","c":214,"l":9,"m":10,"o":0},{"d":"2026/10/21","c":229,"l":9,"m":10,"o":0},{"d":"2026/10/22","c":248,"l":8,"m":12,"o":0},{"d":"2026/10/23","c":299,"l":9,"m":15,"o":0},{"d":"2026/10/24","c":296,"l":8,"m":15,"o":0}]};/*TOPPA-UPSELL-END*/
 /*DAYSNAP-START*/const daySnap={"date":"2026/10/24","cur":{"base":429,"aM":58,"aL":27,"aC":787,"aS":0,"bT":784,"bM":178,"bL":108,"bC":477,"bS":19,"sM":273,"sC":273,"sA":2739000,"tBase":594,"tM":130,"tL":68,"tC":391,"tS":5,"rM":113,"rL":64,"rC":247,"rS":5,"sRM":86,"sRL":45,"sRC":52,"sRO":90,"pT":1247,"pM":240,"pL":183,"pC":700,"pS":102},"prev":{"base":431,"aM":58,"aL":27,"aC":739,"aS":0,"bT":787,"bM":178,"bL":109,"bC":479,"bS":19,"sM":272,"sC":273,"sA":2772000,"tBase":596,"tM":129,"tL":69,"tC":393,"tS":5,"rM":112,"rL":65,"rC":249,"rS":5,"sRM":87,"sRL":45,"sRC":52,"sRO":88,"pT":1247,"pM":240,"pL":183,"pC":700,"pS":102,"date":"2026/10/23"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
@@ -2198,6 +2214,25 @@ if(toppaRoutes){
   });
   const note=document.getElementById('toppa-routes-note');
   if(note)note.innerHTML=`<b>実測 ${tot}名</b>（free9集計・更新 ${toppaRoutes.updated||'—'}）。構成比は流入合計に対する割合です。${toppaRoutes.detail||''}`;
+}
+// 新しい申込ページ（entry-14days）経路別 — entry14に実測が入ると描画
+if(entry14){
+  const tot=entry14.total||0;
+  ['reading','forest','direct','other'].forEach(k=>{
+    const v=entry14[k]||0;
+    const el=document.getElementById('e14-'+k);
+    if(el)el.innerHTML=`${v}<span class="unit">名</span> <span style="font-size:11px;color:var(--muted)">(${tot?Math.round(v/tot*100):0}%)</span>`;
+  });
+  const t=document.getElementById('e14-total');
+  if(t)t.innerHTML=`${tot}<span class="unit">名</span>`;
+  const tf=document.getElementById('e14-total-foot');
+  if(tf)tf.textContent=`解除した方を含む登録者数（登録中${entry14.active}名・登録中以外${entry14.cancelled}名）`;
+  const dd=document.getElementById('entry14-days');
+  if(dd)dd.innerHTML='<b>直近7日の登録（暦日・0件の日も表示・当日は集計時刻まで）：</b>'+((entry14.days||[]).length?entry14.days.map(x=>`${x.d} ${x.n}名（うちreading ${x.reading}・累計${x.cum}）`).join('／'):'まだありません')+'<br><span style="font-size:11px;color:var(--muted)">readingは読書会でご案内するURL（free9=reading）からの登録です。読書会からの流入を追うため、日別に別掲しています。</span>';
+  const note=document.getElementById('entry14-note');
+  if(note)note.textContent='';
+  if(note){const b=document.createElement('b');b.textContent=`実測 ${tot}名`;note.appendChild(b);
+    note.appendChild(document.createTextNode(`（free9集計・更新 ${entry14.updated||'—'} ${entry14.at||''}）。構成比は合計に対する割合です。${entry14.detail||''}`));}
 }
 // 突破Ai アップセル人数（クルー/リーダー/メンター）— toppaUpsell.histに日次実測が貯まると描画
 if(typeof toppaUpsell!=='undefined'&&toppaUpsell.hist&&toppaUpsell.hist.length){
