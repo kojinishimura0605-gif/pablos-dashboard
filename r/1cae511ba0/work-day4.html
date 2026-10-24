@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最初の一手は、紙一枚で決まります｜FanShift</title>
+<!-- FanShift 5日間ローンチ 4日目ワーク（ドラフト）。器: TEMPLATES/5day-work-launch/work-page.html
+     入力内容は送信も保存もしない。{{ }} は未確定（会の名前・金額・URL・日付） -->
+<style>
+  :root{--bg:#ffffff;--ink:#1d2f4f;--sub:#55627a;--line:#d8dee8;--accent:#c9561e;--accent-soft:#fbeee6;--box:#f3f6fa;--navy:#1d2f4f;--on-accent:#ffffff}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#12161d;--ink:#e8edf5;--sub:#a9b3c4;--line:#2d3544;--accent:#f08a52;--accent-soft:#2c1f17;--box:#1a202a;--navy:#e8edf5;--on-accent:#1a1209}}
+  :root[data-theme="dark"]{--bg:#12161d;--ink:#e8edf5;--sub:#a9b3c4;--line:#2d3544;--accent:#f08a52;--accent-soft:#2c1f17;--box:#1a202a;--navy:#e8edf5;--on-accent:#1a1209}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Meiryo UI","Meiryo",sans-serif;line-height:1.9;font-size:17px}
+  main{max-width:640px;margin:0 auto;padding:40px 16px 80px}
+  .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+  h1{font-size:28px;line-height:1.45;margin:4px 0 12px;color:var(--navy)}
+  h2{font-size:21px;line-height:1.5;margin:48px 0 12px;padding-left:12px;border-left:4px solid var(--accent);color:var(--navy)}
+  p{margin:0 0 1em}
+  .lead{color:var(--sub)}
+  .note{background:var(--box);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:15px}
+  .note a{color:var(--accent)}
+  .sample{border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0;background:var(--box)}
+  .sample dt{font-size:13px;color:var(--sub)} .sample dd{margin:0 0 8px;font-weight:600}
+  .field{border:1px solid var(--line);border-radius:10px;padding:16px;margin:16px 0}
+  .field .num{font-size:13px;color:var(--accent);font-weight:700}
+  .field label{display:block;font-weight:700;margin:2px 0 8px}
+  .field textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit;background:var(--bg);color:var(--ink)}
+  details{margin-top:8px;font-size:15px;color:var(--sub)} summary{cursor:pointer;color:var(--accent)}
+  ul.plain{padding-left:1.2em;margin:0 0 1em}
+  .btn{display:block;width:100%;text-align:center;padding:16px;border-radius:10px;border:0;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;text-decoration:none;cursor:pointer;margin:16px 0}
+  .btn.ghost{background:var(--accent-soft);color:var(--accent)}
+  .deadline{border:2px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:15px}
+  .sign{text-align:right;margin-top:40px}
+  #printSheet{display:none}
+  @media print{body{background:#fff;color:#000}main{display:none}#printSheet{display:block;padding:24px;font-size:14px}#printSheet h1{font-size:20px}#printSheet .row{border-bottom:1px solid #999;padding:10px 0}#printSheet .q{font-weight:700}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">FANSHIFT ・ 5日間ワーク 4日目</div>
+  <h1>最初の一手は、<br>紙一枚で決まります</h1>
+  <p class="lead">書くのは5分です。<br>昨日の紙（三行）を横に置いてください。<br>このページで、最初の一手を紙一枚に書きます。90日後の確かめ方も決めます。</p>
+
+  <p class="note">昨日の三行をまだ書いていない方は、先にこちらをどうぞ（5分）。<a href="work-day3.html">自社のファンシフトは三行で決まります</a><br>三行がまだの方も、このまま読めます。</p>
+
+  <h2>「施策」と聞いて、何を思い浮かべましたか</h2>
+  <p>ポイント倍、限定クーポン、ランク特典。</p>
+  <p>そう思うのは自然なことです。ただ、その発想のままだと、お礼の手紙や先行体験会の価値まで、売上だけで判断してしまいます。値引き以外のCRMを評価しにくくなるのは、そのためです。</p>
+  <p>このページで決める一手は、紙一枚です。値引きも、新しいツールも使いません。</p>
+
+  <h2>買ってくださることと、応援してくださることは、別の話です</h2>
+  <p>毎月定期で届いているのに、一度も返信のないお客様がいます。一方で、年に2回しか買わないのに、毎回だれかを紹介してくださるお客様もいます。</p>
+  <p>では、何を見ればいいのか。そのお客様が、実際に何をしているかです。頼んでいないのに返信をくれる。レビューに使い方の工夫を書いてくれる。知り合いにすすめてくれている。</p>
+  <p>こうした行動の中に、値引きではない一手の入口があります。</p>
+
+  <h2>紙一枚に書くのは、三つだけです</h2>
+  <ul class="plain">
+    <li><strong>誰に</strong>（昨日の条件と応援の行動が重なる方を、まず数人）</li>
+    <li><strong>何を渡すか</strong>（割引ではないもの）</li>
+    <li><strong>いつ確かめるか</strong>（90日後に、何を数えるか）</li>
+  </ul>
+  <p>たとえば、こんな紙一枚です。<strong>書き方の見本として作った例で、実在の会社ではありません。</strong></p>
+  <dl class="sample">
+    <dt>誰に</dt><dd>過去12か月で6回以上購入し、頼んでいないのにお礼の返信をくださった方（12人）</dd>
+    <dt>何を渡すか</dt><dd>「続けてくださっている理由」を伺う一筆と、新商品の先行試食へのご招待</dd>
+    <dt>いつ確かめるか</dt><dd>90日後、その日に条件を満たしている優良顧客のうち、紹介・自発的な反応・推奨のいずれかがあった人数（対象人数も併記）。このうち、今回の一手で伺ったことへのお返事は、別に記録しておく</dd>
+  </dl>
+  <p>お渡しするものの形は、次の三つのどれかから選ぶと決めやすくなります。</p>
+  <ul class="plain">
+    <li>続けてくださっている理由を伺う、短いメッセージ</li>
+    <li>購入の履歴を踏まえたお礼や、使い方のご提案</li>
+    <li>先行体験・試食・企画へのご招待</li>
+  </ul>
+
+  <h2>「何を渡すか」の決め方</h2>
+  <p>三つのうちで手が止まるのは、「何を渡すか」です。決め方を三つお伝えします。</p>
+  <p><strong>一つ目。割引から考えないこと。</strong>割引をお渡しする会社は、値引きを待たれます。特別扱いは、特典の大きさではありません。「私のことを分かってくれている」という実感です。</p>
+  <p><strong>二つ目。最初は小さく。けれども、見ている先は小さくしないこと。</strong>最初は数人で構いません。ただ、ベルトコンベア理論で言えば、1名の熱中者が、100名の推し活を生む、と私は考えています。その一人目を、ここで見つけにいきます。</p>
+  <p><strong>三つ目。仮で出して、お客様の言葉で確かめること。</strong>違ったら、お渡しするものを変えればいいのです。CRMは、頭の中では完成しません。</p>
+
+  <h2>90日後の確かめ方　ファンシフト率</h2>
+  <p class="sample"><strong>ファンシフト率 ＝ 応援行動を確認できた優良顧客数 ÷ 対象の優良顧客数 × 100</strong><br>対象は、集計した日に条件を満たしている優良顧客。その方の直近90日間に、紹介・自発的な反応・推奨のいずれかがあったかを見ます。同じ方が複数の行動をしても、1人として数えます。</p>
+  <ul class="plain">
+    <li>開封・クリック・購入だけでは数えません</li>
+    <li>対象の人数も必ず一緒に書きます（例：12人中4人）</li>
+    <li>この率だけで、関係が深まった理由を決めつけません。継続率やLTVも一緒に見ます</li>
+    <li>最初の一手で伺ったことへのお返事は、別に記録しておきます。一手の手応えと、もともとの応援を分けて見られます</li>
+  </ul>
+  <p>FanShiftで提案している運用の指標で、業界共通の標準ではありません。まず自社の今の値を知り、同じ条件で変化を見ていきます。</p>
+
+  <h2>あなたの紙一枚（書くのは5分）</h2>
+  <p>昨日の三行を見ながら書いてください。きれいに書かなくて構いません。単語だけでも構いません。</p>
+  <div id="fields"></div>
+  <p>仮で構いません。お渡しするものも、確かめ方も、何度でも書き直せます。</p>
+  <p class="note">このページは、書いた内容を保存しません。お客様の個人情報は入れないでください。書き終えたら紙に写すか、下のボタンで印刷してください。</p>
+  <button class="btn ghost" type="button" onclick="printSheet()">書いた内容を印刷する</button>
+
+  <h2>この紙を、お客様に何と言ってお渡しするのか</h2>
+  <p>紙一枚が書けると、次に必ず一つ迷いが出ます。「このお客様に、何と言って伺えばいいのか」。</p>
+  <p>紹介をお願いする前に、応援したくなった理由を伺う。私は、最初に伺う言葉を決めています。その中身は、手紙の第三部に書きました。</p>
+
+  <h2>この紙を、一周させる場所</h2>
+  <p>ここまでで、あなたの机の上には、三人のお客様と、物差しと呼び名と、最初の一手があります。見つける・届ける・育てる。この一周を90日で回す場所が、{{会の名前}}です。</p>
+  <p>{{会の名前}}に入っていただくと、迷ったときに質問BOXに書いていただけます。私が読んで、私が答えます。今日の紙一枚も送っていただけます（お客様のお名前や連絡先は消してから送ってください）。</p>
+  <p>どんな場所で、何が手に入るのかは、手紙に書きました。手紙は、3分の動画を最後まで観ると、その下に出てきます。</p>
+  <p class="deadline">今回のご案内は5日間だけです。{{締切日}} 23:59を過ぎると、三つがなくなります。お試し。参加された方全員への特典。そして、今回だけの月額。</p>
+  <a class="btn" href="./">3分の動画と手紙を見る</a>
+  <p class="lead">動画を最後まで観ると、その下に手紙が出てきます。</p>
+
+  <h2>最終日の朝は</h2>
+  <p>5日目（最終日）の朝のメールで、一つだけお話しします。これまでファン化の取り組みが続かなかった理由です。担当者の熱意の話ではありません。</p>
+  <p>今日の紙は、捨てずに置いておいてください。</p>
+  <p class="sign">株式会社ルーチェ　西村公児</p>
+</main>
+
+<div id="printSheet"></div>
+
+<script>
+const PAGE = {
+  sheetTitle: "最初の一手（FanShift 4日目）",
+  fields: [
+    { label: "誰に　お届けしますか？",
+      hint: "昨日の一行目（優良顧客の条件）と二行目（応援の行動）が重なる方を、まず数人。人数も書いてください" },
+    { label: "何を　お渡ししますか？",
+      hint: "割引以外で。「続けてくださっている理由を伺う短いメッセージ」「購入履歴を踏まえたお礼や使い方のご提案」「先行体験・試食・企画へのご招待」のどれか一つの形で。昨日の三行目の呼び名で呼びかけます" },
+    { label: "いつ　確かめますか？",
+      hint: "90日後の日付と、数えるもの（例：その日に条件を満たす優良顧客のうち、紹介・自発的な反応・推奨のいずれかがあった人数）。ファンシフト率は人数と一緒に書き、一手で伺ったことへのお返事は別に記録します" }
+  ]
+};
+const box = document.getElementById("fields");
+PAGE.fields.forEach((f, i) => {
+  const el = document.createElement("div");
+  el.className = "field";
+  el.innerHTML = '<div class="num">' + (PAGE.nums || ["質問1","質問2","質問3","質問4"])[i] + '</div><label for="f' + i + '"></label><textarea id="f' + i + '" autocomplete="off"></textarea><details><summary>思いつかない時のヒント</summary><p></p></details>';
+  el.querySelector("label").textContent = f.label;
+  el.querySelector("details p").textContent = f.hint;
+  box.appendChild(el);
+});
+function buildSheet(){
+  const s = document.getElementById("printSheet");
+  s.innerHTML = "";
+  const h = document.createElement("h1"); h.textContent = PAGE.sheetTitle; s.appendChild(h);
+  PAGE.fields.forEach((f, i) => {
+    const row = document.createElement("div"); row.className = "row";
+    const q = document.createElement("div"); q.className = "q"; q.textContent = f.label;
+    const a = document.createElement("div"); a.style.whiteSpace = "pre-wrap"; a.textContent = document.getElementById("f" + i).value || "　";
+    row.append(q, a); s.appendChild(row);
+  });
+}
+function printSheet(){ buildSheet(); window.print(); }
+window.addEventListener("beforeprint", buildSheet);
+</script>
+</body>
+</html>
