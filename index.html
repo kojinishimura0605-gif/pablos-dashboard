@@ -705,6 +705,19 @@
     <b>実測 14名</b>（free9集計・更新 2026/11/10 09:27）。集計対象はシナリオ「神田昌典 突破Ai｜新規・14日間無料」の10/23 0時以降の登録14名。合計は解除した方も含む登録者数で、うち登録中13名・登録中以外（解除など）1名です。経路（free9）の内訳＝forest 7・未記録 5・direct 1・x 1。最終登録 10/26 16:30。試験の登録（経路がtest、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録（動作確認や既存会員の振り分けなど）は数に入りません。A2の「forest（カード外）」は旧シナリオの有効購読者の数で、この欄のforestとは別の数です。MyASP MCP実測・09:27集計（毎朝9:15の便で自動更新）。
   </div>
 
+  <div class="sec"><span class="badge" style="width:auto;padding:0 7px;white-space:nowrap">A2-3</span><h2>未来地図 読者特典の登録（新旧の未来地図LPの合計）経路別</h2><span class="note">未来地図の読者特典LP（pablos-campus.jp/mk/FUTUREMAPPING/ と以前の未来地図LP）からの登録。登録先はMyASPシナリオ「① 未来地図｜参加前・7日間メール案内」で、URLの free9 がそのまま流入経路として記録されます（新旧のLPは同じフォームのため、LPごとには分けられません）｜人単位（メールでユニーク化）・<b>合計は登録中以外の方も含む登録者数</b>・試験の登録は除外・大文字小文字はまとめ、fb は Facebook として数えます｜A2・A2-2とは別のシナリオで、合算はしません（毎朝9:15の便で自動更新）</span></div>
+  <div class="grid g4" id="futuremap-cards">
+    <div class="card kpi accent-top at-mentor"><div class="label">🗺️ 合計</div><div class="num" id="fm-total">—</div><div class="foot" id="fm-total-foot">登録中以外の方も含む登録者数</div></div>
+    <div class="card kpi accent-top"><div class="label">𝕏 X</div><div class="num" id="fm-x">—</div><div class="foot">free9=X</div></div>
+    <div class="card kpi accent-top at-crew"><div class="label">💬 LINE</div><div class="num" id="fm-line">—</div><div class="foot">free9=LINE</div></div>
+    <div class="card kpi accent-top at-leader"><div class="label">📖 reading（書籍）</div><div class="num" id="fm-reading">—</div><div class="foot">free9=reading</div></div>
+    <div class="card kpi accent-top"><div class="label">🧩 その他</div><div class="num" id="fm-other">—</div><div class="foot">上記以外の経路と未記録（内訳は下の注記）</div></div>
+  </div>
+  <div class="callout" id="futuremap-days" style="margin-top:10px">直近7日の登録（暦日・0件の日も表示・当日は集計時刻まで）：—</div>
+  <div class="callout" id="futuremap-note" style="margin-top:10px">
+    <b>実測 97名</b>（free9集計・更新 2026/11/10 09:52）。集計対象はシナリオ「① 未来地図｜参加前・7日間メール案内」の登録97名（最初の登録 10/23）。合計は登録中以外の方も含む登録者数で、うち登録中45名・登録中以外（解除など）52名です。経路（free9）の内訳＝未記録 60・Facebook 15・rf（ファシリテーターによる読書会） 14・X 7・note 1。最終登録 11/10 07:03。試験の登録（経路が test で始まる、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録は数に入りません。新旧の未来地図LPは同じフォームで登録されるため、LPごとには分けられません。MyASP MCP実測・09:52集計（毎朝9:15の便で自動更新）。
+  </div>
+
   <div class="sec"><span class="badge">A3</span><h2>アップセル人数（リーダー／メンター）</h2><span class="note">標準＝クルー。上位プランを選んだ人数の実測｜Stripe無料期間中（課金開始前・顧客ユニーク・全資格）＝課金判定日カレンダーと同一母集団・毎朝自動更新</span></div>
   <div class="grid g4" id="toppa-upsell-cards">
     <div class="card kpi accent-top at-crew"><div class="label">クルー（標準 ¥3,300）</div><div class="num" style="color:var(--crew)" id="tu-c">—</div><div class="foot" id="tu-c-foot">無料期間中</div></div>
@@ -1315,6 +1328,9 @@ const toppaRoutes={updated:'2026/11/10',reading:135,line:1,note:24,x:30,youtube:
 /*ENTRY14-START*/
 const entry14={updated:'2026/11/10',total:14,reading:0,forest:7,direct:1,other:6,active:13,cancelled:1,at:'09:27',days:[{d:'11/04',n:0,reading:0,cum:14},{d:'11/05',n:0,reading:0,cum:14},{d:'11/06',n:0,reading:0,cum:14},{d:'11/07',n:0,reading:0,cum:14},{d:'11/08',n:0,reading:0,cum:14},{d:'11/09',n:0,reading:0,cum:14},{d:'11/10',n:0,reading:0,cum:14}],detail:"集計対象はシナリオ「神田昌典 突破Ai｜新規・14日間無料」の10/23 0時以降の登録14名。合計は解除した方も含む登録者数で、うち登録中13名・登録中以外（解除など）1名です。経路（free9）の内訳＝forest 7・未記録 5・direct 1・x 1。最終登録 10/26 16:30。試験の登録（経路がtest、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録（動作確認や既存会員の振り分けなど）は数に入りません。A2の「forest（カード外）」は旧シナリオの有効購読者の数で、この欄のforestとは別の数です。MyASP MCP実測・09:27集計（毎朝9:15の便で自動更新）。"};
 /*ENTRY14-END*/
+/*FUTUREMAP-START*/
+const futuremap={updated:'2026/11/10',total:97,x:7,line:0,reading:0,other:90,active:45,cancelled:52,at:'09:52',days:[{d:'11/04',n:2,t:1,cum:80},{d:'11/05',n:0,t:0,cum:80},{d:'11/06',n:1,t:0,cum:81},{d:'11/07',n:1,t:0,cum:82},{d:'11/08',n:6,t:1,cum:88},{d:'11/09',n:7,t:0,cum:95},{d:'11/10',n:2,t:0,cum:97}],detail:"集計対象はシナリオ「① 未来地図｜参加前・7日間メール案内」の登録97名（最初の登録 10/23）。合計は登録中以外の方も含む登録者数で、うち登録中45名・登録中以外（解除など）52名です。経路（free9）の内訳＝未記録 60・Facebook 15・rf（ファシリテーターによる読書会） 14・X 7・note 1。最終登録 11/10 07:03。試験の登録（経路が test で始まる、氏名に「テスト」「てすと」、メールの@より前が test で始まるもの）と、あとでこのシナリオから外された登録は数に入りません。新旧の未来地図LPは同じフォームで登録されるため、LPごとには分けられません。MyASP MCP実測・09:52集計（毎朝9:15の便で自動更新）。"};
+/*FUTUREMAP-END*/
 /*TOPPA-UPSELL-START*/const toppaUpsell={"updated":"2026/11/10","hist":[{"d":"2026/09/02","c":126,"l":4,"m":5,"o":0},{"d":"2026/09/03","c":124,"l":4,"m":4,"o":0},{"d":"2026/09/04","c":119,"l":5,"m":3,"o":0},{"d":"2026/09/05","c":115,"l":5,"m":3,"o":0},{"d":"2026/09/06","c":109,"l":5,"m":3,"o":0},{"d":"2026/09/07","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/08","c":106,"l":5,"m":3,"o":0},{"d":"2026/09/09","c":101,"l":5,"m":3,"o":0},{"d":"2026/09/10","c":97,"l":5,"m":3,"o":0},{"d":"2026/09/11","c":99,"l":4,"m":3,"o":0},{"d":"2026/09/12","c":104,"l":6,"m":3,"o":0},{"d":"2026/09/13","c":123,"l":6,"m":9,"o":0},{"d":"2026/09/14","c":131,"l":6,"m":12,"o":0},{"d":"2026/09/15","c":140,"l":6,"m":12,"o":0},{"d":"2026/09/16","c":154,"l":6,"m":13,"o":0},{"d":"2026/09/17","c":190,"l":8,"m":18,"o":0},{"d":"2026/09/18","c":202,"l":8,"m":18,"o":0},{"d":"2026/09/19","c":216,"l":9,"m":18,"o":0},{"d":"2026/09/20","c":218,"l":9,"m":18,"o":0},{"d":"2026/09/21","c":219,"l":9,"m":18,"o":0},{"d":"2026/09/22","c":224,"l":9,"m":19,"o":0},{"d":"2026/09/23","c":235,"l":9,"m":19,"o":0},{"d":"2026/09/24","c":238,"l":9,"m":18,"o":0},{"d":"2026/09/25","c":250,"l":9,"m":18,"o":0},{"d":"2026/09/26","c":251,"l":9,"m":17,"o":0},{"d":"2026/09/27","c":259,"l":9,"m":16,"o":0},{"d":"2026/09/28","c":255,"l":8,"m":13,"o":0},{"d":"2026/09/30","c":246,"l":7,"m":13,"o":0},{"d":"2026/10/01","c":244,"l":9,"m":13,"o":0},{"d":"2026/10/02","c":236,"l":9,"m":14,"o":0},{"d":"2026/10/04","c":226,"l":8,"m":12,"o":0},{"d":"2026/10/05","c":209,"l":8,"m":12,"o":0},{"d":"2026/10/06","c":199,"l":8,"m":12,"o":0},{"d":"2026/10/07","c":201,"l":8,"m":12,"o":0},{"d":"2026/10/08","c":193,"l":9,"m":12,"o":0},{"d":"2026/10/09","c":190,"l":9,"m":12,"o":0},{"d":"2026/10/10","c":188,"l":9,"m":11,"o":0},{"d":"2026/10/11","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/12","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/13","c":186,"l":9,"m":11,"o":0},{"d":"2026/10/14","c":187,"l":9,"m":10,"o":0},{"d":"2026/10/15","c":187,"l":9,"m":10,"o":0},{"d":"2026/10/16","c":187,"l":9,"m":11,"o":0},{"d":"2026/10/17","c":196,"l":9,"m":11,"o":0},{"d":"2026/10/18","c":202,"l":9,"m":11,"o":0},{"d":"2026/10/19","c":211,"l":9,"m":11,"o":0},{"d":"2026/10/20","c":214,"l":9,"m":10,"o":0},{"d":"2026/10/21","c":229,"l":9,"m":10,"o":0},{"d":"2026/10/22","c":248,"l":8,"m":12,"o":0},{"d":"2026/10/23","c":299,"l":9,"m":15,"o":0},{"d":"2026/10/24","c":296,"l":8,"m":15,"o":0},{"d":"2026/10/25","c":295,"l":8,"m":15,"o":0},{"d":"2026/10/26","c":290,"l":6,"m":14,"o":0},{"d":"2026/10/27","c":277,"l":6,"m":14,"o":0},{"d":"2026/10/28","c":260,"l":6,"m":9,"o":0},{"d":"2026/10/29","c":247,"l":6,"m":9,"o":0},{"d":"2026/10/30","c":235,"l":6,"m":9,"o":0},{"d":"2026/10/31","c":208,"l":4,"m":7,"o":0},{"d":"2026/11/01","c":198,"l":4,"m":6,"o":0},{"d":"2026/11/02","c":189,"l":4,"m":6,"o":0},{"d":"2026/11/03","c":183,"l":4,"m":6,"o":0},{"d":"2026/11/04","c":178,"l":4,"m":6,"o":0},{"d":"2026/11/05","c":169,"l":4,"m":6,"o":0},{"d":"2026/11/06","c":161,"l":4,"m":6,"o":0},{"d":"2026/11/07","c":156,"l":4,"m":6,"o":0},{"d":"2026/11/08","c":149,"l":3,"m":6,"o":0},{"d":"2026/11/09","c":143,"l":3,"m":6,"o":0},{"d":"2026/11/10","c":135,"l":3,"m":5,"o":0}]};/*TOPPA-UPSELL-END*/
 /*DAYSNAP-START*/const daySnap={"date":"2026/11/10","cur":{"base":536,"aM":58,"aL":27,"aC":791,"aS":0,"bT":724,"bM":169,"bL":110,"bC":424,"bS":19,"sM":389,"sC":389,"sA":3154800,"tBase":514,"tM":103,"tL":70,"tC":337,"tS":4,"rM":127,"rL":70,"rC":334,"rS":5,"sRM":78,"sRL":40,"sRC":56,"sRO":215,"pT":1252,"pM":235,"pL":186,"pC":707,"pS":102},"prev":{"base":540,"aM":58,"aL":27,"aC":791,"aS":0,"bT":728,"bM":171,"bL":110,"bC":426,"bS":19,"sM":385,"sC":385,"sA":3148200,"tBase":518,"tM":105,"tL":70,"tC":339,"tS":4,"rM":129,"rL":70,"rC":336,"rS":5,"sRM":78,"sRL":43,"sRC":56,"sRO":208,"pT":1252,"pM":235,"pL":186,"pC":707,"pS":102,"date":"2026/11/09"}};/*DAYSNAP-END*/
 /*DBMASTER-START*/
@@ -2038,6 +2054,24 @@ if(entry14){
   if(note)note.textContent='';
   if(note){const b=document.createElement('b');b.textContent=`実測 ${tot}名`;note.appendChild(b);
     note.appendChild(document.createTextNode(`（free9集計・更新 ${entry14.updated||'—'} ${entry14.at||''}）。構成比は合計に対する割合です。${entry14.detail||''}`));}
+}
+// 未来地図 読者特典の登録（新旧LPの合計）経路別 — futuremap に実測が入ると描画（2026-11-10 追加）
+if(typeof futuremap!=='undefined'&&futuremap){
+  const tot=futuremap.total||0;
+  ['x','line','reading','other'].forEach(k=>{
+    const v=futuremap[k]||0;
+    const el=document.getElementById('fm-'+k);
+    if(el)el.innerHTML=`${v}<span class="unit">名</span> <span style="font-size:11px;color:var(--muted)">(${tot?Math.round(v/tot*100):0}%)</span>`;
+  });
+  const t=document.getElementById('fm-total');
+  if(t)t.innerHTML=`${tot}<span class="unit">名</span>`;
+  const tf=document.getElementById('fm-total-foot');
+  if(tf)tf.textContent=`登録中以外の方も含む登録者数（登録中${futuremap.active}名・登録中以外（解除など）${futuremap.cancelled}名）`;
+  const dd=document.getElementById('futuremap-days');
+  if(dd)dd.innerHTML='<b>直近7日の登録（暦日・0件の日も表示・当日は集計時刻まで）：</b>'+((futuremap.days||[]).length?futuremap.days.map(x=>`${x.d} ${x.n}名（うちX・LINE・reading ${x.t}・累計${x.cum}）`).join('／'):'まだありません')+'<br><span style="font-size:11px;color:var(--muted)">このLPの reading は、書籍に載せたURL（free9=reading）からの登録です。読書会からの登録は rf（ファシリテーターによる読書会・「その他」に含む）で、上のA2-2の reading（読書会）とは別の値です。</span>';
+  const note=document.getElementById('futuremap-note');
+  if(note){note.textContent='';const b=document.createElement('b');b.textContent=`実測 ${tot}名`;note.appendChild(b);
+    note.appendChild(document.createTextNode(`（free9集計・更新 ${futuremap.updated||'—'} ${futuremap.at||''}）。構成比は合計に対する割合です。${futuremap.detail||''}`));}
 }
 // 突破Ai アップセル人数（クルー/リーダー/メンター）— toppaUpsell.histに日次実測が貯まると描画
 if(typeof toppaUpsell!=='undefined'&&toppaUpsell.hist&&toppaUpsell.hist.length){
