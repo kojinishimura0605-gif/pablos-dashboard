@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow"><title>AI流量計 ヒューマンプラス様</title>
+<style>
+:root { --blue-1200:#000060; --blue-900:#0017C1; --blue-600:#3460FB; --blue-200:#C5D7FB; --blue-50:#E8F1FE;
+  --text-label:#626264; --bg-standard:#F8F8FB; --bg-control:#F1F1F4; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"Meiryo UI","Yu Gothic UI",sans-serif; background:var(--bg-standard); color:#000; padding:24px; font-size:14px; line-height:1.6; }
+header { margin-bottom:20px; } header h1 { font-size:22px; color:var(--blue-1200); }
+header .meta { color:var(--text-label); font-size:12px; margin-top:4px; }
+.banner { background:#fff; border:2px solid var(--blue-900); color:var(--blue-1200); border-radius:8px; padding:10px 16px; margin-bottom:16px; font-size:12px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); gap:12px; margin-bottom:24px; }
+.card { background:#fff; border:1px solid var(--bg-control); border-radius:8px; padding:14px 16px; }
+.card.hero { border:2px solid var(--blue-900); background:var(--blue-50); }
+.card .label { color:var(--text-label); font-size:12px; } .card .value { font-size:24px; font-weight:bold; color:var(--blue-900); margin-top:2px; }
+.card .sub { color:var(--text-label); font-size:11px; margin-top:2px; }
+section { background:#fff; border:1px solid var(--bg-control); border-radius:8px; padding:18px 20px; margin-bottom:20px; }
+section h2 { font-size:15px; color:var(--blue-1200); margin-bottom:4px; border-left:4px solid var(--blue-900); padding-left:8px; }
+section h3 { font-size:13px; color:var(--blue-1200); margin:14px 0 6px; }
+section .desc { color:var(--text-label); font-size:11px; margin-bottom:12px; }
+.chart { display:flex; align-items:flex-end; gap:2px; height:160px; padding-top:16px; }
+.chart .bar { flex:1; background:var(--blue-600); border-radius:2px 2px 0 0; min-width:3px; } .chart .bar:hover { background:var(--blue-900); }
+.axis { display:flex; gap:2px; margin-top:4px; } .axis span { flex:1; font-size:9px; color:var(--text-label); text-align:center; min-width:3px; overflow:visible; white-space:nowrap; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:var(--blue-50); color:var(--blue-1200); text-align:left; padding:6px 10px; border-bottom:2px solid var(--blue-200); }
+td { padding:6px 10px; border-bottom:1px solid var(--bg-control); } td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+tr.total td { font-weight:bold; background:var(--blue-50); }
+.hbar { height:10px; background:var(--blue-600); border-radius:2px; display:inline-block; vertical-align:middle; }
+.note { color:var(--text-label); font-size:12px; margin-top:8px; }
+footer { color:var(--text-label); font-size:11px; margin-top:8px; } footer p { margin-bottom:4px; }
+@media (max-width:600px) { body { padding:16px; } table { font-size:12px; } th, td { padding:5px 6px; } }
+</style></head><body>
+<header><h1>AI流量計 — ヒューマンプラス様（切り出し）　2026年10月度のまとめ（10/1〜10/31）</h1>
+<div class="meta">生成: 2026-11-20 22:51 JST｜対象: 業務報告書の台帳に計上済みの作業（2026-10-01 〜 2026-10-31・10月度）｜タスク・トークンは実測／時短は記録時の見積ベース（目安）／コストは単価表による概算（API換算）</div></header>
+<div class="banner">社内用（個社名・金額を含みます。検索に出ない設定のURLで、URLを知っている方だけが開けます。共有先にご注意ください）。AI流量計（社内共有URL /flow/）と同じ器・数え方で、ヒューマンプラス様の作業だけを切り出したものです。電話・Chatworkの対応時間は含みません（業務報告書を参照）。</div>
+<div class="cards">
+<div class="card hero"><div class="label">時短（目安）</div><div class="value">116.0h</div><div class="sub">時短率 75%｜手作業見積 153.7h・AI実行 37.7h</div></div>
+<div class="card hero"><div class="label">人日換算（目安）</div><div class="value">14.5人日</div><div class="sub">1人日=8時間で換算</div></div>
+<div class="card "><div class="label">タスク件数</div><div class="value">118件</div><div class="sub">10/1〜10/30の作業記録</div></div>
+<div class="card "><div class="label">検品品質</div><div class="value">初回PASS 69%</div><div class="sub">平均巡数 1.9回・対象35件（条件付きPASSは合格扱い）</div></div>
+<div class="card "><div class="label">AI概算コスト（計測分）</div><div class="value">¥185,266</div><div class="sub">1,759,560,998トークン・10月・API換算</div></div>
+<div class="card "><div class="label">10月の全業務に占める割合</div><div class="value">約23%</div><div class="sub">¥185,266／全業務 ¥809,911（金額）</div></div>
+</div>
+<section><h2>AIによる実績（全業務との比較）</h2><div class="desc">区分×トークン×API換算×割合（金額）。ヒューマンプラス様分＝作業記録を追記した指示を起点に、その区間の応答（サブエージェント含む）を当案件の行に割り当てた実測。月の全業務＝AI流量計と同じ数え方で暦月を集計。</div>
+<h3>10月（1ドル=159.97円・2026-11-19）</h3>
+<table><thead><tr><th>区分</th><th class="num">トークン</th><th class="num">API換算</th><th class="num">割合（金額）</th></tr></thead><tbody>
+<tr><td>ヒューマンプラス様分</td><td class="num">1,759,560,998</td><td class="num">¥185,266</td><td class="num">約23%</td></tr>
+<tr class="total"><td>10月の全業務</td><td class="num">6,778,490,300</td><td class="num">¥809,911</td><td class="num">100%</td></tr></tbody></table>
+<h3>行別で大きいもの</h3><table><thead><tr><th class="num">行</th><th>内容</th><th class="num">AI稼働</th><th class="num">換算額</th></tr></thead><tbody>
+<tr><td class="num">2228</td><td>BTJ回答の家賃訂正（②No.37を9月分家賃の前払いに・栗原の電気7月分と水道6〜7月分¥26,909を8月末未払いに…（10/15〜10/16）</td><td class="num">40分</td><td class="num">¥6,983</td></tr>
+<tr><td class="num">2309</td><td>GMO明細（9/1〜10/21）受領→月次ルーチン手順2〜7（講座別売上・顧客DB消込・督促リスト・GMO入出金一覧10…</td><td class="num">90分</td><td class="num">¥6,119</td></tr>
+<tr><td class="num">2183・2184・2300</td><td>GMO入出金一覧2026年度の8月末未払一覧タブと提出版の差を確認…（ほか2件）</td><td class="num">75分</td><td class="num">¥5,025</td></tr>
+</tbody></table>
+</section>
+<section><h2>月別 時短実績</h2><div class="desc">業務報告書の月度（暦月に実施した作業）ごと。時短率 = 時短 ÷ 手作業見積（目安）。</div><table><thead><tr><th>月度</th><th class="num">件数</th><th class="num">手作業見積</th><th class="num">AI実行</th><th class="num">時短</th><th class="num">時短率</th><th class="num">AI換算（計測分）</th></tr></thead><tbody>
+<tr><td>10月度</td><td class="num">118</td><td class="num">153.7h</td><td class="num">37.7h</td><td class="num"><b>116.0h</b></td><td class="num">75%</td><td class="num">¥185,266</td></tr>
+<tr class="total"><td>合計</td><td class="num">118</td><td class="num">153.7h</td><td class="num">37.7h</td><td class="num">116.0h</td><td class="num">75%</td><td class="num">¥185,266</td></tr></tbody></table></section>
+<section><h2>系統別 時短実績</h2><div class="desc">AI流量計の「ルーティン別」にあたる表。業務報告書の系統で集計（記録値ベース・目安）。</div><table><thead><tr><th>系統</th><th class="num">件数</th><th class="num">手作業見積</th><th class="num">AI実行</th><th class="num">時短</th><th class="num">時短率</th><th style="width:22%"></th></tr></thead><tbody>
+<tr><td>MF仕訳登録（9月の月次・10月GMO）</td><td class="num">26</td><td class="num">41.2h</td><td class="num">8.0h</td><td class="num"><b>33.2h</b></td><td class="num">81%</td><td><span class="hbar" style="width:100%"></span></td></tr>
+<tr><td>税理士向け決算確認事項への回答（R8.8月期）</td><td class="num">40</td><td class="num">42.5h</td><td class="num">11.6h</td><td class="num"><b>30.9h</b></td><td class="num">73%</td><td><span class="hbar" style="width:93%"></span></td></tr>
+<tr><td>講師報酬・植草さん報酬（9月分）・振込指示書</td><td class="num">14</td><td class="num">23.4h</td><td class="num">6.6h</td><td class="num"><b>16.8h</b></td><td class="num">72%</td><td><span class="hbar" style="width:51%"></span></td></tr>
+<tr><td>カード決済失敗・督促リスト</td><td class="num">7</td><td class="num">15.2h</td><td class="num">2.6h</td><td class="num"><b>12.6h</b></td><td class="num">83%</td><td><span class="hbar" style="width:38%"></span></td></tr>
+<tr><td>カード利用明細（9月分・抜けの補完）</td><td class="num">9</td><td class="num">12.1h</td><td class="num">4.0h</td><td class="num"><b>8.0h</b></td><td class="num">66%</td><td><span class="hbar" style="width:24%"></span></td></tr>
+<tr><td>GMO入出金一覧・月次ルーチン（GMO明細受領後）</td><td class="num">2</td><td class="num">10.0h</td><td class="num">2.5h</td><td class="num"><b>7.5h</b></td><td class="num">75%</td><td><span class="hbar" style="width:23%"></span></td></tr>
+<tr><td>9月損益ご報告（科目別・打ち合わせ用）</td><td class="num">9</td><td class="num">5.6h</td><td class="num">1.1h</td><td class="num"><b>4.5h</b></td><td class="num">81%</td><td><span class="hbar" style="width:14%"></span></td></tr>
+<tr><td>請求書払い・支払いの振込指示書</td><td class="num">8</td><td class="num">2.1h</td><td class="num">0.7h</td><td class="num"><b>1.4h</b></td><td class="num">69%</td><td><span class="hbar" style="width:4%"></span></td></tr>
+<tr><td>立替・振込予約の突合・請求書の格納（9月末）</td><td class="num">3</td><td class="num">1.7h</td><td class="num">0.6h</td><td class="num"><b>1.1h</b></td><td class="num">64%</td><td><span class="hbar" style="width:3%"></span></td></tr>
+<tr class="total"><td>合計</td><td class="num">118</td><td class="num">153.7h</td><td class="num">37.7h</td><td class="num">116.0h</td><td class="num">75%</td><td></td></tr></tbody></table></section>
+<section><h2>日別 タスク件数と時短時間（10/1〜10/31）</h2><div class="desc">棒＝タスク件数。カーソルを乗せると時短分数を表示。</div>
+<div class="chart"><div class="bar" style="height:8%" title="2026-10-01｜3件｜時短 64分"></div><div class="bar" style="height:1%" title="2026-10-02｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-03｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-04｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-05｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-06｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-07｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-08｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-09｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-10｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-11｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-12｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-13｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-14｜0件｜時短 0分"></div><div class="bar" style="height:100%" title="2026-10-15｜39件｜時短 1,989分"></div><div class="bar" style="height:21%" title="2026-10-16｜8件｜時短 530分"></div><div class="bar" style="height:38%" title="2026-10-17｜15件｜時短 1,602分"></div><div class="bar" style="height:1%" title="2026-10-18｜0件｜時短 0分"></div><div class="bar" style="height:13%" title="2026-10-19｜5件｜時短 485分"></div><div class="bar" style="height:18%" title="2026-10-20｜7件｜時短 288分"></div><div class="bar" style="height:3%" title="2026-10-21｜1件｜時短 270分"></div><div class="bar" style="height:13%" title="2026-10-22｜5件｜時短 333分"></div><div class="bar" style="height:18%" title="2026-10-23｜7件｜時短 148分"></div><div class="bar" style="height:1%" title="2026-10-24｜0件｜時短 0分"></div><div class="bar" style="height:1%" title="2026-10-25｜0件｜時短 0分"></div><div class="bar" style="height:23%" title="2026-10-26｜9件｜時短 535分"></div><div class="bar" style="height:5%" title="2026-10-27｜2件｜時短 130分"></div><div class="bar" style="height:5%" title="2026-10-28｜2件｜時短 165分"></div><div class="bar" style="height:36%" title="2026-10-29｜14件｜時短 320分"></div><div class="bar" style="height:3%" title="2026-10-30｜1件｜時短 100分"></div><div class="bar" style="height:1%" title="2026-10-31｜0件｜時短 0分"></div></div><div class="axis"><span>10/1</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/8</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/15</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/22</span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/31</span></div>
+</section>
+<section><h2>日別 概算コスト（10/1〜10/31・API換算・円）</h2><div class="desc">当案件の行に割り当てたトークンの日別（区間の日付で集計）。それより前は記録なし。</div>
+<div class="chart"><div class="bar" style="height:4%" title="2026-10-01｜¥2,488｜22,994,493トークン"></div><div class="bar" style="height:1%" title="2026-10-02｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-03｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-04｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-05｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-06｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-07｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-08｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-09｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-10｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-11｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-12｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-13｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-14｜¥0｜0トークン"></div><div class="bar" style="height:100%" title="2026-10-15｜¥59,072｜580,865,060トークン"></div><div class="bar" style="height:30%" title="2026-10-16｜¥17,704｜183,089,903トークン"></div><div class="bar" style="height:39%" title="2026-10-17｜¥23,072｜225,513,538トークン"></div><div class="bar" style="height:1%" title="2026-10-18｜¥0｜0トークン"></div><div class="bar" style="height:12%" title="2026-10-19｜¥7,012｜56,850,945トークン"></div><div class="bar" style="height:10%" title="2026-10-20｜¥5,640｜47,237,526トークン"></div><div class="bar" style="height:10%" title="2026-10-21｜¥6,119｜59,555,921トークン"></div><div class="bar" style="height:11%" title="2026-10-22｜¥6,562｜59,546,557トークン"></div><div class="bar" style="height:18%" title="2026-10-23｜¥10,888｜109,598,088トークン"></div><div class="bar" style="height:1%" title="2026-10-24｜¥0｜0トークン"></div><div class="bar" style="height:1%" title="2026-10-25｜¥0｜0トークン"></div><div class="bar" style="height:33%" title="2026-10-26｜¥19,786｜195,859,010トークン"></div><div class="bar" style="height:10%" title="2026-10-27｜¥5,897｜44,287,892トークン"></div><div class="bar" style="height:7%" title="2026-10-28｜¥4,302｜32,796,460トークン"></div><div class="bar" style="height:23%" title="2026-10-29｜¥13,359｜115,787,856トークン"></div><div class="bar" style="height:6%" title="2026-10-30｜¥3,365｜25,577,749トークン"></div><div class="bar" style="height:1%" title="2026-10-31｜¥0｜0トークン"></div></div><div class="axis"><span>10/1</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/8</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/15</span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/22</span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span>10/31</span></div>
+</section>
+<section><h2>単価表と注記</h2><table><thead><tr><th>モデル</th><th class="num">入力 $/1M</th><th class="num">出力 $/1M</th></tr></thead><tbody>
+<tr><td>fable</td><td class="num">$10.00</td><td class="num">$50.00</td></tr>
+<tr><td>mythos</td><td class="num">$10.00</td><td class="num">$50.00</td></tr>
+<tr><td>opus</td><td class="num">$5.00</td><td class="num">$25.00</td></tr>
+<tr><td>sonnet</td><td class="num">$3.00</td><td class="num">$15.00</td></tr>
+<tr><td>haiku</td><td class="num">$1.00</td><td class="num">$5.00</td></tr>
+</tbody></table><footer>
+<p>キャッシュ: 書込5分TTL=入力×1.25 / 書込1時間TTL=入力×2 / 読取=入力×0.1。単価出典はAI流量計と同じ（Anthropic公式モデル一覧）。金額は概算で、実請求額はプラン・割引により異なります。</p>
+<p>※ 作業記録＝work-log-作業ログ/log.jsonl のうち、業務報告書の台帳（稼働切り分け/selection.json）で当案件に指名した118件。「手作業見積」「人日換算」は記録時の見積値ベースの目安。</p>
+<p>※ トークン＝token_usage.json（作業記録アンカー方式・当案件の行に割り当てた実測）。未計測の作業記録 0件（対象の全件を計測）。</p>
+<p>※ 検品＝review-log.jsonl のうち対象名に「ヒューマンプラス」・「BTJ」・「アルファノート 督促」のいずれかを含む記録（2026-10-01〜2026-10-31）。初回PASS率は、記録のある最初の巡がFAILでない成果物の割合（1巡目の記録が無く2巡目以降から始まる成果物を含む）（条件付きPASSは合格扱い）。</p>
+<p>※ 時間は分で合計してから0.1時間に丸めて表示しています。そのため内訳の時間を足した値と合計行、手作業見積−AI実行と時短が0.1時間ずれることがあります。日別コストは区間ごとの円を足すため、合計と数円ずれます。</p>
+<p>※ AI流量計にある「読む・判断する時間」「モデル別内訳」「日次自動更新の履歴」は、個社に切り分けられないため載せていません。生成: 稼働切り分け/build_hp_flow.py。配色: デジタル庁ダッシュボードガイドブック準拠 Blue系統。</p>
+</footer></section></body></html>
