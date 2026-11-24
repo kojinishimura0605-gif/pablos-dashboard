@@ -292,6 +292,7 @@
     '</td><td class="num">' + (RATE ? "¥" + Math.round(p.input * RATE).toLocaleString("ja-JP") : "—") + '</td><td class="num">' + (RATE ? "¥" + Math.round(p.output * RATE).toLocaleString("ja-JP") : "—") + "</td></tr>"
   ).join("");
   document.getElementById("foot").innerHTML =
+    (D.pricing_note.revision ? "<p><b>※ 単価の改定: " + D.pricing_note.revision + "</b></p>" : "") +
     "<p>キャッシュ: " + D.pricing_note.cache + "。" + (D.pricing_note.assumption || "") + "</p>" +
     "<p>※ " + D.pricing_note.disclaimer + "。単価出典: " + D.pricing_note.source + "</p>" +
     "<p>※ 円換算: " + fxNote + "。毎朝の集計時に前日のレートを取得（前日が休場の日は直近の公表日）。取得できない日は前回値を使い、その旨を表示</p>" +
